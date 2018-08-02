@@ -1,0 +1,24 @@
+<resources>
+
+    <declare-styleable name="ASTImageView">
+        <attr name="isCircular" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ASTFrameIcon">
+        <attr name="frameSize" format="dimension" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="frameIconText" format="string" />
+        <attr name="iconText" format="string" />
+        <attr name="frameColor" format="color" />
+        <attr name="iconColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ASTTileView">
+        <attr name="imgHeight" format="dimension" />
+        <attr name="imgWidth" format="dimension" />
+        <attr name="isCircularImg" format="boolean" />
+        <attr name="outerPadding" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_45dp"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.telecom.ast.sitesurvey.component.FontViewField
+        android:id="@+id/backBtn"
+        android:layout_width="@dimen/_40dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/icon_prev"
+        android:textColor="@color/appTheamColor"
+        android:textSize="@dimen/_20dp" />
+
+    <com.telecom.ast.sitesurvey.component.FNTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_15dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18dp" />
+
+    <com.telecom.ast.sitesurvey.component.FontViewField
+        android:id="@+id/btnRotateLeft"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/icon_rotate_left"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18dp"
+        android:visibility="gone" />
+
+    <com.telecom.ast.sitesurvey.component.FontViewField
+        android:id="@+id/btnRotateRight"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/icon_rotate_right"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18dp"
+        android:visibility="gone" />
+
+    <com.telecom.ast.sitesurvey.component.FontViewField
+        android:id="@+id/cropButton"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/icon_crop"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18dp"
+        android:visibility="gone" />
+
+    <com.telecom.ast.sitesurvey.component.FontViewField
+        android:id="@+id/cameraButton"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/icon_camera"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18dp"
+        android:visibility="gone" />
+
+    <com.telecom.ast.sitesurvey.component.FNTextView
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minWidth="@dimen/_40dp"
+        android:padding="@dimen/_10dp"
+        android:text="@string/text_done"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_15dp"
+        android:visibility="gone" />
+</LinearLayout>

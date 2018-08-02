@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Ipad</string>
+    <string name="label_main_activity_cant_move_further">We can\'t move further without this permission!!!</string>
+    <string name="button_label_settings">Settings</string>
+    <string name="button_label_cancel">Cancel</string>
+    <string name="button_label_retry">Retry</string>
+    <string name="button_label_exit">Exit</string>
+
+    <string name="label_main_activity_internet_cancelled">Internet permission cancelled</string>
+    <string name="label_main_activity_read_contact_cancelled">Read contacts permission cancelled</string>
+    <string name="label_main_activity_camera_cancelled">Camera permission cancelled</string>
+    <string name="label_main_activity_fine_location_cancelled">Access fine location permission cancelled</string>
+    <string name="we_need_to_access_camera">We need to access camera</string>
+    <string name="we_need_to_access_gps">We need to access gps</string>
+    <string name="we_need_to_read_contacts">We need to read contacts</string>
+    <string name="we_need_to_access_internet">We need to access internet</string>
+    <string name="permission_granted">Permission Granted</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="errorMsg">Error Message</string>
+    <string name="noNetwork">No Network</string>
+    <string name="cheakConn">Please check your network connection</string>
+    <string name="openSett">Open Settings</string>
+    <string name="close">Close</string>
+    <string name="error_no_camera">error_no_camera</string>
+    <string name="text_done">Done</string>
+    <string name="save">save</string>
+    <string name="error_no_images">No files found</string>
+    <string name="picker_images">Photo</string>
+    <string name="picker_videos">Video</string>
+    <string name="picker_documents">Document</string>
+    <string name="picker_audio">Audio</string>
+    <string name="image_picker_error">Please select valid file</string>
+    <string name="text_camera">Camera</string>
+    <string name="select_image">Tap to select</string>
+    <string name="file_picker_title">Attachments</string>
+    <string name="error_image_select_limit">You can select only %1$s files</string>
+    <string name="text_selected">%d item(s) selected</string>
+    <string name="error_image_select_size_limit">Total file size cannot be greater than %1$s.</string>
+    <string name="error_create_image_file">Failed to create image file</string>
+    <string name="entermake">Please Enter Make</string>
+
+</resources>

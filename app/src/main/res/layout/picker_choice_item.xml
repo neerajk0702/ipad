@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.telecom.ast.sitesurvey.component.FNFrameIcon
+        android:id="@+id/frameIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:frameColor="@color/appTheamColor"
+        custom:frameIconText="@string/icon_circle_fill"
+        custom:frameSize="@dimen/_25dp"
+        custom:iconColor="@android:color/white"
+        custom:iconSize="@dimen/_10dp" />
+
+    <com.telecom.ast.sitesurvey.component.FNTextView
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_5dp" />
+</LinearLayout>

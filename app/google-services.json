@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "311509473188",
+    "firebase_url": "https://ipad-29437.firebaseio.com",
+    "project_id": "ipad-29437",
+    "storage_bucket": "ipad-29437.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311509473188:android:41a115cc4d2ddef6",
+        "android_client_info": {
+          "package_name": "com.apitechnosoft.ipad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311509473188-u6tmti1p2afs1kkoer9cntb3tkcq3m30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_cBKux0DCx61HGpXpFqdyld6diXr0f-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

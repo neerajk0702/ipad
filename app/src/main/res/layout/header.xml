@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_45dp"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:id="@+id/headerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <com.telecom.ast.sitesurvey.component.FontViewField
+            android:id="@+id/sliderBtn"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_1dp"
+            android:gravity="center"
+            android:text="@string/icon_menu"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_24dp" />
+
+        <com.telecom.ast.sitesurvey.component.FontViewField
+            android:id="@+id/backBtn"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_1dp"
+            android:gravity="center"
+            android:text="@string/icon_back_arrow"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_22dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="@dimen/zeroDip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14dp" />
+
+
+
+
+    </LinearLayout>
+</FrameLayout>

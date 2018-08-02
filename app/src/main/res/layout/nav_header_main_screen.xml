@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profileLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:minHeight="@dimen/_110dp"
+    android:paddingTop="10dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <com.telecom.ast.sitesurvey.utils.CircularImage
+        android:id="@+id/sliderProfileImg"
+        android:layout_width="@dimen/_60dp"
+        android:layout_height="@dimen/_60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/_8dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/app_header" />
+
+
+    <LinearLayout
+        android:layout_width="@dimen/zeroDip"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_5dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/loginUsrName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2dp"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_17dp" />
+
+        <TextView
+            android:id="@+id/loginUserEmailId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2dp"
+            android:gravity="center_vertical"
+            android:text="Welcome's You"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10dp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orgName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_2dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_8dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_hot_deal_actvity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/cammera"
+        android:layout_width="@dimen/_75dp"
+        android:layout_height="@dimen/_75dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/_5dp"
+        android:layout_marginTop="@dimen/_40dp"
+        android:gravity="center_horizontal"
+        android:src="@android:drawable/presence_video_away"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="xcvxcvxcv"
+        android:textAlignment="center"
+        android:textColor="@color/darkRed"
+        android:textSize="@dimen/_20dp" />
+</LinearLayout>
