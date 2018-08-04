@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center">
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/iconFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
         android:textSize="@dimen/_50dp"
         android:textStyle="normal" />
 
-    <com.telecom.ast.sitesurvey.component.FNFontViewField
+    <com.apitechnosoft.ipad.component.ASTFontViewField
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

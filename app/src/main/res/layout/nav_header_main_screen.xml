@@ -10,14 +10,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <com.telecom.ast.sitesurvey.utils.CircularImage
+    <com.apitechnosoft.ipad.utils.CircularImage
         android:id="@+id/sliderProfileImg"
         android:layout_width="@dimen/_60dp"
         android:layout_height="@dimen/_60dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/_8dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/app_header" />
+        android:src="@mipmap/ic_launcher" />
 
 
     <LinearLayout

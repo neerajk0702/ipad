@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.LoginHomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/_200dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/logo" />
+        </LinearLayout>
+
+        <com.apitechnosoft.ipad.component.ASTTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Your Home in the Cloud!"
+            android:textColor="@color/selectfolder"
+            android:textSize="@dimen/_20dp"
+            android:textStyle="italic" />
+
+        <com.apitechnosoft.ipad.component.ASTTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:gravity="center"
+            android:padding="@dimen/_2dp"
+            android:text="FREE 5 GB"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/_22dp"
+            android:textStyle="bold" />
+
+        <com.apitechnosoft.ipad.component.ASTTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_2dp"
+            android:text="Storage + Digital Organizer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25dp"
+            android:layout_marginRight="@dimen/_25dp"
+            android:layout_marginTop="@dimen/_15dp"
+            android:background="@color/orange">
+
+            <com.apitechnosoft.ipad.component.ASTTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_10dp"
+                android:text="JOIN FOR FREE NOW"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16dp" />
+        </LinearLayout>
+
+        <com.apitechnosoft.ipad.component.ASTTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_10dp"
+            android:text="or Login with"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@color/fb"
+                android:text="Facebook"
+                android:textColor="@color/white" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@color/red_dark_color"
+                android:text="Gmail"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@color/linkedin"
+                android:text="Linkedin"
+                android:textColor="@color/white" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@color/insta"
+                android:text="Instagram"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <com.apitechnosoft.ipad.component.ASTTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:gravity="center"
+            android:padding="@dimen/_2dp"
+            android:text="SYNC with ipadtoday.com"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/_14dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/_10dp"
+        android:orientation="horizontal">
+
+        <com.apitechnosoft.ipad.component.ASTButton
+            android:id="@+id/signup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/orange"
+            android:text="REGISTER"
+            android:textColor="@color/white" />
+
+        <com.apitechnosoft.ipad.component.ASTButton
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/folderbutton"
+            android:text="LOGIN"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</RelativeLayout>

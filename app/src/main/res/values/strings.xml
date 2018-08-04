@@ -40,4 +40,7 @@
     <string name="error_create_image_file">Failed to create image file</string>
     <string name="entermake">Please Enter Make</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

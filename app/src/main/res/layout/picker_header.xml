@@ -6,7 +6,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/backBtn"
         android:layout_width="@dimen/_40dp"
         android:layout_height="match_parent"
@@ -15,7 +15,7 @@
         android:textColor="@color/appTheamColor"
         android:textSize="@dimen/_20dp" />
 
-    <com.telecom.ast.sitesurvey.component.FNTextView
+    <com.apitechnosoft.ipad.component.ASTTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/_18dp" />
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/btnRotateLeft"
         android:layout_width="@dimen/_50dp"
         android:layout_height="match_parent"
@@ -37,7 +37,7 @@
         android:textSize="@dimen/_18dp"
         android:visibility="gone" />
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/btnRotateRight"
         android:layout_width="@dimen/_50dp"
         android:layout_height="match_parent"
@@ -47,7 +47,7 @@
         android:textSize="@dimen/_18dp"
         android:visibility="gone" />
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/cropButton"
         android:layout_width="@dimen/_50dp"
         android:layout_height="match_parent"
@@ -57,7 +57,7 @@
         android:textSize="@dimen/_18dp"
         android:visibility="gone" />
 
-    <com.telecom.ast.sitesurvey.component.FontViewField
+    <com.apitechnosoft.ipad.component.FontViewField
         android:id="@+id/cameraButton"
         android:layout_width="@dimen/_50dp"
         android:layout_height="match_parent"
@@ -67,7 +67,7 @@
         android:textSize="@dimen/_18dp"
         android:visibility="gone" />
 
-    <com.telecom.ast.sitesurvey.component.FNTextView
+    <com.apitechnosoft.ipad.component.ASTTextView
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

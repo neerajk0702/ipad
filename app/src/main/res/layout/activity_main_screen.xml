@@ -46,7 +46,7 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <com.telecom.ast.sitesurvey.component.FNTextView
+            <com.apitechnosoft.ipad.component.ASTTextView
                 android:id="@+id/error_msg"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/white" />
 
-            <com.telecom.ast.sitesurvey.component.FNFontViewField
+            <com.apitechnosoft.ipad.component.ASTFontViewField
                 android:id="@+id/closeErrorIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

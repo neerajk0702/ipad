@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <com.telecom.ast.sitesurvey.component.FontViewField
+        <com.apitechnosoft.ipad.component.FontViewField
             android:id="@+id/sliderBtn"
             android:layout_width="@dimen/_40dp"
             android:layout_height="@dimen/_40dp"
@@ -23,7 +23,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/_24dp" />
 
-        <com.telecom.ast.sitesurvey.component.FontViewField
+        <com.apitechnosoft.ipad.component.FontViewField
             android:id="@+id/backBtn"
             android:layout_width="@dimen/_40dp"
             android:layout_height="match_parent"

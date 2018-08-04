@@ -33,14 +33,17 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 pref = getApplicationContext().getSharedPreferences("SharedPref", MODE_PRIVATE);
                 String userId = pref.getString("userId", "");
-                if (!userId.equals("")) {
+               /* if (!userId.equals("")) {
                     Intent intentLoggedIn = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intentLoggedIn);
                 } else {
                     Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                     startActivity(i);
                     finish();
-                }
+                }*/
+                Intent i = new Intent(SplashScreen.this, LoginHomeActivity.class);
+                startActivity(i);
+                finish();
             }
         }, 1000);
     }
