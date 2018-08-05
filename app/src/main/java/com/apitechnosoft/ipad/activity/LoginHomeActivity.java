@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.apitechnosoft.ipad.R;
 
-public class LoginHomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +19,17 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         loadView();
         datatoView();
     }
+
     //get view ids
     public void loadView() {
         Button login = (Button) findViewById(R.id.login);
         Button signup = (Button) findViewById(R.id.signup);
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
+        LinearLayout joinLayout = findViewById(R.id.joinLayout);
+        joinLayout.setOnClickListener(this);
     }
+
     //get data from UI
     public void datatoView() {
 
@@ -32,7 +37,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.login:
                 Intent i = new Intent(LoginHomeActivity.this, LoginActivity.class);
                 startActivity(i);
@@ -40,6 +45,10 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             case R.id.signup:
                 Intent intent = new Intent(LoginHomeActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.joinLayout:
+                Intent intentjoin = new Intent(LoginHomeActivity.this, RegisterActivity.class);
+                startActivity(intentjoin);
                 break;
         }
     }

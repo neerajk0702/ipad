@@ -54,7 +54,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_14dp" />
 
-        <LinearLayout
+        <LinearLayout android:id="@+id/joinLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25dp"

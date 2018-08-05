@@ -1,14 +1,18 @@
 package com.apitechnosoft.ipad.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -21,6 +25,7 @@ import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.mail.Mail;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
@@ -63,11 +68,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (buttonFlag) {
                     if (isValidate()) {
-                        String userOtp=edt_otp.getText().toString();
-                        if(PINString.equals(userOtp)) {
-                            callSignup();
-                        }else{
-                            Toast.makeText(RegisterActivity.this, "OTP did not matched!", Toast.LENGTH_LONG).show();
+                        String userOtp = edt_otp.getText().toString();
+                        if (userOtp.length() != 0) {
+                            if (PINString.equals(userOtp)) {
+                                callSignup();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "OTP did not matched!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Please Enter OTP!", Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {
@@ -91,9 +100,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(RegisterActivity.this);
             dotDialog.show();
-
-           /* ServiceCaller serviceCaller = new ServiceCaller(this);
-            serviceCaller.CallCommanServiceMethod(emailStr, passwordStr, new IAsyncWorkCompletedCallback() {
+            ServiceCaller serviceCaller = new ServiceCaller(this);
+            final String url = Contants.BASE_URL + Contants.signup + "fName=" + firstnamestr + "&" + "lName=" + lastnamestr + "&" + "emailid=" + mailstr + "&" + "pwd=" + passwordstr;
+            serviceCaller.CallCommanServiceMethod(url, "Signup", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
@@ -116,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                         dotDialog.dismiss();
                     }
                 }
-            });*/
+            });
         } else {
             showToast(Contants.OFFLINE_MESSAGE);
         }
@@ -170,9 +179,11 @@ public class RegisterActivity extends AppCompatActivity {
                 if (aVoid) {
                     buttonFlag = true;
                     btnLogIn.setText("Submit");
+                    otpLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(RegisterActivity.this, "OTP was sent to your Mail successfully.", Toast.LENGTH_LONG).show();
                 } else {
                     btnLogIn.setText("Send OTP");
+                    otpLayout.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "OTP was not sent to your Mail successfully.", Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
@@ -203,5 +214,23 @@ public class RegisterActivity extends AppCompatActivity {
             }
             return doneflag;
         }
+    }
+
+    //for hid keyboard when tab outside edittext box
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 }
