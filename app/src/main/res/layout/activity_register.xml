@@ -67,7 +67,7 @@
 
 
         <EditText
-            android:id="@+id/edt_phone"
+            android:id="@+id/edt_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20dp"
@@ -99,7 +99,31 @@
             android:singleLine="true"
             android:textColorHint="#919191"
             android:textSize="14dp" />
+        <LinearLayout android:id="@+id/otpLayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#919191" />
 
+        <EditText
+            android:id="@+id/edt_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:background="#00000000"
+            android:clickable="true"
+            android:gravity="left|center"
+            android:hint="Enter OTP"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColorHint="#919191"
+            android:textSize="14dp" />
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
