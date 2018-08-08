@@ -20,21 +20,23 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     private ArrayList<Data> dataList;
     Context mContext;
 
-
+    boolean homeflag;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
+
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
-            recentImg =  view.findViewById(R.id.recentImg);
+            recentImg = view.findViewById(R.id.recentImg);
         }
     }
 
 
-    public RecentFileAdapter(Context mContext, ArrayList<Data> dataList) {
+    public RecentFileAdapter(Context mContext, ArrayList<Data> dataList,boolean homeflag) {
         this.dataList = dataList;
         this.mContext = mContext;
+        this.homeflag=homeflag;
     }
 
     @Override
@@ -48,7 +50,21 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.recenttext.setText(dataList.get(position).getTitle());
+        holder.recentImg.setImageResource(R.mipmap.logo);
 
+        if(homeflag){
+            if (position % 2 == 0) {
+                holder.recentImg.setImageResource(R.mipmap.logo);
+            }else {
+                holder.recentImg.setImageResource(R.drawable.noimage);
+            }
+        }else{
+            if (position % 2 == 0) {
+                holder.recentImg.setImageResource(R.drawable.image_placeholder);
+            }else {
+                holder.recentImg.setImageResource(R.drawable.defaultimg);
+            }
+        }
     }
 
     @Override

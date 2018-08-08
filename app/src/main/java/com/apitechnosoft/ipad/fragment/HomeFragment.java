@@ -1,12 +1,16 @@
 package com.apitechnosoft.ipad.fragment;
 
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
@@ -18,13 +22,17 @@ import com.apitechnosoft.ipad.utils.FontManager;
 
 import java.util.ArrayList;
 
+import static com.apitechnosoft.ipad.ApplicationHelper.application;
+
 
 /**
  * Created by Narayan .
  */
-public class HomeFragment extends MainFragment {
+public class HomeFragment extends MainFragment implements View.OnClickListener{
     Typeface materialdesignicons_font;
     RecyclerView recent_recycler_view;
+    LinearLayout uploadLayout;
+    private TabLayout tabLayout;
 
     @Override
     protected int fragmentLayout() {
@@ -33,18 +41,7 @@ public class HomeFragment extends MainFragment {
 
     @Override
     protected void loadView() {
-    }
-
-    @Override
-    protected void setClickListeners() {
-    }
-
-    @Override
-    protected void setAccessibility() {
-    }
-
-    @Override
-    protected void dataToView() {
+        uploadLayout = findViewById(R.id.uploadLayout);
         TextView uploadIcon = findViewById(R.id.uploadIcon);
         TextView searchIcon = findViewById(R.id.searchIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
@@ -53,13 +50,24 @@ public class HomeFragment extends MainFragment {
         searchIcon.setTypeface(materialdesignicons_font);
         searchIcon.setText(Html.fromHtml("&#xf349;"));
 
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));
         tabLayout.addTab(tabLayout.newTab().setText("Shared"));
         tabLayout.addTab(tabLayout.newTab().setText("Received"));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
 
+    @Override
+    protected void setClickListeners() {
+        uploadLayout.setOnClickListener(this);
+    }
+
+    @Override
+    protected void setAccessibility() {
+    }
+
+    @Override
+    protected void dataToView() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final HomePagerAdapter adapter = new HomePagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
@@ -91,7 +99,7 @@ public class HomeFragment extends MainFragment {
             data.setTitle("Recent" + i);
             dataList.add(data);
         }
-        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList);
+        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList, true);
         recent_recycler_view.setAdapter(mAdapter);
 
     }
@@ -102,5 +110,19 @@ public class HomeFragment extends MainFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()){
+            case R.id.uploadLayout:
+                openUploadScreen();
+                break;
+        }
+    }
+    protected void openUploadScreen() {
+        Bundle bundle = new Bundle();
+        bundle.putString("headerTxt", "Home");
+        bundle.putInt("MENU_ID", 0);
+        getHostActivity().updateFragment(new UploadNewFileFragment(), bundle);
+    }
 }

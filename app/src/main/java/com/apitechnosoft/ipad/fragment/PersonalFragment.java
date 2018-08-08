@@ -12,6 +12,9 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 public class PersonalFragment extends MainFragment {
     Typeface materialdesignicons_font;
     RecyclerView recyclerView;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -36,18 +40,22 @@ public class PersonalFragment extends MainFragment {
 
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
+        TextView filter = findViewById(R.id.filter);
+        TextView filterIcon = findViewById(R.id.filterIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
 
         newFolder.setTypeface(materialdesignicons_font);
         newFolder.setText(Html.fromHtml("&#xf257;"));
         upFolder.setTypeface(materialdesignicons_font);
         upFolder.setText(Html.fromHtml("&#xf259;"));
+        filterIcon.setTypeface(materialdesignicons_font);
+        filterIcon.setText(Html.fromHtml("&#xf04a;"));
 
-         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
-
+       // filterspinner = (Spinner) findViewById(R.id.filterspinner);
 
 
     }
@@ -69,8 +77,27 @@ public class PersonalFragment extends MainFragment {
             data.setTitle("Recent" + i);
             dataList.add(data);
         }
-        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList);
+        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList,false);
         recyclerView.setAdapter(mAdapter);
+
+        final String filter_array[] = {"Newest", "Oldest"};
+        ArrayAdapter<String> bankAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_row, filter_array);
+       /* filterspinner.setAdapter(bankAdapter);
+        filterspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //  TextView textview = view.findViewById(R.id.cust_view);
+                String str = filter_array[position];
+                if (str.equals("Savings Account")) {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });*/
     }
 
 
