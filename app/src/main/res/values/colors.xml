@@ -38,7 +38,6 @@
     <color name="darkorrange">#cc2303</color>
     <color name="orangeStyle">#FF6600</color>
     <color name="Green_A">#00FF00</color>
-    <color name="Yellow_A">#FFFF00</color>
     <color name="Orange_A">#FFA500</color>
     <color name="Red_A">#FF0000</color>
     <color name="White_A">#FFFFFF</color>
@@ -83,9 +82,11 @@
 
 
     <color name="yellow">#FFFF00</color>
+    <color name="yellow_dark">#FFD603</color>
+    <color name="yellowLight"> #FFE34A</color>
     <color name="gray7">#CCC1D9</color>
 
-    <color name="orangeLight1">#fac08f</color>
+    <color name="orangeLight1">#E9A162</color>
     <color name="darkSlateGray">#153D46</color>
     <color name="lightSkyBlue">#E8EDF3</color>
     <color name="red4">#FF8000</color>

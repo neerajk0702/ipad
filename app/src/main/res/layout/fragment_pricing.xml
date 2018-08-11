@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragment.PricingFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:gravity="center"
+                android:text="Cloud Pricing Tables"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:gravity="center"
+                android:text="Stores All File Types (Photo's, Video's, Music, Documents and More..)"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_4dp"
+                app:cardElevation="@dimen/_8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/orangeLight1"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_10dp"
+                        android:paddingTop="@dimen/_10dp"
+                        android:text="BRONZE USER"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/orange"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gb5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="5GB"
+                            android:padding="@dimen/_5dp"
+                            android:textColor="@color/white"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="Free Space"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:background="@drawable/free_button"
+                            android:gravity="center"
+                            android:text="FREE FOR ALL USERS"
+                            android:textSize="@dimen/_12dp" />
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:background="@drawable/free_button"
+                            android:gravity="center"
+                            android:text="JOIN NOW"
+                            android:textSize="@dimen/_12dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30dp"
+                            android:background="@color/orange" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_4dp"
+                app:cardElevation="@dimen/_8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray7"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_10dp"
+                        android:paddingTop="@dimen/_10dp"
+                        android:text="SILVER USER"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gb50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="50GB"
+                            android:padding="@dimen/_5dp"
+                            android:textColor="@color/white"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="$5.99/Month"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="$59.90/Year (2 Months Free)"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:layout_marginRight="@dimen/_5dp"
+                                android:text="Monthly" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10dp"
+                                android:textColor="@color/white"
+                                android:text="Yearly" />
+                        </LinearLayout>
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:background="@drawable/buy_button"
+                            android:gravity="center"
+                            android:text="BUY NOW"
+                            android:textSize="@dimen/_12dp" />
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:background="@drawable/buy_button"
+                            android:gravity="center"
+                            android:text="JOIN NOW"
+                            android:textSize="@dimen/_12dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30dp"
+                            android:background="@color/gray" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_4dp"
+                app:cardElevation="@dimen/_8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/yellowLight"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_10dp"
+                        android:paddingTop="@dimen/_10dp"
+                        android:text="GOLD USER"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/yellow_dark"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gb500"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:padding="@dimen/_5dp"
+                            android:text="500GB"
+                            android:textColor="@color/white"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="$5.99/Month"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:text="$59.90/Year (2 Months Free)"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_5dp"
+                                android:textColor="@color/white"
+                                android:text="Monthly" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10dp"
+                                android:textColor="@color/white"
+                                android:text="Yearly" />
+                        </LinearLayout>
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:textColor="@color/white"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:background="@drawable/gold_button"
+                            android:gravity="center"
+                            android:text="BUY NOW"
+                            android:textSize="@dimen/_12dp" />
+
+                        <Button
+                            style="@style/DefaultButtonText"
+                            android:layout_width="@dimen/_180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/gold_button"
+                            android:gravity="center"
+                            android:text="JOIN NOW"
+                            android:textSize="@dimen/_12dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30dp"
+                            android:background="@color/yellow_dark" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

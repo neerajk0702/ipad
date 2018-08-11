@@ -14,17 +14,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.apitechnosoft.ipad.component.ASTTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/_10dp"
                 android:text="UPLOAD NEW FILE"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13dp" />
+                android:textSize="@dimen/_16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +40,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/noimage" />
-
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_16dp"
+                    android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12dp" />
                 <com.apitechnosoft.ipad.component.ASTTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -47,6 +56,7 @@
                     android:text="Warning:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/orange"
+                    android:textStyle="bold"
                     android:textSize="@dimen/_14dp" />
 
                 <com.apitechnosoft.ipad.component.ASTTextView

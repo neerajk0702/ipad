@@ -114,8 +114,35 @@
                 android:layout_weight="0.6"
                 android:gravity="center|right"
                 android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/searchLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <com.apitechnosoft.ipad.component.ASTTextView
+                    <com.apitechnosoft.ipad.component.ASTEditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/bg_boder_round"
+                        android:hint="Search..."
+                        android:padding="@dimen/_3dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12dp" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:id="@+id/searchIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="ic"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/_18dp" />
+                </LinearLayout>
+              <!--  <com.apitechnosoft.ipad.component.ASTTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sort By"
@@ -153,7 +180,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18dp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
 

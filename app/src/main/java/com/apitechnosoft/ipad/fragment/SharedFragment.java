@@ -33,16 +33,19 @@ public class SharedFragment extends MainFragment {
     protected void loadView() {
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
-        TextView filter = findViewById(R.id.filter);
-        TextView filterIcon = findViewById(R.id.filterIcon);
+      //  TextView filter = findViewById(R.id.filter);
+       // TextView filterIcon = findViewById(R.id.filterIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
 
         newFolder.setTypeface(materialdesignicons_font);
         newFolder.setText(Html.fromHtml("&#xf257;"));
         upFolder.setTypeface(materialdesignicons_font);
         upFolder.setText(Html.fromHtml("&#xf259;"));
-        filterIcon.setTypeface(materialdesignicons_font);
-        filterIcon.setText(Html.fromHtml("&#xf04a;"));
+        //filterIcon.setTypeface(materialdesignicons_font);
+        //filterIcon.setText(Html.fromHtml("&#xf04a;"));
+        TextView searchIcon = findViewById(R.id.searchIcon);
+        searchIcon.setTypeface(materialdesignicons_font);
+        searchIcon.setText(Html.fromHtml("&#xf349;"));
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);

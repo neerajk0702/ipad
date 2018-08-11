@@ -43,12 +43,11 @@ public class HomeFragment extends MainFragment implements View.OnClickListener{
     protected void loadView() {
         uploadLayout = findViewById(R.id.uploadLayout);
         TextView uploadIcon = findViewById(R.id.uploadIcon);
-        TextView searchIcon = findViewById(R.id.searchIcon);
+
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
         uploadIcon.setTypeface(materialdesignicons_font);
         uploadIcon.setText(Html.fromHtml("&#xf167;"));
-        searchIcon.setTypeface(materialdesignicons_font);
-        searchIcon.setText(Html.fromHtml("&#xf349;"));
+
 
          tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));

@@ -34,9 +34,15 @@ import android.widget.EditText;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.fragment.AboutFragment;
+import com.apitechnosoft.ipad.fragment.ContactUsFragment;
+import com.apitechnosoft.ipad.fragment.EducationFragment;
 import com.apitechnosoft.ipad.fragment.HeaderFragment;
 import com.apitechnosoft.ipad.fragment.HomeFragment;
 import com.apitechnosoft.ipad.fragment.MainFragment;
+import com.apitechnosoft.ipad.fragment.MyProfileFragment;
+import com.apitechnosoft.ipad.fragment.PressFragment;
+import com.apitechnosoft.ipad.fragment.PricingFragment;
 import com.apitechnosoft.ipad.runtimepermission.PermissionResultCallback;
 import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
@@ -222,9 +228,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             bundle.putString("headerTxt", "Home");
             bundle.putInt("MENU_ID", 0);
-        } else if (id == R.id.nav_tvComplaint) {
-            bundle.putString("headerTxt", "Complaint");
-            bundle.putString("headerTxt", "About");
+            this.updateFragment(new HomeFragment(), bundle);
+        } else if (id == R.id.nav_About) {
+            bundle.putString("headerTxt", "About Us");
+            this.updateFragment(new AboutFragment(), bundle);
+        } else if (id == R.id.nav_Pricing) {
+            bundle.putString("headerTxt", "Pricing");
+            this.updateFragment(new PricingFragment(), bundle);
+        } else if (id == R.id.nav_Education) {
+            bundle.putString("headerTxt", "Education");
+            this.updateFragment(new EducationFragment(), bundle);
+        } else if (id == R.id.nav_Press) {
+            bundle.putString("headerTxt", "Press");
+            this.updateFragment(new PressFragment(), bundle);
+        } else if (id == R.id.nav_Contact) {
+            bundle.putString("headerTxt", "Contact Us");
+            this.updateFragment(new ContactUsFragment(), bundle);
+        } else if (id == R.id.nav_Terms) {
+            Intent i = new Intent(MainActivity.this, TermsConditionActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_Privacy) {
+            Intent i = new Intent(MainActivity.this, PrivacyActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_Logout) {
+            Intent i = new Intent(MainActivity.this, LoginHomeActivity.class);
+            startActivity(i);
+            finish();
+        }else if (id == R.id.nav_profile) {
+            bundle.putString("headerTxt", "My Profile");
+            this.updateFragment(new MyProfileFragment(), bundle);
         }
         DrawerLayout drawer = this.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -536,6 +568,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
     }
+
     //for hid keyboard when tab outside edittext box
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {

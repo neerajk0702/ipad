@@ -14,6 +14,8 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     Typeface materialdesignicons_font;
     EditText edt_phone, edt_password;
     String passwordStr, emailStr;
+    TextView welcom, forgotPasssword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,9 @@ public class LoginActivity extends AppCompatActivity {
         TextView password_icon = (TextView) findViewById(R.id.password_icon);
         password_icon.setTypeface(materialdesignicons_font);
         password_icon.setText(Html.fromHtml("&#xf33e;"));
+        welcom = findViewById(R.id.welcom);
+        welcom.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
+        forgotPasssword = findViewById(R.id.forgotPasssword);
     }
 
     //get data from UI
@@ -88,10 +94,41 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+        forgotPasssword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertForForgotPassword();
+            }
+        });
         //sendMail("89neerajsingh@gmail.com", "Mail test", "Device mail");
     }
-
+    public  void alertForForgotPassword() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(LoginActivity.this);
+        final android.app.AlertDialog alert = builder.create();
+        alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        alert.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        View view = alert.getLayoutInflater().inflate(R.layout.forgot_password_layout, null);
+        EditText edt_phone =  view.findViewById(R.id.edt_phone);
+        Button btnLogIn =  view.findViewById(R.id.btnLogIn);
+        Button btncancel =  view.findViewById(R.id.btncancel);
+        alert.setCustomTitle(view);
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        btncancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
     private void callLogin() {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
@@ -242,6 +279,7 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
     }
+
     //for hid keyboard when tab outside edittext box
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {

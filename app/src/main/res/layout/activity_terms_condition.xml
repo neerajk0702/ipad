@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.TermsConditionActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Welcome to ipadtoday.com (the iPAD Site)."
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="@string/p1"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="I. TRADEMARKS"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p2"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="II. DISCLAIMERS AND LIMITATION OF LIABILITY"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p3"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p4"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p5"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="III. CONTENT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="A. PROPRIETARY RIGHTS"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p6"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="B. DISTRIBUTION/UPLOADING OF THIRD-PARTY CONTENT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p7"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="C. THIRD-PARTY CONTENT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p8"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="D. EXPORT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p9"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="IV. ONLINE CONDUCT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p10"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p11"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p12"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="V. PRIVACY POLICY"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="In accordance with the terms of the IPAD Site's Privacy Policy, RXD respects the privacy of its Users."
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="VI. TERMINATION OF USAGE"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p13"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="VII. USAGE BY CHILDREN UNDER 13"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p14"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="VIII. APPLICABLE LAW"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p15"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="IX. SEVERABILITY"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p16"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="X. ACKNOWLEDGMENT"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p17"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30dp"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

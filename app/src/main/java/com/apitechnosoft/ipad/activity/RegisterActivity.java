@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnLogIn;
     Typeface materialdesignicons_font;
     EditText edt_firstname, edt_lastname, edt_mail, edt_password, edt_otp;
@@ -38,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
     LinearLayout otpLayout;
     String PINString;
     boolean buttonFlag = false;
+    private TextView welcom, Privacy,ipad;
+    private CheckBox accept;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +55,17 @@ public class RegisterActivity extends AppCompatActivity {
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         edt_firstname = (EditText) findViewById(R.id.edt_firstname);
         edt_lastname = (EditText) findViewById(R.id.edt_lastname);
-
         edt_mail = (EditText) findViewById(R.id.edt_mail);
         edt_password = (EditText) findViewById(R.id.edt_password);
-
         otpLayout = findViewById(R.id.otpLayout);
         edt_otp = (EditText) findViewById(R.id.edt_otp);
+        welcom = findViewById(R.id.welcom);
+        Privacy = findViewById(R.id.Privacy);
+        Privacy.setOnClickListener(this);
+        welcom.setOnClickListener(this);
+        accept = findViewById(R.id.accept);
+        ipad = findViewById(R.id.ipad);
+        ipad.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
     }
 
     //get data from UI
@@ -154,12 +162,30 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (passwordstr.length() == 0) {
             showToast("Please enter password");
             return false;
+        } else if (!accept.isChecked()) {
+            showToast("Please select Term's of Service.");
+            return false;
         }
         return true;
     }
 
     private void showToast(String message) {
         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.Privacy:
+                Intent i = new Intent(RegisterActivity.this, PrivacyActivity.class);
+                startActivity(i);
+                break;
+            case R.id.welcom:
+                Intent i2 = new Intent(RegisterActivity.this, TermsConditionActivity.class);
+                startActivity(i2);
+                break;
+
+        }
     }
 
     private class SendMail extends AsyncTask<String, Integer, Boolean> {

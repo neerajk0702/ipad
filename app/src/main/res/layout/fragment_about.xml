@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragment.AboutFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="It all started when..."
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="In 2007, the idea for ipad™ was born from a founder's need for connecting and synchronizing individuals, and groups, within a vastly growing field of information. An accessible platform to bring ideas to life through organized communication was designed to foster engagement and cooperation toward outcomes not only within immediate circles but world community as well."
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="The mission of ipad™ is to be the world's most efficient, user friendly cloud storage service to support the organization and growth for you, your family, your friends and your business."
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="Connect with ipad Today™"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200dp"
+                android:src="@drawable/about" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

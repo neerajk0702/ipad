@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_7dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_7dp">
 
         <LinearLayout
             android:id="@+id/topLayout"
@@ -22,14 +22,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/uploadLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_200dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:orientation="horizontal">
+                    android:background="@drawable/border_layout_orange"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/_5dp"
+                    android:paddingTop="@dimen/_5dp">
 
                     <com.apitechnosoft.ipad.component.ASTTextView
                         android:id="@+id/uploadIcon"
@@ -52,35 +56,7 @@
                         android:textSize="@dimen/_12dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/searchLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:orientation="horizontal">
 
-                    <com.apitechnosoft.ipad.component.ASTEditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/bg_boder_round"
-                        android:hint="Search..."
-                        android:padding="@dimen/_3dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/searchIcon"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:gravity="center"
-                        android:text="ic"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/_18dp" />
-                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -117,24 +93,28 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/topLayout"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
                 android:background="@color/orange" />
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_25dp"
                 android:elevation="8dp"
-                app:tabSelectedTextColor="@color/black"
-                app:tabBackground="@drawable/tab_color_selector"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabBackground="@drawable/tab_color_selector"
                 app:tabIndicatorColor="#00000000"
-                app:tabMode="fixed" />
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/black" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
                 android:background="@color/orange" />
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
@@ -152,14 +132,38 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
+                android:visibility="gone"
                 android:background="@color/orange" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
 
+                <com.apitechnosoft.ipad.component.ASTButton
+                    android:id="@+id/signup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/Orange_A"
+                    android:text="Select Folder"
+                    android:textColor="@color/white" />
+
+                <com.apitechnosoft.ipad.component.ASTButton
+                    android:id="@+id/login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorAccent"
+                    android:text="Share File's"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
             <TextView
                 android:id="@+id/error_msg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30dp"
                 android:gravity="center"
-                android:padding="@dimen/_10dp"
                 android:text="Admob"
                 android:textColor="@android:color/black" />
         </LinearLayout>
