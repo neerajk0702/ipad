@@ -1678,6 +1678,19 @@ public class ASTUIUtil {
     }
 
 
+    //rename file
+    public static File renameFile(String imageFileName, String newImageName) {
+        //File sdcardPath = new File(Environment.getExternalStorageDirectory(), Contants.APP_DIRECTORY);
+        // sdcardPath.mkdirs();
+
+        Context appContext = ApplicationHelper.application().getApplicationContext();
+        File directory = new File(appContext.getCacheDir(), imageFileName);
+        Log.d(Contants.LOG_TAG, "OLd file name and path __: " + directory.getPath());
+        File newFileName = new File(appContext.getCacheDir(), newImageName);
+        boolean success = directory.renameTo(newFileName);
+        Log.d(Contants.LOG_TAG, "New file name and path __: " + newFileName.getPath() + "getName__" + newFileName.getName());
+        return newFileName;
+    }
 
 
 }

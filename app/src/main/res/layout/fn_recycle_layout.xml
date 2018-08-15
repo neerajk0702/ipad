@@ -6,7 +6,7 @@
     android:background="@color/bg_color"
     android:orientation="vertical">
 
-    <com.telecom.ast.sitesurvey.component.FNTextView
+   <com.apitechnosoft.ipad.component.ASTTextView
         android:id="@+id/no_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

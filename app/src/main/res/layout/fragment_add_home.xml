@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.telecom.ast.sitesurvey.component.SwitchViewPager
+   <com.apitechnosoft.ipad.component.SwitchViewPager
         android:id="@+id/viewPager_itemList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

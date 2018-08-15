@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.telecom.ast.sitesurvey.component.FNTileView
+   <com.apitechnosoft.ipad.component.FNTileView
         android:id="@+id/customerTile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

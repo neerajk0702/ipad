@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.telecom.ast.sitesurvey.filepicker.view.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.apitechnosoft.ipad.filepicker.view.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foregroundGravity="center">
 
-    <com.telecom.ast.sitesurvey.component.FNImageView
+   <com.apitechnosoft.ipad.component.ASTImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,4 +17,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black" />
-</com.telecom.ast.sitesurvey.filepicker.view.SquareFrameLayout>
+</com.apitechnosoft.ipad.filepicker.view.SquareFrameLayout>

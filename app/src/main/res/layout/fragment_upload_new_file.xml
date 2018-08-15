@@ -12,75 +12,85 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_10dp">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.apitechnosoft.ipad.component.ASTTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_10dp"
-                android:text="UPLOAD NEW FILE"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16dp" />
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30dp"
-                android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginRight="@dimen/_10dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:orientation="vertical">
 
-                <com.apitechnosoft.ipad.component.ASTImageView
-                    android:id="@+id/recentImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/noimage" />
                 <com.apitechnosoft.ipad.component.ASTTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/_16dp"
-                    android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
+                    android:text="UPLOAD NEW FILE"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12dp" />
-                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:textSize="@dimen/_16dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_14dp"
-                    android:text="Warning:"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/orange"
-                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_30dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/recentImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120dp"
+                        android:src="@drawable/noimage" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16dp"
+                        android:gravity="center"
+                        android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12dp" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_14dp"
+                        android:text="Warning:"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/_14dp"
+                        android:textStyle="bold" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:text="Only certain file type will show in preview .jpeg,.gif,.png, etc."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnLogIn"
+                    style="@style/DefaultButtonText"
+                    android:layout_width="@dimen/_220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_25dp"
+                    android:background="@drawable/button_login"
+                    android:gravity="center"
+                    android:text="Upload"
                     android:textSize="@dimen/_14dp" />
 
-                <com.apitechnosoft.ipad.component.ASTTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5dp"
-                    android:text="Only certain file type will show in preview .jpeg,.gif,.png, etc."
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12dp" />
-            </LinearLayout>
 
-            <Button
-                android:id="@+id/btnLogIn"
-                style="@style/DefaultButtonText"
-                android:layout_width="@dimen/_220dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_25dp"
-                android:background="@drawable/button_login"
-                android:gravity="center"
-                android:textSize="@dimen/_14dp"
-                android:text="Upload" />
-        </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
