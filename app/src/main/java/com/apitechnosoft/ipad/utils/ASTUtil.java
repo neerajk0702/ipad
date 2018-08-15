@@ -1,5 +1,6 @@
 package com.apitechnosoft.ipad.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -32,7 +33,13 @@ import com.apitechnosoft.ipad.FNSortOrderingUtil;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.exception.FNExceptionUtil;
+import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.listener.PermissionRationaleDialogListener;
+
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+import static com.apitechnosoft.ipad.filepicker.FNFilePicker.MEDIA_TYPE_DOCUMENT;
 
 /**
  * @author AST Inc.
@@ -296,4 +303,20 @@ public class ASTUtil {
         FNSortOrdering[] sortOrderArray = FNSortOrderingUtil.create(key, isAsc ? "ASC" : "DESC");
         FNSortOrderingUtil.sort(array, sortOrderArray);
     }
+
+
+    public static void startFilePicker(Activity activity, int limit, long sizeLimit) {
+        FNFilePicker.options(activity)
+                .addMedia(MEDIA_TYPE_IMAGE)
+                .addMedia(MEDIA_TYPE_VIDEO)
+                .addMedia(MEDIA_TYPE_AUDIO)
+                .addMedia(MEDIA_TYPE_DOCUMENT)
+                .returnAfterFirst(false)
+                .limit(limit)
+                .sizeLimit(sizeLimit)
+                .imageDirectory(appNameWithoutSpace(activity)) // captured image directory name ("Camera" folder by default)
+                .start(FNReqResCode.ATTACHMENT_REQUEST); // start image picker activity with request code
+
+    }
+
 }

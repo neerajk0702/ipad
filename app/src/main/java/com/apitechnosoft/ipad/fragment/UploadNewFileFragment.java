@@ -21,7 +21,9 @@ import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.model.ContentData;
+import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FNReqResCode;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -73,15 +75,28 @@ public class UploadNewFileFragment extends MainFragment {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.recentImg:
-                ASTUIUtil.startImagePicker(getHostActivity());
-                break;
-
-            case R.id.btnLogIn:
+        if (view.getId() == R.id.recentImg) {
+            // ASTUIUtil.startImagePicker(getHostActivity());
+            ASTUtil.startFilePicker(getHostActivity(), 60, FNFilePicker.SIZE_LIMIT - attachmentSize());
+        } else if (view.getId() == R.id.btnLogIn) {
+            if (isVlaidate())
                 uploadData();
-                break;
         }
+    }
+
+    public boolean isVlaidate() {
+        if (selectFile == null || !selectFile.exists()) {
+            ASTUIUtil.shownewErrorIndicator(getContext(), "Please Select File");
+            return false;
+        }
+        return true;
+    }
+
+
+    private long attachmentSize() {
+        long ttlSize = 5000;
+
+        return ttlSize;
     }
 
     public void getPickedFiles(ArrayList<MediaFile> files) {

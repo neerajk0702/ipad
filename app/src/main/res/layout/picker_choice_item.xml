@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-   <com.apitechnosoft.ipad.component.FNFrameIcon
+   <com.apitechnosoft.ipad.component.ASTFrameIcon
         android:id="@+id/frameIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
