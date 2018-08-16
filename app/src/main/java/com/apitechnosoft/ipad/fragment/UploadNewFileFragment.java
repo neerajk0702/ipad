@@ -15,9 +15,11 @@ import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTImageView;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.component.ASTTextView;
 import com.apitechnosoft.ipad.constants.Constant;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
+import com.apitechnosoft.ipad.filepicker.listener.FilePickerCallback;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.model.ContentData;
@@ -46,6 +48,7 @@ public class UploadNewFileFragment extends MainFragment {
     static ImageView selectimg;
     private static File selectFile;
     Button btnLogIn;
+    ASTTextView filename;
 
     @Override
     protected int fragmentLayout() {
@@ -56,6 +59,7 @@ public class UploadNewFileFragment extends MainFragment {
     protected void loadView() {
         selectimg = this.findViewById(R.id.recentImg);
         btnLogIn = this.findViewById(R.id.btnLogIn);
+        filename=this.findViewById(R.id.filename);
     }
 
     @Override
@@ -79,7 +83,7 @@ public class UploadNewFileFragment extends MainFragment {
             // ASTUIUtil.startImagePicker(getHostActivity());
             ASTUtil.startFilePicker(getHostActivity(), 60, FNFilePicker.SIZE_LIMIT - attachmentSize());
         } else if (view.getId() == R.id.btnLogIn) {
-            if (isVlaidate())
+            //if (isVlaidate())
                 uploadData();
         }
     }
@@ -99,13 +103,17 @@ public class UploadNewFileFragment extends MainFragment {
         return ttlSize;
     }
 
+    String mimtype;
+
     public void getPickedFiles(ArrayList<MediaFile> files) {
         for (MediaFile deviceFile : files) {
             if (deviceFile.getFilePath() != null && deviceFile.getFilePath().exists()) {
                 String imageName = deviceFile.getFileName();
-                selectFile = ASTUIUtil.renameFile(deviceFile.getFileName(), imageName);
+                selectFile=deviceFile.getFilePath();
+               // selectFile = ASTUIUtil.renameFile(deviceFile.getFileName(), imageName);
                 Picasso.with(ApplicationHelper.application().getContext()).load(selectFile).into(selectimg);
-
+                filename.setText(deviceFile.getFileName());
+                mimtype = deviceFile.getMimeType();
             }
         }
     }
@@ -137,14 +145,8 @@ public class UploadNewFileFragment extends MainFragment {
             final ASTProgressBar progressBar = new ASTProgressBar(getContext());
             progressBar.show();
             String serviceURL = Constant.BASE_URL + Constant.UPLOAD_FILE;
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("username", "89neerajsingh@gmail.com");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             HashMap<String, String> payloadList = new HashMap<String, String>();
-            payloadList.put("file", jsonObject.toString());
+            payloadList.put("username", "89neerajsingh@gmail.com");
             MultipartBody.Builder multipartBody = setMultipartBodyVaule();
             FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
                 @Override
@@ -175,10 +177,10 @@ public class UploadNewFileFragment extends MainFragment {
 
     //add pm install images into MultipartBody for send as multipart
     private MultipartBody.Builder setMultipartBodyVaule() {
-        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/jpg");
+        final MediaType MEDIA_TYPE = MediaType.parse(mimtype);
         MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (selectFile.exists()) {
-            multipartBody.addFormDataPart(selectFile.getName(), selectFile.getName(), RequestBody.create(MEDIA_TYPE_PNG, selectFile));
+            multipartBody.addFormDataPart("file", selectFile.getName(), RequestBody.create(MEDIA_TYPE, selectFile));
         }
         return multipartBody;
     }
