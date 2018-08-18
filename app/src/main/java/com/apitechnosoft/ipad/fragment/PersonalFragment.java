@@ -1,6 +1,9 @@
 package com.apitechnosoft.ipad.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,15 +15,29 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.LoginActivity;
+import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentData;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Data;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -46,6 +63,7 @@ public class PersonalFragment extends MainFragment {
 
         newFolder.setTypeface(materialdesignicons_font);
         newFolder.setText(Html.fromHtml("&#xf257;"));
+        newFolder.setOnClickListener(this);
         upFolder.setTypeface(materialdesignicons_font);
         upFolder.setText(Html.fromHtml("&#xf259;"));
         // filterIcon.setTypeface(materialdesignicons_font);
@@ -60,7 +78,7 @@ public class PersonalFragment extends MainFragment {
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
         // filterspinner = (Spinner) findViewById(R.id.filterspinner);
 
-
+        getAllFile();
     }
 
     @Override
@@ -103,5 +121,123 @@ public class PersonalFragment extends MainFragment {
         });*/
     }
 
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.newFolder:
+                alertForFolderName();
+                break;
+        }
+    }
 
+    public void alertForFolderName() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        final android.app.AlertDialog alert = builder.create();
+        alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        alert.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        View view = alert.getLayoutInflater().inflate(R.layout.folder_create, null);
+        final EditText edt_foldername = view.findViewById(R.id.edt_foldername);
+        Button btnLogIn = view.findViewById(R.id.btnLogIn);
+        Button btncancel = view.findViewById(R.id.btncancel);
+        alert.setCustomTitle(view);
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                if (edt_foldername.getText().toString().length() == 0) {
+                    ASTUIUtil.showToast("Please enter Folder Name!");
+                } else {
+                    createFolder(edt_foldername.getText().toString());
+                }
+
+            }
+        });
+        btncancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    private void createFolder(String folderName) {
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            String UserId = prefs.getString("UserId", "");
+
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                dotDialog.show();
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName;
+                serviceCaller.CallCommanServiceMethod(url, "createFolder", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                            if (data != null) {
+                                if (data.isStatus()) {
+                                    Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            ASTUIUtil.showToast(Contants.Error);
+                        }
+                        if (dotDialog.isShowing()) {
+                            dotDialog.dismiss();
+                        }
+                    }
+                });
+            } else {
+                ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+            }
+        }
+    }
+
+
+    private void getAllFile() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            String UserId = prefs.getString("UserId", "");
+
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                dotDialog.show();
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "";
+                serviceCaller.CallCommanServiceMethod(url, "GetFileListApi", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentData data = new Gson().fromJson(result, ContentData.class);
+                            if (data != null) {
+                                if (data.isStatus()) {
+                                    Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            ASTUIUtil.showToast(Contants.Error);
+                        }
+                        if (dotDialog.isShowing()) {
+                            dotDialog.dismiss();
+                        }
+                    }
+                });
+            } else {
+                ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+            }
+        }
+    }
 }

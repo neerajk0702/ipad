@@ -3,7 +3,8 @@ package com.apitechnosoft.ipad.model;
 public class ContentResponce {
     private String tag;
     private boolean status;
-private String error_msg;
+    private String error_msg;
+
     public String getTag() {
         return tag;
     }

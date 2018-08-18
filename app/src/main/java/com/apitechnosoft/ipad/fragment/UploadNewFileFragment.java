@@ -3,36 +3,24 @@ package com.apitechnosoft.ipad.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.component.ASTImageView;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.component.ASTTextView;
-import com.apitechnosoft.ipad.constants.Constant;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
-import com.apitechnosoft.ipad.filepicker.listener.FilePickerCallback;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.model.ContentData;
-import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FNReqResCode;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -144,7 +132,7 @@ public class UploadNewFileFragment extends MainFragment {
         if (ASTUIUtil.isOnline(getContext())) {
             final ASTProgressBar progressBar = new ASTProgressBar(getContext());
             progressBar.show();
-            String serviceURL = Constant.BASE_URL + Constant.UPLOAD_FILE;
+            String serviceURL = Contants.BASE_URL + Contants.UPLOAD_FILE;
             HashMap<String, String> payloadList = new HashMap<String, String>();
             payloadList.put("username", "89neerajsingh@gmail.com");
             MultipartBody.Builder multipartBody = setMultipartBodyVaule();

@@ -1,17 +1,14 @@
 package com.apitechnosoft.ipad.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +21,13 @@ import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
-import com.apitechnosoft.ipad.constants.Constant;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
-import com.apitechnosoft.ipad.mail.Mail;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.io.UnsupportedEncodingException;
@@ -142,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                ASTUIUtil.setUserId(LoginActivity.this,emailStr);
                                 Toast.makeText(LoginActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
