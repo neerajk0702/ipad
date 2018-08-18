@@ -1,8 +1,10 @@
 package com.apitechnosoft.ipad.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -12,11 +14,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -97,38 +101,37 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasssword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertForForgotPassword();
+                alertForForgotPassword(LoginActivity.this);
             }
         });
         //sendMail("89neerajsingh@gmail.com", "Mail test", "Device mail");
     }
-    public  void alertForForgotPassword() {
-        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(LoginActivity.this);
-        final android.app.AlertDialog alert = builder.create();
-        alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        alert.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        alert.setCanceledOnTouchOutside(false);
-        alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
-        View view = alert.getLayoutInflater().inflate(R.layout.forgot_password_layout, null);
-        EditText edt_phone =  view.findViewById(R.id.edt_phone);
-        Button btnLogIn =  view.findViewById(R.id.btnLogIn);
-        Button btncancel =  view.findViewById(R.id.btncancel);
-        alert.setCustomTitle(view);
+
+
+    public void alertForForgotPassword(Context context) {
+        final View myview = LayoutInflater.from(context).inflate(R.layout.forgot_password_layout, null);
+        EditText edt_phone = myview.findViewById(R.id.edt_phone);
+        Button btnLogIn = myview.findViewById(R.id.btnLogIn);
+        Button btncancel = myview.findViewById(R.id.btncancel);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).setIcon(R.drawable.audio_icon).setCancelable(false)
+                .setView(myview).create();
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                alert.dismiss();
+            public void onClick(View view) {
+                alertDialog.dismiss();
             }
         });
         btncancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                alert.dismiss();
+            public void onClick(View view) {
+                alertDialog.dismiss();
             }
         });
-        alert.show();
+        alertDialog.show();
+
     }
+
     private void callLogin() {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
