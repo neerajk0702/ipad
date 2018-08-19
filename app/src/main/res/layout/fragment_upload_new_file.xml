@@ -44,10 +44,20 @@
                         android:id="@+id/recentImg"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_120dp"
-                        android:src="@drawable/noimage" />
+                        android:src="@drawable/plus" />
 
                     <com.apitechnosoft.ipad.component.ASTTextView
                         android:id="@+id/filename"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12dp" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"

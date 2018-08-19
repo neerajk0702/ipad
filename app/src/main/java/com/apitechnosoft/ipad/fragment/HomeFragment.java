@@ -28,7 +28,7 @@ import static com.apitechnosoft.ipad.ApplicationHelper.application;
 /**
  * Created by Narayan .
  */
-public class HomeFragment extends MainFragment implements View.OnClickListener{
+public class HomeFragment extends MainFragment implements View.OnClickListener {
     Typeface materialdesignicons_font;
     RecyclerView recent_recycler_view;
     LinearLayout uploadLayout;
@@ -49,7 +49,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener{
         uploadIcon.setText(Html.fromHtml("&#xf167;"));
 
 
-         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));
         tabLayout.addTab(tabLayout.newTab().setText("Shared"));
         tabLayout.addTab(tabLayout.newTab().setText("Received"));
@@ -98,8 +98,8 @@ public class HomeFragment extends MainFragment implements View.OnClickListener{
             data.setTitle("Recent" + i);
             dataList.add(data);
         }
-        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList, true);
-        recent_recycler_view.setAdapter(mAdapter);
+       // RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList, true);
+        //recent_recycler_view.setAdapter(mAdapter);
 
     }
 
@@ -112,12 +112,13 @@ public class HomeFragment extends MainFragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.uploadLayout:
                 openUploadScreen();
                 break;
         }
     }
+
     protected void openUploadScreen() {
         Bundle bundle = new Bundle();
         bundle.putString("headerTxt", "Home");

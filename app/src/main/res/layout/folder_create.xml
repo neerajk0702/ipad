@@ -12,14 +12,16 @@
         android:layout_marginTop="@dimen/_10dp"
         android:background="#fff"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="@dimen/_10dp"
+            android:gravity="center"
             android:text="Create Folder"
             android:textColor="@color/black"
             android:textSize="16sp" />
+
         <EditText
             android:id="@+id/edt_foldername"
             android:layout_width="match_parent"
@@ -60,10 +62,10 @@
                 android:layout_marginBottom="@dimen/_10dp"
                 android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
-                android:textSize="12sp"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Submit" />
+                android:text="Submit"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btncancel"
@@ -74,10 +76,10 @@
                 android:layout_marginBottom="@dimen/_10dp"
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
-                android:textSize="12sp"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Cancel" />
+                android:text="Cancel"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <View

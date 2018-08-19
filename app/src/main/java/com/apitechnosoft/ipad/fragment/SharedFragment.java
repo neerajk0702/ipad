@@ -71,8 +71,8 @@ public class SharedFragment extends MainFragment {
             data.setTitle("Recent" + i);
             dataList.add(data);
         }
-        RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList,false);
-        recyclerView.setAdapter(mAdapter);
+        //RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList,false);
+       // recyclerView.setAdapter(mAdapter);
 
         final String filter_array[] = {"Newest", "Oldest"};
         ArrayAdapter<String> bankAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_row, filter_array);

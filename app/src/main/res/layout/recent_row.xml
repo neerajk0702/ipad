@@ -24,7 +24,7 @@
                 android:id="@+id/recentImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/logo" />
+                android:src="@drawable/noimage" />
         </LinearLayout>
 
         <com.apitechnosoft.ipad.component.ASTTextView

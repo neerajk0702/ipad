@@ -117,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                ASTUIUtil.setUserId(RegisterActivity.this,mailstr);
                                 Toast.makeText(RegisterActivity.this, "Signup Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);

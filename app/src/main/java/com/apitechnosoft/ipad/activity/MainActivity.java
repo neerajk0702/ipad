@@ -251,10 +251,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(MainActivity.this, PrivacyActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_Logout) {
+            SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+            if (prefs != null) {
+                prefs.edit().clear().commit();
+            }
             Intent i = new Intent(MainActivity.this, LoginHomeActivity.class);
             startActivity(i);
             finish();
-        }else if (id == R.id.nav_profile) {
+        } else if (id == R.id.nav_profile) {
             bundle.putString("headerTxt", "My Profile");
             this.updateFragment(new MyProfileFragment(), bundle);
         }

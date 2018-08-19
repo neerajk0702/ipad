@@ -120,6 +120,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_below="@+id/tab_layout" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -132,20 +134,25 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
-                android:visibility="gone"
-                android:background="@color/orange" />
+                android:layout_marginBottom="@dimen/_5dp"
+                android:background="@color/orange"
+                android:visibility="visible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30dp"
                 android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:layout_marginRight="@dimen/_10dp"
                 android:orientation="horizontal">
 
                 <com.apitechnosoft.ipad.component.ASTButton
                     android:id="@+id/signup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/Orange_A"
+                    android:background="@drawable/select_folder"
                     android:text="Select Folder"
                     android:textColor="@color/white" />
 
@@ -153,12 +160,14 @@
                     android:id="@+id/login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/colorAccent"
+                    android:background="@drawable/share_folder"
                     android:text="Share File's"
                     android:textColor="@color/white" />
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/error_msg"
                 android:layout_width="match_parent"

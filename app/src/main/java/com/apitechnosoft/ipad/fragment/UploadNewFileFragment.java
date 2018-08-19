@@ -47,7 +47,7 @@ public class UploadNewFileFragment extends MainFragment {
     protected void loadView() {
         selectimg = this.findViewById(R.id.recentImg);
         btnLogIn = this.findViewById(R.id.btnLogIn);
-        filename=this.findViewById(R.id.filename);
+        filename = this.findViewById(R.id.filename);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class UploadNewFileFragment extends MainFragment {
             ASTUtil.startFilePicker(getHostActivity(), 60, FNFilePicker.SIZE_LIMIT - attachmentSize());
         } else if (view.getId() == R.id.btnLogIn) {
             //if (isVlaidate())
-                uploadData();
+            uploadData();
         }
     }
 
@@ -97,8 +97,8 @@ public class UploadNewFileFragment extends MainFragment {
         for (MediaFile deviceFile : files) {
             if (deviceFile.getFilePath() != null && deviceFile.getFilePath().exists()) {
                 String imageName = deviceFile.getFileName();
-                selectFile=deviceFile.getFilePath();
-               // selectFile = ASTUIUtil.renameFile(deviceFile.getFileName(), imageName);
+                selectFile = deviceFile.getFilePath();
+                // selectFile = ASTUIUtil.renameFile(deviceFile.getFileName(), imageName);
                 Picasso.with(ApplicationHelper.application().getContext()).load(selectFile).into(selectimg);
                 filename.setText(deviceFile.getFileName());
                 mimtype = deviceFile.getMimeType();
@@ -142,13 +142,13 @@ public class UploadNewFileFragment extends MainFragment {
                     ContentData data = new Gson().fromJson(result, ContentData.class);
                     if (data != null) {
                         if (data.isStatus() == true) {
-                            ASTUIUtil.showToast("Image SuceesFuly Load");
+                            ASTUIUtil.showToast("File Upload Successfully");
                             reloadBackScreen();
                         } else {
-                            ASTUIUtil.alertForErrorMessage(Contants.Error, getContext());
+                            ASTUIUtil.showToast("File Not Uploaded!");
                         }
                     } else {
-                        ASTUIUtil.showToast("Not Upload Image");
+                        ASTUIUtil.showToast("File Not Uploaded!");
                     }
                     if (progressBar.isShowing()) {
                         progressBar.dismiss();

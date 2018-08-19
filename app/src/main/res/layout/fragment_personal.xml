@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <com.apitechnosoft.ipad.component.ASTTextView
+                android:id="@+id/photolayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_2dp"
@@ -36,6 +37,7 @@
                 android:textSize="@dimen/_12dp" />
 
             <com.apitechnosoft.ipad.component.ASTTextView
+                android:id="@+id/videolayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_2dp"
@@ -50,6 +52,7 @@
                 android:textSize="@dimen/_12dp" />
 
             <com.apitechnosoft.ipad.component.ASTTextView
+                android:id="@+id/audiolayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_2dp"
@@ -64,6 +67,7 @@
                 android:textSize="@dimen/_12dp" />
 
             <com.apitechnosoft.ipad.component.ASTTextView
+                android:id="@+id/doclayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_2dp"
@@ -114,6 +118,7 @@
                 android:layout_weight="0.6"
                 android:gravity="center|right"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/searchLayout"
                     android:layout_width="match_parent"
@@ -142,45 +147,45 @@
                         android:textColor="@color/orange"
                         android:textSize="@dimen/_18dp" />
                 </LinearLayout>
-               <!-- <com.apitechnosoft.ipad.component.ASTTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sort By"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/orange"
-                    android:textSize="@dimen/_13dp" />
+                <!-- <com.apitechnosoft.ipad.component.ASTTextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Sort By"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:textColor="@color/orange"
+                     android:textSize="@dimen/_13dp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_25dp"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_boder_round"
-                    android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="@dimen/_25dp"
+                     android:layout_marginLeft="@dimen/_5dp"
+                     android:gravity="center"
+                     android:background="@drawable/bg_boder_round"
+                     android:orientation="horizontal">
 
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Newest"
-                        android:gravity="center"
-                        android:padding="@dimen/_5dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
+                     <com.apitechnosoft.ipad.component.ASTTextView
+                         android:id="@+id/filter"
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:text="Newest"
+                         android:gravity="center"
+                         android:padding="@dimen/_5dp"
+                         android:textAppearance="?android:attr/textAppearanceMedium"
+                         android:textColor="@color/black"
+                         android:textSize="@dimen/_12dp" />
 
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/filterIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="ic"
-                        android:padding="@dimen/_2dp"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_18dp" />
+                     <com.apitechnosoft.ipad.component.ASTTextView
+                         android:id="@+id/filterIcon"
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:text="ic"
+                         android:padding="@dimen/_2dp"
+                         android:gravity="center"
+                         android:textAppearance="?android:attr/textAppearanceMedium"
+                         android:textColor="@color/black"
+                         android:textSize="@dimen/_18dp" />
 
-                </LinearLayout>-->
+                 </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
 
@@ -190,7 +195,7 @@
             android:background="@color/orange" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/perrecycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10dp"
@@ -198,8 +203,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30dp"
-            android:layout_marginTop="@dimen/_10dp" />
+            android:layout_height="@dimen/_50dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="#00000000" />
     </LinearLayout>
     <!--  </android.support.v4.widget.NestedScrollView>-->
 

@@ -1,5 +1,6 @@
 package com.apitechnosoft.ipad.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,7 +42,18 @@ public class SplashScreen extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }*/
-                Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                String UserId = "";
+                Intent i;
+                SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+                if (prefs != null) {
+                    UserId = prefs.getString("UserId", "");
+                }
+                if (UserId != null && !UserId.equals("")) {
+                    i = new Intent(SplashScreen.this, MainActivity.class);
+
+                } else {
+                    i = new Intent(SplashScreen.this, LoginHomeActivity.class);
+                }
                 startActivity(i);
                 finish();
             }

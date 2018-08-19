@@ -314,6 +314,7 @@ public class ASTUtil {
                 .returnAfterFirst(false)
                 .limit(limit)
                 .sizeLimit(sizeLimit)
+                .single()
                 .imageDirectory(appNameWithoutSpace(activity)) // captured image directory name ("Camera" folder by default)
                 .start(FNReqResCode.ATTACHMENT_REQUEST); // start image picker activity with request code
 

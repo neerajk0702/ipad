@@ -24,8 +24,6 @@ public class ContentData {
 
     private Folderdata[] folderdata;
 
-    private String[] audioist;
-
     private Photolist[] photolist;
 
     private Videolist[] videolist;
@@ -38,16 +36,6 @@ public class ContentData {
     public void setFolderdata (Folderdata[] folderdata)
     {
         this.folderdata = folderdata;
-    }
-
-    public String[] getAudioist ()
-    {
-        return audioist;
-    }
-
-    public void setAudioist (String[] audioist)
-    {
-        this.audioist = audioist;
     }
 
     public Photolist[] getPhotolist ()
@@ -68,6 +56,15 @@ public class ContentData {
     public void setVideolist (Videolist[] videolist)
     {
         this.videolist = videolist;
+    }
+    private Audioist[] audioist;
+
+    public Audioist[] getAudioist() {
+        return audioist;
+    }
+
+    public void setAudioist(Audioist[] audioist) {
+        this.audioist = audioist;
     }
 
     @Override
