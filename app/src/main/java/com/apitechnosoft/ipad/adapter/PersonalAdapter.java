@@ -112,7 +112,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     }
 
     private void play(String filePath, String mime) {
-        Intent playAudioIntent = new Intent();
+         Intent playAudioIntent = new Intent();
         playAudioIntent.setAction(Intent.ACTION_VIEW);
         playAudioIntent.setDataAndType(Uri.parse(filePath), mime);
         mContext.startActivity(playAudioIntent);

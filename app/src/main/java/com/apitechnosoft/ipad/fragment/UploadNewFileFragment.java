@@ -2,7 +2,9 @@ package com.apitechnosoft.ipad.fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -129,37 +131,42 @@ public class UploadNewFileFragment extends MainFragment {
 
 
     public void uploadData() {
-        if (ASTUIUtil.isOnline(getContext())) {
-            final ASTProgressBar progressBar = new ASTProgressBar(getContext());
-            progressBar.show();
-            String serviceURL = Contants.BASE_URL + Contants.UPLOAD_FILE;
-            HashMap<String, String> payloadList = new HashMap<String, String>();
-            payloadList.put("username", "89neerajsingh@gmail.com");
-            MultipartBody.Builder multipartBody = setMultipartBodyVaule();
-            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
-                @Override
-                public void receiveData(String result) {
-                    ContentData data = new Gson().fromJson(result, ContentData.class);
-                    if (data != null) {
-                        if (data.isStatus() == true) {
-                            ASTUIUtil.showToast("File Upload Successfully");
-                            reloadBackScreen();
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            String UserId = prefs.getString("UserId", "");
+
+
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar progressBar = new ASTProgressBar(getContext());
+                progressBar.show();
+                String serviceURL = Contants.BASE_URL + Contants.UPLOAD_FILE;
+                HashMap<String, String> payloadList = new HashMap<String, String>();
+                payloadList.put("username", UserId);
+                MultipartBody.Builder multipartBody = setMultipartBodyVaule();
+                FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
+                    @Override
+                    public void receiveData(String result) {
+                        ContentData data = new Gson().fromJson(result, ContentData.class);
+                        if (data != null) {
+                            if (data.isStatus() == true) {
+                                ASTUIUtil.showToast("File Upload Successfully");
+                                reloadBackScreen();
+                            } else {
+                                ASTUIUtil.showToast("File Not Uploaded!");
+                            }
                         } else {
                             ASTUIUtil.showToast("File Not Uploaded!");
                         }
-                    } else {
-                        ASTUIUtil.showToast("File Not Uploaded!");
+                        if (progressBar.isShowing()) {
+                            progressBar.dismiss();
+                        }
                     }
-                    if (progressBar.isShowing()) {
-                        progressBar.dismiss();
-                    }
-                }
-            };
-            fileUploaderHelper.execute();
-        } else {
-            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+                };
+                fileUploaderHelper.execute();
+            } else {
+                ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+            }
         }
-
     }
 
 
