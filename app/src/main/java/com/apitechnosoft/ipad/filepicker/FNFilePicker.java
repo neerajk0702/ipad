@@ -56,7 +56,7 @@ public abstract class FNFilePicker {
     public static final int MAX_LIMIT = 10;
     public static final long SIZE_LIMIT = 100 * 1024 * 1024; // 100mb
     public static final int MODE_SINGLE = 1;
-    public static final int MODE_MULTIPLE = 2;
+   public static final int MODE_MULTIPLE = 2;
     public static String SCHEME_VIDEO = "video";
     protected FNFilePickerConfig config;
 
@@ -103,7 +103,7 @@ public abstract class FNFilePicker {
     }
 
     public FNFilePicker multi() {
-        config.setMode(FNFilePicker.MODE_MULTIPLE);
+       config.setMode(FNFilePicker.MODE_MULTIPLE);
         return this;
     }
 

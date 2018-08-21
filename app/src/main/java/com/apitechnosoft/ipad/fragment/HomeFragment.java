@@ -125,4 +125,10 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         bundle.putInt("MENU_ID", 0);
         getHostActivity().updateFragment(new UploadNewFileFragment(), bundle);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dataToView();
+    }
 }

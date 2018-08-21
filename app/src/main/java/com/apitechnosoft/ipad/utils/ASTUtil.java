@@ -313,6 +313,7 @@ public class ASTUtil {
                 .addMedia(MEDIA_TYPE_DOCUMENT)
                 .returnAfterFirst(false)
                 .limit(limit)
+                 .single()
                 .sizeLimit(sizeLimit)
                 .single()
                 .imageDirectory(appNameWithoutSpace(activity)) // captured image directory name ("Camera" folder by default)

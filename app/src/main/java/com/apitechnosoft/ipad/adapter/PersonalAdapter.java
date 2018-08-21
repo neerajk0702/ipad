@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -57,19 +59,26 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         } else {
             if (type == 1) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
-                    holder.recentImg.setImageResource(R.drawable.image_placeholder);
+                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-                    holder.recentImg.setImageResource(R.drawable.video);
+                     holder.recentImg.setImageResource(R.drawable.video);
+                  //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
+
+
                 }
             } else if (type == 3) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
                     holder.recentImg.setImageResource(R.drawable.audio_icon);
+                  //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
+
                 }
             } else if (type == 4) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("doc")) {
                     holder.recentImg.setImageResource(R.drawable.doc);
+
                 }
             }
         }
