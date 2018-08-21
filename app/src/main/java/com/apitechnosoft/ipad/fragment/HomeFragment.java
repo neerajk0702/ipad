@@ -1,5 +1,7 @@
 package com.apitechnosoft.ipad.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,19 +10,33 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.adapter.HomePagerAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.Audioist;
+import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.Data;
+import com.apitechnosoft.ipad.model.Folderdata;
+import com.apitechnosoft.ipad.model.MediaData;
+import com.apitechnosoft.ipad.model.Photolist;
+import com.apitechnosoft.ipad.model.Resentdata;
+import com.apitechnosoft.ipad.model.Videolist;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.apitechnosoft.ipad.ApplicationHelper.application;
 
@@ -33,6 +49,9 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     RecyclerView recent_recycler_view;
     LinearLayout uploadLayout;
     private TabLayout tabLayout;
+    ArrayList<Resentdata> mediaList;
+    ViewPager viewPager;
+    HomePagerAdapter adapter;
 
     @Override
     protected int fragmentLayout() {
@@ -47,13 +66,17 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
         uploadIcon.setTypeface(materialdesignicons_font);
         uploadIcon.setText(Html.fromHtml("&#xf167;"));
-
-
+        recent_recycler_view = (RecyclerView) findViewById(R.id.recent_recycler_view);
+        viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));
         tabLayout.addTab(tabLayout.newTab().setText("Shared"));
         tabLayout.addTab(tabLayout.newTab().setText("Received"));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        getRecentFile();
+
+
     }
 
     @Override
@@ -67,8 +90,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
 
     @Override
     protected void dataToView() {
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final HomePagerAdapter adapter = new HomePagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new HomePagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -88,18 +110,10 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             }
         });
 
-        recent_recycler_view = (RecyclerView) findViewById(R.id.recent_recycler_view);
         setLinearLayoutManager(recent_recycler_view);
         recent_recycler_view.setNestedScrollingEnabled(false);
         recent_recycler_view.setHasFixedSize(false);
-        ArrayList<Data> dataList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Data data = new Data();
-            data.setTitle("Recent" + i);
-            dataList.add(data);
-        }
-       // RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), dataList, true);
-        //recent_recycler_view.setAdapter(mAdapter);
+
 
     }
 
@@ -129,6 +143,74 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        dataToView();
+   //     dataToView();
     }
+
+    private void getRecentFile() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            String UserId = prefs.getString("UserId", "");
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                dotDialog.show();
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.RecentFileApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
+                serviceCaller.CallCommanServiceMethod(url, "RecentFile Api", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentData data = new Gson().fromJson(result, ContentData.class);
+                            if (data != null) {
+                                Log.d(Contants.LOG_TAG, "Get Recent File**" + result);
+                                showFileData(data);
+                            } else {
+                                Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            ASTUIUtil.showToast(Contants.Error);
+                        }
+                        if (dotDialog.isShowing()) {
+                            dotDialog.dismiss();
+                        }
+                    }
+                });
+            } else {
+                ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+            }
+        }
+    }
+
+    //show file data in list
+    private void showFileData(ContentData data) {
+        mediaList = new ArrayList<>();
+        Resentdata[] resentdata = data.getResentdata();
+        if (resentdata != null && resentdata.length > 0) {
+            for (Resentdata resentdata1 : resentdata) {
+                Resentdata resentdata2 = new Resentdata();
+                resentdata2.setSno(resentdata1.getSno());
+                resentdata2.setFileName(resentdata1.getFileName());
+                resentdata2.setFilePath(resentdata1.getFilePath());
+                resentdata2.setLimitFilename(resentdata1.getLimitFilename());
+                resentdata2.setLimitFilename1(resentdata1.getLimitFilename1());
+                resentdata2.setSize(resentdata1.getSize());
+                resentdata2.setType(resentdata1.getType());
+                resentdata2.setEnteredDate(resentdata1.getEnteredDate());
+                resentdata2.setShareSno(resentdata1.getShareSno());
+                resentdata2.setItemSno(resentdata1.getItemSno());
+                resentdata2.setBytes(resentdata1.getBytes());
+                resentdata2.setKiloByte(resentdata1.getKiloByte());
+                resentdata2.setMegaByte(resentdata1.getMegaByte());
+                resentdata2.setGigaByte(resentdata1.getGigaByte());
+                resentdata2.setFolderlocation(resentdata1.getFolderlocation());
+                mediaList.add(resentdata2);
+
+            }
+        }
+        if (mediaList != null && mediaList.size() > 0) {
+            RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), mediaList);
+            recent_recycler_view.setAdapter(mAdapter);
+        }
+    }
+
+
 }

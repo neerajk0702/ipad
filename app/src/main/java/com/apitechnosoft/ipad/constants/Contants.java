@@ -20,6 +20,12 @@ public class Contants {
     public static String CreateFolder = "CreateNewDirectoryApi/createNewDirectory?";
     public static String GetFileListApi = "GetFileListApi/getfilelist?";
 
+    public static String RecentFileApi = "ResentFileApi/getRecentfile?";
+
+    public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfileapi?";
+
+    public static String SharedFileApi = "GetShareFileApi/getsharefilelist?";
+
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
     //username=singh.juliepatna@gmail.com&fsno=26
 }

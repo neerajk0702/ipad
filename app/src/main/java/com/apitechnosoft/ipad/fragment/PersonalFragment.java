@@ -40,6 +40,7 @@ import com.apitechnosoft.ipad.model.Audioist;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Data;
+import com.apitechnosoft.ipad.model.Documentlist;
 import com.apitechnosoft.ipad.model.Folderdata;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
@@ -388,6 +389,28 @@ public class PersonalFragment extends MainFragment {
                 mediaList.add(mediaData);
             }
         }
+        Documentlist[] documentlists = data.getDocumentlist();
+        if (documentlists != null && documentlists.length > 0) {
+            for (Documentlist documentlist : documentlists) {
+                MediaData mediaData = new MediaData();
+                mediaData.setSno(documentlist.getSno());
+                mediaData.setFileName(documentlist.getFileName());
+                mediaData.setFilePath(documentlist.getFilePath());
+                mediaData.setLimitFilename(documentlist.getLimitFilename());
+                mediaData.setLimitFilename1(documentlist.getLimitFilename1());
+                mediaData.setSize(documentlist.getSize());
+                mediaData.setType(documentlist.getType());
+                mediaData.setEnteredDate(documentlist.getEnteredDate());
+                mediaData.setShareSno(documentlist.getShareSno());
+                mediaData.setItemSno(documentlist.getItemSno());
+                mediaData.setBytes(documentlist.getBytes());
+                mediaData.setKiloByte(documentlist.getKiloByte());
+                mediaData.setMegaByte(documentlist.getMegaByte());
+                mediaData.setGigaByte(documentlist.getGigaByte());
+                mediaData.setFolderlocation(documentlist.getFolderlocation());
+                mediaList.add(mediaData);
+            }
+        }
         setAdapter(1);
     }
 
@@ -419,7 +442,7 @@ public class PersonalFragment extends MainFragment {
             }
         } else if (type == 4) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("doc")) {
+                if (data.getType() != null && data.getType().contains("text")) {
                     newmediaList.add(data);
                 }
             }

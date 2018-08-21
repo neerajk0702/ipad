@@ -27,36 +27,31 @@ public class ContentData {
     private Photolist[] photolist;
 
     private Videolist[] videolist;
-
-    public Folderdata[] getFolderdata ()
-    {
+    private Documentlist[] documentlist;
+    public Folderdata[] getFolderdata() {
         return folderdata;
     }
 
-    public void setFolderdata (Folderdata[] folderdata)
-    {
+    public void setFolderdata(Folderdata[] folderdata) {
         this.folderdata = folderdata;
     }
 
-    public Photolist[] getPhotolist ()
-    {
+    public Photolist[] getPhotolist() {
         return photolist;
     }
 
-    public void setPhotolist (Photolist[] photolist)
-    {
+    public void setPhotolist(Photolist[] photolist) {
         this.photolist = photolist;
     }
 
-    public Videolist[] getVideolist ()
-    {
+    public Videolist[] getVideolist() {
         return videolist;
     }
 
-    public void setVideolist (Videolist[] videolist)
-    {
+    public void setVideolist(Videolist[] videolist) {
         this.videolist = videolist;
     }
+
     private Audioist[] audioist;
 
     public Audioist[] getAudioist() {
@@ -68,9 +63,28 @@ public class ContentData {
     }
 
     @Override
-    public String toString()
+    public String toString() {
+        return "ClassPojo [folderdata = " + folderdata + ", audioist = " + audioist + ", photolist = " + photolist + ", videolist = " + videolist + "]";
+    }
+
+    private Resentdata[] resentdata;
+
+    public Resentdata[] getResentdata ()
     {
-        return "ClassPojo [folderdata = "+folderdata+", audioist = "+audioist+", photolist = "+photolist+", videolist = "+videolist+"]";
+        return resentdata;
+    }
+
+    public void setResentdata (Resentdata[] resentdata)
+    {
+        this.resentdata = resentdata;
+    }
+
+    public Documentlist[] getDocumentlist() {
+        return documentlist;
+    }
+
+    public void setDocumentlist(Documentlist[] documentlist) {
+        this.documentlist = documentlist;
     }
 }
 

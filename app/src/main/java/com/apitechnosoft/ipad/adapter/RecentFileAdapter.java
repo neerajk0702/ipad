@@ -10,21 +10,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.Audioist;
+import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.Data;
 import com.apitechnosoft.ipad.model.Folderdata;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
+import com.apitechnosoft.ipad.model.Resentdata;
 import com.apitechnosoft.ipad.model.Videolist;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.MyViewHolder> {
 
-    private ArrayList<MediaData> mediaList;
+    private ArrayList<Resentdata> mediaList;
     Context mContext;
-    int type;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
@@ -38,10 +42,9 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     }
 
 
-    public RecentFileAdapter(Context mContext, ArrayList<MediaData> List, int type) {
+    public RecentFileAdapter(Context mContext, ArrayList<Resentdata> List) {
         this.mediaList = List;
         this.mContext = mContext;
-        this.type = type;
     }
 
     @Override
@@ -55,28 +58,19 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-
-        if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
-            holder.recentImg.setImageResource(R.drawable.folder);
-        } else {
-            if (type == 1) {
-                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
-                   // holder.recentImg.setImageResource(R.drawable.image_placeholder);
-                }
-            } else if (type == 2) {
-                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-                    holder.recentImg.setImageResource(R.drawable.video);
-                }
-            } else if (type == 3) {
-                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
-                    holder.recentImg.setImageResource(R.drawable.audio_icon);
-                }
-            } else if (type == 4) {
-                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("doc")) {
-                    holder.recentImg.setImageResource(R.drawable.doc);
-                }
-            }
+        if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
+            String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
+        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+            holder.recentImg.setImageResource(R.drawable.video);
+        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
+            holder.recentImg.setImageResource(R.drawable.audio_icon);
+        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("doc")) {
+            holder.recentImg.setImageResource(R.drawable.doc);
+        }else {
+            holder.recentImg.setImageResource(R.drawable.noimage);
         }
+    }
         /*if (mediaList.get(position).getType().contains("image")) {
             holder.recentImg.setImageResource(R.drawable.image_placeholder);
         } else if (mediaList.get(position).getType().contains("video")) {
@@ -86,7 +80,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         } else if (mediaList.get(position).getType().contains("doc")) {
             holder.recentImg.setImageResource(R.drawable.doc);
         }*/
-    }
+
 
     @Override
     public int getItemCount() {
