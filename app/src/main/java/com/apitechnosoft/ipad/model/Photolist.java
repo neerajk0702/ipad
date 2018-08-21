@@ -181,6 +181,24 @@ public class Photolist {
     {
         return "ClassPojo [sno = "+sno+", bytes = "+bytes+", filePath = "+filePath+", enteredDate = "+enteredDate+", type = "+type+", shareSno = "+shareSno+", size = "+size+", megaByte = "+megaByte+", limitFilename = "+limitFilename+", itemSno = "+itemSno+", limitFilename1 = "+limitFilename1+", folderlocation = "+folderlocation+", fileName = "+fileName+", kiloByte = "+kiloByte+", gigaByte = "+gigaByte+"]";
     }
+
+    String fileExtension, folderName;
+
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
+    }
 }
 
 

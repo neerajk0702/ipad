@@ -31,7 +31,23 @@ public class Videolist {
 
     private String gigaByte;
 
+    String fileExtension, folderName;
 
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
+    }
     public String getBytes ()
     {
         return bytes;

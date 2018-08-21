@@ -90,7 +90,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
 
     @Override
     protected void dataToView() {
-        adapter = new HomePagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new HomePagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -143,7 +143,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-   //     dataToView();
+        dataToView();
     }
 
     private void getRecentFile() {

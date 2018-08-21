@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
+import com.apitechnosoft.ipad.adapter.RecivedFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
@@ -320,6 +321,8 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setSno(photo.getSno());
                 mediaData.setFileName(photo.getFileName());
                 mediaData.setFilePath(photo.getFilePath());
+                mediaData.setFileExtension(photo.getFileExtension());
+                mediaData.setFolderName(photo.getFolderName());
                 mediaData.setLimitFilename(photo.getLimitFilename());
                 mediaData.setLimitFilename1(photo.getLimitFilename1());
                 mediaData.setSize(photo.getSize());
@@ -441,7 +444,7 @@ public class ReceivedFragment extends MainFragment {
         }
         recyclerView.removeAllViews();
         recyclerView.removeAllViewsInLayout();
-        PersonalAdapter mAdapter = new PersonalAdapter(getContext(), newmediaList, type);
+        RecivedFileAdapter mAdapter = new RecivedFileAdapter(getContext(), newmediaList, type);
         recyclerView.setAdapter(mAdapter);
     }
 }
