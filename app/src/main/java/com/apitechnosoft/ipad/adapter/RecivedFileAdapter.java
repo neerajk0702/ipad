@@ -58,7 +58,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             holder.recentImg.setImageResource(R.drawable.folder);
         } else {
         if (type == 1) {
-            if (mediaList.get(position).getType() != null && mediaList.get(position).getFileExtension().contains("image")) {
+            if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
                 String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
                 Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
             }

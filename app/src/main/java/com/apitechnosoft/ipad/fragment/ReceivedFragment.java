@@ -419,25 +419,25 @@ public class ReceivedFragment extends MainFragment {
         }
         if (type == 1) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("image")) {
+                if (data.getFileExtension() != null && data.getFileExtension().contains("image")) {
                     newmediaList.add(data);
                 }
             }
         } else if (type == 2) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("video")) {
+                if (data.getFileExtension() != null && data.getFileExtension().contains("video")) {
                     newmediaList.add(data);
                 }
             }
         } else if (type == 3) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("audio")) {
+                if (data.getFileExtension() != null && data.getFileExtension().contains("audio")) {
                     newmediaList.add(data);
                 }
             }
         } else if (type == 4) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("text")) {
+                if (data.getFileExtension() != null && data.getFileExtension().contains("text")) {
                     newmediaList.add(data);
                 }
             }
