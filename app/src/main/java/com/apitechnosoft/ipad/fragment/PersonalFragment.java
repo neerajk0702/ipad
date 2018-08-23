@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.LoginActivity;
@@ -58,7 +59,6 @@ public class PersonalFragment extends MainFragment {
     RecyclerView recyclerView;
     ArrayList<MediaData> mediaList;
     TextView photolayout, videolayout, audiolayout, doclayout;
-
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -111,12 +111,12 @@ public class PersonalFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        ArrayList<Data> dataList = new ArrayList<>();
+       /* ArrayList<Data> dataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Data data = new Data();
             data.setTitle("Recent" + i);
             dataList.add(data);
-        }
+        }*/
 
 
         final String filter_array[] = {"Newest", "Oldest"};
@@ -408,6 +408,7 @@ public class PersonalFragment extends MainFragment {
                 mediaData.setMegaByte(documentlist.getMegaByte());
                 mediaData.setGigaByte(documentlist.getGigaByte());
                 mediaData.setFolderlocation(documentlist.getFolderlocation());
+                mediaData.setExtension(documentlist.getExtension());
                 mediaList.add(mediaData);
             }
         }
@@ -442,14 +443,14 @@ public class PersonalFragment extends MainFragment {
             }
         } else if (type == 4) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("text")) {
+                if (data.getType() != null && data.getType().contains("application")) {
                     newmediaList.add(data);
                 }
             }
         }
         recyclerView.removeAllViews();
         recyclerView.removeAllViewsInLayout();
-        PersonalAdapter mAdapter = new PersonalAdapter(getContext(), newmediaList, type);
+        PersonalAdapter mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio
         recyclerView.setAdapter(mAdapter);
     }
 }

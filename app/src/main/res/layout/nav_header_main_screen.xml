@@ -3,19 +3,19 @@
     android:id="@+id/profileLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     android:gravity="center"
     android:minHeight="@dimen/_110dp"
     android:paddingTop="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <com.apitechnosoft.ipad.utils.CircularImage
+    <ImageView
         android:id="@+id/sliderProfileImg"
-        android:layout_width="@dimen/_60dp"
-        android:layout_height="@dimen/_60dp"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="@dimen/_50dp"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/_8dp"
+        android:layout_margin="@dimen/_5dp"
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_launcher" />
 
@@ -33,9 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_2dp"
+            android:paddingBottom="@dimen/_5dp"
+            android:paddingTop="@dimen/_5dp"
             android:gravity="center_vertical"
             android:text="@string/app_name"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_17dp" />
 
         <TextView
@@ -45,7 +47,7 @@
             android:layout_marginLeft="@dimen/_2dp"
             android:gravity="center_vertical"
             android:text="Welcome's You"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_10dp"
             android:textStyle="italic" />
 
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_2dp"
                 android:gravity="center_vertical"
-                android:textColor="@android:color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_8dp" />
         </LinearLayout>
     </LinearLayout>

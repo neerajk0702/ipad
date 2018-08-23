@@ -102,12 +102,12 @@ public class SharedFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        ArrayList<Data> dataList = new ArrayList<>();
+       /* ArrayList<Data> dataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Data data = new Data();
             data.setTitle("Recent" + i);
             dataList.add(data);
-        }
+        }*/
 
 
         final String filter_array[] = {"Newest", "Oldest"};
@@ -399,6 +399,7 @@ public class SharedFragment extends MainFragment {
                 mediaData.setMegaByte(documentlist.getMegaByte());
                 mediaData.setGigaByte(documentlist.getGigaByte());
                 mediaData.setFolderlocation(documentlist.getFolderlocation());
+                mediaData.setExtension(documentlist.getExtension());
                 mediaList.add(mediaData);
             }
         }
@@ -433,7 +434,7 @@ public class SharedFragment extends MainFragment {
             }
         } else if (type == 4) {
             for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("text")) {
+                if (data.getType() != null && data.getType().contains("application")) {
                     newmediaList.add(data);
                 }
             }

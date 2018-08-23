@@ -175,6 +175,15 @@ public class Audioist {
     public void setItemSno(int itemSno) {
         this.itemSno = itemSno;
     }
+public  String fileExtension;
+
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
 
     @Override
     public String toString()

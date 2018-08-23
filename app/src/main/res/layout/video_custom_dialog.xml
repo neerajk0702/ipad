@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <VideoView android:id="@+id/videoElem"
+            android:layout_width="fill_parent"
+            android:layout_height="160dip">
+        </VideoView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="0dip"
+      >
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:text=" Start "
+            android:textSize="12dip" />
+
+        <Button
+            android:id="@+id/pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:text=" Pause "
+            android:textSize="12dip" />
+
+        <Button
+            android:id="@+id/end_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:text=" Stop "
+            android:textSize="12dip" />
+    </LinearLayout>
+
+</LinearLayout>

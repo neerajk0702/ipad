@@ -17,6 +17,7 @@
             android:title="Pricing" />
         <item
             android:id="@+id/nav_Education"
+            android:visible="false"
             android:title="Education" />
         <item
             android:id="@+id/nav_Press"

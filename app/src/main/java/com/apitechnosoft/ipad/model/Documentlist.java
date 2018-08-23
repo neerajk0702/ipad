@@ -168,6 +168,15 @@ public class Documentlist {
     public void setItemSno(int itemSno) {
         this.itemSno = itemSno;
     }
+public String extension;
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 
     @Override
     public String toString() {

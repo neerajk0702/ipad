@@ -24,7 +24,7 @@
                 android:id="@+id/recentImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/noimage" />
+               />
         </LinearLayout>
 
         <com.apitechnosoft.ipad.component.ASTTextView
@@ -33,7 +33,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="center"
-            android:text="Recent File"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
             android:textSize="@dimen/_9dp" />

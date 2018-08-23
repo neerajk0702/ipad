@@ -57,30 +57,35 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
         } else {
-        if (type == 1) {
-            if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
-                String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
-                Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
-            }
-        } else if (type == 2) {
-            if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-                holder.recentImg.setImageResource(R.drawable.video);
-                //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
+            if (type == 1) {
+                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
+                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
+                }
+            } else if (type == 2) {
+                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {
+                    holder.recentImg.setImageResource(R.drawable.video);
+                    //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
+                }
+            } else if (type == 3) {
+                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("audio")) {
+                    holder.recentImg.setImageResource(R.drawable.audio_icon);
+                    //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
 
-
+                }
+            } else if (type == 4) {
+                if (mediaList.get(position).getExtension() != null) {
+                    if (mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
+                        holder.recentImg.setImageResource(R.drawable.doc);
+                    } else if (mediaList.get(position).getExtension().contains("pdf")) {
+                        holder.recentImg.setImageResource(R.drawable.pdfimg);
+                    } else if (mediaList.get(position).getExtension().contains("html")) {
+                        holder.recentImg.setImageResource(R.drawable.htmlimg);
+                    } else if (mediaList.get(position).getExtension().contains("zip")) {
+                        holder.recentImg.setImageResource(R.drawable.zipimg);
+                    }
+                }
             }
-        } else if (type == 3) {
-            if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
-                holder.recentImg.setImageResource(R.drawable.audio_icon);
-                //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
-
-            }
-        } else if (type == 4) {
-            if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("doc")) {
-                holder.recentImg.setImageResource(R.drawable.doc);
-
-            }
-        }
 
         }
         holder.recentImg.setOnClickListener(new View.OnClickListener() {

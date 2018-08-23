@@ -58,16 +58,20 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-        if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
+        if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("png"))) {
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
             Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
-        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
             holder.recentImg.setImageResource(R.drawable.video);
-        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
-        } else if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("doc")) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
             holder.recentImg.setImageResource(R.drawable.doc);
-        }else {
+        } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("pdf")) {
+            holder.recentImg.setImageResource(R.drawable.pdfimg);
+        } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
+            holder.recentImg.setImageResource(R.drawable.zipimg);
+        } else {
             holder.recentImg.setImageResource(R.drawable.noimage);
         }
     }

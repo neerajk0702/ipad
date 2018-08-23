@@ -104,12 +104,12 @@ public class ReceivedFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        ArrayList<Data> dataList = new ArrayList<>();
+       /* ArrayList<Data> dataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Data data = new Data();
             data.setTitle("Recent" + i);
             dataList.add(data);
-        }
+        }*/
 
 
         final String filter_array[] = {"Newest", "Oldest"};
@@ -358,6 +358,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setMegaByte(video.getMegaByte());
                 mediaData.setGigaByte(video.getGigaByte());
                 mediaData.setFolderlocation(video.getFolderlocation());
+                mediaData.setFileExtension(video.getFileExtension());
                 mediaList.add(mediaData);
             }
         }
@@ -381,6 +382,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setMegaByte(audio.getMegaByte());
                 mediaData.setGigaByte(audio.getGigaByte());
                 mediaData.setFolderlocation(audio.getFolderlocation());
+                mediaData.setFileExtension(audio.getFileExtension());
                 mediaList.add(mediaData);
             }
         }
@@ -403,6 +405,8 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setMegaByte(documentlist.getMegaByte());
                 mediaData.setGigaByte(documentlist.getGigaByte());
                 mediaData.setFolderlocation(documentlist.getFolderlocation());
+                mediaData.setExtension(documentlist.getExtension());
+                mediaData.setFileExtension(documentlist.getFileExtension());
                 mediaList.add(mediaData);
             }
         }
@@ -437,7 +441,7 @@ public class ReceivedFragment extends MainFragment {
             }
         } else if (type == 4) {
             for (MediaData data : mediaList) {
-                if (data.getFileExtension() != null && data.getFileExtension().contains("text")) {
+                if (data.getFileExtension() != null && data.getFileExtension().contains("application")) {
                     newmediaList.add(data);
                 }
             }

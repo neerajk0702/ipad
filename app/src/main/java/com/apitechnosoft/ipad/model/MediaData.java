@@ -185,6 +185,16 @@ public class MediaData {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
+
+    public String extension;
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 }
 
 
