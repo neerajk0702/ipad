@@ -10,6 +10,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -92,6 +94,10 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                         holder.recentImg.setImageResource(R.drawable.htmlimg);
                     } else if (mediaList.get(position).getExtension().contains("zip")) {
                         holder.recentImg.setImageResource(R.drawable.zipimg);
+                    } else if (mediaList.get(position).getExtension().contains("xlsx")) {
+                        holder.recentImg.setImageResource(R.drawable.excelimg);
+                    } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
+                        holder.recentImg.setImageResource(R.drawable.pptimg);
                     }
                 }
             }
@@ -102,7 +108,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             public void onClick(View view) {
                 if (type == 1) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                   // play(filePath, mediaList.get(position).getType());
+                    // play(filePath, mediaList.get(position).getType());
                     alertForShowImage(filePath, position);
                 } else if (type == 2) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
@@ -112,9 +118,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     alertForShowAudio(filePath, position);
                 } else if (type == 4) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    if (mediaList.get(position).getExtension().contains("pdf")) {
-                        play(filePath, mediaList.get(position).getType());
-                    }
+                    alertForShowDoc(filePath, mediaList.get(position).getType(), position);
                 }
             }
         });
@@ -129,12 +133,71 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         }*/
     }
 
-    private void play(String filePath, String mime) {
-        Intent playAudioIntent = new Intent();
-        playAudioIntent.setAction(Intent.ACTION_VIEW);
-        playAudioIntent.setDataAndType(Uri.parse(filePath), mime);
-        mContext.startActivity(playAudioIntent);
+    private void alertForShowDoc(String filePath, String mime, int position) {
+       /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
+        playAudioIntent.putExtra("FileUrl", filePath);
+        mContext.startActivity(playAudioIntent);*/
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+        final android.app.AlertDialog alert = builder.create();
+        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        View view = alert.getLayoutInflater().inflate(R.layout.show_doc_layout, null);
+        TextView updateDate = view.findViewById(R.id.updateDate);
+        TextView close = view.findViewById(R.id.close);
+        TextView downloadicon = view.findViewById(R.id.downloadicon);
+        TextView deleteicon = view.findViewById(R.id.deleteicon);
+        TextView title = view.findViewById(R.id.title);
+        Button sharebt = view.findViewById(R.id.sharebt);
+        WebView webView = view.findViewById(R.id.web);
+        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        title.setText(mediaList.get(position).getFileName());
+        downloadicon.setTypeface(materialdesignicons_font);
+        downloadicon.setText(Html.fromHtml("&#xf162;"));
+        deleteicon.setTypeface(materialdesignicons_font);
+        deleteicon.setText(Html.fromHtml("&#xf1c0;"));
+
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+        webView.getSettings().setAllowFileAccess(true);
+        if (filePath != null) {
+            webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
+        }
+
+
+        alert.setCustomTitle(view);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        sharebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        deleteicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        downloadicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
     }
+
     public void alertForShowImage(String filePath, int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
@@ -334,6 +397,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         });
         alert.show();
     }
+
     @Override
     public int getItemCount() {
         return mediaList.size();

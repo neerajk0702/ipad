@@ -539,20 +539,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog alert = builder.create();
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
+                        alert.dismiss();
                         startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQUEST_CODE_GPS_PERMISSIONS);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
+                        alert.dismiss();
                         checkGpsEnable();
                     }
                 });
-        final AlertDialog alert = builder.create();
+
         alert.show();
     }
 

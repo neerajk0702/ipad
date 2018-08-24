@@ -11,6 +11,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     private ArrayList<Resentdata> mediaList;
     Context mContext;
     Typeface materialdesignicons_font;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -71,7 +73,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-        if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("png"))) {
+        if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
             Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
@@ -80,6 +82,10 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.audio_icon);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
             holder.recentImg.setImageResource(R.drawable.doc);
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt"))) {
+            holder.recentImg.setImageResource(R.drawable.pptimg);
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("xlsx"))) {
+            holder.recentImg.setImageResource(R.drawable.excelimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("pdf")) {
             holder.recentImg.setImageResource(R.drawable.pdfimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
@@ -89,7 +95,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("png"))) {
+                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowImage(filePath, position);
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
@@ -98,13 +104,9 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowAudio(filePath, position);
-                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
-                   // holder.recentImg.setImageResource(R.drawable.doc);
-                } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("pdf")) {
+                } else {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    play(filePath, mediaList.get(position).getType());
-                } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
-                   // holder.recentImg.setImageResource(R.drawable.zipimg);
+                    alertForShowDoc(filePath, mediaList.get(position).getType(), position);
                 }
             }
         });
@@ -119,12 +121,71 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.doc);
         }*/
 
-    private void play(String filePath, String mime) {
-        Intent playAudioIntent = new Intent();
-        playAudioIntent.setAction(Intent.ACTION_VIEW);
-        playAudioIntent.setDataAndType(Uri.parse(filePath), mime);
-        mContext.startActivity(playAudioIntent);
+    private void alertForShowDoc(String filePath, String mime, int position) {
+       /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
+        playAudioIntent.putExtra("FileUrl", filePath);
+        mContext.startActivity(playAudioIntent);*/
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+        final android.app.AlertDialog alert = builder.create();
+        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        View view = alert.getLayoutInflater().inflate(R.layout.show_doc_layout, null);
+        TextView updateDate = view.findViewById(R.id.updateDate);
+        TextView close = view.findViewById(R.id.close);
+        TextView downloadicon = view.findViewById(R.id.downloadicon);
+        TextView deleteicon = view.findViewById(R.id.deleteicon);
+        TextView title = view.findViewById(R.id.title);
+        Button sharebt = view.findViewById(R.id.sharebt);
+        WebView webView = view.findViewById(R.id.web);
+        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        title.setText(mediaList.get(position).getFileName());
+        downloadicon.setTypeface(materialdesignicons_font);
+        downloadicon.setText(Html.fromHtml("&#xf162;"));
+        deleteicon.setTypeface(materialdesignicons_font);
+        deleteicon.setText(Html.fromHtml("&#xf1c0;"));
+
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+        webView.getSettings().setAllowFileAccess(true);
+        if (filePath != null) {
+            webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
+        }
+
+
+        alert.setCustomTitle(view);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        sharebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        deleteicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        downloadicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
     }
+
     public void alertForShowImage(String filePath, int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
@@ -324,6 +385,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         });
         alert.show();
     }
+
     @Override
     public int getItemCount() {
         return mediaList.size();
