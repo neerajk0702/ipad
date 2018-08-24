@@ -1,19 +1,26 @@
 package com.apitechnosoft.ipad.adapter;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -21,12 +28,17 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.DocOpenActivity;
+import com.apitechnosoft.ipad.activity.VideoPlayerActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.squareup.picasso.Picasso;
+import com.sun.mail.imap.Utility;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyViewHolder> {
 
@@ -34,7 +46,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
-    MediaController mc;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -109,16 +121,19 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     alertForShowImage(filePath, position);
                 } else if (type == 2) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    alertForShowVideo(filePath,position);
-                   // VideoPopup videoPopup = new VideoPopup(mContext, mediaList.get(position).getFileName(), filePath);
-                   // videoPopup.show();
-                   // play(filePath, mediaList.get(position).getType());
+                    alertForShowVideo(filePath, position);
+                    // VideoPopup videoPopup = new VideoPopup(mContext, mediaList.get(position).getFileName(), filePath);
+                    // videoPopup.show();
+                    // play(filePath, mediaList.get(position).getType());
                 } else if (type == 3) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    play(filePath, mediaList.get(position).getType());
+                    //  play(filePath, mediaList.get(position).getType());
+                    alertForShowAudio(filePath, position);
                 } else if (type == 4) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    play(filePath, mediaList.get(position).getType());
+                    if (mediaList.get(position).getExtension().contains("pdf")) {
+                        play(filePath, mediaList.get(position).getType());
+                    }
                 }
             }
         });
@@ -137,6 +152,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         Intent playAudioIntent = new Intent();
         playAudioIntent.setAction(Intent.ACTION_VIEW);
         playAudioIntent.setDataAndType(Uri.parse(filePath), mime);
+        // playAudioIntent.putExtra("FileUrl", filePath);
         mContext.startActivity(playAudioIntent);
     }
 
@@ -145,11 +161,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
         View view = alert.getLayoutInflater().inflate(R.layout.show_image_layout, null);
-        TextView updateDate =  view.findViewById(R.id.updateDate);
-        TextView close =view.findViewById(R.id.close);
-        TextView downloadicon =  view.findViewById(R.id.downloadicon);
-        TextView deleteicon =  view.findViewById(R.id.deleteicon);
-        TextView title =  view.findViewById(R.id.title);
+        TextView updateDate = view.findViewById(R.id.updateDate);
+        TextView close = view.findViewById(R.id.close);
+        TextView downloadicon = view.findViewById(R.id.downloadicon);
+        TextView deleteicon = view.findViewById(R.id.deleteicon);
+        TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         ImageView img = view.findViewById(R.id.img);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
@@ -187,16 +203,17 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         });
         alert.show();
     }
-    public void alertForShowVideo(String filePath, int position) {
+
+    public void alertForShowVideo(final String filePath, int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
         final View view = alert.getLayoutInflater().inflate(R.layout.show_video_view_layout, null);
-        TextView updateDate =  view.findViewById(R.id.updateDate);
-        TextView close =view.findViewById(R.id.close);
-        TextView downloadicon =  view.findViewById(R.id.downloadicon);
-        TextView deleteicon =  view.findViewById(R.id.deleteicon);
-        TextView title =  view.findViewById(R.id.title);
+        TextView updateDate = view.findViewById(R.id.updateDate);
+        TextView close = view.findViewById(R.id.close);
+        TextView downloadicon = view.findViewById(R.id.downloadicon);
+        TextView deleteicon = view.findViewById(R.id.deleteicon);
+        TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
@@ -207,23 +224,110 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         final MediaController mediaController = new MediaController(mContext);
         final VideoView videoView = view.findViewById(R.id.videoView);
         mediaController.setAnchorView(videoView);
-       // mediaController.setMediaPlayer(videoView);
+        mediaController.setMediaPlayer(videoView);
         videoView.setMediaController(mediaController);
-
-        videoView.setVideoURI( Uri.parse(filePath));
+        videoView.setVideoURI(Uri.parse(filePath));
+        //  videoView.setVideoPath(filePath);
         videoView.requestFocus();
-       // videoView.start();
+        ((ViewGroup) mediaController.getParent()).removeView(mediaController);
+        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(mediaController);
+        mediaController.setVisibility(View.VISIBLE);
+        // videoView.start();
         alert.setCustomTitle(view);
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener()  {
-                                                    @Override
-                                                    public void onPrepared(MediaPlayer mp) {
-                                                        Log.i(Contants.LOG_TAG, "Duration = " +
-                                                                videoView.getDuration());
-                                                        videoView.start();
-                                                        mediaController.show(5000);
-                                                    }
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
-                                                });
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                videoView.requestFocus();
+                videoView.start();
+                mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                    @Override
+                    public void onVideoSizeChanged(MediaPlayer mp,
+                                                   int width, int height) {
+
+                        ((ViewGroup) mediaController.getParent()).removeView(mediaController);
+                        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(mediaController);
+                        mediaController.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                videoView.stopPlayback();
+            }
+        });
+        sharebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        deleteicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        downloadicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    public void alertForShowAudio(final String filePath, int position) {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+        final android.app.AlertDialog alert = builder.create();
+        // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        final View view = alert.getLayoutInflater().inflate(R.layout.show_video_view_layout, null);
+        TextView updateDate = view.findViewById(R.id.updateDate);
+        TextView close = view.findViewById(R.id.close);
+        TextView downloadicon = view.findViewById(R.id.downloadicon);
+        TextView deleteicon = view.findViewById(R.id.deleteicon);
+        TextView title = view.findViewById(R.id.title);
+        Button sharebt = view.findViewById(R.id.sharebt);
+        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        title.setText(mediaList.get(position).getFileName());
+        downloadicon.setTypeface(materialdesignicons_font);
+        downloadicon.setText(Html.fromHtml("&#xf162;"));
+        deleteicon.setTypeface(materialdesignicons_font);
+        deleteicon.setText(Html.fromHtml("&#xf1c0;"));
+        final MediaController mediaController = new MediaController(mContext);
+        final VideoView videoView = view.findViewById(R.id.videoView);
+        mediaController.setAnchorView(videoView);
+        mediaController.setMediaPlayer(videoView);
+        videoView.setMediaController(mediaController);
+        videoView.setVideoURI(Uri.parse(filePath));
+        // videoView.requestFocus();
+        ((ViewGroup) mediaController.getParent()).removeView(mediaController);
+        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(mediaController);
+        mediaController.setVisibility(View.VISIBLE);
+        // videoView.start();
+        alert.setCustomTitle(view);
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                videoView.requestFocus();
+                videoView.start();
+                mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                    @Override
+                    public void onVideoSizeChanged(MediaPlayer mp,
+                                                   int width, int height) {
+
+                        ((ViewGroup) mediaController.getParent()).removeView(mediaController);
+                        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(mediaController);
+                        mediaController.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,44 +356,38 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         alert.show();
     }
 
- /*   public  Dialog getVideoDialog(Context context, Uri videoLocation, boolean autoplay) {
-        final Dialog dialog =getBaseDialog(context,true, R.layout.show_video_view_layout);
+    public void audioPlayer(String path) {
+        //set up MediaPlayer
+        MediaPlayer mp = new MediaPlayer();
 
-        ((Activity)context).getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        final VideoView videoHolder = (VideoView) dialog.findViewById(R.id.video_view);
-        videoHolder.setVideoURI(videoLocation);
-        //videoHolder.setRotation(90);
-        MediaController mediaController =  new MediaController(context);
-        videoHolder.setMediaController(mediaController);
-        mediaController.setAnchorView(videoHolder);
-        videoHolder.requestFocus();
-        if(autoplay) {
-            videoHolder.start();
+        try {
+            mp.setDataSource(path);
+            mp.prepare();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                dialog.dismiss();
-
-            }
-        });
-        return dialog;
-    }*/
-
-    public static Dialog getBaseDialog(Context context, boolean cancelable, int layoutResID) {
-        Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(cancelable);
-        dialog.setCanceledOnTouchOutside(cancelable);
-        dialog.setContentView(layoutResID);
-
-        return dialog;
+        try {
+            mp.prepare();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        mp.start();
     }
+
     @Override
     public int getItemCount() {
         return mediaList.size();
     }
-
 
 }

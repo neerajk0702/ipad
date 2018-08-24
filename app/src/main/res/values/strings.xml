@@ -6,7 +6,7 @@
     <string name="button_label_retry">Retry</string>
     <string name="button_label_exit">Exit</string>
     <string name="and">&amp;</string>
-
+    <string name="buffring">Buffering...</string>
     <string name="label_main_activity_internet_cancelled">Internet permission cancelled</string>
     <string name="label_main_activity_read_contact_cancelled">Read contacts permission cancelled</string>
     <string name="label_main_activity_camera_cancelled">Camera permission cancelled</string>

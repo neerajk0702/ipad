@@ -72,7 +72,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_230dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:elevation="5dp"
             app:cardCornerRadius="2dp"
@@ -88,13 +88,14 @@
                     android:id="@+id/videoView"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
+                    android:visibility="gone"
                     android:layout_weight="0.7" />
 
                 <FrameLayout
                     android:id="@+id/videoViewWrapper"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3">
+                    android:layout_height="wrap_content"
+                 >
 
 
                 </FrameLayout>
