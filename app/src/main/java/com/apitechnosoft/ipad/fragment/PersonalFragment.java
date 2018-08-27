@@ -2,8 +2,10 @@ package com.apitechnosoft.ipad.fragment;
 
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -23,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ import android.widget.VideoView;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.LoginActivity;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.adapter.FolderAdapter;
 import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
@@ -56,9 +60,14 @@ import java.util.Arrays;
 
 public class PersonalFragment extends MainFragment {
     Typeface materialdesignicons_font;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
+    ArrayList<Folderdata> folderList;
     TextView photolayout, videolayout, audiolayout, doclayout;
+    FolderAdapter folderAdapter;
+    TextView folderArrowIcon, folderTitel;
+    LinearLayout folderLayout;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -86,6 +95,7 @@ public class PersonalFragment extends MainFragment {
         newFolder.setOnClickListener(this);
         upFolder.setTypeface(materialdesignicons_font);
         upFolder.setText(Html.fromHtml("&#xf259;"));
+        upFolder.setOnClickListener(this);
         // filterIcon.setTypeface(materialdesignicons_font);
         //  filterIcon.setText(Html.fromHtml("&#xf04a;"));
         TextView searchIcon = findViewById(R.id.searchIcon);
@@ -97,6 +107,16 @@ public class PersonalFragment extends MainFragment {
         recyclerView.setHasFixedSize(false);
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
+
+        folderrecycler_view = findViewById(R.id.folderrecycler_view);
+        folderrecycler_view.setHasFixedSize(false);
+        StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
+        folderrecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
+
+        folderArrowIcon = findViewById(R.id.folderArrowIcon);
+        folderTitel = findViewById(R.id.folderTitel);
+        folderLayout = findViewById(R.id.folderLayout);
+        folderArrowIcon.setTypeface(materialdesignicons_font);
         getAllFile();
     }
 
@@ -186,6 +206,9 @@ public class PersonalFragment extends MainFragment {
                 audiolayout.setTextColor(Color.parseColor("#FF4B05"));
                 doclayout.setTextColor(Color.parseColor("#ffffff"));
                 break;
+            case R.id.upFolder:
+                getAllFile();
+                break;
         }
     }
 
@@ -249,6 +272,7 @@ public class PersonalFragment extends MainFragment {
                             if (data != null) {
                                 if (data.isStatus()) {
                                     Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                    getAllFile();
                                 } else {
                                     Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
                                 }
@@ -286,6 +310,10 @@ public class PersonalFragment extends MainFragment {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
                                 Log.d(Contants.LOG_TAG, "Get All File**" + result);
+                                folderLayout.setVisibility(View.GONE);//GONE folder name layout
+                                folderrecycler_view.setVisibility(View.VISIBLE);
+                                mediaList = new ArrayList<>();
+                                showFolder(data);
                                 showFileData(data);
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
@@ -304,22 +332,24 @@ public class PersonalFragment extends MainFragment {
         }
     }
 
+    private void showFolder(ContentData data) {
+        Folderdata[] folderdata = data.getFolderdata();
+        if (folderdata != null && folderdata.length > 0) {
+            folderList = new ArrayList<Folderdata>(Arrays.asList(folderdata));
+            setFolderAdapter(folderList);
+        }
+    }
+
+    private void setFolderAdapter(ArrayList<Folderdata> folderList) {
+        folderrecycler_view.removeAllViews();
+        folderrecycler_view.removeAllViewsInLayout();
+        folderAdapter = new FolderAdapter(getContext(), folderList, false);
+        folderrecycler_view.setAdapter(folderAdapter);
+    }
+
     //show file data in list
     private void showFileData(ContentData data) {
         setPhotoButton();
-        mediaList = new ArrayList<>();
-        Folderdata[] folderdata = data.getFolderdata();
-        if (folderdata != null && folderdata.length > 0) {
-            // FolderdataList = new ArrayList<Folderdata>(Arrays.asList(folderdata));
-            for (Folderdata folder : folderdata) {
-                MediaData mediaData = new MediaData();
-                mediaData.setSno(folder.getSno());
-                mediaData.setFileName(folder.getFileName());
-                mediaData.setFilePath(folder.getFilePath());
-                mediaData.setFullFilePath(folder.getFullFilePath());
-                mediaList.add(mediaData);
-            }
-        }
         Photolist[] photolists = data.getPhotolist();
         if (photolists != null && photolists.length > 0) {
             //photoList = new ArrayList<Photolist>(Arrays.asList(photolists));
@@ -452,5 +482,123 @@ public class PersonalFragment extends MainFragment {
         recyclerView.removeAllViewsInLayout();
         PersonalAdapter mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio
         recyclerView.setAdapter(mAdapter);
+    }
+
+    //get folder data
+    private void getFolderAllFile(final int foldersno) {
+
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.GetFolderDataApi + foldersno;
+            serviceCaller.CallCommanServiceMethod(url, "getFolderAllFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentData data = new Gson().fromJson(result, ContentData.class);
+                        if (data != null) {
+                            Log.d(Contants.LOG_TAG, "Get folder All File**" + result);
+                            mediaList = new ArrayList<>();
+                            parseFolderFile(data, foldersno);
+                        } else {
+                            Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
+
+    private void parseFolderFile(ContentData data, int FolderID) {
+        setPhotoButton();
+        String folderName = "";
+        Folderdata[] folderdata = data.getFolderdata();
+        if (folderdata != null && folderdata.length > 0) {
+            for (Folderdata photo : folderdata) {
+                MediaData mediaData = new MediaData();
+                mediaData.setSno(photo.getSno());
+                mediaData.setFileName(photo.getFileName());
+                mediaData.setFilePath(photo.getFilePath());
+                mediaData.setLimitFilename(photo.getLimitFilename());
+                folderName = photo.getLimitFilename();
+                mediaData.setLimitFilename1(photo.getLimitFilename1());
+                mediaData.setSize(String.valueOf(photo.getSize()));
+                mediaData.setType(photo.getType());
+                mediaData.setEnteredDate(photo.getEnteredDate());
+                mediaData.setShareSno(photo.getShareSno());
+                mediaData.setItemSno(photo.getItemSno());
+                mediaData.setBytes(String.valueOf(photo.getBytes()));
+                mediaData.setKiloByte(String.valueOf(photo.getKiloByte()));
+                mediaData.setMegaByte(String.valueOf(photo.getMegaByte()));
+                mediaData.setGigaByte(String.valueOf(photo.getGigaByte()));
+                mediaData.setFolderlocation(String.valueOf(photo.getFolderlocation()));
+                mediaData.setExtension(photo.getExtension());
+                mediaData.setFullFilePath(photo.getFullFilePath());
+                mediaData.setEventname(photo.getEventname());
+                mediaList.add(mediaData);
+            }
+
+        }
+        folderArrowIcon.setText(Html.fromHtml("&#xf496;"));
+        folderLayout.setVisibility(View.VISIBLE);//Show folder name layout
+        folderrecycler_view.setVisibility(View.GONE);
+        if (folderName != null && !folderName.equals("")) {
+            folderTitel.setText(folderName);
+        } else {
+            folderTitel.setText("No Data Found!");
+        }
+        //filterSelectFolder(FolderID);
+        setAdapter(1);//show folder value
+    }
+
+    //filter select folder
+    private void filterSelectFolder(int FolderID) {
+        ArrayList<Folderdata> newfolderList = new ArrayList<>();
+        for (Folderdata folderdata : folderList) {
+            if (FolderID == folderdata.getSno()) {
+                newfolderList.add(folderdata);
+                break;
+            }
+        }
+        setFolderAdapter(newfolderList);
+    }
+
+    //for geting next previous click action
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equalsIgnoreCase("FolderOpen")) {
+                boolean OpenFolderFlag = intent.getBooleanExtra("OpenFolder", false);
+                int FolderID = intent.getIntExtra("FolderID", 0);
+
+                if (OpenFolderFlag) {
+                    getFolderAllFile(FolderID);
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(receiver, new IntentFilter("FolderOpen"));
+    }
+
+    @Override
+    public void onDestroy() {
+        if (receiver != null) {
+            getActivity().unregisterReceiver(receiver);
+            receiver = null;
+        }
+        super.onDestroy();
+
     }
 }

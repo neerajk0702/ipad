@@ -194,13 +194,58 @@
             android:layout_height="1dp"
             android:background="@color/orange" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/perrecycler_view"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginBottom="@dimen/_5dp"
-            android:background="@color/white" />
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/folderrecycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="@color/white" />
+
+                <LinearLayout android:id="@+id/folderLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:id="@+id/folderArrowIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/darkRed1"
+                        android:textSize="@dimen/_18dp" />
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:id="@+id/folderTitel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14dp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/perrecycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
         <View
             android:layout_width="match_parent"

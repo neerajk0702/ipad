@@ -195,6 +195,15 @@ public class MediaData {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+    private String eventname;
+
+    public String getEventname() {
+        return eventname;
+    }
+
+    public void setEventname(String eventname) {
+        this.eventname = eventname;
+    }
 }
 
 

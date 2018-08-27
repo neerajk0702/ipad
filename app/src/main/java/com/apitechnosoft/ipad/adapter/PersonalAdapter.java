@@ -30,10 +30,12 @@ import android.widget.VideoView;
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.DocOpenActivity;
+import com.apitechnosoft.ipad.activity.ShareImageActivity;
 import com.apitechnosoft.ipad.activity.VideoPlayerActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.sun.mail.imap.Utility;
 
@@ -108,7 +110,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         holder.recentImg.setImageResource(R.drawable.htmlimg);
                     } else if (mediaList.get(position).getExtension().contains("zip")) {
                         holder.recentImg.setImageResource(R.drawable.zipimg);
-                    }else if (mediaList.get(position).getExtension().contains("xlsx")) {
+                    } else if (mediaList.get(position).getExtension().contains("xlsx")) {
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
@@ -136,7 +138,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     alertForShowAudio(filePath, position);
                 } else if (type == 4) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    alertForShowDoc(filePath, mediaList.get(position).getType(),position);
+                    alertForShowDoc(filePath, mediaList.get(position).getType(), position);
                 }
             }
         });
@@ -151,7 +153,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         }*/
     }
 
-    private void alertForShowDoc(String filePath, String mime,int position) {
+    private void alertForShowDoc(String filePath, String mime, final int position) {
        /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
         playAudioIntent.putExtra("FileUrl", filePath);
         mContext.startActivity(playAudioIntent);*/
@@ -198,6 +200,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 2);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -216,7 +223,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         alert.show();
     }
 
-    public void alertForShowImage(String filePath, int position) {
+    public void alertForShowImage(String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -246,6 +253,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 1);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -264,7 +276,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         alert.show();
     }
 
-    public void alertForShowVideo(final String filePath, int position) {
+    public void alertForShowVideo(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -323,6 +335,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 3);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -341,7 +358,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         alert.show();
     }
 
-    public void alertForShowAudio(final String filePath, int position) {
+    public void alertForShowAudio(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -398,6 +415,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 4);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });

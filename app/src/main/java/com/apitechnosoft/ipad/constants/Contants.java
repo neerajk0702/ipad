@@ -24,6 +24,7 @@ public class Contants {
 
     public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfileapi?";
     public static String SharedFileApi = "GetShareFileApi/getsharefilelist?";
+    public static String GetFolderDataApi = "GetFolderDataApi/getfolderdata?foldersno=";
 
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
     //username=singh.juliepatna@gmail.com&fsno=26

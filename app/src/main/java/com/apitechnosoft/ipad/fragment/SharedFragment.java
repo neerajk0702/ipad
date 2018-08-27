@@ -46,7 +46,7 @@ import java.util.ArrayList;
 
 public class SharedFragment extends MainFragment {
     Typeface materialdesignicons_font;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
     TextView photolayout, videolayout, audiolayout, doclayout;
 
@@ -88,6 +88,13 @@ public class SharedFragment extends MainFragment {
         recyclerView.setHasFixedSize(false);
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
+
+
+        folderrecycler_view = findViewById(R.id.folderrecycler_view);
+        folderrecycler_view.setHasFixedSize(false);
+        StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
+        folderrecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
+        folderrecycler_view.setVisibility(View.GONE);
         getAllFile();
     }
 
@@ -240,6 +247,7 @@ public class SharedFragment extends MainFragment {
                             if (data != null) {
                                 if (data.isStatus()) {
                                     Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                    getAllFile();
                                 } else {
                                     Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
                                 }
@@ -300,7 +308,7 @@ public class SharedFragment extends MainFragment {
         setPhotoButton();
         mediaList = new ArrayList<>();
         Folderdata[] folderdata = data.getFolderdata();
-        if (folderdata != null && folderdata.length > 0) {
+      /*  if (folderdata != null && folderdata.length > 0) {
             // FolderdataList = new ArrayList<Folderdata>(Arrays.asList(folderdata));
             for (Folderdata folder : folderdata) {
                 MediaData mediaData = new MediaData();
@@ -310,7 +318,7 @@ public class SharedFragment extends MainFragment {
                 mediaData.setFullFilePath(folder.getFullFilePath());
                 mediaList.add(mediaData);
             }
-        }
+        }*/
         Photolist[] photolists = data.getPhotolist();
         if (photolists != null && photolists.length > 0) {
             //photoList = new ArrayList<Photolist>(Arrays.asList(photolists));

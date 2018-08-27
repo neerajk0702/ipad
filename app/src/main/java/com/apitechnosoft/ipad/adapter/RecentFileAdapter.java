@@ -22,6 +22,7 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.ShareImageActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.Audioist;
 import com.apitechnosoft.ipad.model.ContentData;
@@ -32,6 +33,7 @@ import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Resentdata;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -121,7 +123,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.doc);
         }*/
 
-    private void alertForShowDoc(String filePath, String mime, int position) {
+    private void alertForShowDoc(String filePath, String mime, final int position) {
        /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
         playAudioIntent.putExtra("FileUrl", filePath);
         mContext.startActivity(playAudioIntent);*/
@@ -168,6 +170,11 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 2);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -186,7 +193,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowImage(String filePath, int position) {
+    public void alertForShowImage(String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -216,6 +223,11 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 1);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -234,7 +246,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowVideo(String filePath, int position) {
+    public void alertForShowVideo(String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -293,6 +305,11 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 3);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });
@@ -311,7 +328,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowAudio(final String filePath, int position) {
+    public void alertForShowAudio(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -368,6 +385,11 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                String media = new Gson().toJson(mediaList.get(position));
+                intent.putExtra("MediaData", media);
+                intent.putExtra("MediaType", 4);
+                mContext.startActivity(intent);
                 alert.dismiss();
             }
         });

@@ -84,10 +84,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <VideoView
+                <com.apitechnosoft.ipad.utils.FullScreenVideoView
                     android:id="@+id/videoView"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
+                    android:layout_gravity="center"
                     android:layout_weight="0.7" />
 
                 <FrameLayout
