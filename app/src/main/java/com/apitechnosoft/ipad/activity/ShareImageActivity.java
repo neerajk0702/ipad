@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -119,6 +120,7 @@ public class ShareImageActivity extends AppCompatActivity {
         ((ViewGroup) mediaController.getParent()).removeView(mediaController);
         ((FrameLayout) findViewById(R.id.videoViewWrapper)).addView(mediaController);
         mediaController.setVisibility(View.VISIBLE);
+        final ProgressBar bufferingDialog = findViewById(R.id.bufferingDialog);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -135,6 +137,33 @@ public class ShareImageActivity extends AppCompatActivity {
                         mediaController.setVisibility(View.VISIBLE);
                     }
                 });
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                bufferingDialog.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                bufferingDialog.setVisibility(View.GONE);
+                return false;
             }
         });
     }

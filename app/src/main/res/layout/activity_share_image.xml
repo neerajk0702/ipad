@@ -76,22 +76,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                    <WebView
-                        android:id="@+id/web"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                <WebView
+                    android:id="@+id/web"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-                <LinearLayout android:id="@+id/videoViewLayout"
+                <LinearLayout
+                    android:id="@+id/videoViewLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <com.apitechnosoft.ipad.utils.FullScreenVideoView
-                        android:id="@+id/videoView"
-                        android:layout_width="fill_parent"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.7" />
+                        android:layout_weight="0.7">
+
+                        <com.apitechnosoft.ipad.utils.FullScreenVideoView
+                            android:id="@+id/videoView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center" />
+
+                        <ProgressBar
+                            android:id="@+id/bufferingDialog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
 
                     <FrameLayout
                         android:id="@+id/videoViewWrapper"

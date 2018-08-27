@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -32,6 +33,7 @@ import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.DocOpenActivity;
 import com.apitechnosoft.ipad.activity.ShareImageActivity;
 import com.apitechnosoft.ipad.activity.VideoPlayerActivity;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
@@ -306,6 +308,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         mediaController.setVisibility(View.VISIBLE);
         // videoView.start();
         alert.setCustomTitle(view);
+        final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -322,9 +325,36 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         mediaController.setVisibility(View.VISIBLE);
                     }
                 });
+
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                bufferingDialog.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
         });
-
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                bufferingDialog.setVisibility(View.GONE);
+                return false;
+            }
+        });
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -387,6 +417,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         mediaController.setVisibility(View.VISIBLE);
         // videoView.start();
         alert.setCustomTitle(view);
+        final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -403,9 +434,35 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         mediaController.setVisibility(View.VISIBLE);
                     }
                 });
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                bufferingDialog.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                bufferingDialog.setVisibility(View.GONE);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
         });
-
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                bufferingDialog.setVisibility(View.GONE);
+                return false;
+            }
+        });
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
