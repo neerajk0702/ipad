@@ -95,7 +95,8 @@
         <activity android:name=".activity.DocOpenActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.ShareSingleFileActivity" />
-        <activity android:name=".activity.ShareMultipelFileActivity"></activity>
+        <activity android:name=".activity.ShareMultipelFileActivity" />
+        <activity android:name=".activity.OrganizerActivity"></activity>
     </application>
 
 </manifest>

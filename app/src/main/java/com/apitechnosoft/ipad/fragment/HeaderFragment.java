@@ -1,9 +1,11 @@
 package com.apitechnosoft.ipad.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.OrganizerActivity;
 import com.apitechnosoft.ipad.component.FontViewField;
 import com.apitechnosoft.ipad.resource.FNResources;
 import com.apitechnosoft.ipad.utils.ASTStringUtil;
@@ -15,7 +17,7 @@ import static com.apitechnosoft.ipad.utils.ASTObjectUtil.isEmptyStr;
 public class HeaderFragment extends MainFragment {
 
     protected String headerTxt;
-    protected TextView title;
+    protected TextView title, Organizer;
     protected FontViewField sliderBtn, backButton;
     private boolean showBackButton;
     private boolean showMenuButton;
@@ -36,6 +38,7 @@ public class HeaderFragment extends MainFragment {
         this.sliderBtn = this.findViewById(R.id.sliderBtn);
         this.backButton = this.findViewById(R.id.backBtn);
         this.title = this.findViewById(R.id.title);
+        this.Organizer = this.findViewById(R.id.Organizer);
         getHostActivity().setDrawerState(showMenuButton);
 
     }
@@ -44,7 +47,7 @@ public class HeaderFragment extends MainFragment {
     protected void setClickListeners() {
         this.sliderBtn.setOnClickListener(this);
         this.backButton.setOnClickListener(this);
-
+        this.Organizer.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +71,8 @@ public class HeaderFragment extends MainFragment {
                     this.getHostActivity().showSideNavigationPanel();
                 }
             }
+        } else if (v.getId() == R.id.Organizer) {
+            startActivity(new Intent(getContext(), OrganizerActivity.class));
         }
     }
 
