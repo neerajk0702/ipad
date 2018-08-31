@@ -25,16 +25,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.LoginActivity;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.activity.ShareMultipelFileActivity;
+import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.adapter.FolderAdapter;
+import com.apitechnosoft.ipad.adapter.MoveFileFolderAdapter;
 import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
@@ -51,11 +56,14 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class PersonalFragment extends MainFragment {
@@ -67,6 +75,9 @@ public class PersonalFragment extends MainFragment {
     FolderAdapter folderAdapter;
     TextView folderArrowIcon, folderTitel;
     LinearLayout folderLayout;
+    Button selectfoldet, sharefile;
+    PersonalAdapter mAdapter;
+    String UserId;
 
     @Override
     protected int fragmentLayout() {
@@ -79,10 +90,8 @@ public class PersonalFragment extends MainFragment {
         videolayout = findViewById(R.id.videolayout);
         audiolayout = findViewById(R.id.audiolayout);
         doclayout = findViewById(R.id.doclayout);
-        photolayout.setOnClickListener(this);
-        videolayout.setOnClickListener(this);
-        audiolayout.setOnClickListener(this);
-        doclayout.setOnClickListener(this);
+        selectfoldet = findViewById(R.id.selectfoldet);
+        sharefile = findViewById(R.id.sharefile);
 
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
@@ -122,6 +131,12 @@ public class PersonalFragment extends MainFragment {
 
     @Override
     protected void setClickListeners() {
+        selectfoldet.setOnClickListener(this);
+        sharefile.setOnClickListener(this);
+        photolayout.setOnClickListener(this);
+        videolayout.setOnClickListener(this);
+        audiolayout.setOnClickListener(this);
+        doclayout.setOnClickListener(this);
     }
 
     @Override
@@ -131,13 +146,10 @@ public class PersonalFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-       /* ArrayList<Data> dataList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Data data = new Data();
-            data.setTitle("Recent" + i);
-            dataList.add(data);
-        }*/
-
+        SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
 
         final String filter_array[] = {"Newest", "Oldest"};
         ArrayAdapter<String> bankAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_row, filter_array);
@@ -208,6 +220,16 @@ public class PersonalFragment extends MainFragment {
                 break;
             case R.id.upFolder:
                 getAllFile();
+                break;
+            case R.id.sharefile:
+                startActivity(new Intent(getContext(), ShareMultipelFileActivity.class));
+                break;
+            case R.id.selectfoldet:
+                if (folderList != null && folderList.size() > 0) {
+                    moveFile();
+                } else {
+                    ASTUIUtil.showToast("Folder not found!");
+                }
                 break;
         }
     }
@@ -480,7 +502,7 @@ public class PersonalFragment extends MainFragment {
         }
         recyclerView.removeAllViews();
         recyclerView.removeAllViewsInLayout();
-        PersonalAdapter mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio
+        mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -600,5 +622,99 @@ public class PersonalFragment extends MainFragment {
         }
         super.onDestroy();
 
+    }
+
+
+    public void moveFile() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        final android.app.AlertDialog alert = builder.create();
+        View view = alert.getLayoutInflater().inflate(R.layout.move_folder_layout, null);
+        RecyclerView folderrecycler_view = view.findViewById(R.id.folderrecycler_view);
+        Button movefile = view.findViewById(R.id.movefile);
+        Button close = view.findViewById(R.id.close);
+        folderrecycler_view.setHasFixedSize(false);
+        StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        folderrecycler_view.setLayoutManager(gaggeredGridLayoutManager);
+        final MoveFileFolderAdapter folderAdapter = new MoveFileFolderAdapter(getContext(), folderList);
+        folderrecycler_view.setAdapter(folderAdapter);
+
+        alert.setCustomTitle(view);
+        movefile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Folderdata folderdata = folderAdapter.selectFolderData;
+                if (folderdata != null) {
+                    int itemsno = folderdata.getSno();
+                    if (mAdapter != null) {
+                        ArrayList<MediaData> mediaList = mAdapter.mediaList;
+                        String SEPARATOR = ",";
+                        StringBuilder csvBuilder = new StringBuilder();
+                        List<String> snoList = new ArrayList<>();
+                        if (mediaList != null && mediaList.size() > 0) {
+                            for (MediaData mediaData : mediaList) {
+                                if (mediaData.isSelected()) {
+                                    snoList.add(String.valueOf(mediaData.getSno()));
+                                }
+                            }
+                            for (String city : snoList) {
+                                csvBuilder.append(city);
+                                csvBuilder.append(SEPARATOR);
+                            }
+                            String filevalueforfolder = csvBuilder.toString();
+                            //Remove last comma
+                            if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
+                                filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
+                                MoveFileIntoFolder(filevalueforfolder, itemsno);
+                            } else {
+                                ASTUIUtil.showToast("Please Select file!");
+                            }
+                        }
+                    }
+                }
+                alert.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    private void MoveFileIntoFolder(String filevalue, int itemsno) {
+
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.MoveSaveFolderDataLocationApi + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" + itemsno;
+            serviceCaller.CallCommanServiceMethod(url, "MoveFileIntoFolder", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File Moved Successfully");
+                                getAllFile();
+                            } else {
+                                Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
     }
 }

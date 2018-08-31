@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/available"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:text="Available folder's"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/orange"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/folderrecycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/available"
+        android:layout_marginBottom="@dimen/_10dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/folderrecycler_view"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/movefile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/select_folder"
+                android:text="Move File"
+                android:textColor="@color/white" />
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/close"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/share_folder"
+                android:text="Close"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

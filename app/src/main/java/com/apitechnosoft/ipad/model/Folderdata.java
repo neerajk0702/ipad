@@ -55,6 +55,7 @@ public class Folderdata {
     private String limitFilename1;
     private String uploadFilePath;
     private String folderlocation;
+
     public String getLimitFilename() {
         return limitFilename;
     }
@@ -166,7 +167,8 @@ public class Folderdata {
     public void setFolderlocation(String folderlocation) {
         this.folderlocation = folderlocation;
     }
-private String extension;
+
+    private String extension;
 
     public String getExtension() {
         return extension;
@@ -174,6 +176,16 @@ private String extension;
 
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     @Override

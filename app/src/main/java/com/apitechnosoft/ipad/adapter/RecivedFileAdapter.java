@@ -21,7 +21,7 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.activity.ShareImageActivity;
+import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
@@ -74,7 +74,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             if (type == 1) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
-                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {
@@ -183,7 +183,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 2);
@@ -220,7 +220,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         ImageView img = view.findViewById(R.id.img);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
-        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img);
+        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(img);
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
         deleteicon.setTypeface(materialdesignicons_font);
@@ -236,7 +236,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 1);
@@ -345,7 +345,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 3);
@@ -453,7 +453,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 4);

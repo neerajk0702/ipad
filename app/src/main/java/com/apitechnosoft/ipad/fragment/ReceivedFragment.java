@@ -51,7 +51,7 @@ public class ReceivedFragment extends MainFragment {
     RecyclerView recyclerView,folderrecycler_view;
     ArrayList<MediaData> mediaList;
     TextView photolayout, videolayout, audiolayout, doclayout;
-
+    Button selectfoldet, sharefile;
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -63,6 +63,10 @@ public class ReceivedFragment extends MainFragment {
         videolayout = findViewById(R.id.videolayout);
         audiolayout = findViewById(R.id.audiolayout);
         doclayout = findViewById(R.id.doclayout);
+        selectfoldet = findViewById(R.id.selectfoldet);
+        sharefile = findViewById(R.id.sharefile);
+        selectfoldet.setVisibility(View.GONE);
+
         photolayout.setOnClickListener(this);
         videolayout.setOnClickListener(this);
         audiolayout.setOnClickListener(this);

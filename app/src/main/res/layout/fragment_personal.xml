@@ -211,7 +211,8 @@
                     android:layout_marginTop="@dimen/_10dp"
                     android:background="@color/white" />
 
-                <LinearLayout android:id="@+id/folderLayout"
+                <LinearLayout
+                    android:id="@+id/folderLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -249,11 +250,52 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50dp"
+            android:layout_height="@dimen/_40dp"
             android:layout_marginTop="@dimen/_10dp"
             android:background="#00000000" />
+
+
     </LinearLayout>
     <!--  </android.support.v4.widget.NestedScrollView>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_32dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/orange"
+            android:visibility="visible" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/selectfoldet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/select_folder"
+                android:text="Select Folder"
+                android:textColor="@color/white" />
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/sharefile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/share_folder"
+                android:text="Share File's"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

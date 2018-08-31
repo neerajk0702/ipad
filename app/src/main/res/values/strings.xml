@@ -100,8 +100,11 @@ EACH TIME YOU PURCHASE A PRODUCT OR SERVICE AT IPADTODAY.COM, YOU ARE REPRESENTI
     <string name="pp26">If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us by sending a letter to:</string>
     <string name="pp27">You may also contact us by email at inquiry@rxdmedia.com</string>
     <string name="pp28">The dog cant eat your homework when its in the cloud. Teachers can keep students, and their families, up to date on happenings, expectations and progress.</string>
-    <string name="pp29">Connection is key. The classroom is expanding outside of its four walls and is traveling the information superhighway. Classroom communities can share information and resources among themselves as well as in larger school communities locally and far reaching. Don't miss the bus.</string>
+    <string name="pp29">Connection is key. The classroom is expanding outside of its four walls and is traveling the information superhighway. Classroom communities can share information and resources among themselves as well as in larger school communities locally and far reaching. Dont miss the bus.</string>
     <string name="pp30">Classmates can connect to one another, from home, to collaborate on homework, projects and even sharpen study skills.</string>
     <string name="pp31">Make homework time less stressful with tools to support your student at home in a variety of subject areas.</string>
     <string name="pp32">If you have a general question, or would like to request additional information about ipads personal cloud storage and education solutions, please fill out the form below. Thank you and we look forward to connecting with you!</string>
+
+    <string name="otpverify">Please check your Spam folder! If you use Gmail or another free webmail service, then the verification code will most likely be in your Spam/Junk folder.</string>
+
 </resources>

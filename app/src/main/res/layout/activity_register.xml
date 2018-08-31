@@ -7,200 +7,237 @@
     android:background="#fff"
     tools:context=".activity.LoginActivity">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/_20dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="@dimen/_150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@mipmap/logo"></ImageView>
-
-        <TextView android:id="@+id/ipad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_5dp"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/edt_firstname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15dp"
-            android:background="#00000000"
-            android:clickable="true"
-            android:gravity="left|center"
-            android:hint="Enter First Name"
-            android:singleLine="true"
-            android:textColorHint="#919191"
-            android:textSize="14dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:background="#919191" />
-
-        <EditText
-            android:id="@+id/edt_lastname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
-            android:background="#00000000"
-            android:clickable="true"
-            android:gravity="left|center"
-            android:hint="Enter Last Name "
-            android:singleLine="true"
-            android:textColorHint="#919191"
-            android:textSize="14dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:background="#919191" />
-
-
-        <EditText
-            android:id="@+id/edt_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
-            android:background="#00000000"
-            android:clickable="true"
-            android:gravity="left|center"
-            android:hint="Enter Email-ID"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:textColorHint="#919191"
-            android:textSize="14dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:background="#919191" />
-
-        <EditText
-            android:id="@+id/edt_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
-            android:background="#00000000"
-            android:clickable="true"
-            android:gravity="left|center"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColorHint="#919191"
-            android:textSize="14dp" />
-
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/otpLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/_150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/logo"></ImageView>
+
+            <TextView
+                android:id="@+id/ipad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_5dp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edt_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15dp"
+                android:background="#00000000"
+                android:clickable="true"
+                android:gravity="left|center"
+                android:hint="Enter First Name"
+                android:singleLine="true"
+                android:textColorHint="#919191"
+                android:textSize="14dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10dp"
                 android:background="#919191" />
 
             <EditText
-                android:id="@+id/edt_otp"
+                android:id="@+id/edt_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20dp"
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter OTP"
-                android:inputType="number"
+                android:hint="Enter Last Name "
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:background="#919191" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:background="#919191" />
 
-            <LinearLayout
+
+            <EditText
+                android:id="@+id/edt_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/_20dp"
+                android:background="#00000000"
+                android:clickable="true"
+                android:gravity="left|center"
+                android:hint="Enter Email-ID"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColorHint="#919191"
+                android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/welcom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Term's of Service"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:background="#919191" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text=" &amp; "
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20dp"
+                android:background="#00000000"
+                android:clickable="true"
+                android:gravity="left|center"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColorHint="#919191"
+                android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/Privacy"
-                    android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:id="@+id/otpLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#919191" />
+
+                <EditText
+                    android:id="@+id/edt_otp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Privacy"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:background="#00000000"
+                    android:clickable="true"
+                    android:gravity="left|center"
+                    android:hint="Enter Verification Code"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColorHint="#919191"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="#919191" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/iicon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:text="ic"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/_18dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:text="@string/otpverify"
+                        android:textColor="@color/secondry_txt_color"
+                        android:textSize="@dimen/_12dp" />
+                </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:background="#919191" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/accept"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="By establishing your IPAD account, you agree to our terms of service and consent to the processing and storage of your information on RXD's servers in the U.S. and elsewhere."
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/welcom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Term's of Service"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=" &amp; "
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/Privacy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Privacy"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/accept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="By establishing your IPAD account, you agree to our terms of service and consent to the processing and storage of your information on RXD's servers in the U.S. and elsewhere."
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogIn"
+                style="@style/DefaultButtonText"
+                android:layout_width="@dimen/_220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20dp"
+                android:background="@drawable/button_login"
+                android:gravity="center"
+                android:text="Submit"
+                android:textSize="@dimen/_14dp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLogIn"
-            style="@style/DefaultButtonText"
-            android:layout_width="@dimen/_220dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20dp"
-            android:background="@drawable/button_login"
-            android:gravity="center"
-            android:text="Submit" />
-    </LinearLayout>
-
-
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

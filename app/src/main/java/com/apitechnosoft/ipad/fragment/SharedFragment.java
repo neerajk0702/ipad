@@ -49,6 +49,7 @@ public class SharedFragment extends MainFragment {
     RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
     TextView photolayout, videolayout, audiolayout, doclayout;
+    Button selectfoldet, sharefile;
 
     @Override
     protected int fragmentLayout() {
@@ -61,11 +62,9 @@ public class SharedFragment extends MainFragment {
         videolayout = findViewById(R.id.videolayout);
         audiolayout = findViewById(R.id.audiolayout);
         doclayout = findViewById(R.id.doclayout);
-        photolayout.setOnClickListener(this);
-        videolayout.setOnClickListener(this);
-        audiolayout.setOnClickListener(this);
-        doclayout.setOnClickListener(this);
-
+        selectfoldet = findViewById(R.id.selectfoldet);
+        sharefile = findViewById(R.id.sharefile);
+        selectfoldet.setVisibility(View.GONE);
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         // TextView filter = findViewById(R.id.filter);
@@ -100,6 +99,12 @@ public class SharedFragment extends MainFragment {
 
     @Override
     protected void setClickListeners() {
+        photolayout.setOnClickListener(this);
+        videolayout.setOnClickListener(this);
+        audiolayout.setOnClickListener(this);
+        doclayout.setOnClickListener(this);
+        selectfoldet.setOnClickListener(this);
+        sharefile.setOnClickListener(this);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.apitechnosoft.ipad.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -23,16 +22,9 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.activity.ShareImageActivity;
+import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.constants.Contants;
-import com.apitechnosoft.ipad.model.Audioist;
-import com.apitechnosoft.ipad.model.ContentData;
-import com.apitechnosoft.ipad.model.Data;
-import com.apitechnosoft.ipad.model.Folderdata;
-import com.apitechnosoft.ipad.model.MediaData;
-import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Resentdata;
-import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -78,7 +70,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         holder.recenttext.setText(mediaList.get(position).getFileName());
         if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
+            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
             holder.recentImg.setImageResource(R.drawable.video);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
@@ -171,7 +163,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 2);
@@ -208,7 +200,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         ImageView img = view.findViewById(R.id.img);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
-        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img);
+        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(img);
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
         deleteicon.setTypeface(materialdesignicons_font);
@@ -224,7 +216,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 1);
@@ -333,7 +325,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 3);
@@ -440,7 +432,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 4);

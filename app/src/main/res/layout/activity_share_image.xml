@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activity.ShareImageActivity">
+    tools:context=".activity.ShareSingleFileActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Share Image"
+                        android:text="Share File"
                         android:textColor="#fff"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
@@ -117,15 +117,38 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15dp">
+
+                <TextView android:id="@+id/iicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="ic"
+                    android:textColor="@color/Blue_A"
+                    android:textSize="@dimen/_18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_5dp"
+                    android:text="For Multiple Share Use ',' like:- abc@dom.com,abc@dom.in"
+                    android:textColor="@color/secondry_txt_color"
+                    android:textSize="@dimen/_10dp" />
+            </LinearLayout>
+
+
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_15dp"
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
                 android:hint="Enter Sender Email ID:"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />

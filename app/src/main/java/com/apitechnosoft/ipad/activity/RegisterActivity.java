@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     //get view ids
     public void loadView() {
+        Typeface materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(this, "fonts/materialdesignicons-webfont.otf");
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         edt_firstname = (EditText) findViewById(R.id.edt_firstname);
         edt_lastname = (EditText) findViewById(R.id.edt_lastname);
@@ -66,11 +67,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         accept = findViewById(R.id.accept);
         ipad = findViewById(R.id.ipad);
         ipad.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
+
+        TextView iicon = findViewById(R.id.iicon);
+        iicon.setTypeface(materialdesignicons_font);
+        iicon.setText(Html.fromHtml("&#xf2fd;"));
     }
 
     //get data from UI
     public void datatoView() {
-        btnLogIn.setText("Send OTP");
+        btnLogIn.setText("Send Verification Code");
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,10 +86,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             if (PINString.equals(userOtp)) {
                                 callSignup();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "OTP did not matched!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Verification Code did not matched!", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Please Enter OTP!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Please Enter Verification Code!", Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {
@@ -196,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(RegisterActivity.this, "Please wait", "Sending OTP", true, false);
+            progressDialog = ProgressDialog.show(RegisterActivity.this, "Please wait", "Sending Verification Code", true, false);
         }
 
         @Override
@@ -207,11 +212,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     buttonFlag = true;
                     btnLogIn.setText("Submit");
                     otpLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(RegisterActivity.this, "OTP was sent to your Mail successfully.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Verification Code was sent to your Mail successfully.", Toast.LENGTH_LONG).show();
                 } else {
-                    btnLogIn.setText("Send OTP");
+                    btnLogIn.setText("Send Verification Code");
                     otpLayout.setVisibility(View.GONE);
-                    Toast.makeText(RegisterActivity.this, "OTP was not sent to your Mail successfully.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Verification Code was not sent to your Mail successfully.", Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
                 Log.e("MailApp", "Could not send email", e);
@@ -227,8 +232,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             String[] toArr = {mailstr};//{"neerajk0702@gmail.com", "89neerajsingh@gmail.com"};
             m.setTo(toArr);
             m.setFrom("admin@rxdmedia.com");
-            m.setSubject("Ipad SignUp OTP");
-            m.setBody("Your OTP is :" + PINString);
+            m.setSubject("Ipad SignUp Verification Code");
+            m.setBody("Your Verification Code is :" + PINString);
 
             try {
                 if (m.send()) {

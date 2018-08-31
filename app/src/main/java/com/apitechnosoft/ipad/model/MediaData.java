@@ -195,10 +195,21 @@ public class MediaData {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+
     private String eventname;
 
     public String getEventname() {
         return eventname;
+    }
+
+    private boolean isSelected = false;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public void setEventname(String eventname) {

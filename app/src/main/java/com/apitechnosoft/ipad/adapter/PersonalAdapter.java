@@ -1,26 +1,19 @@
 package com.apitechnosoft.ipad.adapter;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -30,24 +23,19 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.activity.DocOpenActivity;
-import com.apitechnosoft.ipad.activity.ShareImageActivity;
-import com.apitechnosoft.ipad.activity.VideoPlayerActivity;
-import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-import com.sun.mail.imap.Utility;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyViewHolder> {
 
-    private ArrayList<MediaData> mediaList;
+    public ArrayList<MediaData> mediaList;
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
@@ -55,11 +43,13 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
+        CheckBox selectCheck;
 
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
+            selectCheck = view.findViewById(R.id.selectCheck);
         }
     }
 
@@ -85,11 +75,13 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
 
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
+            holder.selectCheck.setVisibility(View.GONE);
         } else {
+            holder.selectCheck.setVisibility(View.VISIBLE);
             if (type == 1) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg);
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
@@ -144,15 +136,21 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 }
             }
         });
-        /*if (mediaList.get(position).getType().contains("image")) {
-            holder.recentImg.setImageResource(R.drawable.image_placeholder);
-        } else if (mediaList.get(position).getType().contains("video")) {
-            holder.recentImg.setImageResource(R.drawable.video);
-        } else if (mediaList.get(position).getType().contains("audio")) {
-            holder.recentImg.setImageResource(R.drawable.audio_icon);
-        } else if (mediaList.get(position).getType().contains("doc")) {
-            holder.recentImg.setImageResource(R.drawable.doc);
-        }*/
+        if (mediaList.get(position).isSelected()) {
+            holder.selectCheck.setChecked(true);
+        } else {
+            holder.selectCheck.setChecked(false);
+        }
+        holder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mediaList.get(position).setSelected(true);
+                } else {
+                    mediaList.get(position).setSelected(false);
+                }
+            }
+        });
     }
 
     private void alertForShowDoc(String filePath, String mime, final int position) {
@@ -202,7 +200,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 2);
@@ -239,7 +237,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         ImageView img = view.findViewById(R.id.img);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
-        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img);
+        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(img);
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
         deleteicon.setTypeface(materialdesignicons_font);
@@ -255,7 +253,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 1);
@@ -365,7 +363,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 3);
@@ -472,7 +470,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         sharebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ShareImageActivity.class);
+                Intent intent = new Intent(mContext, ShareSingleFileActivity.class);
                 String media = new Gson().toJson(mediaList.get(position));
                 intent.putExtra("MediaData", media);
                 intent.putExtra("MediaType", 4);

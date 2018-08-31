@@ -27,6 +27,11 @@ public class Contants {
     public static String GetFolderDataApi = "GetFolderDataApi/getfolderdata?foldersno=";
 
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
-    //username=singh.juliepatna@gmail.com&fsno=26
+    public static String ShareDataapiNew = "ShareDataapiNew/shareDatanew?";
+    public static String MoveSaveFolderDataLocationApi = "MoveSaveFolderDataLocationApi/moveSaveFolderataLocation?";
+
+
+
+
 }
 
