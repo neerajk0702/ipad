@@ -26,8 +26,16 @@
             <com.apitechnosoft.ipad.component.ASTImageView
                 android:id="@+id/recentImg"
                 android:layout_width="match_parent"
-                android:scaleType="fitXY"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+            <ProgressBar
+                android:id="@+id/loadingDialog"
+                android:layout_width="@dimen/_30dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone" />
 
             <CheckBox
                 android:id="@+id/selectCheck"

@@ -17,6 +17,12 @@
         android:layout_margin="@dimen/_10dp"
         android:orientation="vertical">
 
+        <com.apitechnosoft.ipad.utils.FZProgressBar
+            android:id="@+id/card_progressBar"
+            android:layout_width="fill_parent"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:layout_height="10dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -237,6 +243,16 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14dp" />
                 </LinearLayout>
+
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:id="@+id/seeallfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="See All File"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/_14dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/perrecycler_view"

@@ -187,9 +187,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    String username = "neerajk0702@gmail.com";
+   /* String username = "neerajk0702@gmail.com";
     String name = "neeraj";
-    String password = "me&you@0702";
+    String password = "scdscdscc";
 
     private void sendMail(String email, String subject, String messageBody) {
         Session session = createSessionObject();
@@ -276,7 +276,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
+    }*/
 
     //for hid keyboard when tab outside edittext box
     @Override

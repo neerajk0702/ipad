@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.2"
-                android:text="Account"
+                android:text="Account:"
                 android:textColor="@color/black" />
 
             <TextView

@@ -4,35 +4,45 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/ic_homepage"
             android:title="HOME" />
         <item
             android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
             android:title="My Profile" />
         <item
             android:id="@+id/nav_About"
+            android:icon="@drawable/ic_about_planet"
             android:title="About" />
 
         <item
             android:id="@+id/nav_Pricing"
+            android:icon="@drawable/ic_price"
             android:title="Pricing" />
         <item
             android:id="@+id/nav_Education"
-            android:visible="false"
-            android:title="Education" />
+            android:icon="@drawable/ic_homepage"
+            android:title="Education"
+            android:visible="false" />
         <item
             android:id="@+id/nav_Press"
+            android:icon="@drawable/ic_press_delivery"
             android:title="Press" />
         <item
             android:id="@+id/nav_Contact"
+            android:icon="@drawable/ic_contract"
             android:title="Contact Us" />
         <item
             android:id="@+id/nav_Terms"
+            android:icon="@drawable/ic_repairing_service"
             android:title="Terms of Service" />
         <item
             android:id="@+id/nav_Privacy"
+            android:icon="@drawable/ic_cloud"
             android:title="Privacy" />
         <item
             android:id="@+id/nav_Logout"
+            android:icon="@drawable/ic_logout"
             android:title="Logout" />
     </group>
 

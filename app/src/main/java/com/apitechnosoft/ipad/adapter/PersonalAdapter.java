@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -19,15 +20,22 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.MediaData;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -39,17 +47,20 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
+    String UserId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
         CheckBox selectCheck;
+        ProgressBar loadingDialog;
 
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             selectCheck = view.findViewById(R.id.selectCheck);
+            loadingDialog = view.findViewById(R.id.loadingDialog);
         }
     }
 
@@ -70,7 +81,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
         holder.recenttext.setText(mediaList.get(position).getFileName());
 
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
@@ -80,8 +95,25 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             holder.selectCheck.setVisibility(View.VISIBLE);
             if (type == 1) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
+                    if (holder.loadingDialog != null) {
+                        holder.loadingDialog.setVisibility(View.VISIBLE);
+                    }
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            if (holder.loadingDialog != null) {
+                                holder.loadingDialog.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onError() {
+                            if (holder.loadingDialog != null) {
+                                holder.loadingDialog.setVisibility(View.GONE);
+                            }
+                        }
+                    });
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
@@ -212,6 +244,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +298,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
@@ -375,6 +409,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
@@ -482,6 +517,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
@@ -493,7 +529,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         alert.show();
     }
 
-    public void audioPlayer(String path) {
+  /*  public void audioPlayer(String path) {
         //set up MediaPlayer
         MediaPlayer mp = new MediaPlayer();
 
@@ -520,11 +556,45 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             e.printStackTrace();
         }
         mp.start();
-    }
+    }*/
 
     @Override
     public int getItemCount() {
         return mediaList.size();
     }
 
+    private void deletePersonalFile(final int position) {
+        if (ASTUIUtil.isOnline(mContext)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(mContext);
+            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File delete Successfully");
+                                mediaList.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
 }

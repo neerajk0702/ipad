@@ -26,6 +26,7 @@ import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,11 +41,13 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
+        ProgressBar loadingDialog;
 
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
+            loadingDialog = view.findViewById(R.id.loadingDialog);
         }
     }
 
@@ -65,7 +68,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
 
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
@@ -73,8 +76,25 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         } else {
             if (type == 1) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
+                    if (holder.loadingDialog != null) {
+                        holder.loadingDialog.setVisibility(View.VISIBLE);
+                    }
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
-                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            if (holder.loadingDialog != null) {
+                                holder.loadingDialog.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onError() {
+                            if (holder.loadingDialog != null) {
+                                holder.loadingDialog.setVisibility(View.GONE);
+                            }
+                        }
+                    });
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {

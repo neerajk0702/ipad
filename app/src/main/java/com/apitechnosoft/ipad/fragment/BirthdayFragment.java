@@ -3,6 +3,9 @@ package com.apitechnosoft.ipad.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +14,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.LoginActivity;
+import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,6 +49,11 @@ public class BirthdayFragment extends MainFragment {
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
     TimePickerDialog.OnTimeSetListener time;
+    EditText name, description;
+    Switch reminder;
+    TextView email;
+    String nameStr, desStr;
+    String UserId;
 
     @Override
     protected int fragmentLayout() {
@@ -47,6 +67,10 @@ public class BirthdayFragment extends MainFragment {
         timeView = findViewById(R.id.timeView);
         caladerDate = findViewById(R.id.caladerDate);
         submit = findViewById(R.id.submit);
+        name = findViewById(R.id.name);
+        reminder = findViewById(R.id.reminder);
+        email = findViewById(R.id.email);
+        description = findViewById(R.id.description);
     }
 
 
@@ -81,13 +105,18 @@ public class BirthdayFragment extends MainFragment {
         };
         final SimpleDateFormat sdfTime = new SimpleDateFormat("HH.mm");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-     time = new TimePickerDialog.OnTimeSetListener() {
+        time = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 timeView.setText(sdfTime.format(myCalendar.getTime()));
             }
         };
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+            email.setText(UserId);
+        }
     }
 
     @Override
@@ -105,7 +134,64 @@ public class BirthdayFragment extends MainFragment {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 break;
             case R.id.submit:
+                if (isValidate()) {
+                    // saveBdEvent();
+                }
                 break;
         }
     }
+
+    private void saveBdEvent() {
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.Login + "username=" + UserId + "&" + "pwd=" + "";
+            serviceCaller.CallCommanServiceMethod(url, "saveBdEvent", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+
+                            } else {
+                                Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            showToast(Contants.OFFLINE_MESSAGE);
+        }
+
+    }
+
+    // ----validation -----
+    private boolean isValidate() {
+        String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        nameStr = name.getText().toString();
+        desStr = description.getText().toString();
+        if (nameStr.length() == 0) {
+            showToast("Please enter event name");
+            return false;
+        } else if (desStr.length() == 0) {
+            showToast("Please enter description");
+            return false;
+        }
+        return true;
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
 }

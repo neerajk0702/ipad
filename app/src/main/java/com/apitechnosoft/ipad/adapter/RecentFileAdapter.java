@@ -27,6 +27,7 @@ import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.Resentdata;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,12 +42,13 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         public TextView recenttext;
         ImageView recentImg;
         LinearLayout itemLayout;
-
+        ProgressBar loadingDialog;
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             itemLayout = view.findViewById(R.id.itemLayout);
+            loadingDialog = view.findViewById(R.id.loadingDialog);
         }
     }
 
@@ -69,8 +71,25 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
         if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
+            if (holder.loadingDialog != null) {
+                holder.loadingDialog.setVisibility(View.VISIBLE);
+            }
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
+            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
+                @Override
+                public void onSuccess() {
+                    if (holder.loadingDialog != null) {
+                        holder.loadingDialog.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onError() {
+                    if (holder.loadingDialog != null) {
+                        holder.loadingDialog.setVisibility(View.GONE);
+                    }
+                }
+            });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
             holder.recentImg.setImageResource(R.drawable.video);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {

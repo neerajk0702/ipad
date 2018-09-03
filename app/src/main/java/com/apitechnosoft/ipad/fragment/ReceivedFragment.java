@@ -40,6 +40,7 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.FZProgressBar;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -48,10 +49,14 @@ import java.util.ArrayList;
 
 public class ReceivedFragment extends MainFragment {
     Typeface materialdesignicons_font;
-    RecyclerView recyclerView,folderrecycler_view;
+    RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
     TextView photolayout, videolayout, audiolayout, doclayout;
     Button selectfoldet, sharefile;
+    FZProgressBar main_progressBar;
+    TextView seeallfile;
+    boolean seeallfileFlag = true;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -67,10 +72,6 @@ public class ReceivedFragment extends MainFragment {
         sharefile = findViewById(R.id.sharefile);
         selectfoldet.setVisibility(View.GONE);
 
-        photolayout.setOnClickListener(this);
-        videolayout.setOnClickListener(this);
-        audiolayout.setOnClickListener(this);
-        doclayout.setOnClickListener(this);
 
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
@@ -101,11 +102,22 @@ public class ReceivedFragment extends MainFragment {
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         folderrecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
         folderrecycler_view.setVisibility(View.GONE);
+        main_progressBar = (FZProgressBar) view.findViewById(R.id.card_progressBar);
+        //Configure the first progress bar
+        main_progressBar.animation_config(0, 10);
+        int[] colors1 = {Color.parseColor("#FF4B05"), Color.parseColor("#00B1F0")};
+        main_progressBar.bar_config(10, 0, 0, Color.TRANSPARENT, colors1);
+        seeallfile = findViewById(R.id.seeallfile);
         getAllFile();
     }
 
     @Override
     protected void setClickListeners() {
+        photolayout.setOnClickListener(this);
+        videolayout.setOnClickListener(this);
+        audiolayout.setOnClickListener(this);
+        doclayout.setOnClickListener(this);
+        seeallfile.setOnClickListener(this);
     }
 
     @Override
@@ -189,6 +201,10 @@ public class ReceivedFragment extends MainFragment {
                 videolayout.setTextColor(Color.parseColor("#FF4B05"));
                 audiolayout.setTextColor(Color.parseColor("#FF4B05"));
                 doclayout.setTextColor(Color.parseColor("#ffffff"));
+                break;
+            case R.id.seeallfile:
+                seeallfileFlag = false;
+                setAdapter(1);
                 break;
         }
     }
@@ -281,7 +297,9 @@ public class ReceivedFragment extends MainFragment {
 
             if (ASTUIUtil.isOnline(getContext())) {
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-                dotDialog.show();
+                //dotDialog.show();
+                main_progressBar.setVisibility(View.VISIBLE);
+                main_progressBar.animation_start(FZProgressBar.Mode.INDETERMINATE);
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
                 final String url = Contants.BASE_URL + Contants.RecivedFileApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "Recived File", new IAsyncWorkCompletedCallback() {
@@ -298,9 +316,11 @@ public class ReceivedFragment extends MainFragment {
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
                         }
-                        if (dotDialog.isShowing()) {
+                       /* if (dotDialog.isShowing()) {
                             dotDialog.dismiss();
-                        }
+                        }*/
+                        main_progressBar.animation_stop();
+                        main_progressBar.setVisibility(View.GONE);
                     }
                 });
             } else {
@@ -428,39 +448,52 @@ public class ReceivedFragment extends MainFragment {
     private void setAdapter(int type) {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
-        for (MediaData data : mediaList) {
-            if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
-                newmediaList.add(data);
+        if (mediaList != null && mediaList.size() > 0) {
+            for (MediaData data : mediaList) {
+                if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
+                    newmediaList.add(data);
+                }
             }
+            if (type == 1) {
+                for (MediaData data : mediaList) {
+                    if (data.getFileExtension() != null && data.getFileExtension().contains("image")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 2) {
+                for (MediaData data : mediaList) {
+                    if (data.getFileExtension() != null && data.getFileExtension().contains("video")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 3) {
+                for (MediaData data : mediaList) {
+                    if (data.getFileExtension() != null && data.getFileExtension().contains("audio")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 4) {
+                for (MediaData data : mediaList) {
+                    if (data.getFileExtension() != null && data.getFileExtension().contains("application")) {
+                        newmediaList.add(data);
+                    }
+                }
+            }
+            recyclerView.removeAllViews();
+            recyclerView.removeAllViewsInLayout();
+            RecivedFileAdapter mAdapter;
+            if (seeallfileFlag) {//show only 15 file
+                ArrayList<MediaData> seemediaList = new ArrayList<>();
+                for (int i = 0; i < 12; i++) {
+                    if (i < newmediaList.size()) {
+                        seemediaList.add(newmediaList.get(i));
+                    }
+                }
+                mAdapter = new RecivedFileAdapter(getContext(), seemediaList, type);//type for image video audio doc
+            } else {
+                mAdapter = new RecivedFileAdapter(getContext(), newmediaList, type);//type for image video audio doc
+            }
+            recyclerView.setAdapter(mAdapter);
         }
-        if (type == 1) {
-            for (MediaData data : mediaList) {
-                if (data.getFileExtension() != null && data.getFileExtension().contains("image")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 2) {
-            for (MediaData data : mediaList) {
-                if (data.getFileExtension() != null && data.getFileExtension().contains("video")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 3) {
-            for (MediaData data : mediaList) {
-                if (data.getFileExtension() != null && data.getFileExtension().contains("audio")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 4) {
-            for (MediaData data : mediaList) {
-                if (data.getFileExtension() != null && data.getFileExtension().contains("application")) {
-                    newmediaList.add(data);
-                }
-            }
-        }
-        recyclerView.removeAllViews();
-        recyclerView.removeAllViewsInLayout();
-        RecivedFileAdapter mAdapter = new RecivedFileAdapter(getContext(), newmediaList, type);
-        recyclerView.setAdapter(mAdapter);
     }
 }

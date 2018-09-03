@@ -57,6 +57,7 @@ import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
+import com.apitechnosoft.ipad.utils.FZProgressBar;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -78,6 +79,9 @@ public class PersonalFragment extends MainFragment {
     Button selectfoldet, sharefile;
     PersonalAdapter mAdapter;
     String UserId;
+    FZProgressBar main_progressBar;
+    TextView seeallfile;
+    boolean seeallfileFlag = true;
 
     @Override
     protected int fragmentLayout() {
@@ -126,6 +130,18 @@ public class PersonalFragment extends MainFragment {
         folderTitel = findViewById(R.id.folderTitel);
         folderLayout = findViewById(R.id.folderLayout);
         folderArrowIcon.setTypeface(materialdesignicons_font);
+
+        main_progressBar = (FZProgressBar) view.findViewById(R.id.card_progressBar);
+        //Configure the first progress bar
+        main_progressBar.animation_config(0, 10);
+        int[] colors1 = {Color.parseColor("#FF4B05"), Color.parseColor("#00B1F0")};
+        main_progressBar.bar_config(10, 0, 0, Color.TRANSPARENT, colors1);
+        // main_progressBar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+       /* main_progressBar.animation_start(FZProgressBar.Mode.INDETERMINATE);
+        main_progressBar.animation_stop(FZProgressBar.Mode.INDETERMINATE);
+      */
+        seeallfile = findViewById(R.id.seeallfile);
+
         getAllFile();
     }
 
@@ -137,6 +153,7 @@ public class PersonalFragment extends MainFragment {
         videolayout.setOnClickListener(this);
         audiolayout.setOnClickListener(this);
         doclayout.setOnClickListener(this);
+        seeallfile.setOnClickListener(this);
     }
 
     @Override
@@ -231,6 +248,10 @@ public class PersonalFragment extends MainFragment {
                     ASTUIUtil.showToast("Folder not found!");
                 }
                 break;
+            case R.id.seeallfile:
+                seeallfileFlag = false;
+                setAdapter(1);
+                break;
         }
     }
 
@@ -322,7 +343,10 @@ public class PersonalFragment extends MainFragment {
 
             if (ASTUIUtil.isOnline(getContext())) {
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-                dotDialog.show();
+                //dotDialog.show();
+                main_progressBar.setVisibility(View.VISIBLE);
+                main_progressBar.animation_start(FZProgressBar.Mode.INDETERMINATE);
+
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
                 final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "GetFileListApi", new IAsyncWorkCompletedCallback() {
@@ -343,15 +367,19 @@ public class PersonalFragment extends MainFragment {
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
                         }
-                        if (dotDialog.isShowing()) {
+                       /* if (dotDialog.isShowing()) {
                             dotDialog.dismiss();
-                        }
+                        }*/
+                        //main_progressBar.animation_stop(FZProgressBar.Mode.INDETERMINATE);
+                        main_progressBar.animation_stop();
+                        main_progressBar.setVisibility(View.GONE);
                     }
                 });
             } else {
                 ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
             }
         }
+
     }
 
     private void showFolder(ContentData data) {
@@ -470,6 +498,7 @@ public class PersonalFragment extends MainFragment {
     private void setAdapter(int type) {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
+        if (mediaList != null && mediaList.size() > 0) {
         for (MediaData data : mediaList) {
             if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
                 newmediaList.add(data);
@@ -502,8 +531,19 @@ public class PersonalFragment extends MainFragment {
         }
         recyclerView.removeAllViews();
         recyclerView.removeAllViewsInLayout();
-        mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
+        if (seeallfileFlag) {//show only 12 file
+            ArrayList<MediaData> seemediaList = new ArrayList<>();
+            for (int i = 0; i < 12; i++) {
+                if (i < newmediaList.size()) {
+                    seemediaList.add(newmediaList.get(i));
+                }
+            }
+            mAdapter = new PersonalAdapter(getContext(), seemediaList, type);//type for image video audio doc
+        } else {
+            mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
+        }
         recyclerView.setAdapter(mAdapter);
+    }
     }
 
     //get folder data
