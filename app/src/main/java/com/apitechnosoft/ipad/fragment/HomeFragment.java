@@ -152,7 +152,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             String UserId = prefs.getString("UserId", "");
             if (ASTUIUtil.isOnline(getContext())) {
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-                dotDialog.show();
+                // dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
                 final String url = Contants.BASE_URL + Contants.RecentFileApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "RecentFile Api", new IAsyncWorkCompletedCallback() {

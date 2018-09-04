@@ -31,9 +31,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.fragment.AboutFragment;
 import com.apitechnosoft.ipad.fragment.ContactUsFragment;
 import com.apitechnosoft.ipad.fragment.EducationFragment;
@@ -43,15 +47,20 @@ import com.apitechnosoft.ipad.fragment.MainFragment;
 import com.apitechnosoft.ipad.fragment.MyProfileFragment;
 import com.apitechnosoft.ipad.fragment.PressFragment;
 import com.apitechnosoft.ipad.fragment.PricingFragment;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.runtimepermission.PermissionResultCallback;
 import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import static com.apitechnosoft.ipad.ApplicationHelper.application;
 import static com.apitechnosoft.ipad.utils.ASTObjectUtil.isNonEmptyStr;
+import static com.apitechnosoft.ipad.utils.ASTUIUtil.showToast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback {
 
@@ -60,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PermissionUtils permissionUtils;
     private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1;
     private int REQUEST_CODE_GPS_PERMISSIONS = 2;
+    String UserId, FirstName, LastName;
+    TextView loginUsrName, loginUserEmailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +79,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         application().setActivity(this);
         navigationView = this.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerLayout = navigationView.getHeaderView(0);
+        loginUsrName = headerLayout.findViewById(R.id.loginUsrName);
+        loginUserEmailId = headerLayout.findViewById(R.id.loginUserEmailId);
         loadPage();
         showNavigationMenuItem();
         runTimePermission();
+        getUserInfo();
     }
 
     @Override
@@ -592,4 +607,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.dispatchTouchEvent(event);
     }
+
+
+    private void getUserInfo() {
+
+        SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+            FirstName = prefs.getString("FirstName", "");
+            LastName = prefs.getString("LastName", "");
+            loginUsrName.setText(FirstName + " " + LastName);
+            loginUserEmailId.setText(UserId);
+        }
+
+        if (ASTUIUtil.isOnline(this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(MainActivity.this);
+            // dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(this);
+            final String url = Contants.BASE_URL + Contants.UserInfoService + "email=" + UserId;
+            serviceCaller.CallCommanServiceMethod(url, "getUserInfo", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.getUser() != null) {
+                                SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("FirstName", data.getUser().getfName());
+                                editor.putString("LastName", data.getUser().getlName());
+                                editor.commit();
+                            }
+                        }
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+
+    }
+
 }

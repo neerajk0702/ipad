@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,7 +41,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class ShareMultipelFileActivity extends AppCompatActivity implements View.OnClickListener {
-    String UserId;
+    String UserId, FirstName, LastName;
     private Toolbar toolbar;
     EditText edt_email, edt_comment;
     String emailStr, commentStr;
@@ -59,6 +62,8 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
+            FirstName = prefs.getString("FirstName", "");
+            LastName = prefs.getString("LastName", "");
         }
         Typeface materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(this, "fonts/materialdesignicons-webfont.otf");
         TextView back = toolbar.findViewById(R.id.back);
@@ -132,7 +137,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                             filepath = filepath.substring(0, filepath.length() - SEPARATOR.length());
                             folderlocation = folderlocation.substring(0, folderlocation.length() - SEPARATOR.length());
 
-                            shareFile(filename, fileSno, filepath, folderlocation);
+                            shareFile(fileSno);
                         } else {
                             ASTUIUtil.showToast("Please Select file!");
                         }
@@ -164,12 +169,12 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         Toast.makeText(ShareMultipelFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void shareFile(String filename, String fileSno, String filepath, String folderlocation) {
+    private void shareFile(String fileSno) {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + filename + "&" + "itemSno=" + fileSno + "&" + "path=" + filepath + "&" + "folderlocation=" + folderlocation;
+            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "email=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + "" + "&" + "itemsno=" + fileSno + "&" + "message=" + "";
             serviceCaller.CallCommanServiceMethod(url, "shareAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -328,5 +333,21 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         filerecycler_view.setAdapter(mAdapter);
     }
 
-
+    //for hid keyboard when tab outside edittext box
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
 }

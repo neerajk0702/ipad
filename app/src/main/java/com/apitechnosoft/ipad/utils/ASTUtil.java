@@ -24,7 +24,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -320,5 +322,14 @@ public class ASTUtil {
                 .start(FNReqResCode.ATTACHMENT_REQUEST); // start image picker activity with request code
 
     }
-
+    public static String formatDate(String dateInMillis) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm aa");
+        String dateString = "";
+        if (!dateInMillis.contains("/") && !dateInMillis.equals("")) {
+            dateString = formatter.format(new Date(Long.parseLong(dateInMillis)));
+        } else {
+            dateString = dateInMillis;
+        }
+        return dateString;
+    }
 }

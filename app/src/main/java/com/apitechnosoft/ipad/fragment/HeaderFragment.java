@@ -59,6 +59,8 @@ public class HeaderFragment extends MainFragment {
     @Override
     protected void dataToView() {
         this.title.setText(headerTxt);
+
+
     }
 
     @Override

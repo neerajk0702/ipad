@@ -29,6 +29,16 @@ public class Contants {
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
     public static String ShareDataapiNew = "ShareDataapiNew/shareDatanew?";
     public static String MoveSaveFolderDataLocationApi = "MoveSaveFolderDataLocationApi/moveSaveFolderataLocation?";
+    public static String ShareDataMultiFileApi = "ShareDataMultiFileApi/sharemultiData?";
+    public static String GetEventDetails = "GetEventDetails/getfilelist";// username   id (event date)
+    public static String SaveEventApi = "SaveEventApi/saveevent?";
+    public static String SaveBdaysApi = "SaveBdaysApi/savebday?";
+    public static String UserInfoService = "UserInfoService/getuserInfoService?";
+
+
+
+
+
 
 
 }

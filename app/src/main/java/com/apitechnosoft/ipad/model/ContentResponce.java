@@ -28,4 +28,14 @@ public class ContentResponce {
     public void setError_msg(String error_msg) {
         this.error_msg = error_msg;
     }
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

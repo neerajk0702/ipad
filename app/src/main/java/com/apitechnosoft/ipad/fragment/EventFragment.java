@@ -26,6 +26,7 @@ import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -47,11 +48,14 @@ public class EventFragment extends MainFragment {
     TimePickerDialog.OnTimeSetListener time;
     TimePickerDialog.OnTimeSetListener totime;
     DatePickerDialog.OnDateSetListener todate;
-    EditText name,description;
+    EditText name, description;
     Switch reminder;
     TextView email;
-    String nameStr,desStr;
+    String nameStr, desStr;
     String UserId;
+    String reminderStr = "off";
+    String fromcaladerDateStr, fromtimeStr, totimeStr, tocaladerDateStr;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_event;
@@ -88,7 +92,7 @@ public class EventFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = "yyyy-mm-dd"; //In which you need put here
         final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
@@ -103,7 +107,7 @@ public class EventFragment extends MainFragment {
                 fromcaladerDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
-        final SimpleDateFormat sdfTime = new SimpleDateFormat("HH.mm");
+        final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm aa");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -138,6 +142,7 @@ public class EventFragment extends MainFragment {
             UserId = prefs.getString("UserId", "");
             email.setText(UserId);
         }
+
     }
 
     @Override
@@ -167,17 +172,21 @@ public class EventFragment extends MainFragment {
                 break;
             case R.id.submit:
                 if (isValidate()) {
-                    //saveEvent();
+                    saveEvent();
                 }
                 break;
         }
     }
+
+
     private void saveEvent() {
+        long submitTime = System.currentTimeMillis();
+        String currentDate = ASTUtil.formatDate(String.valueOf(submitTime));
         if (ASTUIUtil.isOnline(getContext())) {
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.Login + "username=" + UserId + "&" + "pwd=" + "";
+            final String url = Contants.BASE_URL + Contants.SaveEventApi + "username=" + UserId + "&" + "fromdate=" + fromcaladerDateStr + "&" + "todate=" + tocaladerDateStr + "&" + "mysqldate=" + currentDate + "&" + "eventname=" + nameStr + "&" + "reminder=" + reminderStr + "&" + "eventdescription=" + desStr + "&" + "fromdatetime=" + fromtimeStr + "&" + "todatetime=" + totimeStr;
             serviceCaller.CallCommanServiceMethod(url, "saveEvent", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -185,12 +194,12 @@ public class EventFragment extends MainFragment {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-
+                                Toast.makeText(getContext(), "Event saved Successfully", Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Event not saved Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -211,11 +220,32 @@ public class EventFragment extends MainFragment {
         String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
         nameStr = name.getText().toString();
         desStr = description.getText().toString();
+        fromcaladerDateStr = fromcaladerDate.getText().toString();
+        fromtimeStr = fromtimeView.getText().toString();
+        totimeStr = totimeView.getText().toString();
+        tocaladerDateStr = tocaladerDate.getText().toString();
+        if (reminder.isChecked()) {
+            reminderStr = "on";
+        } else {
+            reminderStr = "off";
+        }
         if (nameStr.length() == 0) {
             showToast("Please enter event name");
             return false;
         } else if (desStr.length() == 0) {
             showToast("Please enter description");
+            return false;
+        } else if (fromcaladerDateStr.length() == 0) {
+            showToast("Please select from date");
+            return false;
+        } else if (fromtimeStr.length() == 0) {
+            showToast("Please  select from time");
+            return false;
+        } else if (tocaladerDateStr.length() == 0) {
+            showToast("Please select to date");
+            return false;
+        } else if (totimeStr.length() == 0) {
+            showToast("Please select to time");
             return false;
         }
         return true;

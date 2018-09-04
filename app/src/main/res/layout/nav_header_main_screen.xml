@@ -35,7 +35,7 @@
             android:paddingBottom="@dimen/_5dp"
             android:paddingTop="@dimen/_5dp"
             android:gravity="center_vertical"
-            android:text="@string/app_name"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/_17dp" />
 

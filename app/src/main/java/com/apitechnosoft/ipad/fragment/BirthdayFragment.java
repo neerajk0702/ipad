@@ -29,6 +29,7 @@ import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -52,8 +53,9 @@ public class BirthdayFragment extends MainFragment {
     EditText name, description;
     Switch reminder;
     TextView email;
-    String nameStr, desStr;
+    String nameStr, desStr, dateStr, timeStr;
     String UserId;
+    String reminderStr = "off";
 
     @Override
     protected int fragmentLayout() {
@@ -88,7 +90,7 @@ public class BirthdayFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = "yyyy-mm-dd"; //In which you need put here
         final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
@@ -103,7 +105,7 @@ public class BirthdayFragment extends MainFragment {
                 caladerDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
-        final SimpleDateFormat sdfTime = new SimpleDateFormat("HH.mm");
+        final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm aa");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -135,18 +137,20 @@ public class BirthdayFragment extends MainFragment {
                 break;
             case R.id.submit:
                 if (isValidate()) {
-                    // saveBdEvent();
+                    saveBdEvent();
                 }
                 break;
         }
     }
 
     private void saveBdEvent() {
+        long submitTime = System.currentTimeMillis();
+        String currentDate = ASTUtil.formatDate(String.valueOf(submitTime));
         if (ASTUIUtil.isOnline(getContext())) {
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.Login + "username=" + UserId + "&" + "pwd=" + "";
+            final String url = Contants.BASE_URL + Contants.SaveBdaysApi + "username=" + UserId + "&" + "fromdate=" + dateStr + "&" + "todate=" + timeStr + "&" + "mysqldate=" + currentDate + "&" + "eventname=" + nameStr + "&" + "reminder=" + reminderStr + "&" + "eventdescription=" + desStr;
             serviceCaller.CallCommanServiceMethod(url, "saveBdEvent", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -154,12 +158,12 @@ public class BirthdayFragment extends MainFragment {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-
+                                Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Event not saved Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -180,11 +184,24 @@ public class BirthdayFragment extends MainFragment {
         String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
         nameStr = name.getText().toString();
         desStr = description.getText().toString();
+        dateStr = caladerDate.getText().toString();
+        timeStr = timeView.getText().toString();
+        if (reminder.isChecked()) {
+            reminderStr = "on";
+        } else {
+            reminderStr = "off";
+        }
         if (nameStr.length() == 0) {
             showToast("Please enter event name");
             return false;
         } else if (desStr.length() == 0) {
             showToast("Please enter description");
+            return false;
+        } else if (dateStr.length() == 0) {
+            showToast("Please Selete date");
+            return false;
+        } else if (timeStr.length() == 0) {
+            showToast("Please Selete time");
             return false;
         }
         return true;
