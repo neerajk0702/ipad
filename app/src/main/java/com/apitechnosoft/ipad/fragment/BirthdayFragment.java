@@ -48,14 +48,14 @@ public class BirthdayFragment extends MainFragment {
     TextView caladerDate, timeView;
     Button submit;
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
-    TimePickerDialog.OnTimeSetListener time;
     EditText name, description;
     Switch reminder;
     TextView email;
     String nameStr, desStr, dateStr, timeStr;
     String UserId;
     String reminderStr = "off";
+    DatePickerDialog pickerDialog;
+    TimePickerDialog timePickerDialog;
 
     @Override
     protected int fragmentLayout() {
@@ -90,10 +90,10 @@ public class BirthdayFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        String myFormat = "yyyy-mm-dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -105,15 +105,22 @@ public class BirthdayFragment extends MainFragment {
                 caladerDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
+        pickerDialog = new DatePickerDialog(getContext(), date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+
         final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm aa");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        time = new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 timeView.setText(sdfTime.format(myCalendar.getTime()));
             }
         };
+        timePickerDialog = new TimePickerDialog(getContext(), time, myCalendar
+                .get(Calendar.HOUR_OF_DAY), myCalendar
+                .get(Calendar.MINUTE), true);
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
@@ -126,14 +133,10 @@ public class BirthdayFragment extends MainFragment {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.timeView:
-                new TimePickerDialog(getContext(), time, myCalendar
-                        .get(Calendar.HOUR_OF_DAY), myCalendar
-                        .get(Calendar.MINUTE), true).show();
+                timePickerDialog.show();
                 break;
             case R.id.caladerDate:
-                new DatePickerDialog(getContext(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                pickerDialog.show();
                 break;
             case R.id.submit:
                 if (isValidate()) {

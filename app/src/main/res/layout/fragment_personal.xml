@@ -209,14 +209,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/folderrecycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5dp"
-                    android:layout_marginTop="@dimen/_10dp"
-                    android:background="@color/white" />
-
                 <LinearLayout
                     android:id="@+id/folderLayout"
                     android:layout_width="match_parent"
@@ -260,6 +252,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_5dp"
                     android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/white" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/folderrecycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:layout_marginTop="@dimen/_10dp"
                     android:background="@color/white" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

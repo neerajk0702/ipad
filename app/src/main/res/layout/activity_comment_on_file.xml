@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.ShareSingleFileActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.NoActionBar.AppBarOverlay"
+                android:visibility="visible">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/orange"
+                    app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_14dp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Comment On File"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_16dp" />
+                    </LinearLayout>
+                </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/app_bar"
+                android:layout_margin="@dimen/_10dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200dp"
+                    android:background="@color/white"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout android:id="@+id/imgLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.apitechnosoft.ipad.component.ASTImageView
+                            android:id="@+id/img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <ProgressBar
+                            android:id="@+id/loadingDialog"
+                            android:layout_width="@dimen/_30dp"
+                            android:layout_height="@dimen/_30dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone" />
+
+                    </RelativeLayout>
+
+                    <WebView
+                        android:id="@+id/web"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:id="@+id/videoViewLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7">
+
+                            <com.apitechnosoft.ipad.utils.FullScreenVideoView
+                                android:id="@+id/videoView"
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center" />
+
+                            <ProgressBar
+                                android:id="@+id/bufferingDialog"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true" />
+                        </RelativeLayout>
+
+                        <FrameLayout
+                            android:id="@+id/videoViewWrapper"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.3">
+
+
+                        </FrameLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150dp"
+                    android:background="@color/white"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/emailrecycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <EditText
+                    android:id="@+id/edt_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:background="#00000000"
+                    android:clickable="true"
+                    android:gravity="left|center"
+                    android:hint="Comment Box Maximum 36 word.."
+                    android:singleLine="true"
+                    android:textColorHint="#919191"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="#919191" />
+
+                <Button
+                    android:id="@+id/btnLogIn"
+                    style="@style/DefaultButtonText"
+                    android:layout_width="@dimen/_220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_25dp"
+                    android:background="@drawable/button_login"
+                    android:gravity="center"
+                    android:text="Submit" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

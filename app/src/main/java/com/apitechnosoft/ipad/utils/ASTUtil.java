@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -331,5 +332,17 @@ public class ASTUtil {
             dateString = dateInMillis;
         }
         return dateString;
+    }
+
+    public static boolean isDateValid(String date) {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        try {
+            DateFormat df = new SimpleDateFormat(myFormat);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 }

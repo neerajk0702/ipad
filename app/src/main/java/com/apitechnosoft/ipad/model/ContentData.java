@@ -86,5 +86,55 @@ public class ContentData {
     public void setDocumentlist(Documentlist[] documentlist) {
         this.documentlist = documentlist;
     }
+
+
+    private Commentdata[] commentdata;
+
+    private Emaildata[] emaildata;
+
+    public Commentdata[] getCommentdata ()
+    {
+        return commentdata;
+    }
+
+    public void setCommentdata (Commentdata[] commentdata)
+    {
+        this.commentdata = commentdata;
+    }
+
+    public Emaildata[] getEmaildata ()
+    {
+        return emaildata;
+    }
+
+    public void setEmaildata (Emaildata[] emaildata)
+    {
+        this.emaildata = emaildata;
+    }
+
+    private EventotdataList[] eventotdataList;
+
+    public EventotdataList[] getEventotdataList ()
+    {
+        return eventotdataList;
+    }
+
+    public void setEventotdataList (EventotdataList[] eventotdataList)
+    {
+        this.eventotdataList = eventotdataList;
+    }
+
+    private Eventdata[] eventdata;
+
+    public Eventdata[] getEventdata ()
+    {
+        return eventdata;
+    }
+
+    public void setEventdata (Eventdata[] eventdata)
+    {
+        this.eventdata = eventdata;
+    }
+
 }
 

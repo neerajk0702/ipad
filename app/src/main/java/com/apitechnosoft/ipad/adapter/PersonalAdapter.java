@@ -268,9 +268,21 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         ImageView img = view.findViewById(R.id.img);
+        final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
-        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(img);
+        loadingDialog.setVisibility(View.VISIBLE);
+        Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img, new Callback() {
+            @Override
+            public void onSuccess() {
+                loadingDialog.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError() {
+                loadingDialog.setVisibility(View.GONE);
+            }
+        });
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
         deleteicon.setTypeface(materialdesignicons_font);

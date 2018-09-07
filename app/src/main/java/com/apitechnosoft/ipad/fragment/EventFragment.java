@@ -44,10 +44,6 @@ public class EventFragment extends MainFragment {
     TextView fromcaladerDate, fromtimeView, totimeView, tocaladerDate;
     Button submit;
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
-    TimePickerDialog.OnTimeSetListener time;
-    TimePickerDialog.OnTimeSetListener totime;
-    DatePickerDialog.OnDateSetListener todate;
     EditText name, description;
     Switch reminder;
     TextView email;
@@ -55,6 +51,10 @@ public class EventFragment extends MainFragment {
     String UserId;
     String reminderStr = "off";
     String fromcaladerDateStr, fromtimeStr, totimeStr, tocaladerDateStr;
+    DatePickerDialog todatepicker;
+    TimePickerDialog totimmepicker;
+    DatePickerDialog fromdatepicker;
+    TimePickerDialog fromtimepicker;
 
     @Override
     protected int fragmentLayout() {
@@ -92,10 +92,10 @@ public class EventFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
-        String myFormat = "yyyy-mm-dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -107,18 +107,23 @@ public class EventFragment extends MainFragment {
                 fromcaladerDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
+        fromdatepicker = new DatePickerDialog(getContext(), date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+
         final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm aa");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        time = new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 fromtimeView.setText(sdfTime.format(myCalendar.getTime()));
             }
         };
-
-
-        todate = new DatePickerDialog.OnDateSetListener() {
+        fromtimepicker = new TimePickerDialog(getContext(), time, myCalendar
+                .get(Calendar.HOUR_OF_DAY), myCalendar
+                .get(Calendar.MINUTE), true);
+        DatePickerDialog.OnDateSetListener todate = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -130,13 +135,19 @@ public class EventFragment extends MainFragment {
                 tocaladerDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
-        totime = new TimePickerDialog.OnTimeSetListener() {
+        todatepicker = new DatePickerDialog(getContext(), todate, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        TimePickerDialog.OnTimeSetListener totime = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 totimeView.setText(sdfTime.format(myCalendar.getTime()));
             }
         };
+        totimmepicker = new TimePickerDialog(getContext(), totime, myCalendar
+                .get(Calendar.HOUR_OF_DAY), myCalendar
+                .get(Calendar.MINUTE), true);
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
@@ -150,25 +161,16 @@ public class EventFragment extends MainFragment {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.fromtimeView:
-                new TimePickerDialog(getContext(), time, myCalendar
-                        .get(Calendar.HOUR_OF_DAY), myCalendar
-                        .get(Calendar.MINUTE), true).show();
+                fromtimepicker.show();
                 break;
             case R.id.fromcaladerDate:
-                new DatePickerDialog(getContext(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                fromdatepicker.show();
                 break;
-
             case R.id.totimeView:
-                new TimePickerDialog(getContext(), totime, myCalendar
-                        .get(Calendar.HOUR_OF_DAY), myCalendar
-                        .get(Calendar.MINUTE), true).show();
+                totimmepicker.show();
                 break;
             case R.id.tocaladerDate:
-                new DatePickerDialog(getContext(), todate, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                todatepicker.show();
                 break;
             case R.id.submit:
                 if (isValidate()) {

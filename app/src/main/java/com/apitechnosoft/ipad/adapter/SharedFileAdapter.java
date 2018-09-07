@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -44,9 +46,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.MyViewHolder> {
+public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.MyViewHolder> {
 
-    private ArrayList<MediaData> mediaList;
+    public ArrayList<MediaData> mediaList;
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
@@ -54,18 +56,20 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
+        CheckBox selectCheck;
         ProgressBar loadingDialog;
 
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
+            selectCheck = view.findViewById(R.id.selectCheck);
             loadingDialog = view.findViewById(R.id.loadingDialog);
         }
     }
 
 
-    public RecivedFileAdapter(Context mContext, ArrayList<MediaData> List, int type) {
+    public SharedFileAdapter(Context mContext, ArrayList<MediaData> List, int type) {
         this.mediaList = List;
         this.mContext = mContext;
         this.type = type;
@@ -82,17 +86,20 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
         holder.recenttext.setText(mediaList.get(position).getFileName());
 
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
+            holder.selectCheck.setVisibility(View.GONE);
         } else {
+            holder.selectCheck.setVisibility(View.VISIBLE);
             if (type == 1) {
-                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("image")) {
+                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
                     if (holder.loadingDialog != null) {
                         holder.loadingDialog.setVisibility(View.VISIBLE);
                     }
-                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -110,12 +117,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     });
                 }
             } else if (type == 2) {
-                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {
+                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
                     holder.recentImg.setImageResource(R.drawable.video);
                     //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
                 }
             } else if (type == 3) {
-                if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("audio")) {
+                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
                     holder.recentImg.setImageResource(R.drawable.audio_icon);
                     //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
 
@@ -135,14 +142,29 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
                     }
+
                 }
             }
-
         }
         holder.recentImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getAllSharedFileComments(position);
+            }
+        });
+        if (mediaList.get(position).isSelected()) {
+            holder.selectCheck.setChecked(true);
+        } else {
+            holder.selectCheck.setChecked(false);
+        }
+        holder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mediaList.get(position).setSelected(true);
+                } else {
+                    mediaList.get(position).setSelected(false);
+                }
             }
         });
     }
@@ -173,7 +195,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
-        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -245,7 +267,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         loadingDialog.setVisibility(View.VISIBLE);
-        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
         Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img, new Callback() {
             @Override
             public void onSuccess() {
@@ -279,6 +301,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 alert.dismiss();
             }
         });
+        //comment=hiiiii &itemsno=111&path=hhhh&filename=432&sharesno=65&username=89neerajsingh@gmail.com&emailid=89neerajsingh@gmail.com
         deleteicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -323,7 +346,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         final MediaController mediaController = new MediaController(mContext);
         final VideoView videoView = view.findViewById(R.id.videoView);
 
-        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
         mediaController.setAnchorView(videoView);
         mediaController.setMediaPlayer(videoView);
         videoView.setMediaController(mediaController);
@@ -438,7 +461,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             recyclerView.setAdapter(recivedEmailAdapter);
         }
 
-        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+        final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
         final MediaController mediaController = new MediaController(mContext);
         final VideoView videoView = view.findViewById(R.id.videoView);
         mediaController.setAnchorView(videoView);
@@ -528,9 +551,78 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
+  /*  public void audioPlayer(String path) {
+        //set up MediaPlayer
+        MediaPlayer mp = new MediaPlayer();
+
+        try {
+            mp.setDataSource(path);
+            mp.prepare();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            mp.prepare();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        mp.start();
+    }*/
+
     @Override
     public int getItemCount() {
         return mediaList.size();
+    }
+
+    private void deletePersonalFile(final int position) {
+        String UserId = "";
+        SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+             UserId = prefs.getString("UserId", "");
+        }
+        if (ASTUIUtil.isOnline(mContext)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(mContext);
+            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File delete Successfully");
+                                mediaList.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
     }
 
     //get all shared comments
@@ -586,44 +678,5 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             alertForShowDoc(position, emailList);
         }
     }
-
-    private void deletePersonalFile(final int position) {
-        String UserId = "";
-        SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
-        if (prefs != null) {
-            UserId = prefs.getString("UserId", "");
-        }
-        if (ASTUIUtil.isOnline(mContext)) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
-            dotDialog.show();
-            ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
-            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
-                @Override
-                public void onDone(String result, boolean isComplete) {
-                    if (isComplete) {
-                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
-                        if (data != null) {
-                            if (data.isStatus()) {
-                                ASTUIUtil.showToast("File delete Successfully");
-                                mediaList.remove(position);
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        ASTUIUtil.showToast(Contants.Error);
-                    }
-                    if (dotDialog.isShowing()) {
-                        dotDialog.dismiss();
-                    }
-                }
-            });
-        } else {
-            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
-        }
-    }
 }
+

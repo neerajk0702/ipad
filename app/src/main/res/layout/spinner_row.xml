@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cust_view"
-    android:minWidth="246dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="left|center_vertical"
-    android:textColor="@color/text_color"
-    android:textSize="@dimen/_12dp"
-    android:paddingTop="@dimen/_10dp"
+    android:minWidth="246dp"
     android:paddingBottom="@dimen/_10dp"
     android:paddingLeft="@dimen/_5dp"
-    android:textIsSelectable="false"/>
+    android:paddingTop="@dimen/_10dp"
+    android:textColor="@color/text_color"
+    android:textIsSelectable="false"
+    android:textSize="@dimen/_12dp" />

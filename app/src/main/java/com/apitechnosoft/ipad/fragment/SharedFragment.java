@@ -23,8 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.adapter.PersonalAdapter;
-import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
+import com.apitechnosoft.ipad.adapter.SharedFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
@@ -474,7 +473,7 @@ public class SharedFragment extends MainFragment {
             }
             recyclerView.removeAllViews();
             recyclerView.removeAllViewsInLayout();
-            PersonalAdapter mAdapter;
+            SharedFileAdapter mAdapter;
             if (seeallfileFlag) {//show only 15 file
                 ArrayList<MediaData> seemediaList = new ArrayList<>();
 
@@ -483,10 +482,10 @@ public class SharedFragment extends MainFragment {
                         seemediaList.add(newmediaList.get(i));
                     }
                 }
-                mAdapter = new PersonalAdapter(getContext(), seemediaList, type);//type for image video audio doc
+                mAdapter = new SharedFileAdapter(getContext(), seemediaList, type);//type for image video audio doc
 
             } else {
-                mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
+                mAdapter = new SharedFileAdapter(getContext(), newmediaList, type);//type for image video audio doc
             }
             recyclerView.setAdapter(mAdapter);
         }

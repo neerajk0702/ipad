@@ -30,12 +30,13 @@ public class Contants {
     public static String ShareDataapiNew = "ShareDataapiNew/shareDatanew?";
     public static String MoveSaveFolderDataLocationApi = "MoveSaveFolderDataLocationApi/moveSaveFolderataLocation?";
     public static String ShareDataMultiFileApi = "ShareDataMultiFileApi/sharemultiData?";
-    public static String GetEventDetails = "GetEventDetails/getfilelist";// username   id (event date)
+    public static String GetEventDetails = "GetEventDetails/getfilelist?";
+    public static String GetAllEventList = "GettodoEventApi/gettodoEvent?";
     public static String SaveEventApi = "SaveEventApi/saveevent?";
     public static String SaveBdaysApi = "SaveBdaysApi/savebday?";
     public static String UserInfoService = "UserInfoService/getuserInfoService?";
-
-
+    public static String GetShareFileCommentandEmail = "GetShareFileCommentandEmail/getcommentemail?";
+    public static String SaveCommentApi = "SaveCommentApi/savecomment?";
 
 
 
