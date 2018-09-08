@@ -15,7 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CalendarView;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,9 @@ import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.adapter.EventDetailAdapter;
 import com.apitechnosoft.ipad.adapter.OrganizerPagerAdapter;
 import com.apitechnosoft.ipad.adapter.ShareRecivedCommentAdapter;
+import com.apitechnosoft.ipad.calendarview.CalendarAdapter;
+import com.apitechnosoft.ipad.calendarview.CalendarCollection;
+import com.apitechnosoft.ipad.calendarview.CalenderActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
@@ -43,13 +49,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.function.Function;
 
 public class ShowAllEventActivity extends AppCompatActivity {
     private Toolbar toolbar;
     String UserId;
-    CalendarView calendarView;
     RecyclerView eventrecycler_view;
+
+    public GregorianCalendar cal_month, cal_month_copy;
+    private CalendarAdapter cal_adapter;
+    private TextView tv_month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,21 +91,101 @@ public class ShowAllEventActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShowAllEventActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventrecycler_view.setLayoutManager(linearLayoutManager);
-        calendarView = (CalendarView) findViewById(R.id.simpleCalendarView); // get the reference of CalendarView
-        calendarView.setDate(1463918226920L);
-        getAllEvents();
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+//--------------calendar data-------------------
+        CalendarCollection.date_collection_arr = new ArrayList<CalendarCollection>();
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("1910-07-02", "ipad"));
+
+        cal_month = (GregorianCalendar) GregorianCalendar.getInstance();
+        cal_month_copy = (GregorianCalendar) cal_month.clone();
+        cal_adapter = new CalendarAdapter(this, cal_month, CalendarCollection.date_collection_arr);
+
+
+        tv_month = findViewById(R.id.tv_month);
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+
+        ImageButton previous = findViewById(R.id.ib_prev);
+
+        previous.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month,
-                                            int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), "" + dayOfMonth, Toast.LENGTH_LONG).show();
-                String eventDate = year + "-" + month + 1 + "-" + dayOfMonth;
-                GetEventDetails(eventDate);
+            public void onClick(View v) {
+                setPreviousMonth();
+                refreshCalendar();
             }
         });
+
+        ImageButton next = findViewById(R.id.Ib_next);
+        next.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setNextMonth();
+                refreshCalendar();
+
+            }
+        });
+
+        GridView gridview = findViewById(R.id.gv_calendar);
+        gridview.setAdapter(cal_adapter);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+
+                ((CalendarAdapter) parent.getAdapter()).setSelected(v, position);
+                String selectedGridDate = CalendarAdapter.day_string
+                        .get(position);
+
+                String[] separatedTime = selectedGridDate.split("-");
+                String gridvalueString = separatedTime[2].replaceFirst("^0*", "");
+                int gridvalue = Integer.parseInt(gridvalueString);
+                GetEventDetails(selectedGridDate);//get event detail
+                if ((gridvalue > 10) && (position < 8)) {
+                    setPreviousMonth();
+                    refreshCalendar();
+                } else if ((gridvalue < 7) && (position > 28)) {
+                    setNextMonth();
+                    refreshCalendar();
+                }
+                ((CalendarAdapter) parent.getAdapter()).setSelected(v, position);
+
+                ((CalendarAdapter) parent.getAdapter()).getPositionList(selectedGridDate, ShowAllEventActivity.this);
+            }
+
+        });
+
+        getAllEvents();
     }
 
+    protected void setNextMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month
+                .getActualMaximum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1),
+                    cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH,
+                    cal_month.get(GregorianCalendar.MONTH) + 1);
+        }
+
+    }
+
+    protected void setPreviousMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month
+                .getActualMinimum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1),
+                    cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH,
+                    cal_month.get(GregorianCalendar.MONTH) - 1);
+        }
+
+    }
+
+    public void refreshCalendar() {
+        cal_adapter.refreshDays();
+        cal_adapter.notifyDataSetChanged();
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+    }
 
     //get all events
     private void getAllEvents() {
@@ -117,12 +207,12 @@ public class ShowAllEventActivity extends AppCompatActivity {
                                     if (eventotdataList.getFromdate() != null && !eventotdataList.getFromdate().equals("")) {
                                         if (ASTUtil.isDateValid(eventotdataList.getFromdate())) {
                                             if (convertDateIntoLong(eventotdataList.getFromdate()) != 0) {
-                                                calendarView.setDate(convertDateIntoLong(eventotdataList.getFromdate()));
-
+                                                CalendarCollection.date_collection_arr.add(new CalendarCollection(eventotdataList.getFromdate(), eventotdataList.getEventname()));
                                             }
                                         }
                                     }
                                 }
+                                refreshCalendar();
                             } else {
                                 Toast.makeText(ShowAllEventActivity.this, "Event List Data found!", Toast.LENGTH_LONG).show();
                             }

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.adapter.HomePagerAdapter;
 import com.apitechnosoft.ipad.adapter.OrganizerPagerAdapter;
+import com.apitechnosoft.ipad.calendarview.CalenderActivity;
+import com.apitechnosoft.ipad.calendarview.ListViewActivity;
 import com.apitechnosoft.ipad.utils.FontManager;
 
 public class OrganizerActivity extends AppCompatActivity {

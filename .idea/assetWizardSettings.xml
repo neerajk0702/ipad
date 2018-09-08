@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_logout" />
-                            <entry key="sourceFile" value="C:\Users\Neeraj\Downloads\Svg Icon\logout.svg" />
+                            <entry key="outputName" value="ic_right_arrow" />
+                            <entry key="sourceFile" value="C:\Users\Neeraj\Downloads\right-chevron.svg" />
                           </map>
                         </option>
                       </PersistentState>

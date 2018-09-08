@@ -201,6 +201,7 @@ public class PersonalFragment extends MainFragment {
                 break;
             case R.id.videolayout:
                 setAdapter(2);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -213,6 +214,7 @@ public class PersonalFragment extends MainFragment {
                 break;
             case R.id.audiolayout:
                 setAdapter(3);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -225,6 +227,7 @@ public class PersonalFragment extends MainFragment {
                 break;
             case R.id.doclayout:
                 setAdapter(4);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -499,51 +502,51 @@ public class PersonalFragment extends MainFragment {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
         if (mediaList != null && mediaList.size() > 0) {
-        for (MediaData data : mediaList) {
-            if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
-                newmediaList.add(data);
+            for (MediaData data : mediaList) {
+                if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
+                    newmediaList.add(data);
+                }
             }
+            if (type == 1) {
+                for (MediaData data : mediaList) {
+                    if (data.getType() != null && data.getType().contains("image")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 2) {
+                for (MediaData data : mediaList) {
+                    if (data.getType() != null && data.getType().contains("video")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 3) {
+                for (MediaData data : mediaList) {
+                    if (data.getType() != null && data.getType().contains("audio")) {
+                        newmediaList.add(data);
+                    }
+                }
+            } else if (type == 4) {
+                for (MediaData data : mediaList) {
+                    if (data.getType() != null && data.getType().contains("application")) {
+                        newmediaList.add(data);
+                    }
+                }
+            }
+            recyclerView.removeAllViews();
+            recyclerView.removeAllViewsInLayout();
+            if (seeallfileFlag) {//show only 12 file
+                ArrayList<MediaData> seemediaList = new ArrayList<>();
+                for (int i = 0; i < 12; i++) {
+                    if (i < newmediaList.size()) {
+                        seemediaList.add(newmediaList.get(i));
+                    }
+                }
+                mAdapter = new PersonalAdapter(getContext(), seemediaList, type);//type for image video audio doc
+            } else {
+                mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
+            }
+            recyclerView.setAdapter(mAdapter);
         }
-        if (type == 1) {
-            for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("image")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 2) {
-            for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("video")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 3) {
-            for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("audio")) {
-                    newmediaList.add(data);
-                }
-            }
-        } else if (type == 4) {
-            for (MediaData data : mediaList) {
-                if (data.getType() != null && data.getType().contains("application")) {
-                    newmediaList.add(data);
-                }
-            }
-        }
-        recyclerView.removeAllViews();
-        recyclerView.removeAllViewsInLayout();
-        if (seeallfileFlag) {//show only 12 file
-            ArrayList<MediaData> seemediaList = new ArrayList<>();
-            for (int i = 0; i < 12; i++) {
-                if (i < newmediaList.size()) {
-                    seemediaList.add(newmediaList.get(i));
-                }
-            }
-            mAdapter = new PersonalAdapter(getContext(), seemediaList, type);//type for image video audio doc
-        } else {
-            mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
-        }
-        recyclerView.setAdapter(mAdapter);
-    }
     }
 
     //get folder data

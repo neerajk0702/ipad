@@ -107,4 +107,13 @@ EACH TIME YOU PURCHASE A PRODUCT OR SERVICE AT IPADTODAY.COM, YOU ARE REPRESENTI
 
     <string name="otpverify">Please check your Spam folder! If you use Gmail or another free webmail service, then the verification code will most likely be in your Spam/Junk folder.</string>
 
+
+    //Day's short keyword
+    <string name="monday">M</string>
+    <string name="tuesday">T</string>
+    <string name="wednesday">W</string>
+    <string name="thursday">T</string>
+    <string name="friday">F</string>
+    <string name="saturday">S</string>
+    <string name="sunday">S</string>
 </resources>

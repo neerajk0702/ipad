@@ -99,6 +99,8 @@
         <activity android:name=".activity.OrganizerActivity" />
         <activity android:name=".activity.CommentOnFileActivity" />
         <activity android:name=".activity.ShowAllEventActivity"></activity>
+        <activity android:name=".calendarview.CalenderActivity"></activity>
+        <activity android:name=".calendarview.ListViewActivity"></activity>
     </application>
 
 </manifest>

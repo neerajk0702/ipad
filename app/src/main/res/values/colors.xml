@@ -279,4 +279,8 @@
 
     </array>
 
+
+    <color name="grey">#a0a0a0</color>
+    <color name="calendar_number">#424A56</color>
+    <color name="pink">#FF4081</color>
 </resources>

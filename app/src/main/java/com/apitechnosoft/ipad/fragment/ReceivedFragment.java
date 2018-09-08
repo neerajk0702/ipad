@@ -168,6 +168,7 @@ public class ReceivedFragment extends MainFragment {
                 break;
             case R.id.videolayout:
                 setAdapter(2);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -180,6 +181,7 @@ public class ReceivedFragment extends MainFragment {
                 break;
             case R.id.audiolayout:
                 setAdapter(3);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -192,6 +194,7 @@ public class ReceivedFragment extends MainFragment {
                 break;
             case R.id.doclayout:
                 setAdapter(4);
+                seeallfile.setVisibility(View.GONE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
