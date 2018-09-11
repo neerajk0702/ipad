@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         ImageView recentImg;
         CheckBox selectCheck;
         ProgressBar loadingDialog;
-        TextView deleteicon;
+        TextView deleteiconfolder;
 
 
         public MyViewHolder(View view) {
@@ -67,9 +68,9 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             recentImg = view.findViewById(R.id.recentImg);
             selectCheck = view.findViewById(R.id.selectCheck);
             loadingDialog = view.findViewById(R.id.loadingDialog);
-            deleteicon = view.findViewById(R.id.deleteicon);
-            deleteicon.setTypeface(materialdesignicons_font);
-            deleteicon.setText(Html.fromHtml("&#xf1c0;"));
+            deleteiconfolder = view.findViewById(R.id.deleteiconfolder);
+            deleteiconfolder.setTypeface(materialdesignicons_font);
+            deleteiconfolder.setText(Html.fromHtml("&#xf1c0;"));
         }
     }
 
@@ -99,11 +100,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
             holder.selectCheck.setVisibility(View.GONE);
-            holder.deleteicon.setVisibility(View.VISIBLE);
+            holder.deleteiconfolder.setVisibility(View.VISIBLE);
 
         } else {
             holder.selectCheck.setVisibility(View.VISIBLE);
-            holder.deleteicon.setVisibility(View.GONE);
+            holder.deleteiconfolder.setVisibility(View.GONE);
             if (type == 1) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
                     if (holder.loadingDialog != null) {
@@ -195,12 +196,13 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             }
         });
 
-        holder.deleteicon.setOnClickListener(new View.OnClickListener() {
+        holder.deleteiconfolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deletePersonalFolder(position);
             }
         });
+
     }
 
     private void alertForShowDoc(final String filePath, String mime, final int position) {
