@@ -56,6 +56,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -617,7 +618,9 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno() + "&" + "p=" + mediaList.get(position).getFilePath();
+            //final String url = Contants.BASE_URL + Contants.DeleteShareFileApi + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno() + "&" + "p=" + mediaList.get(position).getFilePath();
+            final String url = Contants.BASE_URL + Contants.DeleteShareFileApi + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getItemSno();
+
             serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

@@ -538,7 +538,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno()+ "&" + "p=" + mediaList.get(position).getFilePath();
             serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

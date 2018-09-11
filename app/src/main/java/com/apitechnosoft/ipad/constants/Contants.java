@@ -28,8 +28,12 @@ public class Contants {
     public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfileapi?";
     public static String SharedFileApi = "GetShareFileApi/getsharefilelist?";
     public static String GetFolderDataApi = "GetFolderDataApi/getfolderdata?foldersno=";
+
     public static String DeleteFileApi = "DeleteFileApi/deleteFile?";
+    public static String DeleteReceiveFileApi = "DeleteReceiveApi/deleteReceivefile?";
+    public static String DeleteShareFileApi = "DeleteShareApi/deleteShare?";
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
+
     public static String ShareDataapiNew = "ShareDataapiNew/shareDatanew?";
     public static String MoveSaveFolderDataLocationApi = "MoveSaveFolderDataLocationApi/moveSaveFolderataLocation?";
     public static String ShareDataMultiFileApi = "ShareDataMultiFileApi/sharemultiData?";

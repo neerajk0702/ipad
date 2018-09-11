@@ -82,6 +82,8 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
+        <activity android:name=".activity.AndroidVideoViewExample"
+            android:theme="@android:style/Theme.Holo.Dialog" />
         <activity
             android:name=".activity.LoginHomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />

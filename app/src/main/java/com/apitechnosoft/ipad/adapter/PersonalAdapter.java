@@ -58,6 +58,8 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         ImageView recentImg;
         CheckBox selectCheck;
         ProgressBar loadingDialog;
+        TextView deleteicon;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -65,6 +67,9 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             recentImg = view.findViewById(R.id.recentImg);
             selectCheck = view.findViewById(R.id.selectCheck);
             loadingDialog = view.findViewById(R.id.loadingDialog);
+            deleteicon = view.findViewById(R.id.deleteicon);
+            deleteicon.setTypeface(materialdesignicons_font);
+            deleteicon.setText(Html.fromHtml("&#xf1c0;"));
         }
     }
 
@@ -91,12 +96,14 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             UserId = prefs.getString("UserId", "");
         }
         holder.recenttext.setText(mediaList.get(position).getFileName());
-
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
             holder.selectCheck.setVisibility(View.GONE);
+            holder.deleteicon.setVisibility(View.VISIBLE);
+
         } else {
             holder.selectCheck.setVisibility(View.VISIBLE);
+            holder.deleteicon.setVisibility(View.GONE);
             if (type == 1) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("image")) {
                     if (holder.loadingDialog != null) {
@@ -185,6 +192,13 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 } else {
                     mediaList.get(position).setSelected(false);
                 }
+            }
+        });
+
+        holder.deleteicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePersonalFolder(position);
             }
         });
     }
@@ -605,7 +619,10 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno() + "&" + "p=" + mediaList.get(position).getFilePath();
+            ;
+            //final String url = Contants.BASE_URL + Contants.DeleteShareFileApi + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno()
+            // + "&" + "p=" + mediaList.get(position).getFilePath();
             serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -651,6 +668,45 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     ASTUIUtil.showToast("File Downloaded Successfully");
                 }
             }
+        }
+    }
+
+
+    private void deletePersonalFolder(final int position) {
+        if (ASTUIUtil.isOnline(mContext)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(mContext);
+            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            ;
+            //final String url = Contants.BASE_URL + Contants.DeleteShareFileApi + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno()
+            // + "&" + "p=" + mediaList.get(position).getFilePath();
+            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File delete Successfully");
+                                mediaList.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
     }
 }
