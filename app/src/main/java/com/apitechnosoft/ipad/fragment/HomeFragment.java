@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static com.apitechnosoft.ipad.ApplicationHelper.application;
 
@@ -208,6 +209,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             }
         }
         if (mediaList != null && mediaList.size() > 0) {
+            Collections.reverse(mediaList);
             RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), mediaList);
             recent_recycler_view.setAdapter(mAdapter);
         }

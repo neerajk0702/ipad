@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -35,6 +36,7 @@ import com.apitechnosoft.ipad.FNSortOrdering;
 import com.apitechnosoft.ipad.FNSortOrderingUtil;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.exception.FNExceptionUtil;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.listener.PermissionRationaleDialogListener;
@@ -344,5 +346,13 @@ public class ASTUtil {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    public static File getExternalStorageFilePathCreateAppDirectory(Context context) {
+        File directory = new File(Environment.getExternalStorageDirectory(), Contants.APP_DIRECTORY);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        return directory;
     }
 }

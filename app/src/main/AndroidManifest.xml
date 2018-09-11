@@ -68,7 +68,9 @@
             android:name=".activity.LoginActivity"
             android:label="Login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".filepicker.FNFilePickerActivity" />
+        <activity
+            android:name=".filepicker.FNFilePickerActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -92,15 +94,30 @@
         <activity
             android:name=".activity.TermsConditionActivity"
             android:label="Terms Condition" />
-        <activity android:name=".activity.DocOpenActivity" />
+        <activity
+            android:name=".activity.DocOpenActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.VideoPlayerActivity" />
-        <activity android:name=".activity.ShareSingleFileActivity" />
-        <activity android:name=".activity.ShareMultipelFileActivity" />
+        <activity
+            android:name=".activity.ShareSingleFileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ShareMultipelFileActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.OrganizerActivity" />
-        <activity android:name=".activity.CommentOnFileActivity" />
-        <activity android:name=".activity.ShowAllEventActivity"></activity>
-        <activity android:name=".calendarview.CalenderActivity"></activity>
-        <activity android:name=".calendarview.ListViewActivity"></activity>
+        <activity
+            android:name=".activity.CommentOnFileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ShowAllEventActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".calendarview.CalenderActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".calendarview.ListViewActivity"
+            android:screenOrientation="portrait"></activity>
+        <service android:name=".framework.DownloadService"/>
     </application>
 
 </manifest>

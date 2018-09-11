@@ -64,6 +64,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -502,6 +503,7 @@ public class PersonalFragment extends MainFragment {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
         if (mediaList != null && mediaList.size() > 0) {
+            Collections.reverse(mediaList);
             for (MediaData data : mediaList) {
                 if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
                     newmediaList.add(data);
@@ -637,7 +639,7 @@ public class PersonalFragment extends MainFragment {
     }
 
     //for geting next previous click action
-    BroadcastReceiver receiver = new BroadcastReceiver() {
+    BroadcastReceiver   receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equalsIgnoreCase("FolderOpen")) {

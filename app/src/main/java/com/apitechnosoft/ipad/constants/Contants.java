@@ -4,6 +4,9 @@ package com.apitechnosoft.ipad.constants;
  * /** * @author AST Inc.  10/12/2015.
  */
 public class Contants {
+    public static String DEFAULT_APPLICATION_NAME = "iPad";
+    public static final String APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Directory/";
+
     public static String Media_File_BASE_URL = "https://www.ipadtoday.com/";
     public static String BASE_URL = "https://www.ipadtoday.com/resources/";
 
@@ -25,7 +28,7 @@ public class Contants {
     public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfileapi?";
     public static String SharedFileApi = "GetShareFileApi/getsharefilelist?";
     public static String GetFolderDataApi = "GetFolderDataApi/getfolderdata?foldersno=";
-
+    public static String DeleteFileApi = "DeleteFileApi/deleteFile?";
     public static String DeletePersonalSectionFolder = "DeletePersonalSectionFolderApi/deleteePersonalSectionFolder?";
     public static String ShareDataapiNew = "ShareDataapiNew/shareDatanew?";
     public static String MoveSaveFolderDataLocationApi = "MoveSaveFolderDataLocationApi/moveSaveFolderataLocation?";
@@ -37,9 +40,6 @@ public class Contants {
     public static String UserInfoService = "UserInfoService/getuserInfoService?";
     public static String GetShareFileCommentandEmail = "GetShareFileCommentandEmail/getcommentemail?";
     public static String SaveCommentApi = "SaveCommentApi/savecomment?";
-
-
-
 
 
 }

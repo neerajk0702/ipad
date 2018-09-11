@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -28,6 +31,7 @@ import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.DownloadService;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
@@ -185,7 +189,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         });
     }
 
-    private void alertForShowDoc(String filePath, String mime, final int position) {
+    private void alertForShowDoc(final String filePath, String mime, final int position) {
        /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
         playAudioIntent.putExtra("FileUrl", filePath);
         mContext.startActivity(playAudioIntent);*/
@@ -251,12 +255,17 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
     }
 
-    public void alertForShowImage(String filePath, final int position) {
+    public void alertForShowImage(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -317,6 +326,12 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
+
             }
         });
         alert.show();
@@ -428,6 +443,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -536,6 +556,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -607,6 +632,25 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             });
         } else {
             ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
+
+    private class DownloadReceiver extends ResultReceiver {
+        public DownloadReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == DownloadService.UPDATE_PROGRESS) {
+                int progress = resultData.getInt("progress");
+                // dotDialog.setProgress(progress);
+                if (progress == 100) {
+                    // dotDialog.dismiss();
+                    ASTUIUtil.showToast("File Downloaded Successfully");
+                }
+            }
         }
     }
 }

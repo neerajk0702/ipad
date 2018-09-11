@@ -124,7 +124,9 @@ public class UploadNewFileFragment extends MainFragment {
     public void updateOnResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == FNReqResCode.ATTACHMENT_REQUEST && resultCode == Activity.RESULT_OK) {
             ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FNFilePicker.EXTRA_SELECTED_MEDIA);
-            getResult(files);
+            if (files != null && files.size() > 0) {
+                getResult(files);
+            }
 
         }
     }

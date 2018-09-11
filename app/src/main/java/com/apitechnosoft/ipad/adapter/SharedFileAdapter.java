@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -31,6 +34,7 @@ import com.apitechnosoft.ipad.activity.CommentOnFileActivity;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.DownloadService;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentData;
@@ -52,7 +56,6 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -238,6 +241,11 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -301,7 +309,6 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
                 alert.dismiss();
             }
         });
-        //comment=hiiiii &itemsno=111&path=hhhh&filename=432&sharesno=65&username=89neerajsingh@gmail.com&emailid=89neerajsingh@gmail.com
         deleteicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -313,6 +320,11 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -431,6 +443,11 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -546,6 +563,11 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -589,13 +611,13 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         String UserId = "";
         SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
-             UserId = prefs.getString("UserId", "");
+            UserId = prefs.getString("UserId", "");
         }
         if (ASTUIUtil.isOnline(mContext)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno() + "&" + "p=" + mediaList.get(position).getFilePath();
             serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -676,6 +698,23 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             alertForShowAudio(position, emailList);
         } else if (type == 4) {
             alertForShowDoc(position, emailList);
+        }
+    }
+
+    private class DownloadReceiver extends ResultReceiver {
+        public DownloadReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == DownloadService.UPDATE_PROGRESS) {
+                int progress = resultData.getInt("progress");
+                if (progress == 100) {
+                    ASTUIUtil.showToast("File Downloaded Successfully");
+                }
+            }
         }
     }
 }

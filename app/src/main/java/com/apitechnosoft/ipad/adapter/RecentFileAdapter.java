@@ -2,9 +2,13 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -18,13 +22,20 @@ import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.DownloadService;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Resentdata;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
@@ -43,6 +54,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         ImageView recentImg;
         LinearLayout itemLayout;
         ProgressBar loadingDialog;
+
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
@@ -70,7 +82,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-        if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
+        if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png")) || mediaList.get(position).getExtension().contains("PNG") || mediaList.get(position).getExtension().contains("JPG") || mediaList.get(position).getExtension().contains("JPEG")) {
             if (holder.loadingDialog != null) {
                 holder.loadingDialog.setVisibility(View.VISIBLE);
             }
@@ -109,7 +121,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))) {
+                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))|| mediaList.get(position).getExtension().contains("PNG")|| mediaList.get(position).getExtension().contains("JPG")|| mediaList.get(position).getExtension().contains("JPEG")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowImage(filePath, position);
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
@@ -135,7 +147,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.doc);
         }*/
 
-    private void alertForShowDoc(String filePath, String mime, final int position) {
+    private void alertForShowDoc(final String filePath, String mime, final int position) {
        /* Intent playAudioIntent = new Intent(mContext, DocOpenActivity.class);
         playAudioIntent.putExtra("FileUrl", filePath);
         mContext.startActivity(playAudioIntent);*/
@@ -194,18 +206,24 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
     }
 
-    public void alertForShowImage(String filePath, final int position) {
+    public void alertForShowImage(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -259,18 +277,24 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
     }
 
-    public void alertForShowVideo(String filePath, final int position) {
+    public void alertForShowVideo(final String filePath, final int position) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -368,12 +392,18 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
             }
         });
         alert.show();
@@ -475,12 +505,19 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                deletePersonalFile(position);
             }
         });
         downloadicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.dismiss();
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.putExtra("FileName", mediaList.get(position).getFileName());
+                intent.putExtra("url", filePath);
+                intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+                mContext.startService(intent);
+
             }
         });
         alert.show();
@@ -491,6 +528,62 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         return mediaList.size();
     }
 
+    private void deletePersonalFile(final int position) {
+        String UserId = "";
+        SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
+        if (ASTUIUtil.isOnline(mContext)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(mContext);
+            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File delete Successfully");
+                                mediaList.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(mContext, "File not delete Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
 
+
+    private class DownloadReceiver extends ResultReceiver {
+        public DownloadReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == DownloadService.UPDATE_PROGRESS) {
+                int progress = resultData.getInt("progress");
+                if (progress == 100) {
+                    ASTUIUtil.showToast("File Downloaded Successfully");
+                }
+            }
+        }
+    }
 }
 
