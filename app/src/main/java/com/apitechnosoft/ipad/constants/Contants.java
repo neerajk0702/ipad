@@ -25,7 +25,7 @@ public class Contants {
 
     public static String RecentFileApi = "ResentFileApi/getRecentfile?";
 
-    public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfileapi?";
+    public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfile?";
     public static String SharedFileApi = "GetShareFileApi/getsharefilelist?";
     public static String GetFolderDataApi = "GetFolderDataApi/getfolderdata?foldersno=";
 
