@@ -22,7 +22,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.NotificationActivity;
+import com.apitechnosoft.ipad.adapter.NotificationAdapter;
 import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
 import com.apitechnosoft.ipad.adapter.RecivedFileAdapter;
@@ -37,6 +40,7 @@ import com.apitechnosoft.ipad.model.Data;
 import com.apitechnosoft.ipad.model.Documentlist;
 import com.apitechnosoft.ipad.model.Folderdata;
 import com.apitechnosoft.ipad.model.MediaData;
+import com.apitechnosoft.ipad.model.Notificationlist;
 import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
@@ -45,6 +49,7 @@ import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ReceivedFragment extends MainFragment {
@@ -95,8 +100,6 @@ public class ReceivedFragment extends MainFragment {
         recyclerView.setHasFixedSize(false);
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
-
-
         folderrecycler_view = findViewById(R.id.folderrecycler_view);
         folderrecycler_view.setHasFixedSize(false);
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
@@ -313,6 +316,7 @@ public class ReceivedFragment extends MainFragment {
                             if (data != null) {
                                 Log.d(Contants.LOG_TAG, "Get Recived All File**" + result);
                                 showFileData(data);
+                                ApplicationHelper.application().getActivity().getAllNotification();
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
                             }
@@ -445,6 +449,9 @@ public class ReceivedFragment extends MainFragment {
                 mediaList.add(mediaData);
             }
         }
+        if (mediaList != null && mediaList.size() > 0) {
+            Collections.reverse(mediaList);
+        }
         setAdapter(1);
     }
 
@@ -499,4 +506,6 @@ public class ReceivedFragment extends MainFragment {
             recyclerView.setAdapter(mAdapter);
         }
     }
+
+
 }

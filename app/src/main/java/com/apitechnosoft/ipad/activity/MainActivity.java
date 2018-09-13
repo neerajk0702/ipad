@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         showNavigationMenuItem();
         runTimePermission();
         getUserInfo();
+        getAllNotification();
     }
 
     @Override
@@ -651,4 +652,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void getAllNotification() {
+        String UserId = "";
+        SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
+        if (ASTUIUtil.isOnline(MainActivity.this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(MainActivity.this);
+            // dotDialog.show();
+
+            ServiceCaller serviceCaller = new ServiceCaller(MainActivity.this);
+            final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
+            serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            Log.d(Contants.LOG_TAG, "Get All Notification**" + result);
+                            headerFragment().updateNotification(data.getNotificationcount() + "");
+                        }
+                    }
+                }
+            });
+        }
+    }
 }

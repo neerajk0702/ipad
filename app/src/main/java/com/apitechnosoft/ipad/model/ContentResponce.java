@@ -38,4 +38,61 @@ public class ContentResponce {
     public void setUser(User user) {
         this.user = user;
     }
+
+    private long notificationcount;
+
+    private Notificationlist[] notificationlist;
+
+    public long getNotificationcount() {
+        return notificationcount;
+    }
+
+    public void setNotificationcount(long notificationcount) {
+        this.notificationcount = notificationcount;
+    }
+
+    public Notificationlist[] getNotificationlist() {
+        return notificationlist;
+    }
+
+    public void setNotificationlist(Notificationlist[] notificationlist) {
+        this.notificationlist = notificationlist;
+    }
+
+    private String notificationstatus;
+    private long singlenotificationdatacount;
+    private String allnotificationstatus;
+    private long allnotificationdatacount;
+
+    public String getNotificationstatus() {
+        return notificationstatus;
+    }
+
+    public void setNotificationstatus(String notificationstatus) {
+        this.notificationstatus = notificationstatus;
+    }
+
+    public long getSinglenotificationdatacount() {
+        return singlenotificationdatacount;
+    }
+
+    public void setSinglenotificationdatacount(long singlenotificationdatacount) {
+        this.singlenotificationdatacount = singlenotificationdatacount;
+    }
+
+    public String getAllnotificationstatus() {
+        return allnotificationstatus;
+    }
+
+    public void setAllnotificationstatus(String allnotificationstatus) {
+        this.allnotificationstatus = allnotificationstatus;
+    }
+
+    public long getAllnotificationdatacount() {
+        return allnotificationdatacount;
+    }
+
+    public void setAllnotificationdatacount(long allnotificationdatacount) {
+        this.allnotificationdatacount = allnotificationdatacount;
+    }
 }

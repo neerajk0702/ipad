@@ -43,6 +43,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/deleteiconfolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_3dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text=""
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_20dp"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <com.apitechnosoft.ipad.component.ASTTextView
@@ -51,22 +64,10 @@
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="center"
-            android:text=""
+            android:text="zdcds"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
             android:textSize="@dimen/_9dp" />
-
-        <TextView
-            android:id="@+id/deleteiconfolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/_3dp"
-            android:text="ic"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/_20dp"
-            android:visibility="gone" />
-
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

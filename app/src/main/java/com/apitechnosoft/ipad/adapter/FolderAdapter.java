@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -18,14 +19,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Folderdata;
 import com.apitechnosoft.ipad.model.MediaData;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -38,17 +46,22 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
     Typeface materialdesignicons_font;
     private int selectedFolderId = 0;
     boolean firstTime = false;
+    String UserId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
         CardView cardLayout;
+        TextView deleteiconfolder;
 
         public MyViewHolder(View view) {
             super(view);
-            recenttext = (TextView) view.findViewById(R.id.recenttext);
+            recenttext =view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             cardLayout = view.findViewById(R.id.cardLayout);
+            deleteiconfolder = view.findViewById(R.id.deleteiconfolder);
+            deleteiconfolder.setTypeface(materialdesignicons_font);
+            deleteiconfolder.setText(Html.fromHtml("&#xf1c0;"));
         }
     }
 
@@ -74,6 +87,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
 
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
+            holder.deleteiconfolder.setVisibility(View.VISIBLE);
         }
         if (firstTime) {
             if (selectedFolderId == mediaList.get(position).getSno()) {
@@ -86,6 +100,13 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 callFolderService((mediaList.get(position).getSno()));
+            }
+        });
+
+        holder.deleteiconfolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePersonalFolder(position);
             }
         });
 
@@ -105,5 +126,43 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
         return mediaList.size();
     }
 
+    private void deletePersonalFolder(final int position) {
+        SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
+        if (ASTUIUtil.isOnline(mContext)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(mContext);
+            final String url = Contants.BASE_URL + Contants.DeletePersonalSectionFolder + "username=" + UserId + "&" + "fsno=" + mediaList.get(position).getSno();
+            serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("Folder delete Successfully");
+                                mediaList.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Folder not delete Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(mContext, "Folder not delete Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
 }
 

@@ -45,6 +45,10 @@ public class Contants {
     public static String GetShareFileCommentandEmail = "GetShareFileCommentandEmail/getcommentemail?";
     public static String SaveCommentApi = "SaveCommentApi/savecomment?";
 
+    public static String Getallnotification = "GetNotificationInfoApi/getallnotification?";
+    public static String DeleteSingleNotification = "NotificationApi/getnotification?";
+    public static String DeleteAllNotification = "AllNotificationApi/getallnotification?";
+
 
 }
 

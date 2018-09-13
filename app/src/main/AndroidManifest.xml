@@ -82,7 +82,8 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
-        <activity android:name=".activity.AndroidVideoViewExample"
+        <activity
+            android:name=".activity.AndroidVideoViewExample"
             android:theme="@android:style/Theme.Holo.Dialog" />
         <activity
             android:name=".activity.LoginHomeActivity"
@@ -112,14 +113,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ShowAllEventActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".calendarview.CalenderActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".calendarview.ListViewActivity"
-            android:screenOrientation="portrait"></activity>
-        <service android:name=".framework.DownloadService"/>
+            android:screenOrientation="portrait" />
+
+        <service android:name=".framework.DownloadService" />
+
+        <activity android:name=".activity.NotificationActivity"></activity>
     </application>
 
 </manifest>

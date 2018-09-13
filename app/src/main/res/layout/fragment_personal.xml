@@ -241,8 +241,6 @@
                     android:id="@+id/folderrecycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5dp"
-                    android:layout_marginTop="@dimen/_10dp"
                     android:background="@color/white" />
 
                 <com.apitechnosoft.ipad.component.ASTTextView
@@ -259,8 +257,7 @@
                     android:id="@+id/perrecycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5dp"
-                    android:layout_marginTop="@dimen/_5dp"
+                    android:layout_marginBottom="@dimen/_15dp"
                     android:background="@color/white" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

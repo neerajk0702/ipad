@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.NotificationActivity;
 import com.apitechnosoft.ipad.activity.OrganizerActivity;
 import com.apitechnosoft.ipad.component.FontViewField;
 import com.apitechnosoft.ipad.resource.FNResources;
@@ -17,7 +18,7 @@ import static com.apitechnosoft.ipad.utils.ASTObjectUtil.isEmptyStr;
 public class HeaderFragment extends MainFragment {
 
     protected String headerTxt;
-    protected TextView title, Organizer;
+    protected TextView title, Organizer, notification, noticount;
     protected FontViewField sliderBtn, backButton;
     private boolean showBackButton;
     private boolean showMenuButton;
@@ -39,6 +40,8 @@ public class HeaderFragment extends MainFragment {
         this.backButton = this.findViewById(R.id.backBtn);
         this.title = this.findViewById(R.id.title);
         this.Organizer = this.findViewById(R.id.Organizer);
+        this.notification = this.findViewById(R.id.notificationicon);
+        this.noticount = this.findViewById(R.id.noticount);
         getHostActivity().setDrawerState(showMenuButton);
 
     }
@@ -48,6 +51,7 @@ public class HeaderFragment extends MainFragment {
         this.sliderBtn.setOnClickListener(this);
         this.backButton.setOnClickListener(this);
         this.Organizer.setOnClickListener(this);
+        this.notification.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +79,8 @@ public class HeaderFragment extends MainFragment {
             }
         } else if (v.getId() == R.id.Organizer) {
             startActivity(new Intent(getContext(), OrganizerActivity.class));
+        } else if (v.getId() == R.id.notificationicon) {
+            startActivity(new Intent(getContext(), NotificationActivity.class));
         }
     }
 
@@ -87,5 +93,8 @@ public class HeaderFragment extends MainFragment {
         }
     }
 
+    public void updateNotification(String noti) {
+        noticount.setText(noti);
 
+    }
 }

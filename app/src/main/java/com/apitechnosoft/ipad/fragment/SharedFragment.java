@@ -43,6 +43,7 @@ import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SharedFragment extends MainFragment {
     Typeface materialdesignicons_font;
@@ -436,6 +437,9 @@ public class SharedFragment extends MainFragment {
                 mediaData.setExtension(documentlist.getExtension());
                 mediaList.add(mediaData);
             }
+        }
+        if (mediaList != null && mediaList.size() > 0) {
+            Collections.reverse(mediaList);
         }
         setAdapter(1);
     }
