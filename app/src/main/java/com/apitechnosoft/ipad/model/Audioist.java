@@ -32,119 +32,96 @@ public class Audioist {
     private String gigaByte;
 
 
-    public String getBytes ()
-    {
+    public String getBytes() {
         return bytes;
     }
 
-    public void setBytes (String bytes)
-    {
+    public void setBytes(String bytes) {
         this.bytes = bytes;
     }
 
-    public String getFilePath ()
-    {
+    public String getFilePath() {
         return filePath;
     }
 
-    public void setFilePath (String filePath)
-    {
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
-    public String getEnteredDate ()
-    {
+    public String getEnteredDate() {
         return enteredDate;
     }
 
-    public void setEnteredDate (String enteredDate)
-    {
+    public void setEnteredDate(String enteredDate) {
         this.enteredDate = enteredDate;
     }
 
-    public String getType ()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType (String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
 
-    public void setSize (String size)
-    {
+    public void setSize(String size) {
         this.size = size;
     }
 
-    public String getMegaByte ()
-    {
+    public String getMegaByte() {
         return megaByte;
     }
 
-    public void setMegaByte (String megaByte)
-    {
+    public void setMegaByte(String megaByte) {
         this.megaByte = megaByte;
     }
 
-    public String getLimitFilename ()
-    {
+    public String getLimitFilename() {
         return limitFilename;
     }
 
-    public void setLimitFilename (String limitFilename)
-    {
+    public void setLimitFilename(String limitFilename) {
         this.limitFilename = limitFilename;
     }
 
-    public String getLimitFilename1 ()
-    {
+    public String getLimitFilename1() {
         return limitFilename1;
     }
 
-    public void setLimitFilename1 (String limitFilename1)
-    {
+    public void setLimitFilename1(String limitFilename1) {
         this.limitFilename1 = limitFilename1;
     }
 
-    public String getFolderlocation ()
-    {
+    public String getFolderlocation() {
         return folderlocation;
     }
 
-    public void setFolderlocation (String folderlocation)
-    {
+    public void setFolderlocation(String folderlocation) {
         this.folderlocation = folderlocation;
     }
 
-    public String getFileName ()
-    {
+    public String getFileName() {
         return fileName;
     }
 
-    public void setFileName (String fileName)
-    {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    public String getKiloByte ()
-    {
+    public String getKiloByte() {
         return kiloByte;
     }
 
-    public void setKiloByte (String kiloByte)
-    {
+    public void setKiloByte(String kiloByte) {
         this.kiloByte = kiloByte;
     }
 
-    public String getGigaByte ()
-    {
+    public String getGigaByte() {
         return gigaByte;
     }
 
-    public void setGigaByte (String gigaByte)
-    {
+    public void setGigaByte(String gigaByte) {
         this.gigaByte = gigaByte;
     }
 
@@ -175,7 +152,8 @@ public class Audioist {
     public void setItemSno(int itemSno) {
         this.itemSno = itemSno;
     }
-public  String fileExtension;
+
+    public String fileExtension;
 
     public String getFileExtension() {
         return fileExtension;
@@ -185,10 +163,19 @@ public  String fileExtension;
         this.fileExtension = fileExtension;
     }
 
+    String folderName;
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
+    }
+
     @Override
-    public String toString()
-    {
-        return "ClassPojo [sno = "+sno+", bytes = "+bytes+", filePath = "+filePath+", enteredDate = "+enteredDate+", type = "+type+", shareSno = "+shareSno+", size = "+size+", megaByte = "+megaByte+", limitFilename = "+limitFilename+", itemSno = "+itemSno+", limitFilename1 = "+limitFilename1+", folderlocation = "+folderlocation+", fileName = "+fileName+", kiloByte = "+kiloByte+", gigaByte = "+gigaByte+"]";
+    public String toString() {
+        return "ClassPojo [sno = " + sno + ", bytes = " + bytes + ", filePath = " + filePath + ", enteredDate = " + enteredDate + ", type = " + type + ", shareSno = " + shareSno + ", size = " + size + ", megaByte = " + megaByte + ", limitFilename = " + limitFilename + ", itemSno = " + itemSno + ", limitFilename1 = " + limitFilename1 + ", folderlocation = " + folderlocation + ", fileName = " + fileName + ", kiloByte = " + kiloByte + ", gigaByte = " + gigaByte + "]";
     }
 }
 

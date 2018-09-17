@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -187,6 +189,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+      /*  webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                stopProgress();
+            }
+        });*/
         if (filePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
         }

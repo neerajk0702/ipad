@@ -84,7 +84,7 @@
                 android:background="@drawable/notification_circle_bg"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="ic"
+                android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_10dp" />
         </RelativeLayout>

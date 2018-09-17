@@ -396,6 +396,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setKiloByte(video.getKiloByte());
                 mediaData.setMegaByte(video.getMegaByte());
                 mediaData.setGigaByte(video.getGigaByte());
+                mediaData.setFolderName(video.getFolderName());
                 mediaData.setFolderlocation(video.getFolderlocation());
                 mediaData.setFileExtension(video.getFileExtension());
                 mediaList.add(mediaData);
@@ -421,6 +422,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setMegaByte(audio.getMegaByte());
                 mediaData.setGigaByte(audio.getGigaByte());
                 mediaData.setFolderlocation(audio.getFolderlocation());
+                mediaData.setFolderName(audio.getFolderName());
                 mediaData.setFileExtension(audio.getFileExtension());
                 mediaList.add(mediaData);
             }
@@ -433,9 +435,9 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setFileName(documentlist.getFileName());
                 mediaData.setFilePath(documentlist.getFilePath());
                 mediaData.setLimitFilename(documentlist.getLimitFilename());
-                mediaData.setLimitFilename1(documentlist.getLimitFilename1());
+                mediaData.setLimitFilename1(documentlist.getLimitFilename1());//
                 mediaData.setSize(documentlist.getSize());
-                mediaData.setType(documentlist.getType());
+                mediaData.setType(documentlist.getType());//
                 mediaData.setEnteredDate(documentlist.getEnteredDate());
                 mediaData.setShareSno(documentlist.getShareSno());
                 mediaData.setItemSno(documentlist.getItemSno());
@@ -445,6 +447,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setGigaByte(documentlist.getGigaByte());
                 mediaData.setFolderlocation(documentlist.getFolderlocation());
                 mediaData.setExtension(documentlist.getExtension());
+                mediaData.setFolderName(documentlist.getFolderName());
                 mediaData.setFileExtension(documentlist.getFileExtension());
                 mediaList.add(mediaData);
             }

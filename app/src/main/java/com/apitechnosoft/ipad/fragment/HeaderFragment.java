@@ -94,7 +94,9 @@ public class HeaderFragment extends MainFragment {
     }
 
     public void updateNotification(String noti) {
-        noticount.setText(noti);
+        if (noticount != null) {
+            noticount.setText(noti);
+        }
 
     }
 }
