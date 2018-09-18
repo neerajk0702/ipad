@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -53,7 +54,7 @@ public class ChnagePassword extends AppCompatActivity {
     Button btnLogIn;
     Typeface materialdesignicons_font;
     EditText edt_phone, oldpwdedit, new_password, new_confirmpassword;
-    String passwordStr, emailStr, password1;
+    String oldpasswordStr, enteoldpasswordStr, emailStr, newpassword, newconfpassword1;
     TextView welcom, forgotPasssword;
 
     @Override
@@ -110,15 +111,14 @@ public class ChnagePassword extends AppCompatActivity {
             final ASTProgressBar dotDialog = new ASTProgressBar(ChnagePassword.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            final String url = Contants.BASE_URL + Contants.ChnagePassword + "username=" + emailStr + "&" + "password=" + passwordStr + "&" + "password1=" + password1;
-            serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
+            final String url = Contants.BASE_URL + Contants.ChnagePassword + "username=" + emailStr + "&" + "password=" + newpassword + "&" + "password1=" + newconfpassword1;
+            serviceCaller.CallCommanServiceMethod(url, "Password", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(ChnagePassword.this, emailStr);
                                 Toast.makeText(ChnagePassword.this, "Password Change Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(ChnagePassword.this, LoginActivity.class);
                                 startActivity(intentLoggedIn);
@@ -144,10 +144,26 @@ public class ChnagePassword extends AppCompatActivity {
 
     // ----validation -----
     private boolean isValidate() {
-        if (passwordStr.length() == 0) {
+        SharedPreferences prefs = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            oldpasswordStr = prefs.getString("Password", "");
+            emailStr = prefs.getString("UserId", "");
+        }
+        newpassword = new_password.getText().toString();
+        newconfpassword1 = new_confirmpassword.getText().toString();
+        enteoldpasswordStr = oldpwdedit.getText().toString();
+        if (!oldpasswordStr.equalsIgnoreCase(enteoldpasswordStr)) {
+            showToast("Your Old Password Not match please enter valid old password");
+            return false;
+        } else if (newpassword.length() == 0) {
+            showToast("Please enter password");
+            return false;
+        } else if (newconfpassword1.length() == 0) {
             showToast("Please enter password");
             return false;
         }
+
+
         return true;
     }
 

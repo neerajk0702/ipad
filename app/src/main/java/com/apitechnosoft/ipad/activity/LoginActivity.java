@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(LoginActivity.this, emailStr);
+                                ASTUIUtil.setUserId(LoginActivity.this, emailStr,passwordStr);
                                 Toast.makeText(LoginActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
@@ -389,7 +389,6 @@ public class LoginActivity extends AppCompatActivity {
                                     ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                                     if (data != null) {
                                         if (data.isStatus()) {
-                                            ASTUIUtil.setUserId(LoginActivity.this, emailStr);
                                             Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intentLoggedIn);
                                         } else {
