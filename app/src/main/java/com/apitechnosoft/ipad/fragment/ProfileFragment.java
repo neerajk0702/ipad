@@ -146,7 +146,7 @@ public class ProfileFragment extends MainFragment {
         }
         if (ASTUIUtil.isOnline(getContext())) {
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-            // dotDialog.show();
+             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
             final String url = Contants.BASE_URL + Contants.UserInfoService + "email=" + email;
             serviceCaller.CallCommanServiceMethod(url, "getUserInfo", new IAsyncWorkCompletedCallback() {
