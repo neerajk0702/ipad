@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.mail.Mail;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -46,6 +48,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        if (ASTUtil.isTablet(RegisterActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         loadView();
         datatoView();
     }

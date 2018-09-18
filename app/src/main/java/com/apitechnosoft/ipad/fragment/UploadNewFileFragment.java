@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.ChnagePassword;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.component.ASTTextView;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -47,6 +49,11 @@ public class UploadNewFileFragment extends MainFragment {
 
     @Override
     protected void loadView() {
+        if (ASTUtil.isTablet(getContext())) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         selectimg = this.findViewById(R.id.recentImg);
         btnLogIn = this.findViewById(R.id.btnLogIn);
         filename = this.findViewById(R.id.filename);

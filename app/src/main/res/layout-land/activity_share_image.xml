@@ -59,11 +59,13 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/app_bar"
             android:layout_margin="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_40dp"
+            android:layout_marginLeft="@dimen/_40dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200dp"
+                android:layout_height="@dimen/_300dp"
                 android:background="@color/white"
                 android:elevation="5dp"
                 app:cardCornerRadius="2dp"
@@ -181,7 +183,7 @@
             <Button
                 android:id="@+id/btnLogIn"
                 style="@style/DefaultButtonText"
-                android:layout_width="@dimen/_220dp"
+                android:layout_width="@dimen/_300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_25dp"

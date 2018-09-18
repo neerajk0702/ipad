@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.ChnagePassword;
 import com.apitechnosoft.ipad.adapter.HomePagerAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
@@ -32,6 +35,7 @@ import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Resentdata;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -53,6 +57,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     ArrayList<Resentdata> mediaList;
     ViewPager viewPager;
     HomePagerAdapter adapter;
+    boolean isTab;
 
     @Override
     protected int fragmentLayout() {
@@ -61,13 +66,21 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
 
     @Override
     protected void loadView() {
+        if (ASTUtil.isTablet(getContext())) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            isTab = true;
+        } else {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            isTab = false;
+        }
+
         uploadLayout = findViewById(R.id.uploadLayout);
         TextView uploadIcon = findViewById(R.id.uploadIcon);
 
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
         uploadIcon.setTypeface(materialdesignicons_font);
         uploadIcon.setText(Html.fromHtml("&#xf167;"));
-        recent_recycler_view = (RecyclerView) findViewById(R.id.recent_recycler_view);
+        recent_recycler_view = findViewById(R.id.recent_recycler_view);
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));
@@ -119,8 +132,13 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     }
 
     private void setLinearLayoutManager(RecyclerView recyclerView) {
-        RecyclerView.LayoutManager LayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(LayoutManager);
+        if (isTab) {
+            StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(gaggeredGridLayoutManager);
+        } else {
+            RecyclerView.LayoutManager LayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(LayoutManager);
+        }
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 

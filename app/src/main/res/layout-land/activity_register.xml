@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:gravity="center"
     tools:context=".activity.LoginActivity">
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_350dp"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_20dp"
+            android:layout_margin="@dimen/_10dp"
             android:orientation="vertical">
 
             <ImageView

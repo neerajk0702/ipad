@@ -1,6 +1,7 @@
 package com.apitechnosoft.ipad.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 
 public class LoginHomeActivity extends AppCompatActivity implements View.OnClickListener {
+    boolean isTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_home);
+        if (ASTUtil.isTablet(LoginHomeActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            isTab = true;
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            isTab = false;
+        }
         loadView();
         datatoView();
     }

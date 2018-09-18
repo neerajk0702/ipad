@@ -1,5 +1,6 @@
 package com.apitechnosoft.ipad.activity;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 
 public class DocOpenActivity extends AppCompatActivity {
     private WebView webView;
@@ -17,6 +19,11 @@ public class DocOpenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_open);
+        if (ASTUtil.isTablet(DocOpenActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         fileUrl = getIntent().getStringExtra("FileUrl");
         webView = findViewById(R.id.web);
 

@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Notificationlist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FZProgressBar;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
@@ -42,6 +44,11 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        if (ASTUtil.isTablet(NotificationActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();

@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -58,6 +60,11 @@ public class ChnagePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_pwd);
+        if (ASTUtil.isTablet(ChnagePassword.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         loadView();
         datatoView();
     }

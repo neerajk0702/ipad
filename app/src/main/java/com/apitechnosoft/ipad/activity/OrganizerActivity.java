@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,7 @@ import com.apitechnosoft.ipad.adapter.HomePagerAdapter;
 import com.apitechnosoft.ipad.adapter.OrganizerPagerAdapter;
 import com.apitechnosoft.ipad.calendarview.CalenderActivity;
 import com.apitechnosoft.ipad.calendarview.ListViewActivity;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 
 public class OrganizerActivity extends AppCompatActivity {
@@ -34,6 +36,11 @@ public class OrganizerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer);
+        if (ASTUtil.isTablet(OrganizerActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();

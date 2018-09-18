@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -65,6 +66,11 @@ public class ShowAllEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_event);
+        if (ASTUtil.isTablet(ShowAllEventActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();

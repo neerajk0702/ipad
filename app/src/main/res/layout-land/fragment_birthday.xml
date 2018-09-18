@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragment.BirthdayFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_40dp"
+        android:layout_marginRight="@dimen/_40dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:background="#00000000"
+            android:clickable="true"
+            android:gravity="left|center"
+            android:hint="Enter Name"
+            android:singleLine="true"
+            android:textColorHint="#919191"
+            android:textSize="@dimen/_14dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="#919191" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_15dp"
+            android:text="When"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/caladerDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/troke_outlay"
+                android:gravity="center"
+                android:hint="Select Date"
+                android:minHeight="50dp"
+                android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/timeView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/troke_outlay"
+                android:gravity="center"
+                android:hint="Select Time"
+                android:minHeight="50dp"
+                android:paddingLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/reminder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Reminder"
+                android:textColor="@color/black"
+                android:thumbTextPadding="@dimen/_16dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.2"
+                android:text="Account:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text=""
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:background="#00000000"
+            android:clickable="true"
+            android:gravity="left|center"
+            android:hint="Enter Description..."
+            android:singleLine="true"
+            android:textColorHint="#919191"
+            android:textSize="@dimen/_14dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="#919191" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_10dp"
+        android:layout_marginRight="@dimen/_10dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_40dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/_350dp"
+            android:layout_height="@dimen/_35dp"
+            android:orientation="horizontal">
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/select_folder"
+                android:text="Submit"
+                android:textColor="@color/white" />
+
+            <com.apitechnosoft.ipad.component.ASTButton
+                android:id="@+id/reset"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/share_folder"
+                android:text="Reset"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

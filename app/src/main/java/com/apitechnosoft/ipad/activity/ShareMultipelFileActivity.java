@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
 import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
@@ -53,6 +55,11 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_multipel_file);
+        if (ASTUtil.isTablet(ShareMultipelFileActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();

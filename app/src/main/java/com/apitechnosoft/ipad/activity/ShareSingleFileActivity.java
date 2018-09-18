@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -52,6 +54,11 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_image);
+        if (ASTUtil.isTablet(ShareSingleFileActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();
