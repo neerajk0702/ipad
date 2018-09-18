@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int REQUEST_CODE_GPS_PERMISSIONS = 2;
     String UserId, FirstName, LastName;
     TextView loginUsrName, loginUserEmailId;
+    View profileLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerLayout = navigationView.getHeaderView(0);
         loginUsrName = headerLayout.findViewById(R.id.loginUsrName);
         loginUserEmailId = headerLayout.findViewById(R.id.loginUserEmailId);
+        profileLayout = headerLayout.findViewById(R.id.loginUserEmailId);
         loadPage();
         showNavigationMenuItem();
         runTimePermission();
@@ -117,6 +119,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pageBundle.putInt("MENU_ID", 0);
         application().lastMenuItem = menuItem;
         this.updateFragment(new HomeFragment(), pageBundle);
+        profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileFragment profileFragment = new ProfileFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("headerTxt","My Profile");
+                updateFragment(profileFragment, null);
+            }
+        });
     }
 
     protected
@@ -679,7 +690,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
     }
-
 
 
 }
