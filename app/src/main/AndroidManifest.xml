@@ -120,7 +120,7 @@
         <activity
             android:name=".calendarview.ListViewActivity"
             android:screenOrientation="portrait" />
-
+<activity android:name=".activity.ChnagePassword"/>
         <service android:name=".framework.DownloadService" />
 
         <activity android:name=".activity.NotificationActivity"></activity>

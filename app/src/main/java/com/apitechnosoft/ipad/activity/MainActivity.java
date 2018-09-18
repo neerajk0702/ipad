@@ -47,6 +47,7 @@ import com.apitechnosoft.ipad.fragment.MainFragment;
 import com.apitechnosoft.ipad.fragment.MyProfileFragment;
 import com.apitechnosoft.ipad.fragment.PressFragment;
 import com.apitechnosoft.ipad.fragment.PricingFragment;
+import com.apitechnosoft.ipad.fragment.ProfileFragment;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
@@ -276,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         } else if (id == R.id.nav_profile) {
             bundle.putString("headerTxt", "My Profile");
-            this.updateFragment(new MyProfileFragment(), bundle);
+            this.updateFragment(new ProfileFragment(), bundle);
         }
         DrawerLayout drawer = this.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -671,7 +672,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             Log.d(Contants.LOG_TAG, "Get All Notification**" + result);
-                           // headerFragment().updateNotification(data.getNotificationcount() + "");
+                            // headerFragment().updateNotification(data.getNotificationcount() + "");
                         }
                     }
                 }
