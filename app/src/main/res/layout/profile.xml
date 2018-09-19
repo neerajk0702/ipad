@@ -34,10 +34,10 @@
                     android:layout_marginTop="@dimen/_5dp"
                     android:gravity="center"
                     android:padding="@dimen/_6dp"
-                    hubworks:cardBackgroundColor="@color/black_color"
+                    hubworks:cardBackgroundColor="@color/folderbutton"
                     hubworks:cardCornerRadius="@dimen/_1dp">
 
-                    <ImageView
+                    <com.apitechnosoft.ipad.utils.CircularImage
                         android:id="@+id/profileImg"
                         android:layout_width="@dimen/_110dp"
                         android:layout_height="@dimen/_110dp"

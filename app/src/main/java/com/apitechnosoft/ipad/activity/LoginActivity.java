@@ -140,9 +140,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (ASTUIUtil.isOnline(context)) {
                     final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
                     dotDialog.show();
-                    //  validateCaptcha();
-                    Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
-                    startActivity(intent);
+                      validateCaptcha();
+                  //  Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
+                   // startActivity(intent);
                 }
             }
 
