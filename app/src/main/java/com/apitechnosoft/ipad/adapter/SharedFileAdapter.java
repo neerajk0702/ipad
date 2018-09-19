@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -199,6 +200,8 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
+        final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
+        loadingDialog.setVisibility(View.VISIBLE);
         final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -210,6 +213,12 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                loadingDialog.setVisibility(View.GONE);
+            }
+        });
         if (filePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
         }

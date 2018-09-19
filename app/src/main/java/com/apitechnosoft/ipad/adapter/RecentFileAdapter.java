@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -168,7 +169,8 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         downloadicon.setText(Html.fromHtml("&#xf162;"));
         deleteicon.setTypeface(materialdesignicons_font);
         deleteicon.setText(Html.fromHtml("&#xf1c0;"));
-
+        final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
+        loadingDialog.setVisibility(View.VISIBLE);
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -179,6 +181,12 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                loadingDialog.setVisibility(View.GONE);
+            }
+        });
         if (filePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
         }

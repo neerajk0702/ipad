@@ -13,6 +13,7 @@ import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -43,6 +45,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     private Toolbar toolbar;
     ImageView img;
     WebView webView;
+    RelativeLayout webLayout;
     VideoView videoView;
     LinearLayout videoViewLayout;
     EditText edt_email, edt_comment;
@@ -91,6 +94,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
 
         img = findViewById(R.id.img);
         webView = findViewById(R.id.web);
+        webLayout=findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
         String MediaData = getIntent().getStringExtra("MediaData");
         int MediaType = getIntent().getIntExtra("MediaType", 0);
@@ -101,16 +105,19 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
             if (MediaType == 1) {
                 videoViewLayout.setVisibility(View.GONE);
                 webView.setVisibility(View.GONE);
+                webLayout.setVisibility(View.GONE);
                 img.setVisibility(View.VISIBLE);
                 setImageShare(media);
             } else if (MediaType == 2) {
                 videoViewLayout.setVisibility(View.GONE);
                 webView.setVisibility(View.VISIBLE);
+                webLayout.setVisibility(View.VISIBLE);
                 img.setVisibility(View.GONE);
                 setDocShare(media);
             } else if (MediaType == 3 || MediaType == 4) {
                 videoViewLayout.setVisibility(View.VISIBLE);
                 webView.setVisibility(View.GONE);
+                webLayout.setVisibility(View.GONE);
                 img.setVisibility(View.GONE);
                 setVideoShare(media);
             }
@@ -124,6 +131,8 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     }
 
     private void setDocShare(MediaData media) {
+        final ProgressBar loadingDialog = findViewById(R.id.loadingDialog);
+        loadingDialog.setVisibility(View.VISIBLE);
         String filePath = Contants.Media_File_BASE_URL + media.getFolderlocation() + "/" + media.getFileName();
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -135,6 +144,12 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                loadingDialog.setVisibility(View.GONE);
+            }
+        });
         if (filePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
         }

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -56,6 +57,7 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
     private Toolbar toolbar;
     ImageView img;
     WebView webView;
+    RelativeLayout webLayout;
     VideoView videoView;
     LinearLayout videoViewLayout;
     EditText edt_comment;
@@ -106,6 +108,7 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
         img = findViewById(R.id.img);
         imgLayout = findViewById(R.id.imgLayout);
         webView = findViewById(R.id.web);
+        webLayout=findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
         recyclerView = findViewById(R.id.emailrecycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CommentOnFileActivity.this);
@@ -124,16 +127,19 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
         if (MediaType == 1) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
+            webLayout.setVisibility(View.GONE);
             imgLayout.setVisibility(View.VISIBLE);
             setImageShare();
         } else if (MediaType == 2) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
+            webLayout.setVisibility(View.VISIBLE);
             imgLayout.setVisibility(View.GONE);
             setDocShare();
         } else if (MediaType == 3 || MediaType == 4) {
             videoViewLayout.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
+            webLayout.setVisibility(View.GONE);
             imgLayout.setVisibility(View.GONE);
             setVideoShare();
         }
@@ -157,6 +163,8 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setDocShare() {
+        final ProgressBar webloadingDialog = findViewById(R.id.webloadingDialog);
+        webloadingDialog.setVisibility(View.VISIBLE);
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -167,6 +175,12 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                webloadingDialog.setVisibility(View.GONE);
+            }
+        });
         if (ShowfilePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + ShowfilePath);
         }

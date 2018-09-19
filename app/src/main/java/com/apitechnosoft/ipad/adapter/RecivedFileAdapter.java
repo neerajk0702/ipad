@@ -179,6 +179,8 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             recyclerView.setAdapter(recivedEmailAdapter);
         }
         final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+        final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
+        loadingDialog.setVisibility(View.VISIBLE);
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -189,12 +191,13 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
-      /*  webView.setWebViewClient(new WebViewClient() {
+
+        webView.setWebViewClient(new WebViewClient() {
 
             public void onPageFinished(WebView view, String url) {
-                stopProgress();
+                loadingDialog.setVisibility(View.GONE);
             }
-        });*/
+        });
         if (filePath != null) {
             webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
         }

@@ -76,11 +76,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <WebView
-                    android:id="@+id/web"
+                <RelativeLayout android:id="@+id/webLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
+                    <WebView
+                        android:id="@+id/web"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <ProgressBar
+                        android:id="@+id/loadingDialog"
+                        android:layout_width="@dimen/_30dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone" />
+                </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/videoViewLayout"
                     android:layout_width="match_parent"
