@@ -80,8 +80,9 @@ public class UploadNewFileFragment extends MainFragment {
             // ASTUIUtil.startImagePicker(getHostActivity());
             ASTUtil.startFilePicker(getHostActivity(), 60, FNFilePicker.SIZE_LIMIT - attachmentSize());
         } else if (view.getId() == R.id.btnLogIn) {
-            //if (isVlaidate())
-            uploadData();
+            if (isVlaidate()) {
+                uploadData();
+            }
         }
     }
 

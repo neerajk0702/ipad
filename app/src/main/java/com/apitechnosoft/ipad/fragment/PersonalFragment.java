@@ -254,6 +254,7 @@ public class PersonalFragment extends MainFragment {
                 break;
             case R.id.seeallfile:
                 seeallfileFlag = false;
+                seeallfile.setVisibility(View.GONE);
                 setAdapter(1);
                 break;
         }
@@ -403,6 +404,7 @@ public class PersonalFragment extends MainFragment {
 
     //show file data in list
     private void showFileData(ContentData data) {
+        seeallfile.setVisibility(View.VISIBLE);
         setPhotoButton();
         Photolist[] photolists = data.getPhotolist();
         if (photolists != null && photolists.length > 0) {

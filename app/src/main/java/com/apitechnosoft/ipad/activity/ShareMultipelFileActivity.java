@@ -115,36 +115,26 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                                 selectMediaList.add(mediaData);
                             }
                         }
-                        String SEPARATOR = ",";
-                        StringBuilder filenameBuilder = new StringBuilder();
-                        StringBuilder fileSnoBuilder = new StringBuilder();
-                        StringBuilder filepathBuilder = new StringBuilder();
-                        StringBuilder folderlocationBuilder = new StringBuilder();
-                        for (MediaData data : selectMediaList) {
-                            filenameBuilder.append(data.getFileName());
-                            filenameBuilder.append(SEPARATOR);
+                        String SEPARATOR = ">";
+                        String SEPARATORComma = ",";
+                        if (selectMediaList != null && selectMediaList.size()>0) {
+                            StringBuilder fileDetailBuilder = new StringBuilder();
+                            for (MediaData data : selectMediaList) {
+                                fileDetailBuilder.append(data.getSno());
+                                fileDetailBuilder.append(SEPARATOR);
 
-                            fileSnoBuilder.append(data.getSno());
-                            fileSnoBuilder.append(SEPARATOR);
+                                fileDetailBuilder.append(data.getFileName());
+                                fileDetailBuilder.append(SEPARATOR);
 
-                            filepathBuilder.append(data.getFilePath());
-                            filepathBuilder.append(SEPARATOR);
+                                fileDetailBuilder.append(data.getFilePath());
+                                fileDetailBuilder.append(SEPARATOR);
 
-                            folderlocationBuilder.append(data.getFolderlocation());
-                            folderlocationBuilder.append(SEPARATOR);
-                        }
-                        String filename = filenameBuilder.toString();
-                        String fileSno = fileSnoBuilder.toString();
-                        String filepath = filepathBuilder.toString();
-                        String folderlocation = folderlocationBuilder.toString();
-                        //Remove last comma
-                        if (filename != null && !filename.equals("")) {
-                            filename = filename.substring(0, filename.length() - SEPARATOR.length());
-                            fileSno = fileSno.substring(0, fileSno.length() - SEPARATOR.length());
-                            filepath = filepath.substring(0, filepath.length() - SEPARATOR.length());
-                            folderlocation = folderlocation.substring(0, folderlocation.length() - SEPARATOR.length());
-
-                            shareFile(fileSno);
+                                fileDetailBuilder.append(data.getFolderlocation());
+                                fileDetailBuilder.append(SEPARATORComma);
+                            }
+                            String itemsno = fileDetailBuilder.toString();
+                            itemsno = itemsno.substring(0, itemsno.length() - SEPARATORComma.length()); //Remove last comma
+                            shareFile(itemsno);
                         } else {
                             ASTUIUtil.showToast("Please Select file!");
                         }
@@ -176,12 +166,13 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         Toast.makeText(ShareMultipelFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void shareFile(String fileSno) {
+    private void shareFile(String itemsno) {
+        String cdate = ASTUtil.getCurrentDate();
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "email=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + "" + "&" + "itemsno=" + fileSno + "&" + "message=" + "";
+            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;
             serviceCaller.CallCommanServiceMethod(url, "shareAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

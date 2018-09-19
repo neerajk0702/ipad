@@ -202,6 +202,7 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -243,6 +244,12 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/perrecycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_15dp"
+                    android:background="@color/white" />
                 <com.apitechnosoft.ipad.component.ASTTextView
                     android:id="@+id/seeallfile"
                     android:layout_width="match_parent"
@@ -252,20 +259,12 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/_14dp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/perrecycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15dp"
-                    android:background="@color/white" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40dp"
-            android:layout_marginTop="@dimen/_10dp"
+            android:layout_height="@dimen/_30dp"
             android:background="#00000000" />
 
 

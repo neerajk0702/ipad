@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.NotificationActivity;
+import com.apitechnosoft.ipad.activity.ShareMultipelFileActivity;
 import com.apitechnosoft.ipad.adapter.NotificationAdapter;
 import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
@@ -121,6 +123,7 @@ public class ReceivedFragment extends MainFragment {
         audiolayout.setOnClickListener(this);
         doclayout.setOnClickListener(this);
         seeallfile.setOnClickListener(this);
+        sharefile.setOnClickListener(this);
     }
 
     @Override
@@ -210,7 +213,11 @@ public class ReceivedFragment extends MainFragment {
                 break;
             case R.id.seeallfile:
                 seeallfileFlag = false;
+                seeallfile.setVisibility(View.GONE);
                 setAdapter(1);
+                break;
+            case R.id.sharefile:
+                startActivity(new Intent(getContext(), ShareMultipelFileActivity.class));
                 break;
         }
     }
@@ -338,6 +345,7 @@ public class ReceivedFragment extends MainFragment {
 
     //show file data in list
     private void showFileData(ContentData data) {
+        seeallfile.setVisibility(View.VISIBLE);
         setPhotoButton();
         mediaList = new ArrayList<>();
        /* Folderdata[] folderdata = data.getFolderdata();
