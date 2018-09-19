@@ -1691,11 +1691,12 @@ public class ASTUIUtil {
         Log.d(Contants.LOG_TAG, "New file name and path __: " + newFileName.getPath() + "getName__" + newFileName.getName());
         return newFileName;
     }
-    public static void setUserId(Context context, String id) {
+    public static void setUserId(Context context, String id,String password) {
         try {
             SharedPreferences prefs = context.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("UserId", id);
+            editor.putString("Password", password);
             editor.commit();
         } catch (Exception e) {
             // should never happen

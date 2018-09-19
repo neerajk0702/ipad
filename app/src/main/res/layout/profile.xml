@@ -22,69 +22,68 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_230dp"
-                android:background="@color/appTheamColorLight"
+                android:layout_marginTop="@dimen/_5dp"
+                android:background="@color/folderbutton"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/imageContainer"
+                    android:layout_width="@dimen/_110dp"
+                    android:layout_height="@dimen/_110dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_6dp"
+                    hubworks:cardBackgroundColor="@color/folderbutton"
+                    hubworks:cardCornerRadius="@dimen/_1dp">
+
+                    <com.apitechnosoft.ipad.utils.CircularImage
+                        android:id="@+id/profileImg"
+                        android:layout_width="@dimen/_110dp"
+                        android:layout_height="@dimen/_110dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/noimage"
+                        hubworks:isCircular="true" />
+                </android.support.v7.widget.CardView>
 
 
+                <LinearLayout
+                    android:id="@+id/userDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_3dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/imageContainer"
-                        android:layout_width="@dimen/_125dp"
-                        android:layout_height="@dimen/_125dp"
-                        android:layout_gravity="center"
-
-                        android:gravity="center"
-                        android:padding="@dimen/_6dp"
-                        hubworks:cardBackgroundColor="@color/black_color"
-                        hubworks:cardCornerRadius="@dimen/_63dp">
-
-                        <ImageView
-                            android:id="@+id/profileImg"
-                            android:layout_width="@dimen/_110dp"
-                            android:layout_height="@dimen/_110dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/noimage"
-                            hubworks:isCircular="false" />
-                    </android.support.v7.widget.CardView>
-
-
-                    <LinearLayout
-                        android:id="@+id/userDetails"
+                    <TextView
+                        android:id="@+id/loginUserName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/_3dp">
+                        android:gravity="center"
+                        android:text="ABC Defg"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12dp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/loginUserName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:textAlignment="center"
-                            android:text="ABC Defg"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/_12dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/emailusername"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="abc@gmail.com"
-                            android:layout_margin="@dimen/_3dp"
-                            android:textAlignment="center"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/_12dp"
-                            android:textStyle="italic" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/emailusername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_3dp"
+                        android:gravity="center"
+                        android:text="abc@gmail.com"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12dp"
+                        android:textStyle="italic" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -110,6 +109,17 @@
                     android:weightSum="2">
 
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_5dp"
+                        android:text="Chnage User Information"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -128,15 +138,15 @@
                             android:textStyle="bold" />
 
 
-                        <TextView
+                        <EditText
                             android:id="@+id/fname"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.65"
-                            android:hint="First Name"
                             android:background="@drawable/bg_boder_round"
+                            android:hint="First Name"
                             android:padding="@dimen/_10dp"
                             android:textSize="@dimen/_12dp" />
                     </LinearLayout>
@@ -145,8 +155,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/_5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -161,55 +171,50 @@
                             android:textStyle="bold" />
 
 
-
-                        <TextView
+                        <EditText
                             android:id="@+id/lname"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.65"
-                            android:hint="Last Name"
                             android:background="@drawable/bg_boder_round"
+                            android:hint="Last Name"
                             android:padding="@dimen/_10dp"
                             android:textSize="@dimen/_12dp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/changePasswordLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/emailviewLayout"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:background="@color/bg_color"
+                        android:elevation="@dimen/_1dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/_3dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:padding="@dimen/_8dp"
+                            android:text="Change Password"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/_12dp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-
-
-
-            <LinearLayout
-                android:id="@+id/changePasswordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/emailviewLayout"
-                android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginRight="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@color/bg_color"
-                android:elevation="@dimen/_1dp"
-                android:gravity="center"
-                android:minHeight="@dimen/_50dp"
-                android:orientation="horizontal"
-                android:paddingTop="@dimen/_3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:padding="@dimen/_8dp"
-                    android:text="Change Password"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_12dp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
 
 
         </RelativeLayout>

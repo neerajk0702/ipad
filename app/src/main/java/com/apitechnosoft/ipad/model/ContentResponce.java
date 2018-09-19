@@ -29,15 +29,6 @@ public class ContentResponce {
         this.error_msg = error_msg;
     }
 
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     private long notificationcount;
 
@@ -94,5 +85,30 @@ public class ContentResponce {
 
     public void setAllnotificationdatacount(long allnotificationdatacount) {
         this.allnotificationdatacount = allnotificationdatacount;
+    }
+
+    private User user;
+
+    private Userprofile userprofile;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Userprofile getUserprofile() {
+        return userprofile;
+    }
+
+    public void setUserprofile(Userprofile userprofile) {
+        this.userprofile = userprofile;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassPojo [user = " + user + ", userprofile = " + userprofile + "]";
     }
 }

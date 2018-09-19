@@ -31,6 +31,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int REQUEST_CODE_GPS_PERMISSIONS = 2;
     String UserId, FirstName, LastName;
     TextView loginUsrName, loginUserEmailId;
+    View profileLayout;
+    ImageView sliderProfileImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerLayout = navigationView.getHeaderView(0);
         loginUsrName = headerLayout.findViewById(R.id.loginUsrName);
         loginUserEmailId = headerLayout.findViewById(R.id.loginUserEmailId);
+        profileLayout = headerLayout.findViewById(R.id.profileLayout);
+        sliderProfileImg = headerLayout.findViewById(R.id.sliderProfileImg);
         loadPage();
         showNavigationMenuItem();
         runTimePermission();
@@ -117,6 +123,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pageBundle.putInt("MENU_ID", 0);
         application().lastMenuItem = menuItem;
         this.updateFragment(new HomeFragment(), pageBundle);
+        profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileFragment profileFragment = new ProfileFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("headerTxt", "My Profile");
+                updateFragment(profileFragment, null);
+            }
+        });
+
+        ;
+
     }
 
     protected
@@ -612,7 +630,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void getUserInfo() {
-
         SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
@@ -639,6 +656,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.putString("FirstName", data.getUser().getfName());
                                 editor.putString("LastName", data.getUser().getlName());
                                 editor.commit();
+
+                                loginUsrName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
+                                String filePath = data.getUserprofile().getFilePath();
+                                String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
+                                Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(sliderProfileImg);
                             }
                         }
                     }
@@ -679,7 +701,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
     }
-
 
 
 }

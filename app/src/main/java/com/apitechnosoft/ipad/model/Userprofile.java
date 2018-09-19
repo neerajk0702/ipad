@@ -1,6 +1,6 @@
 package com.apitechnosoft.ipad.model;
 
-public class User {
+public class Userprofile {
     private String reminder;
 
     private String eventDate;
