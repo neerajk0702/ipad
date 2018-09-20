@@ -660,8 +660,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 loginUsrName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
                                 String filePath = data.getUserprofile().getFilePath();
-                                String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-                                Picasso.with(ApplicationHelper.application().getContext()).load(newpath).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                if (filePath != null) {
+                                    String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
+                                    Picasso.with(ApplicationHelper.application().getContext()).load(newpath).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                }
                             }
                         }
                     }
