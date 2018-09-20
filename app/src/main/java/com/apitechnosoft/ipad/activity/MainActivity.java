@@ -274,8 +274,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("headerTxt", "Education");
             this.updateFragment(new EducationFragment(), bundle);
         } else if (id == R.id.nav_Press) {
-            bundle.putString("headerTxt", "Press");
+               bundle.putString("headerTxt", "Press");
             this.updateFragment(new PressFragment(), bundle);
+
         } else if (id == R.id.nav_Contact) {
             bundle.putString("headerTxt", "Contact Us");
             this.updateFragment(new ContactUsFragment(), bundle);

@@ -105,7 +105,6 @@
         <activity android:name=".calendarview.CalenderActivity" />
         <activity android:name=".calendarview.ListViewActivity" />
         <activity android:name=".activity.ChnagePassword" />
-
         <service android:name=".framework.DownloadService" />
 
         <activity android:name=".activity.NotificationActivity"></activity>
