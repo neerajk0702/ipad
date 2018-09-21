@@ -23,9 +23,11 @@ import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.security.auth.callback.Callback;
 
 import static com.apitechnosoft.ipad.utils.ASTUIUtil.showToast;

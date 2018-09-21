@@ -38,9 +38,12 @@ import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ShareMultipelFileActivity extends AppCompatActivity implements View.OnClickListener {
     String UserId, FirstName, LastName;

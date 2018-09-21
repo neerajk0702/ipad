@@ -59,6 +59,7 @@ import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FZProgressBar;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -66,6 +67,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class PersonalFragment extends MainFragment {

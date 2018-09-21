@@ -37,9 +37,12 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ShareSingleFileActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;

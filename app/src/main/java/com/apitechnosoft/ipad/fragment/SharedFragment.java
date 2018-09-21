@@ -42,10 +42,13 @@ import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FZProgressBar;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class SharedFragment extends MainFragment {
     Typeface materialdesignicons_font;

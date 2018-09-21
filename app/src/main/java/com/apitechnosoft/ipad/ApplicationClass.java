@@ -14,12 +14,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
+import com.apitechnosoft.ipad.utils.TlsOnlySocketFactory;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
 import com.apitechnosoft.ipad.exception.FNExceptionUtil;
 import com.apitechnosoft.ipad.framework.LruBitmapCache;
 import com.apitechnosoft.ipad.utils.ASTConstants;
 import com.apitechnosoft.ipad.utils.ASTEnum;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * @author AST Inc.
@@ -51,12 +57,20 @@ public class ApplicationClass extends Application {
         setAppInstance();
         this.init();
     }
-
+    static {
+        HttpsURLConnection.setDefaultSSLSocketFactory(new TlsOnlySocketFactory());
+    }
     protected void setAppInstance() {
         ApplicationHelper.setApplicationObj(this);
     }
-
     private void init() {
+       /* try {
+            ProviderInstaller.installIfNeeded(getApplicationContext());
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }*/
         initActivityLifeCycleHandler();
         // Installing a newer security provider using Google Play Services to support
         // TLS v1.1 on Java 1.5 (API 15 or lower devices).
@@ -65,10 +79,12 @@ public class ApplicationClass extends Application {
         } catch (Exception e) {
         }
     }
+
     public void initIcons() {
-            this._sTypeface = Typeface.createFromAsset(this.getAssets(), "fonts/fontawesome-webfont.ttf");
-        
+        this._sTypeface = Typeface.createFromAsset(this.getAssets(), "fonts/fontawesome-webfont.ttf");
+
     }
+
     public Typeface getIconTypeFace() {
         if (this._sTypeface == null) {
             this.initIcons();
@@ -76,9 +92,10 @@ public class ApplicationClass extends Application {
         return this._sTypeface;
     }
 
-    public boolean isClickedMenuIsPrimary(){
+    public boolean isClickedMenuIsPrimary() {
         return lastMenuItem != null;
     }
+
     public Context getContext() {
         return this.getApplicationContext();
     }
@@ -95,30 +112,37 @@ public class ApplicationClass extends Application {
         }
         return activityLifecycleHandler;
     }
+
     public MainActivity getActivity() {
         return this._activity;
     }
+
     public void setActivity(MainActivity activity) {
         this._activity = activity;
     }
+
     public SharedPreferences sharedPreferences() {
         if (this.sharedPref == null) {
             this.sharedPref = this.sharedPrefForKey("FitterShub.com");
         }
         return this.sharedPref;
     }
+
     private SharedPreferences sharedPrefForKey(String key) {
         return getSharedPreferences(key, Context.MODE_PRIVATE);
     }
+
     /**
      * Set a permission is requested
      */
     public void setPermissionRequested(String permissionPref) {
         persistBoolean(permissionPref, true);
     }
+
     public void persistBoolean(String key, boolean value) {
         this.sharedPreferences().edit().putBoolean(key, value).apply();
     }
+
     public boolean getPersistedBoolean(String key, boolean defaultValue) {
         return this.sharedPreferences().getBoolean(key, defaultValue);
     }
@@ -130,9 +154,10 @@ public class ApplicationClass extends Application {
         return getPersistedBoolean(permissionPref, false);
     }
 
-    public boolean isPermissionGranted(int permissionCode){
+    public boolean isPermissionGranted(int permissionCode) {
         return getActivity() != null && getActivity().isPermissionGranted(permissionCode);
     }
+
     //---------------for volley -------------
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
@@ -167,6 +192,7 @@ public class ApplicationClass extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
     public int getResourceId(String resourceName, String defType) {
         return getResourceId(resourceName, defType, this.packageName());
     }
@@ -174,6 +200,7 @@ public class ApplicationClass extends Application {
     public int getResourceId(String resourceName, String defType, String packageName) {
         return (!ASTObjectUtil.isNumber(resourceName) && ASTObjectUtil.isNonEmptyStr(resourceName)) ? this.getResources().getIdentifier(resourceName, defType, packageName) : 0;
     }
+
     public String packageName() {
         if (this.packageName == null) {
             PackageInfo info = this.packageInfo();
@@ -192,8 +219,6 @@ public class ApplicationClass extends Application {
         }
         return info;
     }
-
-
 
 
     public Typeface getFontTypeFace(ASTEnum fontType) {
@@ -240,7 +265,6 @@ public class ApplicationClass extends Application {
                 return this._fontRegular;
         }
     }
-
 
 
     public void initFont(ASTEnum fontType) {

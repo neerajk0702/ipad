@@ -41,6 +41,7 @@ import com.apitechnosoft.ipad.model.EventotdataList;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
@@ -52,6 +53,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.function.Function;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ShowAllEventActivity extends AppCompatActivity {
     private Toolbar toolbar;

@@ -23,12 +23,15 @@ import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FNReqResCode;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -41,7 +44,6 @@ public class UploadNewFileFragment extends MainFragment {
     private static File selectFile;
     Button btnLogIn;
     ASTTextView filename;
-
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_upload_new_file;
