@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragment.PressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/_5dp"
+        android:text="@string/press"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12dp" />
 
 </FrameLayout>

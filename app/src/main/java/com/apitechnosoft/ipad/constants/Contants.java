@@ -47,10 +47,10 @@ public class Contants {
     public static String Getallnotification = "GetNotificationInfoApi/getallnotification?";
     public static String DeleteSingleNotification = "NotificationApi/getnotification?";
     public static String DeleteAllNotification = "AllNotificationApi/getallnotification?";
-
     public static String ForgetPassword = "ForgetPasswordApi/forgetpassword?";
     public static String ChnagePassword = "ChangePasswordApi/chnagepassword?";
     public static String UpdateUserName = "UpdateUserNameApi/updateusername?";
+    public static String UploadProfilePic = "UploadProfileApi/saveuprofile";
 
 
 }
