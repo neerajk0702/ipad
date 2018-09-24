@@ -123,19 +123,19 @@
                 android:layout_marginTop="@dimen/_15dp"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reminder" />
+
                 <Switch
                     android:id="@+id/reminder"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Reminder"
-                    android:textColor="@color/black"
-                    android:thumbTextPadding="@dimen/_16dp" />
+                    android:layout_marginLeft="@dimen/_50dp"
+                    android:textColor="@color/black" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="0.5" />
+
             </LinearLayout>
 
             <LinearLayout

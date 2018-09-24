@@ -8,19 +8,26 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.utils.ClientSSLSocketFactory;
+import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
+import com.apitechnosoft.ipad.utils.TlsOnlySocketFactory;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
 import com.apitechnosoft.ipad.exception.FNExceptionUtil;
 import com.apitechnosoft.ipad.framework.LruBitmapCache;
 import com.apitechnosoft.ipad.utils.ASTConstants;
 import com.apitechnosoft.ipad.utils.ASTEnum;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * @author AST Inc.
@@ -30,7 +37,6 @@ public class ApplicationClass extends Application {
     ActivityLifecycleHandler activityLifecycleHandler;
     private Typeface _sTypeface;
     public volatile MenuItem lastMenuItem;
-    public volatile FNRequest lastRequest;
     private MainActivity _activity;
     private SharedPreferences sharedPref;
     private String packageName;
@@ -53,12 +59,22 @@ public class ApplicationClass extends Application {
         setAppInstance();
         this.init();
     }
+   /* static {
+        //HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());
+        HttpsURLConnection.setDefaultSSLSocketFactory(new TlsOnlySocketFactory());
+    }*/
 
     protected void setAppInstance() {
         ApplicationHelper.setApplicationObj(this);
     }
-
     private void init() {
+       /* try {
+            ProviderInstaller.installIfNeeded(getApplicationContext());
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }*/
         initActivityLifeCycleHandler();
         // Installing a newer security provider using Google Play Services to support
         // TLS v1.1 on Java 1.5 (API 15 or lower devices).
@@ -149,7 +165,8 @@ public class ApplicationClass extends Application {
     //---------------for volley -------------
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+          //  mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(ApplicationHelper.application().getContext(), new HurlStack(null, ClientSSLSocketFactory.getSocketFactory()));
         }
 
         return mRequestQueue;
@@ -209,28 +226,6 @@ public class ApplicationClass extends Application {
     }
 
 
-    public FNRequest initGetRequest(String url) {
-        return new FNRequest(true, url);
-    }
-
-    public FNRequest initRequest(String actionID, View v) {
-        return initRequest(actionID, v, null);
-    }
-
-    public FNRequest initRequest(String actionID, View v, Object headerID) {
-        this.lastRequest = new FNRequest(actionID, v, headerID);
-        return this.lastRequest;
-    }
-
-    public FNRequest initRequest(String actionID, FNView v) {
-        return initRequest(actionID, v, null);
-    }
-
-    public FNRequest initRequest(String actionID, FNView v, Object headerID) {
-        this.lastRequest = new FNRequest(actionID, v, headerID);
-        return this.lastRequest;
-    }
-
     public Typeface getFontTypeFace(ASTEnum fontType) {
         switch (fontType) {
             case FONT_BOLD:
@@ -276,19 +271,6 @@ public class ApplicationClass extends Application {
         }
     }
 
-    public String resourceNameById(int resourceId) {
-        String resourceName = "Unable to find resource ID";
-        try {
-            return this.getApplicationContext().getResources().getResourceEntryName(resourceId);
-        } catch (Exception e) {
-
-        }
-        return resourceName;
-    }
-
-    public Object selectedObject() {
-        return null;
-    }
 
     public void initFont(ASTEnum fontType) {
         switch (fontType) {
@@ -319,5 +301,4 @@ public class ApplicationClass extends Application {
 
         }
     }
-
 }
