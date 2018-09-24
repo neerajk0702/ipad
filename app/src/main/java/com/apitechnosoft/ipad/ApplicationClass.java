@@ -11,9 +11,11 @@ import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.utils.ClientSSLSocketFactory;
 import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.apitechnosoft.ipad.utils.TlsOnlySocketFactory;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -57,9 +59,11 @@ public class ApplicationClass extends Application {
         setAppInstance();
         this.init();
     }
-    static {
+   /* static {
+        //HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());
         HttpsURLConnection.setDefaultSSLSocketFactory(new TlsOnlySocketFactory());
-    }
+    }*/
+
     protected void setAppInstance() {
         ApplicationHelper.setApplicationObj(this);
     }
@@ -161,7 +165,8 @@ public class ApplicationClass extends Application {
     //---------------for volley -------------
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+          //  mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(ApplicationHelper.application().getContext(), new HurlStack(null, ClientSSLSocketFactory.getSocketFactory()));
         }
 
         return mRequestQueue;
