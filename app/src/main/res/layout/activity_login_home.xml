@@ -88,24 +88,23 @@
             android:layout_marginRight="@dimen/_10dp"
             android:orientation="horizontal">
 
-            <Button
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebooklogin"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@color/fb"
-                android:text="Facebook"
                 android:textColor="@color/white" />
 
-            <Button
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_gsign_in"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
-                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
-                android:background="@color/red_dark_color"
-                android:text="Gmail"
+                android:background="@color/fb"
                 android:textColor="@color/white" />
-
         </LinearLayout>
 
         <LinearLayout

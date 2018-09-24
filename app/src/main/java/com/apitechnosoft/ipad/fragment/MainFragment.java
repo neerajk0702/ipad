@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 
 import java.util.ArrayList;
 
@@ -220,6 +219,9 @@ public abstract class MainFragment extends Fragment implements View.OnClickListe
 
     protected void showErrorIndicator(@StringRes int messageResId, Object... args) {
         ASTUIUtil.showErrorIndicator(getActivity(), getString(messageResId, args), getHostActivity().headerView());
+    }
+    public FNRequest getRequest() {
+        return null;
     }
 
 }

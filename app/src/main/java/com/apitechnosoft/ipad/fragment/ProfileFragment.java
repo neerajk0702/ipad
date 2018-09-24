@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.ChnagePassword;
-import com.apitechnosoft.ipad.activity.LoginActivity;
 import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -28,15 +27,12 @@ import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.security.auth.callback.Callback;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +30,7 @@ public class ApplicationClass extends Application {
     ActivityLifecycleHandler activityLifecycleHandler;
     private Typeface _sTypeface;
     public volatile MenuItem lastMenuItem;
+    public volatile FNRequest lastRequest;
     private MainActivity _activity;
     private SharedPreferences sharedPref;
     private String packageName;
@@ -65,10 +67,12 @@ public class ApplicationClass extends Application {
         } catch (Exception e) {
         }
     }
+
     public void initIcons() {
-            this._sTypeface = Typeface.createFromAsset(this.getAssets(), "fonts/fontawesome-webfont.ttf");
-        
+        this._sTypeface = Typeface.createFromAsset(this.getAssets(), "fonts/fontawesome-webfont.ttf");
+
     }
+
     public Typeface getIconTypeFace() {
         if (this._sTypeface == null) {
             this.initIcons();
@@ -76,9 +80,10 @@ public class ApplicationClass extends Application {
         return this._sTypeface;
     }
 
-    public boolean isClickedMenuIsPrimary(){
+    public boolean isClickedMenuIsPrimary() {
         return lastMenuItem != null;
     }
+
     public Context getContext() {
         return this.getApplicationContext();
     }
@@ -95,30 +100,37 @@ public class ApplicationClass extends Application {
         }
         return activityLifecycleHandler;
     }
+
     public MainActivity getActivity() {
         return this._activity;
     }
+
     public void setActivity(MainActivity activity) {
         this._activity = activity;
     }
+
     public SharedPreferences sharedPreferences() {
         if (this.sharedPref == null) {
             this.sharedPref = this.sharedPrefForKey("FitterShub.com");
         }
         return this.sharedPref;
     }
+
     private SharedPreferences sharedPrefForKey(String key) {
         return getSharedPreferences(key, Context.MODE_PRIVATE);
     }
+
     /**
      * Set a permission is requested
      */
     public void setPermissionRequested(String permissionPref) {
         persistBoolean(permissionPref, true);
     }
+
     public void persistBoolean(String key, boolean value) {
         this.sharedPreferences().edit().putBoolean(key, value).apply();
     }
+
     public boolean getPersistedBoolean(String key, boolean defaultValue) {
         return this.sharedPreferences().getBoolean(key, defaultValue);
     }
@@ -130,9 +142,10 @@ public class ApplicationClass extends Application {
         return getPersistedBoolean(permissionPref, false);
     }
 
-    public boolean isPermissionGranted(int permissionCode){
+    public boolean isPermissionGranted(int permissionCode) {
         return getActivity() != null && getActivity().isPermissionGranted(permissionCode);
     }
+
     //---------------for volley -------------
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
@@ -167,6 +180,7 @@ public class ApplicationClass extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
     public int getResourceId(String resourceName, String defType) {
         return getResourceId(resourceName, defType, this.packageName());
     }
@@ -174,6 +188,7 @@ public class ApplicationClass extends Application {
     public int getResourceId(String resourceName, String defType, String packageName) {
         return (!ASTObjectUtil.isNumber(resourceName) && ASTObjectUtil.isNonEmptyStr(resourceName)) ? this.getResources().getIdentifier(resourceName, defType, packageName) : 0;
     }
+
     public String packageName() {
         if (this.packageName == null) {
             PackageInfo info = this.packageInfo();
@@ -194,7 +209,27 @@ public class ApplicationClass extends Application {
     }
 
 
+    public FNRequest initGetRequest(String url) {
+        return new FNRequest(true, url);
+    }
 
+    public FNRequest initRequest(String actionID, View v) {
+        return initRequest(actionID, v, null);
+    }
+
+    public FNRequest initRequest(String actionID, View v, Object headerID) {
+        this.lastRequest = new FNRequest(actionID, v, headerID);
+        return this.lastRequest;
+    }
+
+    public FNRequest initRequest(String actionID, FNView v) {
+        return initRequest(actionID, v, null);
+    }
+
+    public FNRequest initRequest(String actionID, FNView v, Object headerID) {
+        this.lastRequest = new FNRequest(actionID, v, headerID);
+        return this.lastRequest;
+    }
 
     public Typeface getFontTypeFace(ASTEnum fontType) {
         switch (fontType) {
@@ -241,7 +276,19 @@ public class ApplicationClass extends Application {
         }
     }
 
+    public String resourceNameById(int resourceId) {
+        String resourceName = "Unable to find resource ID";
+        try {
+            return this.getApplicationContext().getResources().getResourceEntryName(resourceId);
+        } catch (Exception e) {
 
+        }
+        return resourceName;
+    }
+
+    public Object selectedObject() {
+        return null;
+    }
 
     public void initFont(ASTEnum fontType) {
         switch (fontType) {
@@ -272,4 +319,5 @@ public class ApplicationClass extends Application {
 
         }
     }
+
 }

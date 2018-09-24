@@ -4,12 +4,10 @@ package com.apitechnosoft.ipad.filepicker.fragment;
 import com.apitechnosoft.ipad.filepicker.DocumentLoader;
 import com.apitechnosoft.ipad.filepicker.adaptor.DocumentAdaptor;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 
 import java.util.ArrayList;
 
 import static com.apitechnosoft.ipad.utils.FNObjectUtil.isEmpty;
-import static java.security.AccessController.getContext;
 
 /**
  * Created 03-07-2017

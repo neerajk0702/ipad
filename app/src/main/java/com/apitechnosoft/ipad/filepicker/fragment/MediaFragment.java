@@ -37,7 +37,6 @@ import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.filepicker.view.GridSpacingItemDecoration;
 import com.apitechnosoft.ipad.fragment.MainFragment;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 
 import java.util.ArrayList;
 

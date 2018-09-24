@@ -21,7 +21,6 @@ import com.apitechnosoft.ipad.fragment.MainFragment;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
 import com.apitechnosoft.ipad.utils.ASTStringUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 
 import java.util.ArrayList;
 

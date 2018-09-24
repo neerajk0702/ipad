@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.activity.ChnagePassword;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.component.ASTTextView;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -22,7 +21,6 @@ import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
-import com.apitechnosoft.ipad.utils.FNReqResCode;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
