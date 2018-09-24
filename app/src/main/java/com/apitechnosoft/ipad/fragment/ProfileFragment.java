@@ -27,6 +27,7 @@ import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.FNReqResCode;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 

@@ -19,6 +19,7 @@ import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
@@ -54,6 +55,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_home);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         if (ASTUtil.isTablet(LoginHomeActivity.this)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             isTab = true;
