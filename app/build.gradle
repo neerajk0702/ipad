@@ -5,9 +5,10 @@ android {
     defaultConfig {
         applicationId "com.apitechnosoft.ipad"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -20,6 +21,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -58,11 +63,8 @@ dependencies {
     // SafetyNet reCAPTCHA
     implementation 'com.google.android.gms:play-services-safetynet:15.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:4.36.1'
-    implementation 'com.android.tools.build:gradle:3.1.4'
     implementation 'com.google.gms:google-services:4.0.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.google.dagger:dagger-compiler:2.17'
-    implementation 'com.google.auto.value:auto-value:1.6.2'
 }
 
 

@@ -42,6 +42,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class ShareSingleFileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -97,7 +100,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
 
         img = findViewById(R.id.img);
         webView = findViewById(R.id.web);
-        webLayout=findViewById(R.id.webLayout);
+        webLayout = findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
         String MediaData = getIntent().getStringExtra("MediaData");
         int MediaType = getIntent().getIntExtra("MediaType", 0);
@@ -254,7 +257,20 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                 final ASTProgressBar dotDialog = new ASTProgressBar(ShareSingleFileActivity.this);
                 dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(this);
-                final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + media.getFileName() + "&" + "itemSno=" + media.getSno() + "&" + "path=" + media.getFilePath() + "&" + "folderlocation=" + media.getFolderlocation();
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("emailId", emailStr);
+                    object.put("userName", UserId);
+                    object.put("commentl", commentStr);
+                    object.put("sharedfilename", media.getFileName());
+                    object.put("itemSno", media.getSno());
+                    object.put("path", media.getFilePath());
+                    object.put("folderlocation", media.getFolderlocation());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                final String url = Contants.BASE_URL + Contants.ShareDataapiNew +"jsonData="+ object.toString();
+                /* final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + media.getFileName() + "&" + "itemSno=" + media.getSno() + "&" + "path=" + media.getFilePath() + "&" + "folderlocation=" + media.getFolderlocation();*/
                 serviceCaller.CallCommanServiceMethod(url, "shareFile", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
