@@ -23,6 +23,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -38,6 +39,10 @@ import com.google.android.gms.common.api.Status;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
+import static com.facebook.appevents.UserDataStore.EMAIL;
+
 public class LoginHomeActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     boolean isTab;
     LoginButton facebooklogin;
@@ -49,13 +54,16 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     private static final int RC_SIGN_IN = 007;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
-
+    private static final String EMAIL = "email";
+    private static final String USER_POSTS = "user_posts";
+    private static final String AUTH_TYPE = "rerequest";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_home);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         if (ASTUtil.isTablet(LoginHomeActivity.this)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             isTab = true;
@@ -93,23 +101,26 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
     //get data from UI
     public void datatoView() {
-        facebooklogin.setReadPermissions("email");
-        facebooklogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                getUserDetails(loginResult);
-            }
+        //LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("EMAIL","public_profile"));
+        facebooklogin.setReadPermissions(Arrays.asList(EMAIL,"public_profile"));
+      //  facebooklogin.setAuthType(AUTH_TYPE);
+        facebooklogin.registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        getUserDetails(loginResult);
+                    }
 
-            @Override
-            public void onCancel() {
-                // App code
-            }
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
 
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
     }
 
 

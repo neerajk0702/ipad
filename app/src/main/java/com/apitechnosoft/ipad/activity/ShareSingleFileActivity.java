@@ -269,9 +269,9 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                final String url = Contants.BASE_URL + Contants.ShareDataapiNew +"jsonData="+ object.toString();
+                final String url = Contants.BASE_URL + Contants.ShareDataapiNew;
                 /* final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + media.getFileName() + "&" + "itemSno=" + media.getSno() + "&" + "path=" + media.getFilePath() + "&" + "folderlocation=" + media.getFolderlocation();*/
-                serviceCaller.CallCommanServiceMethod(url, "shareFile", new IAsyncWorkCompletedCallback() {
+                serviceCaller.CallCommanServiceMethod(url, object, "shareFile", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         if (isComplete) {

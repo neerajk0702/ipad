@@ -59,22 +59,11 @@ public class ApplicationClass extends Application {
         setAppInstance();
         this.init();
     }
-   /* static {
-        //HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());
-        HttpsURLConnection.setDefaultSSLSocketFactory(new TlsOnlySocketFactory());
-    }*/
 
     protected void setAppInstance() {
         ApplicationHelper.setApplicationObj(this);
     }
     private void init() {
-       /* try {
-            ProviderInstaller.installIfNeeded(getApplicationContext());
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }*/
         initActivityLifeCycleHandler();
         // Installing a newer security provider using Google Play Services to support
         // TLS v1.1 on Java 1.5 (API 15 or lower devices).
@@ -165,8 +154,8 @@ public class ApplicationClass extends Application {
     //---------------for volley -------------
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-          //  mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-            mRequestQueue = Volley.newRequestQueue(ApplicationHelper.application().getContext(), new HurlStack(null, ClientSSLSocketFactory.getSocketFactory()));
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+            //mRequestQueue = Volley.newRequestQueue(ApplicationHelper.application().getContext(), new HurlStack(null, ClientSSLSocketFactory.getSocketFactory()));
         }
 
         return mRequestQueue;

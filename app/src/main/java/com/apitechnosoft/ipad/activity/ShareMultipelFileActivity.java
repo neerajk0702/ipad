@@ -41,6 +41,10 @@ import com.apitechnosoft.ipad.utils.FontManager;
 import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -120,8 +124,8 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                         }
                         String SEPARATOR = ">";
                         String SEPARATORComma = ",";
-                        if (selectMediaList != null && selectMediaList.size()>0) {
-                            StringBuilder fileDetailBuilder = new StringBuilder();
+                        if (selectMediaList != null && selectMediaList.size() > 0) {
+                          /*  StringBuilder fileDetailBuilder = new StringBuilder();
                             for (MediaData data : selectMediaList) {
                                 fileDetailBuilder.append(data.getSno());
                                 fileDetailBuilder.append(SEPARATOR);
@@ -136,8 +140,34 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                                 fileDetailBuilder.append(SEPARATORComma);
                             }
                             String itemsno = fileDetailBuilder.toString();
-                            itemsno = itemsno.substring(0, itemsno.length() - SEPARATORComma.length()); //Remove last comma
-                            shareFile(itemsno);
+                            itemsno = itemsno.substring(0, itemsno.length() - SEPARATORComma.length()); //Remove last comma*/
+                            JSONObject object = new JSONObject();
+                            try {
+                                object.put("email", emailStr);
+                                object.put("userName", UserId);
+
+                                JSONArray fileArray = new JSONArray();
+                                String cdate = ASTUtil.getCurrentDate();
+                                for (MediaData data : selectMediaList) {
+                                    JSONObject fileobject = new JSONObject();
+                                    fileobject.put("fname", FirstName);
+                                    fileobject.put("lname", LastName);
+                                    fileobject.put("from", cdate);
+                                    fileobject.put("message", commentStr);
+                                    fileobject.put("itemSno", data.getSno());
+                                    fileobject.put("filename", data.getFileName());
+                                    fileobject.put("path", data.getFilePath());
+                                    fileobject.put("shareSno", data.getShareSno());
+                                    fileobject.put("folderlocation", data.getFolderlocation());
+                                    fileArray.put(fileobject);
+                                }
+                                object.put("fileDetail", fileArray);
+                                shareFile(object);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
                         } else {
                             ASTUIUtil.showToast("Please Select file!");
                         }
@@ -169,14 +199,16 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         Toast.makeText(ShareMultipelFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void shareFile(String itemsno) {
+    private void shareFile(JSONObject object) {
         String cdate = ASTUtil.getCurrentDate();
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;
-            serviceCaller.CallCommanServiceMethod(url, "shareAllFile", new IAsyncWorkCompletedCallback() {
+            //final String url = "http://192.168.1.98:8080/IpadProject/" + Contants.ShareDataMultiFileApi;
+            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
+            /* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*/
+            serviceCaller.CallCommanServiceMethod(url, object, "shareAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
