@@ -30,8 +30,10 @@ import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
@@ -45,7 +47,13 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import javax.net.ssl.HttpsURLConnection;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class ShareSingleFileActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
@@ -300,12 +308,59 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         }
     }
 
+    public void shareSingleFile() {
+        if (ASTUIUtil.isOnline(ShareSingleFileActivity.this)) {
+            final ASTProgressBar progressBar = new ASTProgressBar(ShareSingleFileActivity.this);
+            progressBar.show();
+            final String serviceURL = Contants.BASE_URL + Contants.ShareDataapiNew;
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("emailId", emailStr);
+            payloadList.put("userName", UserId);
+            payloadList.put("commentl", commentStr);
+            payloadList.put("sharedfilename", media.getFileName().toString());
+            payloadList.put("itemSno", String.valueOf(media.getSno()));
+            payloadList.put("path", media.getFilePath());
+            payloadList.put("folderlocation", media.getFolderlocation());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(ShareSingleFileActivity.this, payloadList, multipartBody, serviceURL) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                showToast("File shared Successfully");
+                                finish();
+                            } else {
+                                Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, ShareSingleFileActivity.this);//off line msg....
+        }
+
+    }
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogIn:
                 if (isValidate()) {
-                    shareFile();
+                    //shareFile();
+                    shareSingleFile();
                 }
                 break;
         }

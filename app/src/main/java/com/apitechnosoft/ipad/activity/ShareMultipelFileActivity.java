@@ -205,7 +205,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            //final String url = "http://192.168.1.98:8080/IpadProject/" + Contants.ShareDataMultiFileApi;
+            //final String url = "http://192.168.1.98:8080/IpadProject/ShareDataMultiFileApi/sharemultiData";
             final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
             /* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*/
             serviceCaller.CallCommanServiceMethod(url, object, "shareAllFile", new IAsyncWorkCompletedCallback() {
