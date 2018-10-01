@@ -313,6 +313,59 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
             final ASTProgressBar progressBar = new ASTProgressBar(ShareSingleFileActivity.this);
             progressBar.show();
             final String serviceURL = Contants.BASE_URL + Contants.ShareDataapiNew;
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("emailId", emailStr);
+                object.put("userName", UserId);
+                object.put("commentl", commentStr);
+                object.put("sharedfilename", media.getFileName());
+                object.put("itemSno", media.getSno());
+                object.put("path", media.getFilePath());
+                object.put("folderlocation", media.getFolderlocation());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("jsonData", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(ShareSingleFileActivity.this, payloadList, multipartBody, serviceURL) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                showToast("File shared Successfully");
+                                finish();
+                            } else {
+                                Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, ShareSingleFileActivity.this);//off line msg....
+        }
+
+    }
+
+ /*   public void shareSingleFile() {
+        if (ASTUIUtil.isOnline(ShareSingleFileActivity.this)) {
+            final ASTProgressBar progressBar = new ASTProgressBar(ShareSingleFileActivity.this);
+            progressBar.show();
+            final String serviceURL = Contants.BASE_URL + Contants.ShareDataapiNew;
             HashMap<String, String> payloadList = new HashMap<String, String>();
             payloadList.put("emailId", emailStr);
             payloadList.put("userName", UserId);
@@ -351,7 +404,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
             ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, ShareSingleFileActivity.this);//off line msg....
         }
 
-    }
+    }*/
 
 
     @Override

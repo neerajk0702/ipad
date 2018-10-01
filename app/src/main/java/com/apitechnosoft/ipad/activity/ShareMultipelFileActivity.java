@@ -26,6 +26,7 @@ import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.ShareAllFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.Audioist;
@@ -46,8 +47,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import okhttp3.MultipartBody;
 
 public class ShareMultipelFileActivity extends AppCompatActivity implements View.OnClickListener {
     String UserId, FirstName, LastName;
@@ -199,7 +203,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         Toast.makeText(ShareMultipelFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void shareFile(JSONObject object) {
+  /*  private void shareFile(JSONObject object) {
         String cdate = ASTUtil.getCurrentDate();
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
@@ -207,7 +211,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
             ServiceCaller serviceCaller = new ServiceCaller(this);
             //final String url = "http://192.168.1.98:8080/IpadProject/ShareDataMultiFileApi/sharemultiData";
             final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
-            /* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*/
+            *//* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*//*
             serviceCaller.CallCommanServiceMethod(url, object, "shareAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -235,8 +239,45 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         } else {
             showToast(Contants.OFFLINE_MESSAGE);
         }
-    }
+    }*/
+    public void shareFile(JSONObject object) {
+        if (ASTUIUtil.isOnline(ShareMultipelFileActivity.this)) {
+            final ASTProgressBar progressBar = new ASTProgressBar(ShareMultipelFileActivity.this);
+            progressBar.show();
+            final String serviceURL = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("userData", object.toString());
 
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(ShareMultipelFileActivity.this, payloadList, multipartBody, serviceURL) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                showToast("File shared Successfully");
+                                finish();
+                            } else {
+                                Toast.makeText(ShareMultipelFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(ShareMultipelFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, ShareMultipelFileActivity.this);//off line msg....
+        }
+
+    }
     private void getAllFile() {
         if (ASTUIUtil.isOnline(ShareMultipelFileActivity.this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
