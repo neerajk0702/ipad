@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("headerTxt", "Education");
             this.updateFragment(new EducationFragment(), bundle);
         } else if (id == R.id.nav_Press) {
-               bundle.putString("headerTxt", "Press");
+            bundle.putString("headerTxt", "Press");
             this.updateFragment(new PressFragment(), bundle);
 
         } else if (id == R.id.nav_Contact) {
@@ -659,11 +659,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.commit();
 
                                 loginUsrName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
-                                String filePath = data.getUserprofile().getFilePath();
-                                if (filePath != null) {
-                                    String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-                                    Picasso.with(ApplicationHelper.application().getContext()).load(newpath).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                if (data.getUserprofile() != null) {
+                                    String filePath = data.getUserprofile().getFilePath();
+                                    if (filePath != null) {
+                                        String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
+                                        Picasso.with(ApplicationHelper.application().getContext()).load(newpath).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                    }
                                 }
+
                             }
                         }
                     }
