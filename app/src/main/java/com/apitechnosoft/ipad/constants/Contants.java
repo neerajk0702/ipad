@@ -17,6 +17,9 @@ public class Contants {
     public static final String Error = "Server Side error!";
     public static String Login = "login/dologin?";
     public static String signup = "UserRegistrationApi/doRegister?";
+    public static String SocialMediaRegistration = "SocialMediaRegistration/registration?";
+    public static String SocialMediaLogin = "SocialMediaLoginApi/loginsocilamedia?";
+
 
     // public static String BASE_URL = " http://192.168.1.98:8080/IpadProject/";
     public static String UPLOAD_FILE = "FileUplodingApi/fileupload";
