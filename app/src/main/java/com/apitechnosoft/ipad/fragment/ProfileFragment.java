@@ -179,10 +179,13 @@ public class ProfileFragment extends MainFragment {
                                 editor.commit();
                                 loginUserName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
                                 emailusername.setText(emailStr);
-                                String filePath = data.getUserprofile().getFilePath();
-                                String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-
-                                Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(profileImg);
+                                if (data.getUserprofile() != null) {
+                                    String filePath = data.getUserprofile().getFilePath();
+                                    if (filePath != null) {
+                                        String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
+                                        Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(profileImg);
+                                    }
+                                }
 
 
                             }
