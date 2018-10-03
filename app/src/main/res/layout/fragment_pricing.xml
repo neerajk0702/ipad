@@ -95,16 +95,6 @@
                             android:text="FREE FOR ALL USERS"
                             android:textSize="@dimen/_12dp" />
 
-                        <Button
-                            style="@style/DefaultButtonText"
-                            android:layout_width="@dimen/_180dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_20dp"
-                            android:background="@drawable/free_button"
-                            android:gravity="center"
-                            android:text="JOIN NOW"
-                            android:textSize="@dimen/_12dp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -179,14 +169,14 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <CheckBox
+                            <CheckBox android:id="@+id/silvermonth"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
                                 android:layout_marginRight="@dimen/_5dp"
                                 android:text="Monthly" />
 
-                            <CheckBox
+                            <CheckBox android:id="@+id/silveryear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_10dp"
@@ -194,7 +184,7 @@
                                 android:text="Yearly" />
                         </LinearLayout>
 
-                        <Button
+                        <Button android:id="@+id/silverbt"
                             style="@style/DefaultButtonText"
                             android:layout_width="@dimen/_180dp"
                             android:layout_height="wrap_content"
@@ -269,7 +259,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="$5.99/Month"
+                            android:text="$9.99/Month"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -278,7 +268,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="$59.90/Year (2 Months Free)"
+                            android:text="$99.90/Year (2 Months Free)"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -289,14 +279,14 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <CheckBox
+                            <CheckBox android:id="@+id/goldmonth"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/_5dp"
                                 android:textColor="@color/white"
                                 android:text="Monthly" />
 
-                            <CheckBox
+                            <CheckBox android:id="@+id/goldyear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_10dp"
@@ -304,7 +294,7 @@
                                 android:text="Yearly" />
                         </LinearLayout>
 
-                        <Button
+                        <Button android:id="@+id/goldbt"
                             style="@style/DefaultButtonText"
                             android:layout_width="@dimen/_180dp"
                             android:textColor="@color/white"

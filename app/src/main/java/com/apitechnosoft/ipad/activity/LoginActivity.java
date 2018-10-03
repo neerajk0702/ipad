@@ -71,9 +71,12 @@ public class LoginActivity extends AppCompatActivity {
     EditText edt_phone, edt_password;
     String passwordStr, emailStr;
     TextView welcom, forgotPasssword;
-    public final String SiteKey = "6LdwxD8UAAAAAGBNbiw0GF4E_8sopV1ZtfnHDcYt";
-    public final String SiteSecretKey = "6LcWu18UAAAAAMZU2Wh8MSyhgcw8CkgyQBR08f1n";
+    public final String SiteKey = "6LfX9XIUAAAAABxYNoXqqajjwCVNg-tqyZtrc2yp";
+    public final String SiteSecretKey = "6LfX9XIUAAAAAKf_nuYjGe71TOhrZF6IbFv_4eFt";
+    private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final String URL_VERIFY_ON_SERVER = Contants.BASE_URL + Contants.VerifyRecaptchaApi;
     private GoogleApiClient mGoogleApiClient;
+    ASTProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,11 +141,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialog.dismiss();
                 if (ASTUIUtil.isOnline(context)) {
-                    final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
-                    dotDialog.show();
-                      validateCaptcha();
-                  //  Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
-                   // startActivity(intent);
+                    validateCaptcha();
+                    //  Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
+                    // startActivity(intent);
                 }
             }
 
@@ -171,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(LoginActivity.this, emailStr,passwordStr);
+                                ASTUIUtil.setUserId(LoginActivity.this, emailStr, passwordStr);
                                 Toast.makeText(LoginActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
@@ -329,19 +330,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final String SAFETY_NET_API_SITE_KEY = "6LcWu18UAAAAAMZU2Wh8MSyhgcw8CkgyQBR08f1n";
-    private static final String URL_VERIFY_ON_SERVER = "https://www.google.com/recaptcha/api/siteverify";
-
     public void validateCaptcha() {
+        progressBar = new ASTProgressBar(LoginActivity.this);
+        progressBar.show();
         // Showing reCAPTCHA dialog
-        SafetyNet.getClient(this).verifyWithRecaptcha(SAFETY_NET_API_SITE_KEY)
+        SafetyNet.getClient(this).verifyWithRecaptcha(SiteKey)
                 .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
                     @Override
                     public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
                         Log.d(TAG, "onSuccess");
                         if (!response.getTokenResult().isEmpty()) {
-                            verifyTokenOnServer(response.getTokenResult());
+                            //verifyTokenOnServer(response.getTokenResult());
+                            forgotPasswordSendResponceToken(response.getTokenResult());
                         }
                     }
                 })
@@ -354,6 +354,9 @@ public class LoginActivity extends AppCompatActivity {
                                     CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
                         } else {
                             Log.d(TAG, "Unknown type of error: " + e.getMessage());
+                        }
+                        if (progressBar.isShowing()) {
+                            progressBar.dismiss();
                         }
                     }
                 });
@@ -378,8 +381,9 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
-                    String message = jsonObject.getString("message");
+
                     if (success) {
+                        String message = jsonObject.getString("message");
                         ServiceCaller serviceCaller = new ServiceCaller(LoginActivity.this);
                         final String url = Contants.BASE_URL + Contants.ForgetPassword + "emailid=" + emailStr + "&" + "RecaptchaResponse=" + "";
                         serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
@@ -400,10 +404,16 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     showToast(Contants.Error);
                                 }
+                                if (progressBar.isShowing()) {
+                                    progressBar.dismiss();
+                                }
                             }
                         });
                     } else {
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "No Data", Toast.LENGTH_LONG).show();
+                        if (progressBar.isShowing()) {
+                            progressBar.dismiss();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -415,17 +425,51 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error: " + error.getMessage());
+                if (progressBar.isShowing()) {
+                    progressBar.dismiss();
+                }
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("recaptcha-response", token);
-
                 return params;
             }
         };
 
         ApplicationHelper.application().addToRequestQueue(strReq);
+    }
+
+    private void forgotPasswordSendResponceToken(String responseCode) {
+        if (ASTUIUtil.isOnline(this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(this);
+            serviceCaller.CallCommanServiceMethod(URL_VERIFY_ON_SERVER, "forgotPasswordSendResponceToken", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                Toast.makeText(LoginActivity.this, "Password reset link send into your registered Mailid.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, data.getError_msg(), Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, data.getError_msg(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            showToast(Contants.OFFLINE_MESSAGE);
+        }
     }
 }

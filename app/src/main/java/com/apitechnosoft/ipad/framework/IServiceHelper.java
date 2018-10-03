@@ -17,5 +17,6 @@ public interface IServiceHelper {
     public void callGetService(String url, JSONObject jsonInputObj, IServiceSuccessCallback c);
 
     public void callJsonArryService(String url, Map<String, String> params, IServiceSuccessCallback c);
+   // public void callServiceWithStringRequest(String url, String jsonInputObj, IServiceSuccessCallback c);
 }
 

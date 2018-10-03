@@ -106,7 +106,11 @@
             android:singleLine="true"
             android:textColorHint="#919191"
             android:textSize="14dp" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="#919191" />
         <Button
             android:id="@+id/btnLogIn"
             style="@style/DefaultButtonText"

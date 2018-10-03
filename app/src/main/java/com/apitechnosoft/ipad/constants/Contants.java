@@ -63,7 +63,8 @@ public class Contants {
     public static String ChnagePassword = "ChangePasswordApi/chnagepassword?";
     public static String UpdateUserName = "UpdateUserNameApi/updateusername?";
     public static String UploadProfilePic = "UploadProfileApi/saveuprofile";
-
+    public static String ServcePlanApi = "ServcePlanApi/saveplan?";
+    public static String VerifyRecaptchaApi = "VerifyRecaptchaApi/verifyrecaptcha";
 
 }
 

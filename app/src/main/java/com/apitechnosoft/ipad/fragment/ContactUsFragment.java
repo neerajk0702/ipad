@@ -90,6 +90,12 @@ public class ContactUsFragment extends MainFragment {
             super.onPostExecute(aVoid);
             try {
                 if (aVoid) {
+                    edt_firstname.setText("");
+                    edt_lastname.setText("");
+                    edt_mail.setText("");
+                    edt_subject.setText("");
+                    edt_message.setText("");
+
                     Toast.makeText(getContext(), "Thanku for Contact us.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Something wrong.", Toast.LENGTH_LONG).show();
@@ -104,29 +110,22 @@ public class ContactUsFragment extends MainFragment {
         protected Boolean doInBackground(String... params) {
             boolean doneflag = false;
 
-           message = "<h3>IPAD User Name <b> " + fname + " " + lname + " </b><br> Contact's You <br> <br><br> " + message1 + "<br><br>";
+            message = "<h3>IPAD User Name <b> " + fname + " " + lname + " " + from + " </b><br> Contact's You <br> <br><br> " + message1 + "<br><br>";
             Mail m = new Mail("admin@rxdmedia.com", "Cowboys777!");
             String[] toArr = {"admin@rxdmedia.com"};//{"neerajk0702@gmail.com", "89neerajsingh@gmail.com"};
             m.setTo(toArr);
-            m.setFrom(from);
+            m.setFrom("admin@rxdmedia.com");
             m.setSubject(subject1);
             m.setBody(message);
             try {
                 if (m.send()) {
                     doneflag = true;
-                    edt_firstname.setText("");
-                    edt_lastname.setText("");
-                    edt_mail.setText("");
-                    edt_subject.setText("");
-                    edt_message.setText("");
-
                 } else {
                     doneflag = false;
                 }
             } catch (Exception e) {
                 //Log.e("MailApp", "Could not send email", e);
             }
-
 
 
             return doneflag;

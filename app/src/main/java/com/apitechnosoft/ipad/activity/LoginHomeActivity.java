@@ -36,6 +36,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.linkedin.platform.APIHelper;
+import com.linkedin.platform.LISessionManager;
+import com.linkedin.platform.errors.LIApiError;
+import com.linkedin.platform.errors.LIAuthError;
+import com.linkedin.platform.listeners.ApiListener;
+import com.linkedin.platform.listeners.ApiResponse;
+import com.linkedin.platform.listeners.AuthListener;
+import com.linkedin.platform.utils.Scope;
 
 import org.json.JSONObject;
 
@@ -48,7 +56,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     LoginButton facebooklogin;
     CallbackManager callbackManager;
     SignInButton btn_gsign_in;
-
+    Button instabt, linkedinbt;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
@@ -81,6 +89,11 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         Button signup = (Button) findViewById(R.id.signup);
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
+        instabt = findViewById(R.id.instabt);
+        linkedinbt = findViewById(R.id.linkedinbt);
+        instabt.setOnClickListener(this);
+        linkedinbt.setOnClickListener(this);
+
         LinearLayout joinLayout = findViewById(R.id.joinLayout);
         joinLayout.setOnClickListener(this);
         facebooklogin = findViewById(R.id.facebooklogin);
@@ -102,8 +115,8 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     //get data from UI
     public void datatoView() {
         //LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("EMAIL","public_profile"));
-        facebooklogin.setReadPermissions(Arrays.asList(EMAIL,"public_profile"));
-      //  facebooklogin.setAuthType(AUTH_TYPE);
+        facebooklogin.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
+        //  facebooklogin.setAuthType(AUTH_TYPE);
         facebooklogin.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -142,8 +155,13 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 Intent intentjoin = new Intent(LoginHomeActivity.this, RegisterActivity.class);
                 startActivity(intentjoin);
                 break;
+            case R.id.instabt:
+                signIn();
+                break;
+            case R.id.linkedinbt:
+                linkedInLogin();
+                break;
         }
-
 
     }
 
@@ -155,6 +173,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
+        LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
     }
 
     protected void getUserDetails(LoginResult loginResult) {
@@ -257,4 +276,43 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    //--------------linkdin login--------------------
+    private void linkedInLogin() {
+        LISessionManager.getInstance(getApplicationContext()).init(LoginHomeActivity.this, buildScope(), new AuthListener() {
+            @Override
+            public void onAuthSuccess() {
+                // Authentication was successful.  You can now do
+                // other calls with the SDK.
+                getLinkedData();
+            }
+
+            @Override
+            public void onAuthError(LIAuthError error) {
+                // Handle authentication errors
+            }
+        }, true);
+    }
+
+    // Build the list of member permissions our LinkedIn session requires
+    private static Scope buildScope() {
+        return Scope.build(Scope.R_BASICPROFILE, Scope.W_SHARE);
+    }
+
+    private void getLinkedData() {
+
+        String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name)";
+        APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
+        apiHelper.getRequest(this, url, new ApiListener() {
+            @Override
+            public void onApiSuccess(ApiResponse apiResponse) {
+                // Success!
+                Log.d(TAG, "apiResponse:" + apiResponse.toString());
+            }
+
+            @Override
+            public void onApiError(LIApiError liApiError) {
+                // Error making GET request!
+            }
+        });
+    }
 }

@@ -56,6 +56,11 @@ import com.apitechnosoft.ipad.runtimepermission.PermissionResultCallback;
 import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -65,7 +70,7 @@ import static com.apitechnosoft.ipad.ApplicationHelper.application;
 import static com.apitechnosoft.ipad.utils.ASTObjectUtil.isNonEmptyStr;
 import static com.apitechnosoft.ipad.utils.ASTUIUtil.showToast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback, GoogleApiClient.OnConnectionFailedListener {
 
     NavigationView navigationView;
     ArrayList<String> permissions = new ArrayList<>();
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView loginUsrName, loginUserEmailId;
     View profileLayout;
     ImageView sliderProfileImg;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +100,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         runTimePermission();
         getUserInfo();
         getAllNotification();
+
+        //for gmail login
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
     }
 
     @Override
@@ -287,6 +303,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(MainActivity.this, PrivacyActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_Logout) {
+            LoginManager.getInstance().logOut();
+            Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
             if (prefs != null) {
                 prefs.edit().clear().commit();
@@ -709,4 +727,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

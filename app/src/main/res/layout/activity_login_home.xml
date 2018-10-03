@@ -115,7 +115,7 @@
             android:layout_marginTop="@dimen/_10dp"
             android:orientation="horizontal">
 
-            <Button
+            <Button android:id="@+id/linkedinbt"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginRight="@dimen/_5dp"
@@ -124,7 +124,7 @@
                 android:text="Linkedin"
                 android:textColor="@color/white" />
 
-            <Button
+            <Button android:id="@+id/instabt"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginLeft="@dimen/_5dp"
