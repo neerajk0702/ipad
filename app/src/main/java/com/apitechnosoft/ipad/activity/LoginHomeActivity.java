@@ -163,7 +163,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onError(FacebookException exception) {
                 System.out.println("onError");
-                Log.v("LoginActivity", exception.getCause().toString());
             }
         });
 
@@ -300,6 +299,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onAuthError(LIAuthError error) {
                 // Handle authentication errors
+                Log.d(TAG, "error:" + error.toString());
             }
         }, true);
     }
