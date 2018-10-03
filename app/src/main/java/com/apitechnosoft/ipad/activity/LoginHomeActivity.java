@@ -311,13 +311,14 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
     private void getLinkedData() {
 
-        String url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name)";
+        String url = "https://api.linkedin.com/v1/people/~:(id,email-address,picture-url,first-name,last-name)";
         APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
         apiHelper.getRequest(this, url, new ApiListener() {
             @Override
             public void onApiSuccess(ApiResponse apiResponse) {
                 // Success!
                 Log.d(TAG, "apiResponse:" + apiResponse.toString());
+                callwithSocialMediaRegister("", "");
             }
 
             @Override
