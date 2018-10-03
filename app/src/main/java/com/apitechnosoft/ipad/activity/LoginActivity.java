@@ -1,5 +1,6 @@
 package com.apitechnosoft.ipad.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -11,9 +12,11 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
@@ -61,8 +64,12 @@ import com.google.android.gms.safetynet.SafetyNetApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -126,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //sendMail("89neerajsingh@gmail.com", "Mail test", "Device mail");
+
     }
 
 

@@ -11,9 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.component.ASTProgressBar;
+import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.fragment.HomeFragment;
+import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
+import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.facebook.CallbackManager;
@@ -45,8 +51,11 @@ import com.linkedin.platform.listeners.ApiResponse;
 import com.linkedin.platform.listeners.AuthListener;
 import com.linkedin.platform.utils.Scope;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 
 import static com.facebook.appevents.UserDataStore.EMAIL;
@@ -59,7 +68,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     Button instabt, linkedinbt;
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final int RC_SIGN_IN = 007;
+    private static final int RC_SIGN_IN = 7;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
     private static final String EMAIL = "email";
@@ -117,23 +126,53 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         //LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("EMAIL","public_profile"));
         facebooklogin.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
         //  facebooklogin.setAuthType(AUTH_TYPE);
-        facebooklogin.registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        getUserDetails(loginResult);
-                    }
+        facebooklogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
 
+                System.out.println("onSuccess");
+                progressDialog = new ASTProgressBar(LoginHomeActivity.this);
+                progressDialog.setMessage("Procesando datos...");
+                progressDialog.show();
+                String accessToken = loginResult.getAccessToken().getToken();
+                Log.i("accessToken", accessToken);
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
-                    public void onCancel() {
-                        // App code
-                    }
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.i("LoginActivity", response.toString());
+                        // Get facebook data from login
+                        Bundle bFacebookData = getFacebookData(object);
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
+                        String emailid = bFacebookData.getString("email");
+                        String fname = bFacebookData.getString("first_name");
+                        // String last_name = bFacebookData.getString("last_name");
+                        // String name = fname +" "+ last_name;
+
+                        callwithSocialMediaRegister(emailid, fname);
+
+
+                        progressDialog.dismiss();
                     }
                 });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                System.out.println("onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                System.out.println("onError");
+                Log.v("LoginActivity", exception.getCause().toString());
+            }
+        });
+
+
     }
 
 
@@ -176,26 +215,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
     }
 
-    protected void getUserDetails(LoginResult loginResult) {
-        GraphRequest data_request = GraphRequest.newMeRequest(
-                loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(
-                            JSONObject json_object,
-                            GraphResponse response) {
-                        //    Intent intent = new Intent(LoginHomeActivity.this, HomeFragment.class);
-                        //    intent.putExtra("userProfile", json_object.toString());
-                        //   startActivity(intent);
-                    }
-
-                });
-        Bundle permission_param = new Bundle();
-        permission_param.putString("fields", "id,name,email,picture.width(120).height(120)");
-        data_request.setParameters(permission_param);
-        data_request.executeAsync();
-
-    }
-
     protected void onResume() {
         super.onResume();
     }
@@ -224,13 +243,10 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-
             Log.e(TAG, "display name: " + acct.getDisplayName());
-
             String personName = acct.getDisplayName();
             String personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
-
             Log.e(TAG, "Name: " + personName + ", email: " + email
                     + ", Image: " + personPhotoUrl);
 
@@ -314,5 +330,169 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 // Error making GET request!
             }
         });
+    }
+
+    private Bundle getFacebookData(JSONObject object) {
+        try {
+            Bundle bundle = new Bundle();
+            String id = object.getString("id");
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
+            if (object.has("birthday"))
+                bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("location"))
+                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+            return bundle;
+        } catch (JSONException e) {
+            Log.d(TAG, "Error parsing JSON");
+        }
+        return null;
+    }
+
+
+    private void callwithSocialMediaRegister(String emailStr, String fname) {
+        if (ASTUIUtil.isOnline(this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(LoginHomeActivity.this);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(this);
+            final String url = Contants.BASE_URL + Contants.SocialMediaRegistration + "emailid=" + emailStr + "&" + "fname=" + fname;
+            serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                Toast.makeText(LoginHomeActivity.this, "Registeration Successfully.", Toast.LENGTH_LONG).show();
+                                Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
+                                startActivity(intentLoggedIn);
+
+                            } else {
+                                Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+
+                                if (data.getError_msg().equalsIgnoreCase("User email already Registr")) {
+                                    loginFacebook();
+                                }
+
+                            }
+                        } else {
+                            Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            showToast(Contants.OFFLINE_MESSAGE);
+        }
+
+    }
+
+
+    public void loginFacebook() {
+        facebooklogin.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
+        //  facebooklogin.setAuthType(AUTH_TYPE);
+        facebooklogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                System.out.println("onSuccess");
+                progressDialog = new ASTProgressBar(LoginHomeActivity.this);
+                progressDialog.setMessage("Procesando datos...");
+                progressDialog.show();
+                String accessToken = loginResult.getAccessToken().getToken();
+                Log.i("accessToken", accessToken);
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.i("LoginActivity", response.toString());
+                        // Get facebook data from login
+                        Bundle bFacebookData = getFacebookData(object);
+
+                        String emailid = bFacebookData.getString("email");
+                        String fname = bFacebookData.getString("first_name");
+                        // String last_name = bFacebookData.getString("last_name");
+                        // String name = fname +" "+ last_name;
+                        callwithSocialMediaLogin(emailid, fname);
+
+                        progressDialog.dismiss();
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                System.out.println("onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                System.out.println("onError");
+            }
+        });
+
+
+    }
+
+    private void callwithSocialMediaLogin(String emailStr, String fname) {
+        if (ASTUIUtil.isOnline(this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(LoginHomeActivity.this);
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(this);
+            final String url = Contants.BASE_URL + Contants.SocialMediaLogin + "username=" + emailStr;
+            serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                Toast.makeText(LoginHomeActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
+                                Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
+                                startActivity(intentLoggedIn);
+
+
+                            } else {
+                                Toast.makeText(LoginHomeActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginHomeActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            showToast(Contants.OFFLINE_MESSAGE);
+        }
+
     }
 }
