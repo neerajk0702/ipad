@@ -42,6 +42,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.gson.Gson;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISessionManager;
 import com.linkedin.platform.errors.LIApiError;
@@ -131,9 +132,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(LoginResult loginResult) {
 
                 System.out.println("onSuccess");
-                progressDialog = new ASTProgressBar(LoginHomeActivity.this);
-                progressDialog.setMessage("Procesando datos...");
-                progressDialog.show();
                 String accessToken = loginResult.getAccessToken().getToken();
                 Log.i("accessToken", accessToken);
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
@@ -149,9 +147,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         // String name = fname +" "+ last_name;
 
                         callwithSocialMediaRegister(emailid, fname);
-
-
-                        progressDialog.dismiss();
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -395,7 +390,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        showToast(Contants.Error);
+                        ASTUIUtil.showToast(Contants.Error);
                     }
                     if (dotDialog.isShowing()) {
                         dotDialog.dismiss();
@@ -403,7 +398,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 }
             });
         } else {
-            showToast(Contants.OFFLINE_MESSAGE);
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
 
     }
@@ -417,9 +412,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(LoginResult loginResult) {
 
                 System.out.println("onSuccess");
-                progressDialog = new ASTProgressBar(LoginHomeActivity.this);
-                progressDialog.setMessage("Procesando datos...");
-                progressDialog.show();
                 String accessToken = loginResult.getAccessToken().getToken();
                 Log.i("accessToken", accessToken);
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
@@ -434,8 +426,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         // String last_name = bFacebookData.getString("last_name");
                         // String name = fname +" "+ last_name;
                         callwithSocialMediaLogin(emailid, fname);
-
-                        progressDialog.dismiss();
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -483,7 +473,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(LoginHomeActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        showToast(Contants.Error);
+                        ASTUIUtil.showToast(Contants.Error);
                     }
                     if (dotDialog.isShowing()) {
                         dotDialog.dismiss();
@@ -491,7 +481,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 }
             });
         } else {
-            showToast(Contants.OFFLINE_MESSAGE);
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
 
     }
