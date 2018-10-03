@@ -62,6 +62,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
+import com.linkedin.platform.LISession;
+import com.linkedin.platform.LISessionManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -303,6 +305,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(MainActivity.this, PrivacyActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_Logout) {
+            if (isLogin()) {//linkedin logout
+                LISessionManager.getInstance(getApplicationContext()).clearSession();
+            }
             LoginManager.getInstance().logOut();
             Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
@@ -730,5 +735,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    //linkedin login check
+    private boolean isLogin() {
+        LISessionManager sessionManager = LISessionManager.getInstance(getApplicationContext());
+        LISession session = sessionManager.getSession();
+        boolean accessTokenValid = session.isValid();
+        return accessTokenValid;
     }
 }

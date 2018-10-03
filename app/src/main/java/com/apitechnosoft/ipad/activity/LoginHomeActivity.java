@@ -306,7 +306,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
     // Build the list of member permissions our LinkedIn session requires
     private static Scope buildScope() {
-        return Scope.build(Scope.R_BASICPROFILE, Scope.W_SHARE);
+        return Scope.build(Scope.R_BASICPROFILE,Scope.R_EMAILADDRESS, Scope.W_SHARE);
     }
 
     private void getLinkedData() {
