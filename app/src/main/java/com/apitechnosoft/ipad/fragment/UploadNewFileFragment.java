@@ -116,6 +116,10 @@ public class UploadNewFileFragment extends MainFragment {
                 filename.setText(deviceFile.getFileName());
                 mimtype = deviceFile.getMimeType();
             }
+
+        }
+        if(!mimtype.contains("image")){
+            ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!!", getContext());//off line msg....
         }
     }
 

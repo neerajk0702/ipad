@@ -38,6 +38,7 @@ import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.DownloadService;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.Commentdata;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Emaildata;
@@ -174,7 +175,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         });
     }
 
-    private void alertForShowDoc(final int position, ArrayList<Emaildata> emailList) {
+    private void alertForShowDoc(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -261,7 +262,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowImage(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowImage(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -340,7 +341,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowVideo(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowVideo(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -463,7 +464,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowAudio(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowAudio(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -674,12 +675,12 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         Log.d(Contants.LOG_TAG, "Get All File**" + result);
-                        ArrayList<Emaildata> emailList = null;
+                        ArrayList<Commentdata> emailList = null;
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
                                 if (data.getEmaildata() != null) {
-                                    emailList = new ArrayList<Emaildata>(Arrays.asList(data.getEmaildata()));
+                                    emailList = new ArrayList<Commentdata>(Arrays.asList(data.getCommentdata()));
                                 } else {
                                     Toast.makeText(mContext, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
                                 }
@@ -701,7 +702,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         }
     }
 
-    private void openPopup(int position, ArrayList<Emaildata> emailList) {
+    private void openPopup(int position, ArrayList<Commentdata> emailList) {
         if (type == 1) {
             alertForShowImage(position, emailList);
         } else if (type == 2) {

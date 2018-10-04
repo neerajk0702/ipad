@@ -255,7 +255,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="See All File"
+                    android:text="View All File"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/_14dp" />
@@ -286,6 +286,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30dp"
             android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_5dp"
             android:layout_marginRight="@dimen/_10dp"
             android:orientation="horizontal">
 

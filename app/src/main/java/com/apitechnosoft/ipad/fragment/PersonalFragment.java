@@ -545,7 +545,7 @@ public class PersonalFragment extends MainFragment {
             recyclerView.removeAllViewsInLayout();
             if (seeallfileFlag) {//show only 12 file
                 ArrayList<MediaData> seemediaList = new ArrayList<>();
-                for (int i = 0; i < 12; i++) {
+                for (int i = 0; i < 8; i++) {
                     if (i < newmediaList.size()) {
                         seemediaList.add(newmediaList.get(i));
                     }

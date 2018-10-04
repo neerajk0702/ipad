@@ -183,7 +183,9 @@ public class ProfileFragment extends MainFragment {
                                     String filePath = data.getUserprofile().getFilePath();
                                     if (filePath != null) {
                                         String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-                                        Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(profileImg);
+                                        if (newpath != null) {
+                                            Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(profileImg);
+                                        }
                                     }
                                 }
 

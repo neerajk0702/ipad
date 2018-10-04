@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PermissionUtils permissionUtils;
     private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1;
     private int REQUEST_CODE_GPS_PERMISSIONS = 2;
-    String UserId, FirstName, LastName;
+    String UserId, FirstName, LastName, profileimage;
     TextView loginUsrName, loginUserEmailId;
     View profileLayout;
     ImageView sliderProfileImg;
@@ -659,8 +659,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             UserId = prefs.getString("UserId", "");
             FirstName = prefs.getString("FirstName", "");
             LastName = prefs.getString("LastName", "");
+            profileimage = prefs.getString("profileimage", "");
             loginUsrName.setText(FirstName + " " + LastName);
             loginUserEmailId.setText(UserId);
+           /* if (profileimage != null) {
+                Picasso.with(ApplicationHelper.application().getContext()).load(profileimage).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+            }*/
         }
 
         if (ASTUIUtil.isOnline(this)) {
@@ -682,6 +686,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.commit();
 
                                 loginUsrName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
+
+
                                 if (data.getUserprofile() != null) {
                                     String filePath = data.getUserprofile().getFilePath();
                                     if (filePath != null) {
@@ -723,7 +729,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             Log.d(Contants.LOG_TAG, "Get All Notification**" + result);
-                            // headerFragment().updateNotification(data.getNotificationcount() + "");
+                             headerFragment().updateNotification(data.getNotificationcount() + "");
                         }
                     }
                 }

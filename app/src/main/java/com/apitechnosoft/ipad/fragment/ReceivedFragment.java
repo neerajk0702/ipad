@@ -20,11 +20,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.activity.NotificationActivity;
 import com.apitechnosoft.ipad.activity.ShareMultipelFileActivity;
 import com.apitechnosoft.ipad.adapter.NotificationAdapter;
@@ -66,6 +68,7 @@ public class ReceivedFragment extends MainFragment {
     FZProgressBar main_progressBar;
     TextView seeallfile;
     boolean seeallfileFlag = true;
+    HeaderFragment headerFragment;
 
     @Override
     protected int fragmentLayout() {
@@ -117,7 +120,21 @@ public class ReceivedFragment extends MainFragment {
         main_progressBar.bar_config(10, 0, 0, Color.TRANSPARENT, colors1);
         seeallfile = findViewById(R.id.seeallfile);
         getAllFile();
+
     }
+
+
+    protected void loadcartdata(String count) {
+        if (getHostActivity() == null) {
+            return;
+        }
+        this.headerFragment = this.getHostActivity().headerFragment();
+        if (headerFragment == null) {
+            return;
+        }
+        this.headerFragment.updateNotification(count);
+    }
+
 
     @Override
     protected void setClickListeners() {
@@ -326,7 +343,7 @@ public class ReceivedFragment extends MainFragment {
                             if (data != null) {
                                 Log.d(Contants.LOG_TAG, "Get Recived All File**" + result);
                                 showFileData(data);
-                                ApplicationHelper.application().getActivity().getAllNotification();
+                                getAllNotification();
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
                             }
@@ -508,7 +525,7 @@ public class ReceivedFragment extends MainFragment {
             RecivedFileAdapter mAdapter;
             if (seeallfileFlag) {//show only 15 file
                 ArrayList<MediaData> seemediaList = new ArrayList<>();
-                for (int i = 0; i < 12; i++) {
+                for (int i = 0; i < 8; i++) {
                     if (i < newmediaList.size()) {
                         seemediaList.add(newmediaList.get(i));
                     }
@@ -521,5 +538,29 @@ public class ReceivedFragment extends MainFragment {
         }
     }
 
+    public void getAllNotification() {
+        String UserId = "";
+        SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            // dotDialog.show();
 
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
+            serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                             loadcartdata(data.getNotificationcount() + "");
+                        }
+                    }
+                }
+            });
+        }
+    }
 }

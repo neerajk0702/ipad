@@ -12,10 +12,9 @@
 
     <com.apitechnosoft.ipad.utils.CircularImage
         android:id="@+id/sliderProfileImg"
-        android:layout_width="@dimen/_50dp"
-        android:layout_height="@dimen/_50dp"
+        android:layout_width="@dimen/_55dp"
+        android:layout_height="@dimen/_55dp"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/_5dp"
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_launcher" />
 

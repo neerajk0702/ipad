@@ -71,7 +71,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class LoginActivity extends AppCompatActivity {
     Button btnLogIn;
     Typeface materialdesignicons_font;
@@ -81,7 +80,8 @@ public class LoginActivity extends AppCompatActivity {
     public final String SiteKey = "6LfX9XIUAAAAABxYNoXqqajjwCVNg-tqyZtrc2yp";
     public final String SiteSecretKey = "6LfX9XIUAAAAAKf_nuYjGe71TOhrZF6IbFv_4eFt";
     private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final String URL_VERIFY_ON_SERVER = Contants.BASE_URL + Contants.VerifyRecaptchaApi;
+ //   private static final String URL_VERIFY_ON_SERVER = Contants.BASE_URL + Contants.VerifyRecaptchaApi;
+    private static final String URL_VERIFY_ON_SERVER = "http://192.168.1.98:8080/IpadProject/VerifyRecaptchaApi/verifyrecaptcha";
     private GoogleApiClient mGoogleApiClient;
     ASTProgressBar progressBar;
 
@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void alertForForgotPassword(final Context context) {
+    public void alertForForgotPassword(Context context) {
         final View myview = LayoutInflater.from(context).inflate(R.layout.forgot_password_layout, null);
         EditText edt_phone = myview.findViewById(R.id.edt_phone);
         Button btnLogIn = myview.findViewById(R.id.btnLogIn);
@@ -147,12 +147,17 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
-                if (ASTUIUtil.isOnline(context)) {
-                    validateCaptcha();
-                    //  Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
-                    // startActivity(intent);
+                 String emailstring = edt_phone.getText().toString().trim();
+                String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                if (emailstring != null && emailstring.length() > 0 && emailstring.matches(emailRegex)) {
+                    if (ASTUIUtil.isOnline(context)) {
+                        validateCaptcha(emailstring);
+                        //  Intent intent = new Intent(LoginActivity.this, ChnagePassword.class);
+                        // startActivity(intent);
+                        alertDialog.dismiss();
+                    }
                 }
+
             }
 
 
@@ -180,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(LoginActivity.this, emailStr, passwordStr);
+                                ASTUIUtil.setUserId(LoginActivity.this, emailStr, passwordStr, null, null);
                                 Toast.makeText(LoginActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
@@ -338,7 +343,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void validateCaptcha() {
+    public void validateCaptcha(String emailid) {
         progressBar = new ASTProgressBar(LoginActivity.this);
         progressBar.show();
         // Showing reCAPTCHA dialog
@@ -349,7 +354,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onSuccess");
                         if (!response.getTokenResult().isEmpty()) {
                             //verifyTokenOnServer(response.getTokenResult());
-                            forgotPasswordSendResponceToken(response.getTokenResult());
+                            forgotPasswordSendResponceToken(response.getTokenResult(), emailid);
                         }
                     }
                 })
@@ -449,12 +454,19 @@ public class LoginActivity extends AppCompatActivity {
         ApplicationHelper.application().addToRequestQueue(strReq);
     }
 
-    private void forgotPasswordSendResponceToken(String responseCode) {
+    private void forgotPasswordSendResponceToken(String captchacode, String emailid) {
         if (ASTUIUtil.isOnline(this)) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(LoginActivity.this);
-            dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
-            serviceCaller.CallCommanServiceMethod(URL_VERIFY_ON_SERVER, "forgotPasswordSendResponceToken", new IAsyncWorkCompletedCallback() {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("emailId", emailid);
+                jsonObject.put("captchacode", captchacode);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.d(Contants.LOG_TAG, "forgotPasswordSendResponceToken payload: " + jsonObject.toString());
+
+            serviceCaller.CallCommanServiceMethod(URL_VERIFY_ON_SERVER, jsonObject, "forgotPasswordSendResponceToken", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
@@ -471,8 +483,8 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         showToast(Contants.Error);
                     }
-                    if (dotDialog.isShowing()) {
-                        dotDialog.dismiss();
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
                     }
                 }
             });

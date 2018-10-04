@@ -103,7 +103,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         linkedinbt = findViewById(R.id.linkedinbt);
         instabt.setOnClickListener(this);
         linkedinbt.setOnClickListener(this);
-
         LinearLayout joinLayout = findViewById(R.id.joinLayout);
         joinLayout.setOnClickListener(this);
         facebooklogin = findViewById(R.id.facebooklogin);
@@ -143,10 +142,9 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
                         String emailid = bFacebookData.getString("email");
                         String fname = bFacebookData.getString("first_name");
-                        // String last_name = bFacebookData.getString("last_name");
-                        // String name = fname +" "+ last_name;
+                        String profile_pic = bFacebookData.getString("profile_pic");
 
-                        callwithSocialMediaRegister(emailid, fname);
+                        callwithSocialMediaRegister(emailid, fname,profile_pic);
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -241,6 +239,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             String personName = acct.getDisplayName();
             String personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
+            callwithSocialMediaLogin(email, personName);
             Log.e(TAG, "Name: " + personName + ", email: " + email
                     + ", Image: " + personPhotoUrl);
 
@@ -318,7 +317,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onApiSuccess(ApiResponse apiResponse) {
                 // Success!
                 Log.d(TAG, "apiResponse:" + apiResponse.toString());
-                callwithSocialMediaRegister("", "");
+                callwithSocialMediaRegister("", "","");
             }
 
             @Override
@@ -362,7 +361,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void callwithSocialMediaRegister(String emailStr, String fname) {
+    private void callwithSocialMediaRegister(String emailStr, String fname,String pimage) {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(LoginHomeActivity.this);
             dotDialog.show();
@@ -375,6 +374,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null,fname,null);
                                 Toast.makeText(LoginHomeActivity.this, "Registeration Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
