@@ -173,14 +173,13 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
                 // dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.RecentFileApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
+                final String url = Contants.BASE_URL + Contants.RecentFileApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "RecentFile Api", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
-                                Log.d(Contants.LOG_TAG, "Get Recent File**" + result);
                                 showFileData(data);
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
@@ -227,7 +226,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             }
         }
         if (mediaList != null && mediaList.size() > 0) {
-            Collections.reverse(mediaList);
+            //Collections.reverse(mediaList);
             RecentFileAdapter mAdapter = new RecentFileAdapter(getContext(), mediaList);
             recent_recycler_view.setAdapter(mAdapter);
         }

@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -50,13 +52,51 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.MyViewHolder> {
+public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.MyViewHolder> implements Filterable {
 
     private ArrayList<MediaData> mediaList;
+    public ArrayList<MediaData> masterMediaList;
     Context mContext;
     int type;
     Typeface materialdesignicons_font;
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+
+                    mediaList = masterMediaList;
+                } else {
+
+                    ArrayList<MediaData> filteredList = new ArrayList<MediaData>();
+
+                    for (MediaData data : masterMediaList) {
+
+                        if (data.getFileName().toLowerCase().contains(charString)) {
+                            filteredList.add(data);
+                        }
+                    }
+
+                    mediaList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mediaList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mediaList = (ArrayList<MediaData>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -73,6 +113,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
 
     public RecivedFileAdapter(Context mContext, ArrayList<MediaData> List, int type) {
         this.mediaList = List;
+        this.masterMediaList = List;
         this.mContext = mContext;
         this.type = type;
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");

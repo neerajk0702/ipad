@@ -95,7 +95,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.4"
+                android:layout_weight="0.3"
                 android:orientation="horizontal">
 
                 <com.apitechnosoft.ipad.component.ASTTextView
@@ -111,7 +111,7 @@
                     android:id="@+id/upFolder"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/_5dp"
+                    android:layout_marginRight="@dimen/_3dp"
                     android:text="ic"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/folder"
@@ -121,7 +121,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.6"
+                android:layout_weight="0.7"
                 android:gravity="center|right"
                 android:orientation="horizontal">
 
@@ -132,12 +132,13 @@
                     android:orientation="horizontal">
 
                     <com.apitechnosoft.ipad.component.ASTEditText
+                        android:id="@+id/searchedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:background="@drawable/bg_boder_round"
                         android:hint="Search..."
-                        android:padding="@dimen/_3dp"
+                        android:padding="@dimen/_2dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12dp" />
@@ -146,12 +147,12 @@
                         android:id="@+id/searchIcon"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.1"
                         android:gravity="center"
                         android:text="ic"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"
-                        android:textSize="@dimen/_18dp" />
+                        android:textSize="@dimen/_17dp" />
                 </LinearLayout>
                 <!-- <com.apitechnosoft.ipad.component.ASTTextView
                      android:layout_width="wrap_content"
@@ -202,8 +203,8 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,6 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_15dp"
                     android:background="@color/white" />
+
                 <com.apitechnosoft.ipad.component.ASTTextView
                     android:id="@+id/seeallfile"
                     android:layout_width="match_parent"

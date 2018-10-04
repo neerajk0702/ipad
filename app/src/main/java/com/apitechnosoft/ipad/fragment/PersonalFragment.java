@@ -15,7 +15,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +88,7 @@ public class PersonalFragment extends MainFragment {
     FZProgressBar main_progressBar;
     TextView seeallfile;
     boolean seeallfileFlag = true;
+    EditText searchedit;
 
     @Override
     protected int fragmentLayout() {
@@ -100,6 +103,7 @@ public class PersonalFragment extends MainFragment {
         doclayout = findViewById(R.id.doclayout);
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
+        searchedit = findViewById(R.id.searchedit);
 
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
@@ -147,6 +151,24 @@ public class PersonalFragment extends MainFragment {
         seeallfile = findViewById(R.id.seeallfile);
 
         getAllFile();
+
+        searchedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //after the change calling the method and passing the search input
+                mAdapter.getFilter().filter(editable.toString());
+            }
+        });
     }
 
     @Override
@@ -356,7 +378,7 @@ public class PersonalFragment extends MainFragment {
                 main_progressBar.animation_start(FZProgressBar.Mode.INDETERMINATE);
 
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
+                final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "GetFileListApi", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
@@ -500,9 +522,6 @@ public class PersonalFragment extends MainFragment {
                 mediaData.setExtension(documentlist.getExtension());
                 mediaList.add(mediaData);
             }
-        }
-        if (mediaList != null && mediaList.size() > 0) {
-            Collections.reverse(mediaList);
         }
         setAdapter(1);
     }

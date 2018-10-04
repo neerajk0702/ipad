@@ -12,7 +12,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +61,8 @@ public class SharedFragment extends MainFragment {
     FZProgressBar main_progressBar;
     TextView seeallfile;
     boolean seeallfileFlag = true;
-
+    EditText searchedit;
+    SharedFileAdapter mAdapter;
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -76,6 +79,7 @@ public class SharedFragment extends MainFragment {
         selectfoldet.setVisibility(View.GONE);
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
+        searchedit = findViewById(R.id.searchedit);
         // TextView filter = findViewById(R.id.filter);
         //TextView filterIcon = findViewById(R.id.filterIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
@@ -110,6 +114,24 @@ public class SharedFragment extends MainFragment {
         main_progressBar.bar_config(10, 0, 0, Color.TRANSPARENT, colors1);
         seeallfile = findViewById(R.id.seeallfile);
         getAllFile();
+
+        searchedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //after the change calling the method and passing the search input
+                mAdapter.getFilter().filter(editable.toString());
+            }
+        });
     }
 
     @Override
@@ -310,7 +332,7 @@ public class SharedFragment extends MainFragment {
                 main_progressBar.setVisibility(View.VISIBLE);
                 main_progressBar.animation_start(FZProgressBar.Mode.INDETERMINATE);
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.SharedFileApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
+                final String url = Contants.BASE_URL + Contants.SharedFileApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "Shared File", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
@@ -447,9 +469,7 @@ public class SharedFragment extends MainFragment {
                 mediaList.add(mediaData);
             }
         }
-        if (mediaList != null && mediaList.size() > 0) {
-            Collections.reverse(mediaList);
-        }
+
         setAdapter(1);
     }
 
@@ -489,7 +509,7 @@ public class SharedFragment extends MainFragment {
             }
             recyclerView.removeAllViews();
             recyclerView.removeAllViewsInLayout();
-            SharedFileAdapter mAdapter;
+
             if (seeallfileFlag) {//show only 15 file
                 ArrayList<MediaData> seemediaList = new ArrayList<>();
 
