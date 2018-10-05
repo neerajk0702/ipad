@@ -116,7 +116,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="376 MB used out of 5 GB"
                         android:padding="@dimen/_6dp"
                         android:textAlignment="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"

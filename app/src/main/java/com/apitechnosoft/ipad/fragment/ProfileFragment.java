@@ -74,7 +74,7 @@ public class ProfileFragment extends MainFragment {
         lname = this.findViewById(R.id.lname);
         this.findViewById(R.id.cancelButton).setVisibility(View.GONE);
         usertype = this.findViewById(R.id.usertype);
-        dataSize = this.findViewById(R.id.usertype);
+        dataSize = this.findViewById(R.id.dataSize);
 
     }
 
