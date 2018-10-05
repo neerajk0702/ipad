@@ -274,7 +274,8 @@
     <!--  </android.support.v4.widget.NestedScrollView>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_32dp"
+        android:layout_height="@dimen/_35dp"
+      android:layout_marginBottom="@dimen/_6dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
@@ -282,13 +283,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1dp"
             android:background="@color/orange"
+            android:layout_marginBottom="@dimen/_3dp"
             android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30dp"
+            android:layout_marginTop="@dimen/_1dp"
             android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginTop="@dimen/_5dp"
             android:layout_marginRight="@dimen/_10dp"
             android:orientation="horizontal">
 

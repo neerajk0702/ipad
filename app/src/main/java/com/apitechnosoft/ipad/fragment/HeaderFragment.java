@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
@@ -22,6 +23,7 @@ public class HeaderFragment extends MainFragment {
     protected FontViewField sliderBtn, backButton;
     private boolean showBackButton;
     private boolean showMenuButton;
+    RelativeLayout notificationLayout;
 
     @Override
     protected void getArgs() {
@@ -42,6 +44,8 @@ public class HeaderFragment extends MainFragment {
         this.Organizer = this.findViewById(R.id.Organizer);
         this.notification = this.findViewById(R.id.notificationicon);
         this.noticount = this.findViewById(R.id.noticount);
+        this.notificationLayout = this.findViewById(R.id.notification);
+
         getHostActivity().setDrawerState(showMenuButton);
 
     }
@@ -98,5 +102,9 @@ public class HeaderFragment extends MainFragment {
             noticount.setText(noti);
         }
 
+    }
+
+    public void setVisiVilityNotificationIcon(boolean isVisible) {
+        notificationLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 }

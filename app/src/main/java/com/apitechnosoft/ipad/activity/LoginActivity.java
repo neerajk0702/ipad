@@ -41,6 +41,7 @@ import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
@@ -70,6 +71,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogIn;
@@ -80,8 +83,8 @@ public class LoginActivity extends AppCompatActivity {
     public final String SiteKey = "6LfX9XIUAAAAABxYNoXqqajjwCVNg-tqyZtrc2yp";
     public final String SiteSecretKey = "6LfX9XIUAAAAAKf_nuYjGe71TOhrZF6IbFv_4eFt";
     private static final String TAG = LoginActivity.class.getSimpleName();
- //   private static final String URL_VERIFY_ON_SERVER = Contants.BASE_URL + Contants.VerifyRecaptchaApi;
-    private static final String URL_VERIFY_ON_SERVER = "http://192.168.1.98:8080/IpadProject/VerifyRecaptchaApi/verifyrecaptcha";
+    private static final String URL_VERIFY_ON_SERVER = Contants.BASE_URL + Contants.VerifyRecaptchaApi;
+    //   private static final String URL_VERIFY_ON_SERVER = "http://192.168.0.115:8080/IpadProject/VerifyRecaptchaApi/verifyrecaptcha";
     private GoogleApiClient mGoogleApiClient;
     ASTProgressBar progressBar;
 
@@ -147,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 String emailstring = edt_phone.getText().toString().trim();
+                String emailstring = edt_phone.getText().toString().trim();
                 String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
                 if (emailstring != null && emailstring.length() > 0 && emailstring.matches(emailRegex)) {
                     if (ASTUIUtil.isOnline(context)) {
@@ -454,26 +457,35 @@ public class LoginActivity extends AppCompatActivity {
         ApplicationHelper.application().addToRequestQueue(strReq);
     }
 
+
     private void forgotPasswordSendResponceToken(String captchacode, String emailid) {
-        if (ASTUIUtil.isOnline(this)) {
-            ServiceCaller serviceCaller = new ServiceCaller(this);
-            JSONObject jsonObject = new JSONObject();
+        if (ASTUIUtil.isOnline(LoginActivity.this)) {
+            final ASTProgressBar progressBar = new ASTProgressBar(LoginActivity.this);
+            progressBar.show();
+            final String serviceURL = URL_VERIFY_ON_SERVER;
+
+            JSONObject object = new JSONObject();
             try {
-                jsonObject.put("emailId", emailid);
-                jsonObject.put("captchacode", captchacode);
+                object.put("emailId", emailid);
+                object.put("captchacode", captchacode);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.d(Contants.LOG_TAG, "forgotPasswordSendResponceToken payload: " + jsonObject.toString());
 
-            serviceCaller.CallCommanServiceMethod(URL_VERIFY_ON_SERVER, jsonObject, "forgotPasswordSendResponceToken", new IAsyncWorkCompletedCallback() {
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("jsonData", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(LoginActivity.this, payloadList, multipartBody, serviceURL) {
                 @Override
-                public void onDone(String result, boolean isComplete) {
-                    if (isComplete) {
+                public void receiveData(String result) {
+                    if (result != null) {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
                                 Toast.makeText(LoginActivity.this, "Password reset link send into your registered Mailid.", Toast.LENGTH_LONG).show();
+
+                                finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, data.getError_msg(), Toast.LENGTH_LONG).show();
                             }
@@ -487,9 +499,11 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.dismiss();
                     }
                 }
-            });
+            };
+            fileUploaderHelper.execute();
         } else {
-            showToast(Contants.OFFLINE_MESSAGE);
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, LoginActivity.this);//off line msg....
         }
+
     }
 }

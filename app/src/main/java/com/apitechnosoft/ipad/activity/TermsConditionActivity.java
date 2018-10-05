@@ -4,12 +4,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.fragment.MainFragment;
 
-public class TermsConditionActivity extends AppCompatActivity {
+public class TermsConditionActivity extends MainFragment {
+    @Override
+    protected int fragmentLayout() {
+        return R.layout.activity_terms_condition;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_terms_condition);
+    protected void loadView() {
+
+    }
+
+    @Override
+    protected void setClickListeners() {
+    }
+
+    @Override
+    protected void setAccessibility() {
+    }
+
+    @Override
+    protected void dataToView() {
+
     }
 }
+

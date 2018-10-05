@@ -39,6 +39,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
+import static com.apitechnosoft.ipad.utils.ASTUIUtil.getColor;
 import static com.apitechnosoft.ipad.utils.ASTUIUtil.showToast;
 
 public class ProfileFragment extends MainFragment {
@@ -53,6 +54,8 @@ public class ProfileFragment extends MainFragment {
     String email;
     private static File selectFile;
     String mimtype;
+    TextView usertype;
+    HeaderFragment headerFragment;
 
     @Override
     protected int fragmentLayout() {
@@ -70,6 +73,8 @@ public class ProfileFragment extends MainFragment {
         fname = this.findViewById(R.id.fname);
         lname = this.findViewById(R.id.lname);
         this.findViewById(R.id.cancelButton).setVisibility(View.GONE);
+        usertype = this.findViewById(R.id.usertype);
+
     }
 
     @Override
@@ -85,6 +90,16 @@ public class ProfileFragment extends MainFragment {
 
     }
 
+    protected void loadcartdata() {
+        if (getHostActivity() == null) {
+            return;
+        }
+        this.headerFragment = this.getHostActivity().headerFragment();
+        if (headerFragment == null) {
+            return;
+        }
+        this.headerFragment.setVisiVilityNotificationIcon(false);
+    }
 
     @Override
     public void dataToView() {
@@ -179,6 +194,18 @@ public class ProfileFragment extends MainFragment {
                                 editor.commit();
                                 loginUserName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
                                 emailusername.setText(emailStr);
+                                if (data.getUser().getType().equals("0")) {
+                                    usertype.setText("Bronze User");
+                                    usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.browne));
+                                } else if (data.getUser().getType().equals("1")) {
+                                    usertype.setText("Silver User");
+                                    usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.silver3));
+                                } else if (data.getUser().getType().equals("2")) {
+                                    usertype.setText("Gold  User");
+                                    usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.gold));
+                                }
+
+                                loadcartdata();
                                 if (data.getUserprofile() != null) {
                                     String filePath = data.getUserprofile().getFilePath();
                                     if (filePath != null) {

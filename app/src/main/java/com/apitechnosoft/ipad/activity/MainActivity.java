@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ProfileFragment profileFragment = new ProfileFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("headerTxt", "My Profile");
-                updateFragment(profileFragment, null);
+                updateFragment(new ProfileFragment(), bundle);
             }
         });
 
@@ -299,11 +299,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("headerTxt", "Contact Us");
             this.updateFragment(new ContactUsFragment(), bundle);
         } else if (id == R.id.nav_Terms) {
-            Intent i = new Intent(MainActivity.this, TermsConditionActivity.class);
-            startActivity(i);
+            bundle.putString("headerTxt", "Terms of Service");
+            this.updateFragment(new TermsConditionActivity(), bundle);
+
         } else if (id == R.id.nav_Privacy) {
-            Intent i = new Intent(MainActivity.this, PrivacyActivity.class);
-            startActivity(i);
+            bundle.putString("headerTxt", "Privacy");
+            this.updateFragment(new PrivacyActivity(), bundle);
+
         } else if (id == R.id.nav_Logout) {
             if (isLogin()) {//linkedin logout
                 LISessionManager.getInstance(getApplicationContext()).clearSession();
@@ -729,7 +731,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             Log.d(Contants.LOG_TAG, "Get All Notification**" + result);
+                            headerFragment().setVisiVilityNotificationIcon(true);
                              headerFragment().updateNotification(data.getNotificationcount() + "");
+
                         }
                     }
                 }

@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -189,13 +190,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.Privacy:
-                Intent i = new Intent(RegisterActivity.this, PrivacyActivity.class);
-                startActivity(i);
+                Bundle bundle=new Bundle();
+                bundle.putString("headerTxt", "Terms of Service");
+                ApplicationHelper.application().getActivity().updateFragment(new PrivacyActivity(), bundle);
                 break;
             case R.id.welcom:
-                Intent i2 = new Intent(RegisterActivity.this, TermsConditionActivity.class);
-                startActivity(i2);
+                Bundle bundle1=new Bundle();
+                bundle1.putString("headerTxt", "Terms of Service");
+                ApplicationHelper.application().getActivity().updateFragment(new TermsConditionActivity(), bundle1);
                 break;
 
         }

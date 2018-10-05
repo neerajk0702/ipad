@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_230dp"
-                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginTop="@dimen/_2dp"
                 android:background="@color/folderbutton"
                 android:orientation="vertical">
 
@@ -85,6 +85,46 @@
                         android:textStyle="italic" />
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/usertype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="SILVER USER"
+                        android:background="@color/browne"
+                        android:layout_marginBottom="@dimen/_4dp"
+                        android:paddingLeft="@dimen/_8dp"
+                        android:paddingRight="@dimen/_8dp"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dataSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="376 MB used out of 5 GB"
+                        android:padding="@dimen/_6dp"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_10dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
 
@@ -94,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10dp"
                 android:layout_marginRight="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_190dp"
+                android:layout_marginTop="@dimen/_200dp"
                 android:background="@android:color/white"
                 hubworks:cardCornerRadius="@dimen/_5dp"
                 hubworks:cardElevation="@dimen/_3dp"
@@ -156,7 +196,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/_5dp"
+                        android:layout_marginTop="@dimen/_2dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 

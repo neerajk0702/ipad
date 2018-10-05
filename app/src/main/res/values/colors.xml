@@ -210,7 +210,7 @@
     <color name="blue1">#0066CC</color>
     <color name="red1">#E66454</color>
     <color name="darkRed1">#BE241F</color>
-    <color name="silver3">#EBECEE</color>
+    <color name="silver3">#C0C0C0</color>
     <color name="text_color">#737680</color>
     <color name="disable_cancel_color">#FCACB4</color>
     <color name="greenDark">#198719</color>
@@ -279,8 +279,8 @@
 
     </array>
 
-
+<color name="browne">#CD7F32</color>
     <color name="grey">#a0a0a0</color>
     <color name="calendar_number">#424A56</color>
-    <color name="pink">#FF4081</color>
+    <color name="gold">#FFD700</color>
 </resources>

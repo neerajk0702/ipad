@@ -73,6 +73,7 @@ public class ReceivedFragment extends MainFragment {
     HeaderFragment headerFragment;
     EditText searchedit;
     RecivedFileAdapter mAdapter;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -153,6 +154,7 @@ public class ReceivedFragment extends MainFragment {
         if (headerFragment == null) {
             return;
         }
+        this.headerFragment.setVisiVilityNotificationIcon(true);
         this.headerFragment.updateNotification(count);
     }
 
@@ -573,7 +575,7 @@ public class ReceivedFragment extends MainFragment {
                     if (isComplete) {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
-                             loadcartdata(data.getNotificationcount() + "");
+                            loadcartdata(data.getNotificationcount() + "");
                         }
                     }
                 }
