@@ -54,7 +54,7 @@ public class ProfileFragment extends MainFragment {
     String email;
     private static File selectFile;
     String mimtype;
-    TextView usertype;
+    TextView usertype, dataSize;
     HeaderFragment headerFragment;
 
     @Override
@@ -74,6 +74,7 @@ public class ProfileFragment extends MainFragment {
         lname = this.findViewById(R.id.lname);
         this.findViewById(R.id.cancelButton).setVisibility(View.GONE);
         usertype = this.findViewById(R.id.usertype);
+        dataSize = this.findViewById(R.id.usertype);
 
     }
 
@@ -194,6 +195,7 @@ public class ProfileFragment extends MainFragment {
                                 editor.commit();
                                 loginUserName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
                                 emailusername.setText(emailStr);
+                                dataSize.setText(data.getUsedsize() + "\tMB used out of" + data.getRemanningsiz() + "\tGB");
                                 if (data.getUser().getType().equals("0")) {
                                     usertype.setText("Bronze User");
                                     usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.browne));

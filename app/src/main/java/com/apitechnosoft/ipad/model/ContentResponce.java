@@ -111,4 +111,23 @@ public class ContentResponce {
     public String toString() {
         return "ClassPojo [user = " + user + ", userprofile = " + userprofile + "]";
     }
+
+    long remanningsiz;
+    long usedsize;
+
+    public long getRemanningsiz() {
+        return remanningsiz;
+    }
+
+    public void setRemanningsiz(long remanningsiz) {
+        this.remanningsiz = remanningsiz;
+    }
+
+    public long getUsedsize() {
+        return usedsize;
+    }
+
+    public void setUsedsize(long usedsize) {
+        this.usedsize = usedsize;
+    }
 }
