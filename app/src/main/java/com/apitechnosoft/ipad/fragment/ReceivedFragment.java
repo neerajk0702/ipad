@@ -140,7 +140,9 @@ public class ReceivedFragment extends MainFragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 //after the change calling the method and passing the search input
-                mAdapter.getFilter().filter(editable.toString());
+                if (mAdapter != null) {
+                    mAdapter.getFilter().filter(editable.toString());
+                }
             }
         });
     }
