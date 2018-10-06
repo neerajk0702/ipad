@@ -560,28 +560,32 @@ public class ReceivedFragment extends MainFragment {
     }
 
     public void getAllNotification() {
-        String UserId = "";
-        SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
-        if (prefs != null) {
-            UserId = prefs.getString("UserId", "");
-        }
-        if (ASTUIUtil.isOnline(getContext())) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-            // dotDialog.show();
+        try {
+            String UserId = "";
+            SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+            if (prefs != null) {
+                UserId = prefs.getString("UserId", "");
+            }
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                // dotDialog.show();
 
-            ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
-            serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
-                @Override
-                public void onDone(String result, boolean isComplete) {
-                    if (isComplete) {
-                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
-                        if (data != null) {
-                            loadcartdata(data.getNotificationcount() + "");
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
+                serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                            if (data != null) {
+                                loadcartdata(data.getNotificationcount() + "");
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+        } catch (Exception E) {
+
         }
     }
 }

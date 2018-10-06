@@ -728,10 +728,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
-                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
-                        if (data != null) {
-                            headerFragment().setVisiVilityNotificationIcon(true);
-                             headerFragment().updateNotification(data.getNotificationcount() + "");
+                        try {
+                            ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                            if (data != null) {
+                                headerFragment().setVisiVilityNotificationIcon(true);
+                                headerFragment().updateNotification(data.getNotificationcount() + "");
+
+                            }
+                        } catch (Exception E) {
 
                         }
                     }
