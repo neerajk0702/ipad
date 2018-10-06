@@ -264,9 +264,6 @@ public class CalendarAdapter extends BaseAdapter {
                             }
                         }).show();
                 break;
-            } else {
-
-
             }
         }
 

@@ -123,7 +123,7 @@ public class BirthdayFragment extends MainFragment {
         };
         timePickerDialog = new TimePickerDialog(getContext(), time, myCalendar
                 .get(Calendar.HOUR_OF_DAY), myCalendar
-                .get(Calendar.MINUTE), true);
+                .get(Calendar.MINUTE), false);
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");

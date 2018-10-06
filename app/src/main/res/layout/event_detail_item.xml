@@ -45,6 +45,7 @@
             android:paddingBottom="@dimen/_5dp"
             android:paddingTop="@dimen/_5dp"
             android:text=""
+            android:visibility="gone"
             android:textColor="@color/secondry_txt_color"
             android:textSize="@dimen/_12dp" />
 

@@ -369,7 +369,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         return null;
     }
 
-
     private void callwithSocialMediaRegister(String emailStr, String fname, String pimage) {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(LoginHomeActivity.this);

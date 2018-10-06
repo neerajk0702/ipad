@@ -730,7 +730,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (isComplete) {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
-                            Log.d(Contants.LOG_TAG, "Get All Notification**" + result);
                             headerFragment().setVisiVilityNotificationIcon(true);
                              headerFragment().updateNotification(data.getNotificationcount() + "");
 

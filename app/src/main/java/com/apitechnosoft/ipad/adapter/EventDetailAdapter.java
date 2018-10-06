@@ -55,7 +55,7 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
         holder.eventname.setText(eventdataList.get(position).getEventname());
         holder.eventtype.setText(eventdataList.get(position).getType());
         holder.fromdate.setText("From: " + eventdataList.get(position).getFromdate() + " " + eventdataList.get(position).getFromDateTime());
-        holder.todate.setText("To: " + eventdataList.get(position).getTodate() + " " + eventdataList.get(position).getToDateTime());
+       // holder.todate.setText("To: " + eventdataList.get(position).getTodate() + " " + eventdataList.get(position).getToDateTime());
         holder.eventdes.setText(eventdataList.get(position).getEventDescription());
     }
 

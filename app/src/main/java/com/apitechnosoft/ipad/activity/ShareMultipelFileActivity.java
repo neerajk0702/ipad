@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,12 +29,14 @@ import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.ShareAllFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.database.IpadDBHelper;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.Audioist;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.model.Data;
 import com.apitechnosoft.ipad.model.Documentlist;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.model.Photolist;
@@ -56,7 +61,8 @@ import okhttp3.MultipartBody;
 public class ShareMultipelFileActivity extends AppCompatActivity implements View.OnClickListener {
     String UserId, FirstName, LastName;
     private Toolbar toolbar;
-    EditText edt_email, edt_comment;
+    EditText edt_comment;
+    AutoCompleteTextView edt_email;
     String emailStr, commentStr;
     ArrayList<MediaData> mediaList;
     ShareAllFileAdapter mAdapter;
@@ -108,6 +114,23 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         filerecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
         getAllFile();
+
+        IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareMultipelFileActivity.this);
+        ArrayList<Data> dataArrayList = ipadDBHelper.getAllShareEmailData();
+        if (dataArrayList != null) {
+            String[] arrSearchData = new String[dataArrayList.size()];
+            for (int i = 0; i < dataArrayList.size(); i++) {
+                arrSearchData[i] = dataArrayList.get(i).getEmailId();
+            }
+            ArrayAdapter<String> adapterSiteName = new ArrayAdapter<String>(ShareMultipelFileActivity.this, android.R.layout.select_dialog_item, arrSearchData);
+            edt_email.setAdapter(adapterSiteName);
+            edt_email.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String searchString = edt_email.getText().toString();
+                }
+            });
+        }
     }
 
     @Override
@@ -203,15 +226,15 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         Toast.makeText(ShareMultipelFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-  /*  private void shareFile(JSONObject object) {
-        String cdate = ASTUtil.getCurrentDate();
-        if (ASTUIUtil.isOnline(this)) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
-            dotDialog.show();
-            ServiceCaller serviceCaller = new ServiceCaller(this);
-            //final String url = "http://192.168.1.98:8080/IpadProject/ShareDataMultiFileApi/sharemultiData";
-            final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
-            *//* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*//*
+    /*  private void shareFile(JSONObject object) {
+          String cdate = ASTUtil.getCurrentDate();
+          if (ASTUIUtil.isOnline(this)) {
+              final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
+              dotDialog.show();
+              ServiceCaller serviceCaller = new ServiceCaller(this);
+              //final String url = "http://192.168.1.98:8080/IpadProject/ShareDataMultiFileApi/sharemultiData";
+              final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi;
+              *//* final String url = Contants.BASE_URL + Contants.ShareDataMultiFileApi + "u=" + "ff" + "&" + "emailid=" + emailStr + "&" + "username=" + UserId + "&" + "fname=" + FirstName + "&" + "lname=" + LastName + "&" + "from=" + cdate + "&" + "itemsno=" + itemsno + "&" + "message=" + commentStr;*//*
             serviceCaller.CallCommanServiceMethod(url, object, "shareAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -256,6 +279,16 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareMultipelFileActivity.this);
+                                String[] mailarray = emailStr.split(",");
+                                if (mailarray != null) {
+                                    for (int i = 0; i < mailarray.length; i++) {
+                                        Data emaildata = new Data();
+                                        emaildata.setEmailId(mailarray[i]);
+                                        ipadDBHelper.upsertShareEmailData(emaildata);
+                                    }
+                                }
+
                                 showToast("File shared Successfully");
                                 finish();
                             } else {
@@ -278,6 +311,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         }
 
     }
+
     private void getAllFile() {
         if (ASTUIUtil.isOnline(ShareMultipelFileActivity.this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);

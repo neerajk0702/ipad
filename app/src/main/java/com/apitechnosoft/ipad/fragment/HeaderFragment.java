@@ -105,6 +105,8 @@ public class HeaderFragment extends MainFragment {
     }
 
     public void setVisiVilityNotificationIcon(boolean isVisible) {
-        notificationLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        if (notificationLayout != null) {
+            notificationLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
     }
 }
