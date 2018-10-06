@@ -3,12 +3,14 @@ package com.apitechnosoft.ipad.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -130,9 +132,15 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
 
         return new MyViewHolder(itemView);
     }
-
+    public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
+        int states[][] = {{android.R.attr.state_checked}, {}};
+        int colors[] = {checkedColor, uncheckedColor};
+        CompoundButtonCompat.setButtonTintList(checkBox, new
+                ColorStateList(states, colors));
+    }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.red_dark_color));
 
         holder.recenttext.setText(mediaList.get(position).getFileName());
 

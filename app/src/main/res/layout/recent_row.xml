@@ -41,6 +41,7 @@
                 android:id="@+id/selectCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/red_dark_color"
                 android:layout_alignParentRight="true"
                 android:visibility="gone" />
 

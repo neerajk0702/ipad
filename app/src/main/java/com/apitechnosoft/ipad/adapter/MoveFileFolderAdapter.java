@@ -2,7 +2,10 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,6 +65,19 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
         holder.selectCheck.setVisibility(View.VISIBLE);
+        ColorStateList  colorStateList = new ColorStateList(
+                new int[][]{
+                        new int[]{-android.R.attr.state_checked}, // unchecked
+                        new int[]{android.R.attr.state_checked} , // checked
+                },
+                new int[]{
+                        Color.parseColor("#d33434"),
+                        Color.parseColor("##42C47D"),
+                }
+        );
+
+        CompoundButtonCompat.setButtonTintList(holder.selectCheck,colorStateList);
+
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
         }

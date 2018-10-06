@@ -236,12 +236,13 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             String personName = acct.getDisplayName();
-            Uri personPhotoUrl;
+            Uri personPhotoUrl = null;
             if (acct.getPhotoUrl() != null) {
                 personPhotoUrl = acct.getPhotoUrl();
             }
             String email = acct.getEmail();
             callwithSocialMediaLogin(email, personName);
+            callwithSocialMediaRegister(email, personName, personPhotoUrl + "");
             Log.e(TAG, "Name: " + personName + ", email: " + email);
         }
     }
@@ -304,7 +305,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getLinkedData() {
-
         String url = "https://api.linkedin.com/v1/people/~:(id,email-address,picture-url,first-name,last-name)";
         APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
         apiHelper.getRequest(this, url, new ApiListener() {
@@ -320,8 +320,9 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         String email = resObj.getString("emailAddress");
                         String firstName = resObj.getString("firstName");
                         String lastName = resObj.getString("lastName");
+                        String pimage=resObj.getString("picture");
                         String name = firstName + " " + lastName;
-                        callwithSocialMediaRegister(email, name, "");
+                        callwithSocialMediaRegister(email, name, pimage);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -376,7 +377,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(this);
             final String url = Contants.BASE_URL + Contants.SocialMediaRegistration + "emailid=" + emailStr + "&" + "fname=" + fname;
-            serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
+            serviceCaller.CallCommanServiceMethod(url, "Registeration", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
                     if (isComplete) {
@@ -392,7 +393,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                                 Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
 
                                 if (data.getError_msg().equalsIgnoreCase("User email already Registr")) {
-                                    loginFacebook();
+                                    callwithSocialMediaLogin(emailStr, fname);
                                 }
 
                             }

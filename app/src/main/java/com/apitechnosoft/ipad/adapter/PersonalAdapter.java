@@ -3,12 +3,15 @@ package com.apitechnosoft.ipad.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -112,7 +115,12 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
 
         }
     }
-
+    public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
+        int states[][] = {{android.R.attr.state_checked}, {}};
+        int colors[] = {checkedColor, uncheckedColor};
+        CompoundButtonCompat.setButtonTintList(checkBox, new
+                ColorStateList(states, colors));
+    }
 
     public PersonalAdapter(Context mContext, ArrayList<MediaData> List, int type) {
         this.mediaList = List;
@@ -133,6 +141,8 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.red_dark_color));
+
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
         }
