@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -144,7 +145,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         String fname = bFacebookData.getString("first_name");
                         String profile_pic = bFacebookData.getString("profile_pic");
 
-                        callwithSocialMediaRegister(emailid, fname,profile_pic);
+                        callwithSocialMediaRegister(emailid, fname, profile_pic);
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -231,22 +232,17 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            Log.e(TAG, "display name: " + acct.getDisplayName());
             String personName = acct.getDisplayName();
-            String personPhotoUrl = acct.getPhotoUrl().toString();
+            Uri personPhotoUrl;
+            if (acct.getPhotoUrl() != null) {
+                 personPhotoUrl = acct.getPhotoUrl();
+            }
             String email = acct.getEmail();
             callwithSocialMediaLogin(email, personName);
-            Log.e(TAG, "Name: " + personName + ", email: " + email
-                    + ", Image: " + personPhotoUrl);
-
-            //    txtEmail.setText(email);
-
-        } else {
-            // Signed out, show unauthenticated UI.
+            Log.e(TAG, "Name: " + personName + ", email: " + email);
         }
     }
 
@@ -259,7 +255,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         if (opr.isDone()) {
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
             // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
         } else {
@@ -305,7 +300,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
     // Build the list of member permissions our LinkedIn session requires
     private static Scope buildScope() {
-        return Scope.build(Scope.R_BASICPROFILE,Scope.R_EMAILADDRESS, Scope.W_SHARE);
+        return Scope.build(Scope.R_BASICPROFILE, Scope.R_EMAILADDRESS, Scope.W_SHARE);
     }
 
     private void getLinkedData() {
@@ -317,7 +312,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onApiSuccess(ApiResponse apiResponse) {
                 // Success!
                 Log.d(TAG, "apiResponse:" + apiResponse.toString());
-                callwithSocialMediaRegister("", "","");
+                callwithSocialMediaRegister("", "", "");
             }
 
             @Override
@@ -361,7 +356,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void callwithSocialMediaRegister(String emailStr, String fname,String pimage) {
+    private void callwithSocialMediaRegister(String emailStr, String fname, String pimage) {
         if (ASTUIUtil.isOnline(this)) {
             final ASTProgressBar dotDialog = new ASTProgressBar(LoginHomeActivity.this);
             dotDialog.show();
@@ -374,7 +369,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null,fname,null);
+                                ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null, fname, null);
                                 Toast.makeText(LoginHomeActivity.this, "Registeration Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);

@@ -90,12 +90,7 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.PrivacyActivity"
-            android:label="Privacy" />
-        <activity
-            android:name=".activity.TermsConditionActivity"
-            android:label="Terms Condition" />
+
         <activity android:name=".activity.DocOpenActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.ShareSingleFileActivity" />
