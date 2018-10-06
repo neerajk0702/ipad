@@ -38,9 +38,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_15dp"
-                android:text="From"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:text="When"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14dp" />
 
@@ -79,16 +79,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_15dp"
+                android:layout_marginBottom="@dimen/_10dp"
                 android:text="To"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14dp" />
+                android:textSize="@dimen/_14dp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tocaladerDate"
@@ -170,7 +172,6 @@
                 android:clickable="true"
                 android:gravity="left|center"
                 android:hint="Enter Description..."
-                android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="@dimen/_14dp" />
 
@@ -185,8 +186,8 @@
                 android:layout_height="@dimen/_35dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginRight="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_40dp"
+                android:layout_marginRight="@dimen/_10dp"
                 android:orientation="horizontal">
 
                 <com.apitechnosoft.ipad.component.ASTButton

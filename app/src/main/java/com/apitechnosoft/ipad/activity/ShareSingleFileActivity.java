@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -30,11 +33,13 @@ import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.database.IpadDBHelper;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.model.Data;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
@@ -47,6 +52,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -62,7 +68,8 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     RelativeLayout webLayout;
     VideoView videoView;
     LinearLayout videoViewLayout;
-    EditText edt_email, edt_comment;
+    EditText edt_comment;
+    AutoCompleteTextView edt_email;
     String emailStr, commentStr;
     MediaData media;
     String UserId;
@@ -136,7 +143,22 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                 setVideoShare(media);
             }
         }
-
+        IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareSingleFileActivity.this);
+        ArrayList<Data> dataArrayList = ipadDBHelper.getAllShareEmailData();
+        if (dataArrayList != null) {
+            String[] arrSearchData = new String[dataArrayList.size()];
+            for (int i = 0; i < dataArrayList.size(); i++) {
+                arrSearchData[i] = dataArrayList.get(i).getEmailId();
+            }
+            ArrayAdapter<String> adapterSiteName = new ArrayAdapter<String>(ShareSingleFileActivity.this, android.R.layout.select_dialog_item, arrSearchData);
+            edt_email.setAdapter(adapterSiteName);
+            edt_email.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String searchString = edt_email.getText().toString();
+                }
+            });
+        }
     }
 
     private void setImageShare(MediaData media) {
@@ -338,6 +360,15 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareSingleFileActivity.this);
+                                String[] mailarray = emailStr.split(",");
+                                if (mailarray != null) {
+                                    for (int i = 0; i < mailarray.length; i++) {
+                                        Data emaildata = new Data();
+                                        emaildata.setEmailId(mailarray[i]);
+                                        ipadDBHelper.upsertShareEmailData(emaildata);
+                                    }
+                                }
                                 showToast("File shared Successfully");
                                 finish();
                             } else {

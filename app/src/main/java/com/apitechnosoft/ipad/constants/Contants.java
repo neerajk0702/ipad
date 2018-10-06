@@ -4,8 +4,8 @@ package com.apitechnosoft.ipad.constants;
  * /** * @author AST Inc.  10/12/2015.
  */
 public class Contants {
-    public static String DEFAULT_APPLICATION_NAME = "iPad";
-    public static final String APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Directory/";
+    public static String DEFAULT_APPLICATION_NAME = "IPAD";
+    public static final String APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Downloads/";
 
     public static String Media_File_BASE_URL = "https://www.ipadtoday.com/";
     public static String BASE_URL = "https://www.ipadtoday.com/resources/";

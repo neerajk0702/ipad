@@ -125,7 +125,7 @@ public class EventFragment extends MainFragment {
         };
         fromtimepicker = new TimePickerDialog(getContext(), time, myCalendar
                 .get(Calendar.HOUR_OF_DAY), myCalendar
-                .get(Calendar.MINUTE), true);
+                .get(Calendar.MINUTE), false);
         DatePickerDialog.OnDateSetListener todate = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -191,7 +191,7 @@ public class EventFragment extends MainFragment {
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.SaveEventApi + "username=" + UserId + "&" + "fromdate=" + fromcaladerDateStr + "&" + "todate=" + tocaladerDateStr + "&" + "mysqldate=" + currentDate + "&" + "eventname=" + nameStr + "&" + "reminder=" + reminderStr + "&" + "eventdescription=" + desStr + "&" + "fromdatetime=" + fromtimeStr + "&" + "todatetime=" + totimeStr;
+            final String url = Contants.BASE_URL + Contants.SaveEventApi + "username=" + UserId + "&" + "fromdate=" + fromcaladerDateStr + "&" + "todate=" + "" + "&" + "mysqldate=" + currentDate + "&" + "eventname=" + nameStr + "&" + "reminder=" + reminderStr + "&" + "eventdescription=" + desStr + "&" + "fromdatetime=" + fromtimeStr + "&" + "todatetime=" + "";
             serviceCaller.CallCommanServiceMethod(url, "saveEvent", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -244,15 +244,15 @@ public class EventFragment extends MainFragment {
             showToast("Please select from date");
             return false;
         } else if (fromtimeStr.length() == 0) {
-            showToast("Please  select from time");
+            showToast("Please select from time");
             return false;
-        } else if (tocaladerDateStr.length() == 0) {
+        } /*else if (tocaladerDateStr.length() == 0) {
             showToast("Please select to date");
             return false;
         } else if (totimeStr.length() == 0) {
             showToast("Please select to time");
             return false;
-        }
+        }*/
         return true;
     }
 

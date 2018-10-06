@@ -125,7 +125,6 @@
             android:clickable="true"
             android:gravity="left|center"
             android:hint="Enter Description..."
-            android:singleLine="true"
             android:textColorHint="#919191"
             android:textSize="@dimen/_14dp" />
 
