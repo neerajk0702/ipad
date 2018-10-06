@@ -238,7 +238,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             String personName = acct.getDisplayName();
             Uri personPhotoUrl;
             if (acct.getPhotoUrl() != null) {
-                 personPhotoUrl = acct.getPhotoUrl();
+                personPhotoUrl = acct.getPhotoUrl();
             }
             String email = acct.getEmail();
             callwithSocialMediaLogin(email, personName);
@@ -312,7 +312,21 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onApiSuccess(ApiResponse apiResponse) {
                 // Success!
                 Log.d(TAG, "apiResponse:" + apiResponse.toString());
-                callwithSocialMediaRegister("", "", "");
+                if (apiResponse != null) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(apiResponse.toString());
+                        String resStr = jsonObject.getString("responseData");
+                        JSONObject resObj = new JSONObject(resStr);
+                        String email = resObj.getString("emailAddress");
+                        String firstName = resObj.getString("firstName");
+                        String lastName = resObj.getString("lastName");
+                        String name = firstName + " " + lastName;
+                        callwithSocialMediaRegister(email, name, "");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
             }
 
             @Override
