@@ -177,6 +177,15 @@ public String extension;
     public void setExtension(String extension) {
         this.extension = extension;
     }
+private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
     @Override
     public String toString() {

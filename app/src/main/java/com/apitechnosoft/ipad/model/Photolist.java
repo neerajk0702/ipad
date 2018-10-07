@@ -199,6 +199,16 @@ public class Photolist {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
+
+    private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 }
 
 

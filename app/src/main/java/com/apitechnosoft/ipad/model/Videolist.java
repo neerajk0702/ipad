@@ -190,7 +190,15 @@ public class Videolist {
     public void setItemSno(int itemSno) {
         this.itemSno = itemSno;
     }
+    private String emailId;
 
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
     @Override
     public String toString()
     {

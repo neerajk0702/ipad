@@ -172,7 +172,15 @@ public class Audioist {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
+    private String emailId;
 
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
     @Override
     public String toString() {
         return "ClassPojo [sno = " + sno + ", bytes = " + bytes + ", filePath = " + filePath + ", enteredDate = " + enteredDate + ", type = " + type + ", shareSno = " + shareSno + ", size = " + size + ", megaByte = " + megaByte + ", limitFilename = " + limitFilename + ", itemSno = " + itemSno + ", limitFilename1 = " + limitFilename1 + ", folderlocation = " + folderlocation + ", fileName = " + fileName + ", kiloByte = " + kiloByte + ", gigaByte = " + gigaByte + "]";

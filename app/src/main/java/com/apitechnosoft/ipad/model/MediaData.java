@@ -215,6 +215,16 @@ public class MediaData {
     public void setEventname(String eventname) {
         this.eventname = eventname;
     }
+
+    private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 }
 
 

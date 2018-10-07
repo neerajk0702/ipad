@@ -81,7 +81,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
 
                     for (MediaData data : masterMediaList) {
 
-                        if (data.getFileName().toLowerCase().contains(charString)) {
+                        if (data.getEmailId().toLowerCase().contains(charString)) {
                             filteredList.add(data);
                         }
                     }

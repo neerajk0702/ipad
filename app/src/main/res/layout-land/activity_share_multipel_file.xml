@@ -134,7 +134,6 @@
                         android:clickable="true"
                         android:gravity="left|center"
                         android:hint="Comment Box..."
-                        android:singleLine="true"
                         android:textColorHint="#919191"
                         android:textSize="14dp" />
 

@@ -427,6 +427,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setMegaByte(photo.getMegaByte());
                 mediaData.setGigaByte(photo.getGigaByte());
                 mediaData.setFolderlocation(photo.getFolderlocation());
+                mediaData.setEmailId(photo.getEmailId());
                 mediaList.add(mediaData);
             }
         }
@@ -452,6 +453,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setFolderName(video.getFolderName());
                 mediaData.setFolderlocation(video.getFolderlocation());
                 mediaData.setFileExtension(video.getFileExtension());
+                mediaData.setEmailId(video.getEmailId());
                 mediaList.add(mediaData);
             }
         }
@@ -477,6 +479,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setFolderlocation(audio.getFolderlocation());
                 mediaData.setFolderName(audio.getFolderName());
                 mediaData.setFileExtension(audio.getFileExtension());
+                mediaData.setEmailId(audio.getEmailId());
                 mediaList.add(mediaData);
             }
         }
@@ -502,6 +505,7 @@ public class ReceivedFragment extends MainFragment {
                 mediaData.setExtension(documentlist.getExtension());
                 mediaData.setFolderName(documentlist.getFolderName());
                 mediaData.setFileExtension(documentlist.getFileExtension());
+                mediaData.setEmailId(documentlist.getEmailId());
                 mediaList.add(mediaData);
             }
         }
