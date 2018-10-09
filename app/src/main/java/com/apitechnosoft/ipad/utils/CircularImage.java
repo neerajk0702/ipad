@@ -12,8 +12,11 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
 
 public class CircularImage extends ImageView {
 
@@ -33,14 +36,37 @@ public class CircularImage extends ImageView {
         if (getWidth() == 0 || getHeight() == 0) {
             return;
         }
-        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-        Bitmap bitmap = b.copy(Config.ARGB_8888, true);
+        // Bitmap b = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap b = getConvertDrawableToBitmap(drawable);
+        // Bitmap bitmap = b.copy(Config.ARGB_8888, true);
 
         int w = getWidth(), h = getHeight();
 
-        Bitmap roundBitmap = getRoundedCroppedBitmap(bitmap, w);
+        Bitmap roundBitmap = getRoundedCroppedBitmap(b, w);
         canvas.drawBitmap(roundBitmap, 0, 0, null);
 
+    }
+
+    @NonNull
+    private Bitmap getBitmapFromDrawable(@NonNull Drawable drawable) {
+        final Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bmp);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bmp;
+    }
+
+    private Bitmap getConvertDrawableToBitmap(Drawable drawable) {
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        return bitmap;
     }
 
     public static Bitmap getRoundedCroppedBitmap(Bitmap bitmap, int radius) {

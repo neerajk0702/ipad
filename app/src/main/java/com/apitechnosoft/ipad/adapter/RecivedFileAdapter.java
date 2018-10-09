@@ -194,7 +194,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         });
     }
 
-    private void alertForShowDoc(final int position, ArrayList<Commentdata> emailList) {
+    private void alertForShowDoc(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -282,7 +282,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowImage(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowImage(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -361,7 +361,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowVideo(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowVideo(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -484,7 +484,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowAudio(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowAudio(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -624,12 +624,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         Log.d(Contants.LOG_TAG, "Get All File**" + result);
-                        ArrayList<Commentdata> emailList = null;
+                        ArrayList<Emaildata> emailList = null;
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
                                 if (data.getEmaildata() != null) {
-                                    emailList = new ArrayList<Commentdata>(Arrays.asList(data.getCommentdata()));
+                                    emailList = new ArrayList<Emaildata>(Arrays.asList(data.getEmaildata()));
                                 } else {
                                     Toast.makeText(mContext, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
                                 }
@@ -651,7 +651,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         }
     }
 
-    private void openPopup(int position, ArrayList<Commentdata> emailList) {
+    private void openPopup(int position, ArrayList<Emaildata> emailList) {
         if (type == 1) {
             alertForShowImage(position, emailList);
         } else if (type == 2) {

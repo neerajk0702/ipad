@@ -317,7 +317,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(ShareMultipelFileActivity.this);
-            final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "" + "&" + "search_keyword=" + "&" + "searchdate=";
+            final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
             serviceCaller.CallCommanServiceMethod(url, "GetFileListApi", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

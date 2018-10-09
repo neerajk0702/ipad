@@ -46,8 +46,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustPan"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".activity.SplashScreen"
             android:alwaysRetainTaskState="true"
@@ -91,7 +91,6 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".activity.DocOpenActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.ShareSingleFileActivity" />
@@ -105,7 +104,7 @@
 
         <service android:name=".framework.DownloadService" />
 
-        <activity android:name=".activity.NotificationActivity"></activity>
+        <activity android:name=".activity.NotificationActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -114,6 +113,31 @@
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />
+
+         <activity android:name=".activity.ChangeNameActivity"></activity>
+
+        <activity android:name=".activity.UploadFromOutsideActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <data android:mimeType="application/msword" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

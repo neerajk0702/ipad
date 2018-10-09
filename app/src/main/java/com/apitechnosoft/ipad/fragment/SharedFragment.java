@@ -80,6 +80,7 @@ public class SharedFragment extends MainFragment {
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         searchedit = findViewById(R.id.searchedit);
+        searchedit.setHint("Search with email id");
         // TextView filter = findViewById(R.id.filter);
         //TextView filterIcon = findViewById(R.id.filterIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");

@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.ChangeNameActivity;
 import com.apitechnosoft.ipad.activity.ChnagePassword;
 import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
@@ -47,15 +49,17 @@ public class ProfileFragment extends MainFragment {
     CardView emailviewLayout;
     private ImageView profileImg;
     private TextView loginUserName, emailusername, userprofile, userMailAdd;
-    EditText lname, fname;
-    private Button submitButton;
+
+
     private View changePasswordLayout;
-    String fnamee, lnamee, emailStr;
+
     String email;
     private static File selectFile;
     String mimtype;
     TextView usertype, dataSize;
     HeaderFragment headerFragment;
+    String emailStr;
+    LinearLayout changeNameLayout;
 
     @Override
     protected int fragmentLayout() {
@@ -66,23 +70,20 @@ public class ProfileFragment extends MainFragment {
     protected void loadView() {
         this.profileImg = this.findViewById(R.id.profileImg);
         this.loginUserName = this.findViewById(R.id.loginUserName);
-        this.submitButton = this.findViewById(R.id.submitButton);
         this.changePasswordLayout = this.findViewById(R.id.changePasswordLayout);
         this.emailviewLayout = this.findViewById(R.id.emailviewLayout);
         emailusername = this.findViewById(R.id.emailusername);
-        fname = this.findViewById(R.id.fname);
-        lname = this.findViewById(R.id.lname);
         this.findViewById(R.id.cancelButton).setVisibility(View.GONE);
         usertype = this.findViewById(R.id.usertype);
         dataSize = this.findViewById(R.id.dataSize);
-
+        changeNameLayout = this.findViewById(R.id.changeNameLayout);
     }
 
     @Override
     protected void setClickListeners() {
         this.profileImg.setOnClickListener(this);
-        this.submitButton.setOnClickListener(this);
         this.changePasswordLayout.setOnClickListener(this);
+        this.changeNameLayout.setOnClickListener(this);
         profileImg.setOnClickListener(this);
     }
 
@@ -119,57 +120,12 @@ public class ProfileFragment extends MainFragment {
         } else if (view.getId() == R.id.changePasswordLayout) {
             Intent intent = new Intent(getContext(), ChnagePassword.class);
             startActivity(intent);
-        } else if (view.getId() == R.id.submitButton) {
-
-            fnamee = fname.getText().toString();
-            lnamee = lname.getText().toString();
-            if (ASTObjectUtil.isEmptyStr(fnamee)) {
-                ASTUIUtil.showToast("Please Enter First Name");
-            } else if (ASTObjectUtil.isEmptyStr(lnamee)) {
-                ASTUIUtil.showToast("Please Enter Last Name");
-            } else {
-                ChnageName();
-            }
-
-
+        } else if (view.getId() == R.id.changeNameLayout) {
+            Intent intent = new Intent(getContext(), ChangeNameActivity.class);
+            startActivity(intent);
         }
     }
 
-    private void ChnageName() {
-        if (ASTUIUtil.isOnline(getContext())) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-            dotDialog.show();
-            ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.UpdateUserName + "username=" + emailStr + "&" + "fname=" + fnamee + "&" + "lname=" + lnamee;
-            serviceCaller.CallCommanServiceMethod(url, "Login", new IAsyncWorkCompletedCallback() {
-                @Override
-                public void onDone(String result, boolean isComplete) {
-                    if (isComplete) {
-                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
-                        if (data != null) {
-                            if (data.isStatus()) {
-                                Toast.makeText(getContext(), "Name Chnage Successfully.", Toast.LENGTH_LONG).show();
-                                Intent intentLoggedIn = new Intent(getContext(), MainActivity.class);
-                                startActivity(intentLoggedIn);
-                            } else {
-                                Toast.makeText(getContext(), "Not Updated Name!", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), "Name not  Update Successfully!", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        showToast(Contants.Error);
-                    }
-                    if (dotDialog.isShowing()) {
-                        dotDialog.dismiss();
-                    }
-                }
-            });
-        } else {
-            showToast(Contants.OFFLINE_MESSAGE);
-        }
-
-    }
 
     private void getUserInfo() {
         SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);

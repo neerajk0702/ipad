@@ -25,34 +25,28 @@ public class Commentdata {
 
     private String fName;
 
-    public String getContent ()
-    {
+    public String getContent() {
         return content;
     }
 
-    public void setContent (String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
 
-    public String getFilePath ()
-    {
+    public String getFilePath() {
         return filePath;
     }
 
-    public void setFilePath (String filePath)
-    {
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
-    public String getPath ()
-    {
+    public String getPath() {
         return path;
     }
 
-    public void setPath (String path)
-    {
+    public void setPath(String path) {
         this.path = path;
     }
 
@@ -128,20 +122,27 @@ public class Commentdata {
         this.fName = fName;
     }
 
-    public String getFName ()
-    {
+    public String getFName() {
         return fName;
     }
 
-    public void setFName (String fName)
-    {
+    public void setFName(String fName) {
         this.fName = fName;
     }
 
+    private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
     @Override
-    public String toString()
-    {
-        return "ClassPojo [content = "+content+", itemSno = "+itemSno+", bytes = "+bytes+", sno = "+sno+", filePath = "+filePath+", path = "+path+", kiloByte = "+kiloByte+", shareSno = "+shareSno+", gigaByte = "+gigaByte+", megaByte = "+megaByte+", size = "+size+", fName = "+fName+"]";
+    public String toString() {
+        return "ClassPojo [content = " + content + ", itemSno = " + itemSno + ", bytes = " + bytes + ", sno = " + sno + ", filePath = " + filePath + ", path = " + path + ", kiloByte = " + kiloByte + ", shareSno = " + shareSno + ", gigaByte = " + gigaByte + ", megaByte = " + megaByte + ", size = " + size + ", fName = " + fName + "]";
     }
 }
 

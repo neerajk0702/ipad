@@ -98,12 +98,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="SILVER USER"
-                        android:background="@color/browne"
                         android:layout_marginBottom="@dimen/_4dp"
+                        android:background="@color/browne"
+                        android:gravity="center"
                         android:paddingLeft="@dimen/_8dp"
                         android:paddingRight="@dimen/_8dp"
+                        android:text="SILVER USER"
                         android:textAlignment="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@android:color/black"
@@ -132,8 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginRight="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_200dp"
+                android:layout_marginRight="@dimen/_10dp"
                 android:background="@android:color/white"
                 hubworks:cardCornerRadius="@dimen/_5dp"
                 hubworks:cardElevation="@dimen/_3dp"
@@ -146,91 +146,43 @@
                     android:orientation="vertical"
                     android:padding="@dimen/_8dp"
                     android:weightSum="2">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/_5dp"
-                        android:text="Change User Information"
-                        android:textAlignment="center"
-                        android:textStyle="bold" />
-
                     <LinearLayout
+                        android:id="@+id/changeNameLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_below="@id/emailviewLayout"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:background="@color/bg_color"
+                        android:elevation="@dimen/_1dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/_3dp">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="@dimen/_5dp"
-                            android:layout_weight="0.35"
-                            android:text="First Name"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:padding="@dimen/_8dp"
+                            android:text="Change User Information"
+                            android:textAlignment="center"
                             android:textSize="@dimen/_12dp"
                             android:textStyle="bold" />
 
 
-                        <EditText
-                            android:id="@+id/fname"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_5dp"
-                            android:layout_weight="0.65"
-                            android:background="@drawable/bg_boder_round"
-                            android:hint="First Name"
-                            android:padding="@dimen/_10dp"
-                            android:textSize="@dimen/_12dp" />
                     </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/_2dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_5dp"
-                            android:layout_weight="0.35"
-                            android:text="Last Name"
-                            android:textSize="@dimen/_12dp"
-                            android:textStyle="bold" />
-
-
-                        <EditText
-                            android:id="@+id/lname"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_5dp"
-                            android:layout_weight="0.65"
-                            android:background="@drawable/bg_boder_round"
-                            android:hint="Last Name"
-                            android:padding="@dimen/_10dp"
-                            android:textSize="@dimen/_12dp" />
-                    </LinearLayout>
-
                     <LinearLayout
                         android:id="@+id/changePasswordLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/emailviewLayout"
                         android:layout_marginLeft="@dimen/_10dp"
-                        android:layout_marginRight="@dimen/_10dp"
                         android:layout_marginTop="@dimen/_10dp"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
                         android:background="@color/bg_color"
                         android:elevation="@dimen/_1dp"
                         android:gravity="center"

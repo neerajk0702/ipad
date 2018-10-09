@@ -139,7 +139,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:background="@drawable/bg_boder_round"
-                        android:hint="Search..."
+                        android:hint="Search with Folder/File-Name"
                         android:padding="@dimen/_2dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"

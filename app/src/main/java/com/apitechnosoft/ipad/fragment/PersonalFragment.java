@@ -104,7 +104,7 @@ public class PersonalFragment extends MainFragment {
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
         searchedit = findViewById(R.id.searchedit);
-
+        searchedit.setHint("Search with Folder/File-Name");
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         // TextView filter = findViewById(R.id.filter);
@@ -152,25 +152,7 @@ public class PersonalFragment extends MainFragment {
 
         getAllFile();
 
-        searchedit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //after the change calling the method and passing the search input
-                if (mAdapter != null) {
-                    mAdapter.getFilter().filter(editable.toString());
-                }
-            }
-        });
     }
 
     @Override
@@ -214,6 +196,31 @@ public class PersonalFragment extends MainFragment {
 
             }
         });*/
+
+        searchedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //after the change calling the method and passing the search input
+                if (mAdapter != null) {
+                    mAdapter.getFilter().filter(editable.toString());
+                }
+                if (folderAdapter != null) {
+                    folderAdapter.getFilter().filter(editable.toString());
+                }
+
+            }
+        });
+        getAllNotification();
     }
 
     @Override
@@ -789,5 +796,47 @@ public class PersonalFragment extends MainFragment {
         } else {
             ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
+    }
+
+    public void getAllNotification() {
+        try {
+            String UserId = "";
+            SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+            if (prefs != null) {
+                UserId = prefs.getString("UserId", "");
+            }
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                // dotDialog.show();
+
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
+                serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                            if (data != null) {
+                                loadcartdata(data.getNotificationcount() + "");
+                            }
+                        }
+                    }
+                });
+            }
+        } catch (Exception E) {
+
+        }
+    }
+
+    protected void loadcartdata(String count) {
+        if (getHostActivity() == null) {
+            return;
+        }
+        HeaderFragment headerFragment = this.getHostActivity().headerFragment();
+        if (headerFragment == null) {
+            return;
+        }
+        headerFragment.setVisiVilityNotificationIcon(true);
+        headerFragment.updateNotification(count);
     }
 }

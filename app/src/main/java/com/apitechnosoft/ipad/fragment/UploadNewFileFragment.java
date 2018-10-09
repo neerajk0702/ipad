@@ -119,7 +119,7 @@ public class UploadNewFileFragment extends MainFragment {
 
         }
         if(!mimtype.contains("image")){
-            ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!!", getContext());//off line msg....
+            ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!! Please Press Upload Button.", getContext());//off line msg....
         }
     }
 

@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,14 +41,52 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHolder> {
+public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHolder> implements Filterable {
 
     private ArrayList<Folderdata> mediaList;
+    public ArrayList<Folderdata> masterMediaList;
     Context mContext;
     Typeface materialdesignicons_font;
     private int selectedFolderId = 0;
     boolean firstTime = false;
     String UserId;
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+
+                    mediaList = masterMediaList;
+                } else {
+
+                    ArrayList<Folderdata> filteredList = new ArrayList<Folderdata>();
+
+                    for (Folderdata data : masterMediaList) {
+
+                        if (data.getFileName().toLowerCase().contains(charString)) {
+                            filteredList.add(data);
+                        }
+                    }
+
+                    mediaList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mediaList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mediaList = (ArrayList<Folderdata>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
@@ -68,6 +108,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
 
     public FolderAdapter(Context mContext, ArrayList<Folderdata> List, boolean firstTime) {
         this.mediaList = List;
+        this.masterMediaList=List;
         this.mContext = mContext;
         this.firstTime = firstTime;
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");

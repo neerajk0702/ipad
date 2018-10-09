@@ -140,8 +140,7 @@ public class NotificationActivity extends AppCompatActivity {
                             Log.d(Contants.LOG_TAG, "Get All RemoveAllNotification**" + result);
                             if (data.getAllnotificationstatus().equals("true")) {
                                 if (arrayList != null) {
-                                    arrayList.clear();
-                                    adapter.notifyDataSetChanged();
+                                    finish();
                                 }
                             }
 

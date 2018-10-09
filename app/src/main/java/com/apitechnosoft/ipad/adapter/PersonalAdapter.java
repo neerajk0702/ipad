@@ -141,7 +141,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         SharedPreferences prefs = mContext.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
-        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.red_dark_color));
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.selectfolder));
 
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");

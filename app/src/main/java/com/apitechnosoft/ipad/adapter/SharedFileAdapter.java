@@ -101,6 +101,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
             }
         };
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -132,15 +133,17 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
 
         return new MyViewHolder(itemView);
     }
+
     public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
         int states[][] = {{android.R.attr.state_checked}, {}};
         int colors[] = {checkedColor, uncheckedColor};
         CompoundButtonCompat.setButtonTintList(checkBox, new
                 ColorStateList(states, colors));
     }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.red_dark_color));
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
 
         holder.recenttext.setText(mediaList.get(position).getFileName());
 
@@ -224,7 +227,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         });
     }
 
-    private void alertForShowDoc(final int position, ArrayList<Commentdata> emailList) {
+    private void alertForShowDoc(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -311,7 +314,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowImage(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowImage(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -390,7 +393,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowVideo(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowVideo(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -513,7 +516,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         alert.show();
     }
 
-    public void alertForShowAudio(final int position, ArrayList<Commentdata> emailList) {
+    public void alertForShowAudio(final int position, ArrayList<Emaildata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -724,12 +727,12 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         Log.d(Contants.LOG_TAG, "Get All File**" + result);
-                        ArrayList<Commentdata> emailList = null;
+                        ArrayList<Emaildata> emailList = null;
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
                                 if (data.getEmaildata() != null) {
-                                    emailList = new ArrayList<Commentdata>(Arrays.asList(data.getCommentdata()));
+                                    emailList = new ArrayList<Emaildata>(Arrays.asList(data.getEmaildata()));
                                 } else {
                                     Toast.makeText(mContext, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
                                 }
@@ -751,7 +754,7 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         }
     }
 
-    private void openPopup(int position, ArrayList<Commentdata> emailList) {
+    private void openPopup(int position, ArrayList<Emaildata> emailList) {
         if (type == 1) {
             alertForShowImage(position, emailList);
         } else if (type == 2) {

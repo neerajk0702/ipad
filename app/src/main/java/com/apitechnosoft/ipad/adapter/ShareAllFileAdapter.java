@@ -69,7 +69,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.red_dark_color));
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.selectfolder));
 
 
         holder.selectCheck.setVisibility(View.VISIBLE);

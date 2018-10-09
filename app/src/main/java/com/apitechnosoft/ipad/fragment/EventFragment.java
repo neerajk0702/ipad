@@ -200,6 +200,8 @@ public class EventFragment extends MainFragment {
                         if (data != null) {
                             if (data.isStatus()) {
                                 Toast.makeText(getContext(), "Event saved Successfully", Toast.LENGTH_LONG).show();
+                                name.setText("");
+                                description.setText("");
                             } else {
                                 Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             }

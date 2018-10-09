@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class SharedRecivedEmailAdapter extends RecyclerView.Adapter<SharedRecivedEmailAdapter.MyViewHolder> {
 
-    private ArrayList<Commentdata> emailList;
+    private ArrayList<Emaildata> emailList;
     Context mContext;
     Typeface materialdesignicons_font;
     private int selectedFolderId = 0;
@@ -37,7 +37,7 @@ public class SharedRecivedEmailAdapter extends RecyclerView.Adapter<SharedRecive
     }
 
 
-    public SharedRecivedEmailAdapter(Context mContext, ArrayList<Commentdata> emailList) {
+    public SharedRecivedEmailAdapter(Context mContext, ArrayList<Emaildata> emailList) {
         this.emailList = emailList;
         this.mContext = mContext;
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");
@@ -53,7 +53,7 @@ public class SharedRecivedEmailAdapter extends RecyclerView.Adapter<SharedRecive
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.cust_view.setText(emailList.get(position).getfName());
+        holder.cust_view.setText(emailList.get(position).getEmailId());
 
     }
 
