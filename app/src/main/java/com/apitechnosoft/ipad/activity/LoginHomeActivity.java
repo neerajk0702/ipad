@@ -389,7 +389,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                                 startActivity(intentLoggedIn);
 
                             } else {
-                                Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+                               // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
 
                                 if (data.getError_msg().equalsIgnoreCase("User email already Registr")) {
                                     callwithSocialMediaLogin(emailStr, fname);
@@ -397,7 +397,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
                             }
                         } else {
-                            Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);

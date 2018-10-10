@@ -97,6 +97,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             }
         };
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
@@ -194,7 +195,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         });
     }
 
-    private void alertForShowDoc(final int position, ArrayList<Emaildata> emailList) {
+    private void alertForShowDoc(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -217,7 +218,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (emailList != null && emailList.size() > 0) {
-            SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
+            RecivedEmailAdapter recivedEmailAdapter = new RecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
         final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
@@ -282,7 +283,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowImage(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowImage(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -298,7 +299,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (emailList != null && emailList.size() > 0) {
-            SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
+            RecivedEmailAdapter recivedEmailAdapter = new RecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
 
@@ -361,7 +362,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowVideo(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowVideo(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -376,7 +377,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (emailList != null && emailList.size() > 0) {
-            SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
+            RecivedEmailAdapter recivedEmailAdapter = new RecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
 
@@ -484,7 +485,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         alert.show();
     }
 
-    public void alertForShowAudio(final int position, ArrayList<Emaildata> emailList) {
+    public void alertForShowAudio(final int position, ArrayList<Commentdata> emailList) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
@@ -505,7 +506,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (emailList != null && emailList.size() > 0) {
-            SharedRecivedEmailAdapter recivedEmailAdapter = new SharedRecivedEmailAdapter(mContext, emailList);
+            RecivedEmailAdapter recivedEmailAdapter = new RecivedEmailAdapter(mContext, emailList);
             recyclerView.setAdapter(recivedEmailAdapter);
         }
 
@@ -624,12 +625,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     @Override
                     public void onDone(String result, boolean isComplete) {
                         Log.d(Contants.LOG_TAG, "Get All File**" + result);
-                        ArrayList<Emaildata> emailList = null;
+                        ArrayList<Commentdata> emailList = null;
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
                                 if (data.getEmaildata() != null) {
-                                    emailList = new ArrayList<Emaildata>(Arrays.asList(data.getEmaildata()));
+                                    emailList = new ArrayList<Commentdata>(Arrays.asList(data.getCommentdata()));
                                 } else {
                                     Toast.makeText(mContext, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
                                 }
@@ -651,7 +652,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         }
     }
 
-    private void openPopup(int position, ArrayList<Emaildata> emailList) {
+    private void openPopup(int position, ArrayList<Commentdata> emailList) {
         if (type == 1) {
             alertForShowImage(position, emailList);
         } else if (type == 2) {

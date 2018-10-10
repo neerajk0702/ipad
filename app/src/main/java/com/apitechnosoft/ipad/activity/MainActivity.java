@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -66,6 +68,10 @@ import com.linkedin.platform.LISession;
 import com.linkedin.platform.LISessionManager;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static com.apitechnosoft.ipad.ApplicationHelper.application;
@@ -150,9 +156,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 updateFragment(new ProfileFragment(), bundle);
             }
         });
-
-        ;
-
     }
 
     protected
@@ -311,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 LISessionManager.getInstance(getApplicationContext()).clearSession();
             }
             LoginManager.getInstance().logOut();
-            Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+            signOut();
             SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
             if (prefs != null) {
                 prefs.edit().clear().commit();
@@ -332,6 +335,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.updateFragment(pageFragment, bundle, true, false);
     }
 
+    //gmail logout
+    private void signOut() {
+        if (mGoogleApiClient.isConnected()) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient.connect();
+        }
+    }
 
     public void updateFragment(MainFragment pageFragment, Bundle bundle, boolean replaceHeaderFragment, boolean animate) {
         this.hideKeyBoard();
@@ -688,13 +699,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.commit();
 
                                 loginUsrName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
-
-
                                 if (data.getUserprofile() != null) {
                                     String filePath = data.getUserprofile().getFilePath();
                                     if (filePath != null) {
                                         String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-                                        Picasso.with(ApplicationHelper.application().getContext()).load(newpath).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                        Picasso.with(MainActivity.this).load(newpath).resize(65, 65).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
                                     }
                                 }
 
