@@ -1,5 +1,7 @@
 package com.apitechnosoft.ipad.model;
 
+import java.util.ArrayList;
+
 public class ContentData {
 
     String tag;
@@ -28,6 +30,7 @@ public class ContentData {
 
     private Videolist[] videolist;
     private Documentlist[] documentlist;
+
     public Folderdata[] getFolderdata() {
         return folderdata;
     }
@@ -69,13 +72,11 @@ public class ContentData {
 
     private Resentdata[] resentdata;
 
-    public Resentdata[] getResentdata ()
-    {
+    public Resentdata[] getResentdata() {
         return resentdata;
     }
 
-    public void setResentdata (Resentdata[] resentdata)
-    {
+    public void setResentdata(Resentdata[] resentdata) {
         this.resentdata = resentdata;
     }
 
@@ -92,48 +93,51 @@ public class ContentData {
 
     private Emaildata[] emaildata;
 
-    public Commentdata[] getCommentdata ()
-    {
+    public Commentdata[] getCommentdata() {
         return commentdata;
     }
 
-    public void setCommentdata (Commentdata[] commentdata)
-    {
+    public void setCommentdata(Commentdata[] commentdata) {
         this.commentdata = commentdata;
     }
 
-    public Emaildata[] getEmaildata ()
-    {
+    public Emaildata[] getEmaildata() {
         return emaildata;
     }
 
-    public void setEmaildata (Emaildata[] emaildata)
-    {
+    public void setEmaildata(Emaildata[] emaildata) {
         this.emaildata = emaildata;
     }
 
     private EventotdataList[] eventotdataList;
 
-    public EventotdataList[] getEventotdataList ()
-    {
+    public EventotdataList[] getEventotdataList() {
         return eventotdataList;
     }
 
-    public void setEventotdataList (EventotdataList[] eventotdataList)
-    {
+    public void setEventotdataList(EventotdataList[] eventotdataList) {
         this.eventotdataList = eventotdataList;
     }
 
     private Eventdata[] eventdata;
 
-    public Eventdata[] getEventdata ()
-    {
+    public Eventdata[] getEventdata() {
         return eventdata;
     }
 
-    public void setEventdata (Eventdata[] eventdata)
-    {
+    public void setEventdata(Eventdata[] eventdata) {
         this.eventdata = eventdata;
+    }
+
+
+    private ArrayList<Lastuploadpic> lastuploadpic;
+
+    public ArrayList<Lastuploadpic> getLastuploadpic() {
+        return this.lastuploadpic;
+    }
+
+    public void setLastuploadpic(ArrayList<Lastuploadpic> lastuploadpic) {
+        this.lastuploadpic = lastuploadpic;
     }
 
 }

@@ -23,6 +23,8 @@ public class Contants {
 
     // public static String BASE_URL = " http://192.168.1.98:8080/IpadProject/";
     public static String UPLOAD_FILE = "FileUplodingApi/fileupload";
+
+    public static String UPLOAD_OURSITEFILE = "FileUplodOutSiteApi/fileuploadoutsite";
     public static String CreateFolder = "CreateNewDirectoryApi/createNewDirectory?";
     public static String GetFileListApi = "GetFileListApi/getfilelist?";
 
