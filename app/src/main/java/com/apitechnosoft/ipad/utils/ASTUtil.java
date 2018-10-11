@@ -276,23 +276,17 @@ public class ASTUtil {
         return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    public static boolean isAboveLollipop()
-    {
+    public static boolean isAboveLollipop() {
         boolean isAboveHOneyComb = false;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1)
-        {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
             isAboveHOneyComb = true;
         }
         return isAboveHOneyComb;
     }
 
 
-
-
-    public static boolean isCollectionEmpty(Collection arrayList)
-    {
-        if(arrayList != null && arrayList.size() > 0)
-        {
+    public static boolean isCollectionEmpty(Collection arrayList) {
+        if (arrayList != null && arrayList.size() > 0) {
             return false;
         }
         return true;
@@ -319,13 +313,14 @@ public class ASTUtil {
                 .addMedia(MEDIA_TYPE_DOCUMENT)
                 .returnAfterFirst(false)
                 .limit(limit)
-                 .single()
+                .single()
                 .sizeLimit(sizeLimit)
                 .single()
                 .imageDirectory(appNameWithoutSpace(activity)) // captured image directory name ("Camera" folder by default)
                 .start(FNReqResCode.ATTACHMENT_REQUEST); // start image picker activity with request code
 
     }
+
     public static String formatDate(String dateInMillis) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm aa");
         String dateString = "";
@@ -357,12 +352,18 @@ public class ASTUtil {
         return directory;
     }
 
-    public static String getCurrentDate(){
+    public static String getCurrentDate() {
         Date c = Calendar.getInstance().getTime();
         System.out.println("Current time => " + c);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c);
         return formattedDate;
+    }
+
+    //get DLP directory for download files
+    public static File getExternalStorageFilePath(Context context) {
+        File DLPDirectory = new File(Environment.getExternalStorageDirectory(), Contants.Share_APP_DIRECTORY);
+        return DLPDirectory;
     }
 }

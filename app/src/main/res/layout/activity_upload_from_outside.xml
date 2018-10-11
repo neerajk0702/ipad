@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.ShareSingleFileActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -76,7 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <RelativeLayout android:id="@+id/webLayout"
+                <RelativeLayout
+                    android:id="@+id/webLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -93,6 +96,7 @@
                         android:layout_centerVertical="true"
                         android:visibility="gone" />
                 </RelativeLayout>
+
                 <LinearLayout
                     android:id="@+id/videoViewLayout"
                     android:layout_width="match_parent"
@@ -134,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15dp">
 
-                <TextView android:id="@+id/iicon"
+                <TextView
+                    android:id="@+id/iicon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="ic"
@@ -201,4 +206,5 @@
                 android:text="SEND" />
         </LinearLayout>
     </RelativeLayout>
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

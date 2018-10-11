@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +56,7 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTFileUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
+import com.apitechnosoft.ipad.utils.FileUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,6 +66,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,13 +96,13 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
     private String limitFilename;
     private int sno;
     private int size;
-    private String type;
     private String enteredDate;
     private int shareSno;
     private int itemSno;
     private int bytes;
     private String extension;
     private String folderlocation;
+    ASTProgressBar shareProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,24 +150,24 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         videoViewLayout = findViewById(R.id.videoViewLayout);
     }
 
-    private void setType(String type, File selectFile, Uri imageUri) {
-        if (type.equalsIgnoreCase("image")) {
+    private void setType(File selectFile, Uri imageUri) {
+        if (mimtype.equalsIgnoreCase("image")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
             webLayout.setVisibility(View.GONE);
             img.setVisibility(View.VISIBLE);
             setImageShare(selectFile);
-        } else if (type.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
-                type.equalsIgnoreCase("application/pdf") ||
-                type.equalsIgnoreCase("text/plain") ||
-                type.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
-                type.equalsIgnoreCase("application/vnd.ms-powerpoint")) {
+        } else if (mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
+                mimtype.equalsIgnoreCase("application/pdf") ||
+                mimtype.equalsIgnoreCase("text/plain") ||
+                mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
+                mimtype.equalsIgnoreCase("application/vnd.ms-powerpoint")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             webLayout.setVisibility(View.VISIBLE);
             img.setVisibility(View.GONE);
-            setDocShare(selectFile,imageUri);
-        } else if (type.equalsIgnoreCase("video") || type.equalsIgnoreCase("audio")) {
+            // setDocShare(selectFile, imageUri);
+        } else if (mimtype.contains("video") || mimtype.contains("VIDEO") || mimtype.contains("audio") || mimtype.contains("AUDIO")) {
             videoViewLayout.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
             webLayout.setVisibility(View.GONE);
@@ -207,26 +216,25 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
 
     void handleSendImage(Intent intent, String type) {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
         if (imageUri != null) {
-            File file = new File(imageUri.getPath());
-            selectFile = file;
-            mimtype = type;
-            Log.d("type",type);
-            if (type.equalsIgnoreCase("image")) {
-                if (file != null) {
-                    title.setText(file.getName());
-                    Picasso.with(this).load(file).into(img);
+            try {
+                // File filesc = new File(imageUri.getPath());
+
+                File file = FileUtil.from(UploadFromOutsideActivity.this, imageUri);
+                Log.d("file", "File...:::: uti - " + file.getPath() + " file -" + file + " : " + file.exists());
+                selectFile = file;
+                mimtype = type;
+                title.setText(selectFile.getName());
+                setType(selectFile, imageUri);
+                if (file != null && file.exists()) {
+                    uploadData();
                 }
+            } catch (Exception e) {
+                //e.printStackTrace();
             }
-            if (file != null) {
-                uploadData();
-            }
-            setType(type, selectFile, imageUri);
-
         }
-
     }
-
 
     public void uploadData() {
         SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
@@ -252,14 +260,20 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
                                     limitFilename = lastuploadpic.getLimitFilename();
                                     sno = lastuploadpic.getSno();
                                     size = lastuploadpic.getSize();
-                                    type = lastuploadpic.getType();
+                                    //type = lastuploadpic.getType();
                                     enteredDate = lastuploadpic.getEnteredDate();
                                     shareSno = lastuploadpic.getShareSno();
                                     itemSno = lastuploadpic.getItemSno();
                                     bytes = lastuploadpic.getBytes();
                                     extension = lastuploadpic.getExtension();
                                     folderlocation = lastuploadpic.getFolderlocation();
-
+                                    if (mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
+                                            mimtype.equalsIgnoreCase("application/pdf") ||
+                                            mimtype.equalsIgnoreCase("text/plain") ||
+                                            mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
+                                            mimtype.equalsIgnoreCase("application/vnd.ms-powerpoint")) {
+                                        setDocShare();
+                                    }
                                 }
 
                             } else {
@@ -295,7 +309,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         Picasso.with(ApplicationHelper.application().getContext()).load(selectFile).placeholder(R.drawable.image_icon).into(img);
     }
 
-    private void setDocShare(File selectFile,Uri imageUri) {
+    private void setDocShare() {
         final ProgressBar loadingDialog = findViewById(R.id.loadingDialog);
         loadingDialog.setVisibility(View.VISIBLE);
         //  String filePath = Contants.Media_File_BASE_URL + media.getFolderlocation() + "/" + media.getFileName();
@@ -309,15 +323,18 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAllowFileAccess(true);
         webView.setWebViewClient(new WebViewClient() {
 
             public void onPageFinished(WebView view, String url) {
                 loadingDialog.setVisibility(View.GONE);
             }
         });
-        if (filePath != null) {
-            webView.loadUrl(imageUri.toString());
-        }
+        String filePath = Contants.Media_File_BASE_URL + folderlocation + "/" + fileName;
+        webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filePath);
+        //webView.loadUrl(selectFile.getAbsolutePath());
+        // webView.loadData(selectFile.getAbsolutePath(), mimtype, "utf8");
+        //webView.loadData(selectFile.getAbsolutePath(), "pdf", "utf8");
     }
 
     private void setVideoShare(File selectFile, Uri imageUri) {

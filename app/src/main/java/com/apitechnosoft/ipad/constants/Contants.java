@@ -6,6 +6,7 @@ package com.apitechnosoft.ipad.constants;
 public class Contants {
     public static String DEFAULT_APPLICATION_NAME = "IPAD";
     public static final String APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Downloads/";
+    public static final String Share_APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Share/";
 
     public static String Media_File_BASE_URL = "https://www.ipadtoday.com/";
     public static String BASE_URL = "https://www.ipadtoday.com/resources/";
