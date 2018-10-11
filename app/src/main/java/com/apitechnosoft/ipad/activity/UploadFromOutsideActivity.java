@@ -148,13 +148,16 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
             webLayout.setVisibility(View.GONE);
             img.setVisibility(View.VISIBLE);
             setImageShare(selectFile);
-        } else if (type.equalsIgnoreCase("text") ||
-                type.equalsIgnoreCase("doc") || type.equalsIgnoreCase("pdf")) {
+        } else if (type.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
+                type.equalsIgnoreCase("application/pdf") ||
+                type.equalsIgnoreCase("text/plain") ||
+                type.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
+                type.equalsIgnoreCase("application/vnd.ms-powerpoint")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             webLayout.setVisibility(View.VISIBLE);
             img.setVisibility(View.GONE);
-            setDocShare(selectFile);
+            setDocShare(selectFile,imageUri);
         } else if (type.equalsIgnoreCase("video") || type.equalsIgnoreCase("audio")) {
             videoViewLayout.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
@@ -292,7 +295,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         Picasso.with(ApplicationHelper.application().getContext()).load(selectFile).placeholder(R.drawable.image_icon).into(img);
     }
 
-    private void setDocShare(File selectFile) {
+    private void setDocShare(File selectFile,Uri imageUri) {
         final ProgressBar loadingDialog = findViewById(R.id.loadingDialog);
         loadingDialog.setVisibility(View.VISIBLE);
         //  String filePath = Contants.Media_File_BASE_URL + media.getFolderlocation() + "/" + media.getFileName();
@@ -313,7 +316,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
             }
         });
         if (filePath != null) {
-            webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + selectFile);
+            webView.loadUrl(imageUri.toString());
         }
     }
 

@@ -122,14 +122,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:mimeType="image/*" />
+                <data android:mimeType="*/*" />
                 <data android:mimeType="video/*" />
                 <data android:mimeType="audio/*" />
                 <data android:mimeType="text/plain" />
-                <data android:mimeType="pdf" />
-                <data android:mimeType="vnd.ms-powerpoint" />
-                <data android:mimeType="msword" />
-                <data android:mimeType="vnd.ms-excel" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <data android:mimeType="application/msword" />
+                <data android:mimeType="application/vnd.ms-excel" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
