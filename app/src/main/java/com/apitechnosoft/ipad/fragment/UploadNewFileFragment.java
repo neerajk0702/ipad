@@ -19,6 +19,7 @@ import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
+import com.apitechnosoft.ipad.framework.FileUploaderHelperWithProgress;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
@@ -118,7 +119,7 @@ public class UploadNewFileFragment extends MainFragment {
             }
 
         }
-        if(!mimtype.contains("image")){
+        if (!mimtype.contains("image")) {
             ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!! Please Press Upload Button.", getContext());//off line msg....
         }
     }
@@ -155,12 +156,12 @@ public class UploadNewFileFragment extends MainFragment {
 
             if (ASTUIUtil.isOnline(getContext())) {
                 final ASTProgressBar progressBar = new ASTProgressBar(getContext());
-                progressBar.show();
+                //   progressBar.show();
                 String serviceURL = Contants.BASE_URL + Contants.UPLOAD_FILE;
                 HashMap<String, String> payloadList = new HashMap<String, String>();
                 payloadList.put("username", UserId);
                 MultipartBody.Builder multipartBody = setMultipartBodyVaule();
-                FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
+                FileUploaderHelperWithProgress fileUploaderHelper = new FileUploaderHelperWithProgress(getContext(), payloadList, multipartBody, serviceURL) {
                     @Override
                     public void receiveData(String result) {
                         ContentData data = new Gson().fromJson(result, ContentData.class);

@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ProgressBar;
-
 
 import com.apitechnosoft.ipad.constants.Contants;
 
@@ -19,18 +17,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * Created by Neeraj on 3/22/2017.
- */
-
-public abstract class FileUploaderHelper extends AsyncTask<String, Integer, String> implements UploadLicenseImageCallback {
+public abstract class FileUploaderHelperWithProgress extends AsyncTask<String, Integer, String> implements UploadLicenseImageCallback {
 
     Context mContext;
     HashMap<String, String> payload;
     MultipartBody.Builder multipartBody;
     String url;
+    ProgressDialog mProgressDialog;
 
-    public FileUploaderHelper(Context context, HashMap<String, String> payload, MultipartBody.Builder multipartBody, String url) {
+    public FileUploaderHelperWithProgress(Context context, HashMap<String, String> payload, MultipartBody.Builder multipartBody, String url) {
         this.mContext = context;
         this.payload = payload;
         this.multipartBody = multipartBody;
@@ -50,16 +45,25 @@ public abstract class FileUploaderHelper extends AsyncTask<String, Integer, Stri
         if (Contants.IS_DEBUG_LOG) {
             Log.d(Contants.LOG_TAG, "image uploaded successfully****" + result);
         }
+        mProgressDialog.dismiss();
         receiveData(result);
     }
 
     @Override
     protected void onPreExecute() {
-
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage("Uploading...");
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setMax(100);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
+        mProgressDialog.setProgress(values[0]);
     }
 
     public String uploadImage(HashMap<String, String> mapList) {
@@ -72,10 +76,25 @@ public abstract class FileUploaderHelper extends AsyncTask<String, Integer, Stri
                 }
             }
             RequestBody requestBody = multipartBody.build();
+            CountingRequestBody monitoredRequest = new CountingRequestBody(requestBody, new CountingRequestBody.Listener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength) {
+                    //Update a progress bar with the following percentage
+                    float percentage = 100f * bytesWritten / contentLength;
+                    if (percentage >= 0) {
+                        //TODO: Progress bar
+                        publishProgress(Math.round(percentage));
+                        Log.d("progress ", percentage + "");
+                    } else {
+                        //Something went wrong
+                        Log.d("No progress ", 0 + "");
+                    }
+                }
+            });
 
             Request request = new Request.Builder()
                     .url(url)
-                    .post(requestBody)
+                    .post(monitoredRequest)
                     .build();
 
             OkHttpClient.Builder b = new OkHttpClient.Builder();
@@ -98,3 +117,4 @@ public abstract class FileUploaderHelper extends AsyncTask<String, Integer, Stri
 
 
 }
+

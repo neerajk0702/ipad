@@ -48,6 +48,7 @@ import com.apitechnosoft.ipad.database.IpadDBHelper;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.filepicker.model.MediaFile;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
+import com.apitechnosoft.ipad.framework.FileUploaderHelperWithProgress;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Data;
@@ -242,12 +243,12 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
             String UserId = prefs.getString("UserId", "");
             if (ASTUIUtil.isOnline(this)) {
                 final ASTProgressBar progressBar = new ASTProgressBar(this);
-                progressBar.show();
+                //progressBar.show();
                 String serviceURL = Contants.BASE_URL + Contants.UPLOAD_OURSITEFILE;
                 HashMap<String, String> payloadList = new HashMap<String, String>();
                 payloadList.put("username", UserId);
                 MultipartBody.Builder multipartBody = setMultipartBodyVaule();
-                FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(this, payloadList, multipartBody, serviceURL) {
+                FileUploaderHelperWithProgress fileUploaderHelper = new FileUploaderHelperWithProgress(this, payloadList, multipartBody, serviceURL) {
                     @Override
                     public void receiveData(String result) {
                         ContentData data = new Gson().fromJson(result, ContentData.class);
