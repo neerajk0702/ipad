@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -84,6 +85,7 @@ public class NotificationActivity extends AppCompatActivity {
                 getRemoveAllNotification();
             }
         });
+
     }
 
     private void getAllNotification() {
@@ -118,6 +120,7 @@ public class NotificationActivity extends AppCompatActivity {
                     if (dotDialog.isShowing()) {
                         dotDialog.dismiss();
                     }
+
                 }
             });
         } else {

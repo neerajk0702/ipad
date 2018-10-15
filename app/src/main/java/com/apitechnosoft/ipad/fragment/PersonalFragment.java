@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +74,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class PersonalFragment extends MainFragment {
+public class PersonalFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener{
     Typeface materialdesignicons_font;
     RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
@@ -89,7 +90,7 @@ public class PersonalFragment extends MainFragment {
     TextView seeallfile;
     boolean seeallfileFlag = true;
     EditText searchedit;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -149,10 +150,30 @@ public class PersonalFragment extends MainFragment {
         main_progressBar.animation_stop(FZProgressBar.Mode.INDETERMINATE);
       */
         seeallfile = findViewById(R.id.seeallfile);
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
 
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeRefreshLayout.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+
+                // Fetching data from server
+                getAllFile();
+            }
+        });
         getAllFile();
-
-
     }
 
     @Override
@@ -412,6 +433,7 @@ public class PersonalFragment extends MainFragment {
                         //main_progressBar.animation_stop(FZProgressBar.Mode.INDETERMINATE);
                         main_progressBar.animation_stop();
                         main_progressBar.setVisibility(View.GONE);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             } else {
@@ -839,4 +861,10 @@ public class PersonalFragment extends MainFragment {
         headerFragment.setVisiVilityNotificationIcon(true);
         headerFragment.updateNotification(count);
     }
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        getAllFile();
+    }
+
 }

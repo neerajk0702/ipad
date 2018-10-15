@@ -203,68 +203,76 @@
             android:layout_height="1dp"
             android:background="@color/orange" />
 
-        <android.support.v4.widget.NestedScrollView
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/folderLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/folderLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:id="@+id/folderArrowIcon"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/darkRed1"
+                            android:textSize="@dimen/_18dp" />
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:id="@+id/folderTitel"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14dp" />
+                    </LinearLayout>
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/folderrecycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/perrecycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15dp"
+                        android:background="@color/white" />
+
 
                     <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/folderArrowIcon"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:text=""
+                        android:id="@+id/seeallfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="View All File"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkRed1"
-                        android:textSize="@dimen/_18dp" />
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/folderTitel"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.9"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
+                        android:textColor="@color/orange"
                         android:textSize="@dimen/_14dp" />
                 </LinearLayout>
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/folderrecycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/perrecycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15dp"
-                    android:background="@color/white" />
-
-                <com.apitechnosoft.ipad.component.ASTTextView
-                    android:id="@+id/seeallfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="View All File"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/orange"
-                    android:textSize="@dimen/_14dp" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <View
             android:layout_width="match_parent"

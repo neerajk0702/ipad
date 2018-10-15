@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.model.Folderdata;
+import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 
 import java.util.ArrayList;
@@ -65,19 +66,8 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
         holder.selectCheck.setVisibility(View.VISIBLE);
-        ColorStateList  colorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{-android.R.attr.state_checked}, // unchecked
-                        new int[]{android.R.attr.state_checked} , // checked
-                },
-                new int[]{
-                        Color.parseColor("#d33434"),
-                        Color.parseColor("##42C47D"),
-                }
-        );
 
-        CompoundButtonCompat.setButtonTintList(holder.selectCheck,colorStateList);
-
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {
             holder.recentImg.setImageResource(R.drawable.folder);
         }
@@ -115,6 +105,12 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
         return mediaList.size();
     }
 
+    public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
+        int states[][] = {{android.R.attr.state_checked}, {}};
+        int colors[] = {checkedColor, uncheckedColor};
+        CompoundButtonCompat.setButtonTintList(checkBox, new
+                ColorStateList(states, colors));
+    }
 }
 
 

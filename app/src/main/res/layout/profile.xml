@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="ABC Defg"
+                        android:text=""
                         android:textAlignment="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@android:color/white"
@@ -77,7 +77,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/_3dp"
                         android:gravity="center"
-                        android:text="abc@gmail.com"
+                        android:text=""
                         android:textAlignment="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@android:color/white"
@@ -212,18 +212,5 @@
 
 
     </ScrollView>
-
-
-    <LinearLayout
-        android:id="@+id/footerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <include layout="@layout/footer" />
-    </LinearLayout>
 
 </LinearLayout>

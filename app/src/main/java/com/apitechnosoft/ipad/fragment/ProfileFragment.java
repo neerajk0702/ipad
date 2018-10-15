@@ -73,7 +73,6 @@ public class ProfileFragment extends MainFragment {
         this.changePasswordLayout = this.findViewById(R.id.changePasswordLayout);
         this.emailviewLayout = this.findViewById(R.id.emailviewLayout);
         emailusername = this.findViewById(R.id.emailusername);
-        this.findViewById(R.id.cancelButton).setVisibility(View.GONE);
         usertype = this.findViewById(R.id.usertype);
         dataSize = this.findViewById(R.id.dataSize);
         changeNameLayout = this.findViewById(R.id.changeNameLayout);
@@ -110,7 +109,7 @@ public class ProfileFragment extends MainFragment {
         if (prefs != null) {
             emailStr = prefs.getString("UserId", "");
         }
-        getUserInfo();
+
     }
 
     @Override
@@ -126,6 +125,11 @@ public class ProfileFragment extends MainFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserInfo();
+    }
 
     private void getUserInfo() {
         SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
@@ -169,7 +173,7 @@ public class ProfileFragment extends MainFragment {
                                     if (filePath != null) {
                                         String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
                                         if (newpath != null) {
-                                            Picasso.with(ApplicationHelper.application().getContext()).load(newpath).into(profileImg);
+                                            Picasso.with(ApplicationHelper.application().getContext()).load(newpath).resize(65, 65).into(profileImg);
                                         }
                                     }
                                 }

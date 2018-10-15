@@ -46,7 +46,7 @@ public class SharedRecivedEmailAdapter extends RecyclerView.Adapter<SharedRecive
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.spinner_row, parent, false);
+                .inflate(R.layout.share_emailid_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
