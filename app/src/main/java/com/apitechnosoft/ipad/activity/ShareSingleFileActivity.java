@@ -73,6 +73,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     String emailStr, commentStr;
     MediaData media;
     String UserId;
+    String FirstName, LastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,8 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
+            FirstName = prefs.getString("FirstName", "");
+            LastName = prefs.getString("LastName", "");
         }
         Typeface materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(this, "fonts/materialdesignicons-webfont.otf");
         TextView back = toolbar.findViewById(R.id.back);
@@ -281,26 +284,29 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         Toast.makeText(ShareSingleFileActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void shareFile() {
-        if (ASTUIUtil.isOnline(this)) {
-            if (media != null) {
-                final ASTProgressBar dotDialog = new ASTProgressBar(ShareSingleFileActivity.this);
-                dotDialog.show();
-                ServiceCaller serviceCaller = new ServiceCaller(this);
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("emailId", emailStr);
-                    object.put("userName", UserId);
-                    object.put("commentl", commentStr);
-                    object.put("sharedfilename", media.getFileName());
-                    object.put("itemSno", media.getSno());
-                    object.put("path", media.getFilePath());
-                    object.put("folderlocation", media.getFolderlocation());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                final String url = Contants.BASE_URL + Contants.ShareDataapiNew;
-                /* final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + media.getFileName() + "&" + "itemSno=" + media.getSno() + "&" + "path=" + media.getFilePath() + "&" + "folderlocation=" + media.getFolderlocation();*/
+    /*    private void shareFile() {
+            if (ASTUIUtil.isOnline(this)) {
+                if (media != null) {
+                    final ASTProgressBar dotDialog = new ASTProgressBar(ShareSingleFileActivity.this);
+                    dotDialog.show();
+                    ServiceCaller serviceCaller = new ServiceCaller(this);
+                    JSONObject object = new JSONObject();
+                    try {
+                        object.put("emailId", emailStr);
+                        object.put("userName", UserId);
+                        object.put("emailId", emailStr);
+                        object.put("emailId", emailStr);
+
+                        object.put("commentl", commentStr);
+                        object.put("sharedfilename", media.getFileName());
+                        object.put("itemSno", media.getSno());
+                        object.put("path", media.getFilePath());
+                        object.put("folderlocation", media.getFolderlocation());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    final String url = Contants.BASE_URL + Contants.ShareDataapiNew;
+                    *//* final String url = Contants.BASE_URL + Contants.ShareDataapiNew + "emailId=" + emailStr + "&" + "userName=" + UserId + "&" + "commentl=" + commentStr + "&" + "sharedfilename=" + media.getFileName() + "&" + "itemSno=" + media.getSno() + "&" + "path=" + media.getFilePath() + "&" + "folderlocation=" + media.getFolderlocation();*//*
                 serviceCaller.CallCommanServiceMethod(url, object, "shareFile", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
@@ -328,7 +334,8 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         } else {
             showToast(Contants.OFFLINE_MESSAGE);
         }
-    }
+    }*/
+
 
     public void shareSingleFile() {
         if (ASTUIUtil.isOnline(ShareSingleFileActivity.this)) {
@@ -340,6 +347,8 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
             try {
                 object.put("emailId", emailStr);
                 object.put("userName", UserId);
+                object.put("fName", FirstName);
+                object.put("lName", LastName);
                 object.put("commentl", commentStr);
                 object.put("sharedfilename", media.getFileName());
                 object.put("itemSno", media.getSno());

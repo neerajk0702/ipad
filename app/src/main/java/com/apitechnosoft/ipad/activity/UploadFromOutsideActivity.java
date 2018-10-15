@@ -104,7 +104,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
     private String extension;
     private String folderlocation;
     ASTProgressBar shareProgressBar;
-
+    String FirstName, LastName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +125,8 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
+            FirstName = prefs.getString("FirstName", "");
+            LastName = prefs.getString("LastName", "");
         }
         Typeface materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(this, "fonts/materialdesignicons-webfont.otf");
         TextView back = toolbar.findViewById(R.id.back);
@@ -438,6 +440,8 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
                 object.put("emailId", emailStr);
                 object.put("userName", UserId);
                 object.put("commentl", commentStr);
+                object.put("fName", FirstName);
+                object.put("lName", LastName);
                 object.put("sharedfilename", fileName);
                 object.put("itemSno", sno);
                 object.put("path", filePath);
