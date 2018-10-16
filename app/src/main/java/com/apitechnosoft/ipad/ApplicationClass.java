@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
@@ -60,9 +61,16 @@ public class ApplicationClass extends Application {
         this.init();
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     protected void setAppInstance() {
         ApplicationHelper.setApplicationObj(this);
     }
+
     private void init() {
         initActivityLifeCycleHandler();
         // Installing a newer security provider using Google Play Services to support
