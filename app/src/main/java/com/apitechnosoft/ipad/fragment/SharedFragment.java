@@ -536,7 +536,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 }
             } else if (type == 4) {
                 for (MediaData data : mediaList) {
-                    if (data.getType() != null && data.getType().contains("application")) {
+                    if (data.getType() != null && (data.getType().contains("application") || data.getType().contains("text"))) {
                         newmediaList.add(data);
                     }
                 }

@@ -74,7 +74,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class PersonalFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class PersonalFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener {
     Typeface materialdesignicons_font;
     RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
@@ -91,6 +91,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     boolean seeallfileFlag = true;
     EditText searchedit;
     SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -586,7 +587,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 }
             } else if (type == 4) {
                 for (MediaData data : mediaList) {
-                    if (data.getType() != null && data.getType().contains("application")) {
+                    if (data.getType() != null && (data.getType().contains("application") || data.getType().contains("text"))) {
                         newmediaList.add(data);
                     }
                 }
@@ -861,6 +862,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         headerFragment.setVisiVilityNotificationIcon(true);
         headerFragment.updateNotification(count);
     }
+
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);

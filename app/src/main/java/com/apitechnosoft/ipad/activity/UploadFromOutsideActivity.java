@@ -105,6 +105,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
     private String folderlocation;
     ASTProgressBar shareProgressBar;
     String FirstName, LastName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +155,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
     }
 
     private void setType(File selectFile, Uri imageUri) {
-        if (mimtype.equalsIgnoreCase("image")) {
+        if (mimtype.contains("image")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
             webLayout.setVisibility(View.GONE);
