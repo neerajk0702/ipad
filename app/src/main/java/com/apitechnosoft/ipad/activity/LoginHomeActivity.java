@@ -241,7 +241,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 personPhotoUrl = acct.getPhotoUrl();
             }
             String email = acct.getEmail();
-            callwithSocialMediaLogin(email, personName);
             callwithSocialMediaRegister(email, personName, personPhotoUrl + "");
             Log.e(TAG, "Name: " + personName + ", email: " + email);
         }
@@ -314,13 +313,19 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 Log.d(TAG, "apiResponse:" + apiResponse.toString());
                 if (apiResponse != null) {
                     try {
+                        String pimage = "";
+                        String lastName = "";
                         JSONObject jsonObject = new JSONObject(apiResponse.toString());
                         String resStr = jsonObject.getString("responseData");
                         JSONObject resObj = new JSONObject(resStr);
                         String email = resObj.getString("emailAddress");
                         String firstName = resObj.getString("firstName");
-                        String lastName = resObj.getString("lastName");
-                        String pimage=resObj.getString("picture");
+                        if (resObj.has("lastName")) {
+                            lastName = resObj.getString("lastName");
+                        }
+                        if (resObj.has("picture")) {
+                            pimage = resObj.getString("picture");
+                        }
                         String name = firstName + " " + lastName;
                         callwithSocialMediaRegister(email, name, pimage);
                     } catch (JSONException e) {
@@ -389,7 +394,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                                 startActivity(intentLoggedIn);
 
                             } else {
-                               // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+                                // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
 
                                 if (data.getError_msg().equalsIgnoreCase("User email already Registr")) {
                                     callwithSocialMediaLogin(emailStr, fname);
@@ -397,7 +402,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
                             }
                         } else {
-                           // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
+                            // Toast.makeText(LoginHomeActivity.this, "Registeration not Successfully!", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);
@@ -410,51 +415,6 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         } else {
             ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
-
-    }
-
-
-    public void loginFacebook() {
-        facebooklogin.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
-        //  facebooklogin.setAuthType(AUTH_TYPE);
-        facebooklogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-
-                System.out.println("onSuccess");
-                String accessToken = loginResult.getAccessToken().getToken();
-                Log.i("accessToken", accessToken);
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        Log.i("LoginActivity", response.toString());
-                        // Get facebook data from login
-                        Bundle bFacebookData = getFacebookData(object);
-
-                        String emailid = bFacebookData.getString("email");
-                        String fname = bFacebookData.getString("first_name");
-                        // String last_name = bFacebookData.getString("last_name");
-                        // String name = fname +" "+ last_name;
-                        callwithSocialMediaLogin(emailid, fname);
-                    }
-                });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
-                request.setParameters(parameters);
-                request.executeAsync();
-            }
-
-            @Override
-            public void onCancel() {
-                System.out.println("onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                System.out.println("onError");
-            }
-        });
-
 
     }
 
@@ -471,6 +431,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
+                                ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null, fname, null);
                                 Toast.makeText(LoginHomeActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);

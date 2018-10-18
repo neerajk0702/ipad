@@ -29,13 +29,14 @@ import java.security.NoSuchAlgorithmException;
  * Created by Narayan Semwal on 12-09-2017.
  */
 
-public class SplashScreen extends AppCompatActivity implements ProviderInstaller.ProviderInstallListener{
+public class SplashScreen extends AppCompatActivity implements ProviderInstaller.ProviderInstallListener {
     String gcmRegId;
     SharedPreferences pref;
     GCM_Registration gcmClass;
     private static final int ERROR_DIALOG_REQUEST_CODE = 1;
 
     private boolean mRetryProviderInstall;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,6 @@ public class SplashScreen extends AppCompatActivity implements ProviderInstaller
                 }
                 if (UserId != null && !UserId.equals("")) {
                     i = new Intent(SplashScreen.this, MainActivity.class);
-
                 } else {
                     i = new Intent(SplashScreen.this, LoginHomeActivity.class);
                 }
@@ -77,6 +77,7 @@ public class SplashScreen extends AppCompatActivity implements ProviderInstaller
 
         getHSAKey();
     }
+
     public void getHSAKey() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
