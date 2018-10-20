@@ -72,5 +72,9 @@ public class Contants {
     public static String ServcePlanApi = "ServcePlanApi/saveplan?";
     public static String VerifyRecaptchaApi = "VerifyRecaptchaApi/verifyrecaptcha";
 
+    public static String MoveSaveShareFolderDataLocationApi = "MoveSharedFileFolderApi/movehsaredfolderfile?";
+
+    public static String CreateFolderSHARE = "CreateNewDirectoryApi/createNewDirectory?";
+
 }
 

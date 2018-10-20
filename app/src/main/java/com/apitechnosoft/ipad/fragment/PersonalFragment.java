@@ -366,7 +366,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
                 dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName;
+                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName+ "&" + "type=" + "P";
                 serviceCaller.CallCommanServiceMethod(url, "createFolder", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {

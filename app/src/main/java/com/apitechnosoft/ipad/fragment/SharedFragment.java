@@ -2,8 +2,10 @@ package com.apitechnosoft.ipad.fragment;
 
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -23,11 +25,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.ShareMultipelFileActivity;
+import com.apitechnosoft.ipad.adapter.FolderAdapter;
+import com.apitechnosoft.ipad.adapter.MoveFileFolderAdapter;
 import com.apitechnosoft.ipad.adapter.SharedFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -49,11 +54,13 @@ import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class SharedFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class SharedFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener {
     Typeface materialdesignicons_font;
     RecyclerView recyclerView, folderrecycler_view;
     ArrayList<MediaData> mediaList;
@@ -64,7 +71,13 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     boolean seeallfileFlag = true;
     EditText searchedit;
     SharedFileAdapter mAdapter;
+    ArrayList<Folderdata> folderList;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    FolderAdapter folderAdapter;
+    String UserId;
+    TextView folderArrowIcon, folderTitel;
+    LinearLayout folderLayout;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -104,6 +117,10 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
 
+        folderArrowIcon = findViewById(R.id.folderArrowIcon);
+        folderTitel = findViewById(R.id.folderTitel);
+        folderLayout = findViewById(R.id.folderLayout);
+        folderArrowIcon.setTypeface(materialdesignicons_font);
 
         folderrecycler_view = findViewById(R.id.folderrecycler_view);
         folderrecycler_view.setHasFixedSize(false);
@@ -207,7 +224,31 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
 
             }
         });*/
+        searchedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //after the change calling the method and passing the search input
+                if (mAdapter != null) {
+                    mAdapter.getFilter().filter(editable.toString());
+                }
+                if (folderAdapter != null) {
+                    folderAdapter.getFilter().filter(editable.toString());
+                }
+
+            }
+        });
     }
+
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -257,6 +298,13 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 videolayout.setTextColor(Color.parseColor("#FF4B05"));
                 audiolayout.setTextColor(Color.parseColor("#FF4B05"));
                 doclayout.setTextColor(Color.parseColor("#ffffff"));
+                break;
+            case R.id.selectfoldet:
+                if (folderList != null && folderList.size() > 0) {
+                    moveFile();
+                } else {
+                    ASTUIUtil.showToast("Folder not found!");
+                }
                 break;
             case R.id.seeallfile:
                 seeallfileFlag = false;
@@ -320,7 +368,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
                 dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName;
+                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName + "&" + "type=" + "S";
                 serviceCaller.CallCommanServiceMethod(url, "createFolder", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
@@ -368,7 +416,11 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                         if (isComplete) {
                             ContentData data = new Gson().fromJson(result, ContentData.class);
                             if (data != null) {
-                                Log.d(Contants.LOG_TAG, "Get Shared All File**" + result);
+                                Log.d(Contants.LOG_TAG, "Get All File**" + result);
+                                folderLayout.setVisibility(View.GONE);//GONE folder name layout
+                                folderrecycler_view.setVisibility(View.VISIBLE);
+                                mediaList = new ArrayList<>();
+                                showFolder(data);
                                 showFileData(data);
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
@@ -387,6 +439,14 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
             } else {
                 ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
             }
+        }
+    }
+
+    private void showFolder(ContentData data) {
+        Folderdata[] folderdata = data.getFolderdata();
+        if (folderdata != null && folderdata.length > 0) {
+            folderList = new ArrayList<Folderdata>(Arrays.asList(folderdata));
+            setFolderAdapter(folderList);
         }
     }
 
@@ -507,6 +567,13 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         setAdapter(1);
     }
 
+    private void setFolderAdapter(ArrayList<Folderdata> folderList) {
+        folderrecycler_view.removeAllViews();
+        folderrecycler_view.removeAllViewsInLayout();
+        folderAdapter = new FolderAdapter(getContext(), folderList, false);
+        folderrecycler_view.setAdapter(folderAdapter);
+    }
+
     private void setAdapter(int type) {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
@@ -565,5 +632,203 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);
         getAllFile();
+    }
+
+    public void moveFile() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        final android.app.AlertDialog alert = builder.create();
+        View view = alert.getLayoutInflater().inflate(R.layout.move_folder_layout, null);
+        RecyclerView folderrecycler_view = view.findViewById(R.id.folderrecycler_view);
+        Button movefile = view.findViewById(R.id.movefile);
+        Button close = view.findViewById(R.id.close);
+        folderrecycler_view.setHasFixedSize(false);
+        StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        folderrecycler_view.setLayoutManager(gaggeredGridLayoutManager);
+        final MoveFileFolderAdapter folderAdapter = new MoveFileFolderAdapter(getContext(), folderList);
+        folderrecycler_view.setAdapter(folderAdapter);
+
+        alert.setCustomTitle(view);
+        movefile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Folderdata folderdata = folderAdapter.selectFolderData;
+                if (folderdata != null) {
+                    int itemsno = folderdata.getSno();
+                    if (mAdapter != null) {
+                        ArrayList<MediaData> mediaList = mAdapter.mediaList;
+                        String SEPARATOR = ",";
+                        StringBuilder csvBuilder = new StringBuilder();
+                        List<String> snoList = new ArrayList<>();
+                        if (mediaList != null && mediaList.size() > 0) {
+                            for (MediaData mediaData : mediaList) {
+                                if (mediaData.isSelected()) {
+                                    snoList.add(String.valueOf(mediaData.getSno()));
+                                }
+                            }
+                            for (String city : snoList) {
+                                csvBuilder.append(city);
+                                csvBuilder.append(SEPARATOR);
+                            }
+                            String filevalueforfolder = csvBuilder.toString();
+                            //Remove last comma
+                            if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
+                                filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
+                                MoveFileIntoFolder(filevalueforfolder, itemsno);
+                            } else {
+                                ASTUIUtil.showToast("Please Select file!");
+                            }
+                        }
+                    }
+                }
+                alert.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    private void MoveFileIntoFolder(String filevalue, int itemsno) {
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" + itemsno;
+            serviceCaller.CallCommanServiceMethod(url, "MoveFileIntoFolder", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data.isStatus()) {
+                                ASTUIUtil.showToast("File Moved Successfully");
+                                getAllFile();
+                            } else {
+                                Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
+
+    //for geting next previous click action
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equalsIgnoreCase("FolderOpen")) {
+                boolean OpenFolderFlag = intent.getBooleanExtra("OpenFolder", false);
+                int FolderID = intent.getIntExtra("FolderID", 0);
+
+                if (OpenFolderFlag) {
+                    getFolderAllFile(FolderID);
+                }
+            }
+        }
+    };
+
+    //get folder data
+    private void getFolderAllFile(final int foldersno) {
+
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(getContext());
+            final String url = Contants.BASE_URL + Contants.GetFolderDataApi + foldersno;
+            serviceCaller.CallCommanServiceMethod(url, "getFolderAllFile", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    if (isComplete) {
+                        ContentData data = new Gson().fromJson(result, ContentData.class);
+                        if (data != null) {
+                            Log.d(Contants.LOG_TAG, "Get folder All File**" + result);
+                            mediaList = new ArrayList<>();
+                            parseFolderFile(data, foldersno);
+                        } else {
+                            Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            });
+        } else {
+            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
+        }
+    }
+
+    private void parseFolderFile(ContentData data, int FolderID) {
+        setPhotoButton();
+        String folderName = "";
+        Folderdata[] folderdata = data.getFolderdata();
+        if (folderdata != null && folderdata.length > 0) {
+            for (Folderdata photo : folderdata) {
+                MediaData mediaData = new MediaData();
+                mediaData.setSno(photo.getSno());
+                mediaData.setFileName(photo.getFileName());
+                mediaData.setFilePath(photo.getFilePath());
+                mediaData.setLimitFilename(photo.getLimitFilename());
+                folderName = photo.getLimitFilename();
+                mediaData.setLimitFilename1(photo.getLimitFilename1());
+                mediaData.setSize(String.valueOf(photo.getSize()));
+                mediaData.setType(photo.getType());
+                mediaData.setEnteredDate(photo.getEnteredDate());
+                mediaData.setShareSno(photo.getShareSno());
+                mediaData.setItemSno(photo.getItemSno());
+                mediaData.setBytes(String.valueOf(photo.getBytes()));
+                mediaData.setKiloByte(String.valueOf(photo.getKiloByte()));
+                mediaData.setMegaByte(String.valueOf(photo.getMegaByte()));
+                mediaData.setGigaByte(String.valueOf(photo.getGigaByte()));
+                mediaData.setFolderlocation(String.valueOf(photo.getFolderlocation()));
+                mediaData.setExtension(photo.getExtension());
+                mediaData.setFullFilePath(photo.getFullFilePath());
+                mediaData.setEventname(photo.getEventname());
+                mediaList.add(mediaData);
+            }
+
+        }
+        folderArrowIcon.setText(Html.fromHtml("&#xf496;"));
+        folderLayout.setVisibility(View.VISIBLE);//Show folder name layout
+        folderrecycler_view.setVisibility(View.GONE);
+        if (folderName != null && !folderName.equals("")) {
+            folderTitel.setText(folderName);
+        } else {
+            folderTitel.setText("No Data Found!");
+        }
+        //filterSelectFolder(FolderID);
+        setAdapter(1);//show folder value
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(receiver, new IntentFilter("FolderOpen"));
+    }
+
+    @Override
+    public void onDestroy() {
+        if (receiver != null) {
+            getActivity().unregisterReceiver(receiver);
+            receiver = null;
+        }
+        super.onDestroy();
+
     }
 }
