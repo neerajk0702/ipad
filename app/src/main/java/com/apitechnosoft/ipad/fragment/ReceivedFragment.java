@@ -569,7 +569,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 }
             } else if (type == 4) {
                 for (MediaData data : mediaList) {
-                    if (data.getFileExtension() != null && data.getFileExtension().contains("application")) {
+                    if (data.getType() != null && (data.getType().contains("application") || data.getType().contains("text"))) {
                         newmediaList.add(data);
                     }
                 }
