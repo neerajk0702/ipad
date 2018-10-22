@@ -74,7 +74,6 @@ public class Contants {
 
     public static String MoveSaveShareFolderDataLocationApi = "MoveSharedFileFolderApi/movehsaredfolderfile?";
 
-    public static String CreateFolderSHARE = "CreateNewDirectoryApi/createNewDirectory?";
 
 }
 
