@@ -367,7 +367,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
                 dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
-                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName+ "&" + "type=" + "P";
+                final String url = Contants.BASE_URL + Contants.CreateFolder + "username=" + UserId + "&" + "foldername=" + folderName + "&" + "type=" + "P";
                 serviceCaller.CallCommanServiceMethod(url, "createFolder", new IAsyncWorkCompletedCallback() {
                     @Override
                     public void onDone(String result, boolean isComplete) {
@@ -455,7 +455,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     private void setFolderAdapter(ArrayList<Folderdata> folderList) {
         folderrecycler_view.removeAllViews();
         folderrecycler_view.removeAllViewsInLayout();
-        folderAdapter = new FolderAdapter(getContext(), folderList, false);
+        folderAdapter = new FolderAdapter(getContext(), folderList, false, true);
         folderrecycler_view.setAdapter(folderAdapter);
     }
 
@@ -700,7 +700,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equalsIgnoreCase("FolderOpen")) {
+            if (intent.getAction().equalsIgnoreCase("PersonalFolderOpen")) {
                 boolean OpenFolderFlag = intent.getBooleanExtra("OpenFolder", false);
                 int FolderID = intent.getIntExtra("FolderID", 0);
 
@@ -714,7 +714,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(receiver, new IntentFilter("FolderOpen"));
+        getActivity().registerReceiver(receiver, new IntentFilter("PersonalFolderOpen"));
     }
 
     @Override

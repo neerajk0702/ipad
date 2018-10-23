@@ -94,7 +94,7 @@
             android:layout_height="@dimen/_40dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <LinearLayout android:id="@+id/folderlayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"

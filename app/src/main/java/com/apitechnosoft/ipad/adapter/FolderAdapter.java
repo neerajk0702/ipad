@@ -50,6 +50,8 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
     private int selectedFolderId = 0;
     boolean firstTime = false;
     String UserId;
+    boolean screenFlag;
+
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -96,7 +98,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
 
         public MyViewHolder(View view) {
             super(view);
-            recenttext =view.findViewById(R.id.recenttext);
+            recenttext = view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             cardLayout = view.findViewById(R.id.cardLayout);
             deleteiconfolder = view.findViewById(R.id.deleteiconfolder);
@@ -106,11 +108,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
     }
 
 
-    public FolderAdapter(Context mContext, ArrayList<Folderdata> List, boolean firstTime) {
+    public FolderAdapter(Context mContext, ArrayList<Folderdata> List, boolean firstTime, boolean screenFlag) {
         this.mediaList = List;
-        this.masterMediaList=List;
+        this.masterMediaList = List;
         this.mContext = mContext;
         this.firstTime = firstTime;
+        this.screenFlag = screenFlag;
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");
     }
 
@@ -154,7 +157,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.MyViewHold
     }
 
     private void callFolderService(int sno) {
-        Intent intent = new Intent("FolderOpen");
+        Intent intent;
+        if (screenFlag) {
+            intent = new Intent("PersonalFolderOpen");
+        } else {
+            intent = new Intent("ShareFolderOpen");
+        }
         intent.putExtra("OpenFolder", true);
         intent.putExtra("FolderID", sno);
         selectedFolderId = sno;

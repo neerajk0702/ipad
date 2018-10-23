@@ -57,7 +57,9 @@ public class PricingFragment extends MainFragment {
 
     // note that these credentials will differ between live & sandbox
     // environments.
-    private static final String CONFIG_CLIENT_ID = "AVZUbOX3ry-gyvTBVykh9TnK1v49hM0ycQiquryr8NjuRwnayplCFEm1M4ZnK5Q9JCcWzn5_briWUeRH";
+//testing = AVZUbOX3ry-gyvTBVykh9TnK1v49hM0ycQiquryr8NjuRwnayplCFEm1M4ZnK5Q9JCcWzn5_briWUeRH
+    // ipad=    AfPQXoihdmLg8g1nzNSZ5bvg09MSEqo50cbZkeO4_KDLgMkjR2oeyNIUuDMhNWdBYoRvIu7lGf4E7Lmk
+    private static final String CONFIG_CLIENT_ID = "AfPQXoihdmLg8g1nzNSZ5bvg09MSEqo50cbZkeO4_KDLgMkjR2oeyNIUuDMhNWdBYoRvIu7lGf4E7Lmk";
 
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;

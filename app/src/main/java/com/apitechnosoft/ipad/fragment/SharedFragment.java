@@ -91,7 +91,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         doclayout = findViewById(R.id.doclayout);
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
-        selectfoldet.setVisibility(View.GONE);
+        selectfoldet.setVisibility(View.VISIBLE);
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         searchedit = findViewById(R.id.searchedit);
@@ -105,6 +105,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         newFolder.setOnClickListener(this);
         upFolder.setTypeface(materialdesignicons_font);
         upFolder.setText(Html.fromHtml("&#xf259;"));
+        upFolder.setOnClickListener(this);
         // filterIcon.setTypeface(materialdesignicons_font);
         //  filterIcon.setText(Html.fromHtml("&#xf04a;"));
         TextView searchIcon = findViewById(R.id.searchIcon);
@@ -152,6 +153,9 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 if (mAdapter != null) {
                     mAdapter.getFilter().filter(editable.toString());
                 }
+                if (folderAdapter != null) {
+                    folderAdapter.getFilter().filter(editable.toString());
+                }
             }
         });
 
@@ -178,6 +182,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 getAllFile();
             }
         });
+
     }
 
     @Override
@@ -198,6 +203,10 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
 
     @Override
     protected void dataToView() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        if (prefs != null) {
+            UserId = prefs.getString("UserId", "");
+        }
        /* ArrayList<Data> dataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Data data = new Data();
@@ -313,6 +322,9 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 break;
             case R.id.sharefile:
                 startActivity(new Intent(getContext(), ShareMultipelFileActivity.class));
+                break;
+            case R.id.upFolder:
+                getAllFile();
                 break;
         }
     }
@@ -570,7 +582,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     private void setFolderAdapter(ArrayList<Folderdata> folderList) {
         folderrecycler_view.removeAllViews();
         folderrecycler_view.removeAllViewsInLayout();
-        folderAdapter = new FolderAdapter(getContext(), folderList, false);
+        folderAdapter = new FolderAdapter(getContext(), folderList, false, false);
         folderrecycler_view.setAdapter(folderAdapter);
     }
 
@@ -730,7 +742,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equalsIgnoreCase("FolderOpen")) {
+            if (intent.getAction().equalsIgnoreCase("ShareFolderOpen")) {
                 boolean OpenFolderFlag = intent.getBooleanExtra("OpenFolder", false);
                 int FolderID = intent.getIntExtra("FolderID", 0);
 
@@ -819,7 +831,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(receiver, new IntentFilter("FolderOpen"));
+        getActivity().registerReceiver(receiver, new IntentFilter("ShareFolderOpen"));
     }
 
     @Override

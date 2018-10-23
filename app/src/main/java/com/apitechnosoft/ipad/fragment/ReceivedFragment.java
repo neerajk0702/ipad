@@ -90,6 +90,8 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
         selectfoldet.setVisibility(View.GONE);
+        LinearLayout folderlayout = findViewById(R.id.folderlayout);
+        folderlayout.setVisibility(View.GONE);
 
 
         TextView newFolder = findViewById(R.id.newFolder);
