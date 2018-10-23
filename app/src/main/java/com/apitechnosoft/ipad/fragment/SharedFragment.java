@@ -709,7 +709,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" + itemsno;
+            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" +  itemsno;
             serviceCaller.CallCommanServiceMethod(url, "MoveFileIntoFolder", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -760,7 +760,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.GetFolderDataApi + foldersno;
+            final String url = Contants.BASE_URL + Contants.GetSharedFolderDataApi + foldersno;
             serviceCaller.CallCommanServiceMethod(url, "getFolderAllFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

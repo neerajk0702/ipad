@@ -73,7 +73,7 @@ public class Contants {
     public static String VerifyRecaptchaApi = "VerifyRecaptchaApi/verifyrecaptcha";
 
     public static String MoveSaveShareFolderDataLocationApi = "MoveSharedFileFolderApi/movehsaredfolderfile?";
-
+    public static String GetSharedFolderDataApi = "GetShareFolderDataApi/getsharefolder?foldersno=";
 
 }
 
