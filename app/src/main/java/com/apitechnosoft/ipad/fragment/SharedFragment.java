@@ -674,7 +674,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                         if (mediaList != null && mediaList.size() > 0) {
                             for (MediaData mediaData : mediaList) {
                                 if (mediaData.isSelected()) {
-                                    snoList.add(String.valueOf(mediaData.getSno()));
+                                    snoList.add(String.valueOf(mediaData.getItemSno()));
                                 }
                             }
                             for (String city : snoList) {
@@ -721,6 +721,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                                 getAllFile();
                             } else {
                                 Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                                getAllFile();
                             }
                         } else {
                             Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
