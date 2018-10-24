@@ -36,6 +36,7 @@ import com.apitechnosoft.ipad.adapter.MoveFileFolderAdapter;
 import com.apitechnosoft.ipad.adapter.SharedFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.Audioist;
@@ -53,12 +54,18 @@ import com.apitechnosoft.ipad.utils.FontManager;
 import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import okhttp3.MultipartBody;
 
 public class SharedFragment extends MainFragment implements SwipeRefreshLayout.OnRefreshListener {
     Typeface materialdesignicons_font;
@@ -674,7 +681,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                         if (mediaList != null && mediaList.size() > 0) {
                             for (MediaData mediaData : mediaList) {
                                 if (mediaData.isSelected()) {
-                                    snoList.add(String.valueOf(mediaData.getSno()));
+                                    snoList.add(String.valueOf(mediaData.getItemSno()));
                                 }
                             }
                             for (String city : snoList) {
@@ -704,12 +711,13 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         alert.show();
     }
 
-    private void MoveFileIntoFolder(String filevalue, int itemsno) {
+  /*  private void MoveFileIntoFolder(String filevalue, int itemsno) {
         if (ASTUIUtil.isOnline(getContext())) {
             final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" +  itemsno;
+            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi
+                    + "username=" + UserId + "&" + "filevalueforfolder=" + filevalue + "&" + "itemsno=" +  itemsno;
             serviceCaller.CallCommanServiceMethod(url, "MoveFileIntoFolder", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -736,7 +744,62 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         } else {
             ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
+    }*/
+
+
+    public void MoveFileIntoFolder(String filevalue, int itemsno) {
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            dotDialog.show();
+            final String url = Contants.BASE_URL + Contants.MoveSaveShareFolderDataLocationApi;
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("username", UserId);
+                object.put("filevalueforfolder", filevalue);
+                object.put("itemsno", itemsno);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("movefiledata", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, url) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            if (data != null) {
+                                if (data.isStatus()) {
+                                    ASTUIUtil.showToast("File Moved Successfully");
+                                    getAllFile();
+                                } else {
+                                    Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                                    getAllFile();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                        ASTUIUtil.showToast(Contants.Error);
+                    }
+                    if (dotDialog.isShowing()) {
+                        dotDialog.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+        }
+
     }
+
 
     //for geting next previous click action
     BroadcastReceiver receiver = new BroadcastReceiver() {
