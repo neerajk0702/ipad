@@ -778,14 +778,14 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                                     ASTUIUtil.showToast("File Moved Successfully");
                                     getAllFile();
                                 } else {
-                                    Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
-                                    getAllFile();
+                                    Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
+                                  //  getAllFile();
                                 }
                             } else {
-                                Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "File  Moved Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
                         }
                         ASTUIUtil.showToast(Contants.Error);
                     }
