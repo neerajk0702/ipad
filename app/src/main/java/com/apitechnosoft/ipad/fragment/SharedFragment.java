@@ -779,7 +779,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                                     getAllFile();
                                 } else {
                                     Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
-                                  //  getAllFile();
+                                    //  getAllFile();
                                 }
                             } else {
                                 Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
@@ -787,6 +787,8 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                         } else {
                             Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
                         }
+
+                    } else {
                         ASTUIUtil.showToast(Contants.Error);
                     }
                     if (dotDialog.isShowing()) {

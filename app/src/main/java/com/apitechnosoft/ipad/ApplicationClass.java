@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
@@ -33,7 +34,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * @author AST Inc.
  */
-public class ApplicationClass extends Application {
+public class ApplicationClass extends MultiDexApplication {
 
     ActivityLifecycleHandler activityLifecycleHandler;
     private Typeface _sTypeface;
@@ -59,12 +60,6 @@ public class ApplicationClass extends Application {
         super.onCreate();
         setAppInstance();
         this.init();
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
     protected void setAppInstance() {

@@ -120,6 +120,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
         // Customizing G+ button
         btn_gsign_in.setSize(SignInButton.SIZE_STANDARD);
+
     }
 
     //get data from UI
@@ -256,7 +257,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
             // and the GoogleSignInResult will be available instantly.
             GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
+           // handleSignInResult(result);
         } else {
             //   showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
@@ -455,5 +456,15 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
         }
 
+    }
+
+    //gmail logout
+    private void signOut() {
+        LoginManager.getInstance().logOut();
+        if (mGoogleApiClient.isConnected()) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient.connect();
+        }
     }
 }
