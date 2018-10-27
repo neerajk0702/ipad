@@ -317,7 +317,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 break;
             case R.id.selectfoldet:
                 if (folderList != null && folderList.size() > 0) {
-                    moveFile();
+                    getMoveFilevalue();
                 } else {
                     ASTUIUtil.showToast("Folder not found!");
                 }
@@ -333,6 +333,35 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
             case R.id.upFolder:
                 getAllFile();
                 break;
+        }
+    }
+
+
+    private void getMoveFilevalue() {
+        if (mAdapter != null) {
+            ArrayList<MediaData> mediaList = mAdapter.mediaList;
+            String SEPARATOR = ",";
+            StringBuilder csvBuilder = new StringBuilder();
+            List<String> snoList = new ArrayList<>();
+            if (mediaList != null && mediaList.size() > 0) {
+                for (MediaData mediaData : mediaList) {
+                    if (mediaData.isSelected()) {
+                        snoList.add(String.valueOf(mediaData.getItemSno()));
+                    }
+                }
+                for (String city : snoList) {
+                    csvBuilder.append(city);
+                    csvBuilder.append(SEPARATOR);
+                }
+                String filevalueforfolder = csvBuilder.toString();
+                //Remove last comma
+                if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
+                    filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
+                    moveFile(filevalueforfolder);
+                } else {
+                    ASTUIUtil.showToast("Please Select file!");
+                }
+            }
         }
     }
 
@@ -653,7 +682,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         getAllFile();
     }
 
-    public void moveFile() {
+    public void moveFile(String filevalueforfolder) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
         final android.app.AlertDialog alert = builder.create();
         View view = alert.getLayoutInflater().inflate(R.layout.move_folder_layout, null);
@@ -673,31 +702,9 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 Folderdata folderdata = folderAdapter.selectFolderData;
                 if (folderdata != null) {
                     int itemsno = folderdata.getSno();
-                    if (mAdapter != null) {
-                        ArrayList<MediaData> mediaList = mAdapter.mediaList;
-                        String SEPARATOR = ",";
-                        StringBuilder csvBuilder = new StringBuilder();
-                        List<String> snoList = new ArrayList<>();
-                        if (mediaList != null && mediaList.size() > 0) {
-                            for (MediaData mediaData : mediaList) {
-                                if (mediaData.isSelected()) {
-                                    snoList.add(String.valueOf(mediaData.getItemSno()));
-                                }
-                            }
-                            for (String city : snoList) {
-                                csvBuilder.append(city);
-                                csvBuilder.append(SEPARATOR);
-                            }
-                            String filevalueforfolder = csvBuilder.toString();
-                            //Remove last comma
-                            if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
-                                filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
-                                MoveFileIntoFolder(filevalueforfolder, itemsno);
-                            } else {
-                                ASTUIUtil.showToast("Please Select file!");
-                            }
-                        }
-                    }
+                    MoveFileIntoFolder(filevalueforfolder, itemsno);
+                } else {
+                    ASTUIUtil.showToast("Please Select Folder!");
                 }
                 alert.dismiss();
             }
@@ -778,8 +785,8 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                                     ASTUIUtil.showToast("File Moved Successfully");
                                     getAllFile();
                                 } else {
-                                    Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();
-                                    //  getAllFile();
+                                    Toast.makeText(getContext(), "File Moved Successfully!", Toast.LENGTH_LONG).show();
+                                    getAllFile();
                                 }
                             } else {
                                 Toast.makeText(getContext(), "File Not Moved Successfully!", Toast.LENGTH_LONG).show();

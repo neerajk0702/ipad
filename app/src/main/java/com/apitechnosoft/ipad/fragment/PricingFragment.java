@@ -53,7 +53,9 @@ public class PricingFragment extends MainFragment {
     CheckBox silvermonth, silveryear, goldmonth, goldyear;
     String payAmount = "0";
     String UserId;
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
+    // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
+    // or live (ENVIRONMENT_PRODUCTION)
+    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
 
     // note that these credentials will differ between live & sandbox
     // environments.
@@ -118,7 +120,7 @@ public class PricingFragment extends MainFragment {
                     silveryear.setChecked(false);
                     goldmonth.setChecked(false);
                     goldyear.setChecked(false);
-                    payAmount = "5.99";
+
                 }
             }
         });
@@ -129,7 +131,7 @@ public class PricingFragment extends MainFragment {
                     silvermonth.setChecked(false);
                     goldmonth.setChecked(false);
                     goldyear.setChecked(false);
-                    payAmount = "59.90";
+
                 }
             }
         });
@@ -140,7 +142,7 @@ public class PricingFragment extends MainFragment {
                     silveryear.setChecked(false);
                     silvermonth.setChecked(false);
                     goldyear.setChecked(false);
-                    payAmount = "9.99";
+
                 }
             }
         });
@@ -151,10 +153,11 @@ public class PricingFragment extends MainFragment {
                     silveryear.setChecked(false);
                     silvermonth.setChecked(false);
                     goldmonth.setChecked(false);
-                    payAmount = "99.90";
+
                 }
             }
         });
+
 
     }
 
@@ -162,17 +165,26 @@ public class PricingFragment extends MainFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.goldbt:
-                if (payAmount != null && !payAmount.equals("0")) {
+                if (goldmonth.isChecked()) {
+                    payAmount = "9.99";
+                    callPayment();
+                } else if (goldyear.isChecked()) {
+                    payAmount = "99.90";
                     callPayment();
                 } else {
-                    ASTUIUtil.showToast("Please select anyone payment option!");
+                    ASTUIUtil.showToast("Please select anyone payment option in Gold User!");
                 }
                 break;
             case R.id.silverbt:
-                if (payAmount != null && !payAmount.equals("0")) {
+
+                if (silveryear.isChecked()) {
+                    payAmount = "5.99";
+                    callPayment();
+                } else if (silvermonth.isChecked()) {
+                    payAmount = "59.90";
                     callPayment();
                 } else {
-                    ASTUIUtil.showToast("Please select anyone payment option!");
+                    ASTUIUtil.showToast("Please select anyone payment option in Silver User!");
                 }
                 break;
         }

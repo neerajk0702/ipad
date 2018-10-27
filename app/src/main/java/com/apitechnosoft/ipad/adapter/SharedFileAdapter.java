@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -107,13 +109,16 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
         ImageView recentImg;
         CheckBox selectCheck;
         ProgressBar loadingDialog;
-
+        VideoView videoView;
+        LinearLayout videoViewLayout;
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             selectCheck = view.findViewById(R.id.selectCheck);
             loadingDialog = view.findViewById(R.id.loadingDialog);
+            videoView = view.findViewById(R.id.videoView);
+            videoViewLayout = view.findViewById(R.id.videoViewLayout);
         }
     }
 
@@ -176,7 +181,22 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-                    holder.recentImg.setImageResource(R.drawable.video);
+                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+                    holder.recentImg.setVisibility(View.GONE);
+                    holder.videoViewLayout.setVisibility(View.VISIBLE);
+
+                    holder.videoView.setVideoURI(Uri.parse(filePath));
+                    holder.videoView.requestFocus();
+                    holder.videoView.seekTo(200);
+                    holder.videoView.pause();
+                    holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
+                    holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                    });
+                   // holder.recentImg.setImageResource(R.drawable.video);
                     //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
                 }
             } else if (type == 3) {
@@ -210,6 +230,13 @@ public class SharedFileAdapter extends RecyclerView.Adapter<SharedFileAdapter.My
                 getAllSharedFileComments(position);
             }
         });
+        holder.videoViewLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getAllSharedFileComments(position);
+            }
+        });
+
         if (mediaList.get(position).isSelected()) {
             holder.selectCheck.setChecked(true);
         } else {

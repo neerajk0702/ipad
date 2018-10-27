@@ -195,17 +195,6 @@
                             android:text="BUY NOW"
                             android:textSize="@dimen/_12dp" />
 
-                        <Button
-                            style="@style/DefaultButtonText"
-                            android:layout_width="@dimen/_180dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_20dp"
-                            android:background="@drawable/buy_button"
-                            android:gravity="center"
-                            android:text="JOIN NOW"
-                            android:textSize="@dimen/_12dp" />
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30dp"
@@ -304,18 +293,6 @@
                             android:background="@drawable/gold_button"
                             android:gravity="center"
                             android:text="BUY NOW"
-                            android:textSize="@dimen/_12dp" />
-
-                        <Button
-                            style="@style/DefaultButtonText"
-                            android:layout_width="@dimen/_180dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_20dp"
-                            android:textColor="@color/white"
-                            android:background="@drawable/gold_button"
-                            android:gravity="center"
-                            android:text="JOIN NOW"
                             android:textSize="@dimen/_12dp" />
 
                         <View

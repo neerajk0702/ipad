@@ -303,7 +303,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 break;
             case R.id.selectfoldet:
                 if (folderList != null && folderList.size() > 0) {
-                    moveFile();
+                    getMoveFilevalue();
                 } else {
                     ASTUIUtil.showToast("Folder not found!");
                 }
@@ -313,6 +313,34 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 seeallfile.setVisibility(View.GONE);
                 setAdapter(1);
                 break;
+        }
+    }
+
+    private void getMoveFilevalue() {
+        if (mAdapter != null) {
+            ArrayList<MediaData> mediaList = mAdapter.mediaList;
+            String SEPARATOR = ",";
+            StringBuilder csvBuilder = new StringBuilder();
+            List<String> snoList = new ArrayList<>();
+            if (mediaList != null && mediaList.size() > 0) {
+                for (MediaData mediaData : mediaList) {
+                    if (mediaData.isSelected()) {
+                        snoList.add(String.valueOf(mediaData.getSno()));
+                    }
+                }
+                for (String city : snoList) {
+                    csvBuilder.append(city);
+                    csvBuilder.append(SEPARATOR);
+                }
+                String filevalueforfolder = csvBuilder.toString();
+                //Remove last comma
+                if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
+                    filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
+                    moveFile(filevalueforfolder);
+                } else {
+                    ASTUIUtil.showToast("Please Select file!");
+                }
+            }
         }
     }
 
@@ -728,7 +756,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     }
 
 
-    public void moveFile() {
+    public void moveFile(String filevalueforfolder) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
         final android.app.AlertDialog alert = builder.create();
         View view = alert.getLayoutInflater().inflate(R.layout.move_folder_layout, null);
@@ -748,31 +776,9 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 Folderdata folderdata = folderAdapter.selectFolderData;
                 if (folderdata != null) {
                     int itemsno = folderdata.getSno();
-                    if (mAdapter != null) {
-                        ArrayList<MediaData> mediaList = mAdapter.mediaList;
-                        String SEPARATOR = ",";
-                        StringBuilder csvBuilder = new StringBuilder();
-                        List<String> snoList = new ArrayList<>();
-                        if (mediaList != null && mediaList.size() > 0) {
-                            for (MediaData mediaData : mediaList) {
-                                if (mediaData.isSelected()) {
-                                    snoList.add(String.valueOf(mediaData.getSno()));
-                                }
-                            }
-                            for (String city : snoList) {
-                                csvBuilder.append(city);
-                                csvBuilder.append(SEPARATOR);
-                            }
-                            String filevalueforfolder = csvBuilder.toString();
-                            //Remove last comma
-                            if (filevalueforfolder != null && !filevalueforfolder.equals("")) {
-                                filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
-                                MoveFileIntoFolder(filevalueforfolder, itemsno);
-                            } else {
-                                ASTUIUtil.showToast("Please Select file!");
-                            }
-                        }
-                    }
+                    MoveFileIntoFolder(filevalueforfolder, itemsno);
+                }else {
+                    ASTUIUtil.showToast("Please Select Folder!");
                 }
                 alert.dismiss();
             }

@@ -22,12 +22,27 @@
             android:layout_weight="0.8"
             android:orientation="vertical">
 
+            <LinearLayout android:id="@+id/videoViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_gravity="center">
+
+                <com.apitechnosoft.ipad.utils.FullScreenVideoView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
 
             <com.apitechnosoft.ipad.component.ASTImageView
                 android:id="@+id/recentImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:src="@drawable/defaultimg"
+                android:visibility="visible" />
 
             <ProgressBar
                 android:id="@+id/loadingDialog"
@@ -41,18 +56,18 @@
                 android:id="@+id/selectCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/red_dark_color"
                 android:layout_alignParentRight="true"
+                android:buttonTint="@color/red_dark_color"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/deleteiconfolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/_3dp"
                 android:layout_alignParentRight="true"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_3dp"
+                android:padding="@dimen/_3dp"
                 android:text=""
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_20dp"

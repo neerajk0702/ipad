@@ -36,6 +36,11 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
         android:name=".ApplicationClass"
@@ -114,7 +119,7 @@
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />
 
-         <activity android:name=".activity.ChangeNameActivity"></activity>
+        <activity android:name=".activity.ChangeNameActivity"></activity>
 
         <activity android:name=".activity.UploadFromOutsideActivity">
             <intent-filter>
@@ -123,14 +128,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="*/*" />
-               <!-- <data android:mimeType="video/*" />
-                <data android:mimeType="audio/*" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="application/pdf" />
-                <data android:mimeType="application/vnd.ms-powerpoint" />
-                <data android:mimeType="application/msword" />
-                <data android:mimeType="application/vnd.ms-excel" />
-                <data android:mimeType="text/plain" />-->
+                <!-- <data android:mimeType="video/*" />
+                 <data android:mimeType="audio/*" />
+                 <data android:mimeType="text/plain" />
+                 <data android:mimeType="application/pdf" />
+                 <data android:mimeType="application/vnd.ms-powerpoint" />
+                 <data android:mimeType="application/msword" />
+                 <data android:mimeType="application/vnd.ms-excel" />
+                 <data android:mimeType="text/plain" />-->
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
