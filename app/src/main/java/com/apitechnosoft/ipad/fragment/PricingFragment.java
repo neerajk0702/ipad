@@ -47,7 +47,7 @@ public class PricingFragment extends MainFragment {
     protected int fragmentLayout() {
         return R.layout.fragment_pricing;
     }
-
+    HeaderFragment headerFragment;
     TextView gb5, gb50, gb500;
     Button goldbt, silverbt;
     CheckBox silvermonth, silveryear, goldmonth, goldyear;
@@ -102,6 +102,7 @@ public class PricingFragment extends MainFragment {
 
     @Override
     protected void dataToView() {
+        getAllNotification();
         gb5.setText(Html.fromHtml("5<sup>GB</sup>"));
         gb50.setText(Html.fromHtml("50<sup>GB</sup>"));
         gb500.setText(Html.fromHtml("500<sup>GB</sup>"));
@@ -321,5 +322,44 @@ public class PricingFragment extends MainFragment {
         }
 
     }
+    public void getAllNotification() {
+        try {
+            String UserId = "";
+            SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+            if (prefs != null) {
+                UserId = prefs.getString("UserId", "");
+            }
+            if (ASTUIUtil.isOnline(getContext())) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+                // dotDialog.show();
 
+                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
+                serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
+                    @Override
+                    public void onDone(String result, boolean isComplete) {
+                        if (isComplete) {
+                            ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                            if (data != null) {
+                                loadcartdata(data.getNotificationcount() + "");
+                            }
+                        }
+                    }
+                });
+            }
+        } catch (Exception E) {
+
+        }
+    }
+    protected void loadcartdata(String count) {
+        if (getHostActivity() == null) {
+            return;
+        }
+        this.headerFragment = this.getHostActivity().headerFragment();
+        if (headerFragment == null) {
+            return;
+        }
+        this.headerFragment.setVisiVilityNotificationIcon(true);
+        this.headerFragment.updateNotification(count);
+    }
 }

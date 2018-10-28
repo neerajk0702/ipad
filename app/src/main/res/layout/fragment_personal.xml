@@ -309,7 +309,7 @@
                 android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/select_folder"
-                android:text="Select Folder"
+                android:text="Move to Folder"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12dp" />
 
@@ -320,7 +320,7 @@
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/share_folder"
-                android:text="Share File's"
+                android:text="Share Multiple File's"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12dp" />
 

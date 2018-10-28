@@ -2,8 +2,10 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
@@ -36,12 +40,16 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         public TextView recenttext;
         ImageView recentImg;
         CheckBox selectCheck;
+        LinearLayout videoViewLayout;
+        VideoView videoView;
 
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             selectCheck = view.findViewById(R.id.selectCheck);
+            videoView = view.findViewById(R.id.videoView);
+            videoViewLayout = view.findViewById(R.id.videoViewLayout);
         }
     }
 
@@ -60,16 +68,18 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
 
         return new MyViewHolder(itemView);
     }
+
     public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
         int states[][] = {{android.R.attr.state_checked}, {}};
         int colors[] = {checkedColor, uncheckedColor};
         CompoundButtonCompat.setButtonTintList(checkBox, new
                 ColorStateList(states, colors));
     }
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
-        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color),ASTUIUtil.getColor(R.color.selectfolder));
+        setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
 
 
         holder.selectCheck.setVisibility(View.VISIBLE);
@@ -78,7 +88,23 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-            holder.recentImg.setImageResource(R.drawable.video);
+             holder.recentImg.setImageResource(R.drawable.video);
+
+           /* String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+            holder.recentImg.setVisibility(View.GONE);
+            holder.videoViewLayout.setVisibility(View.VISIBLE);
+
+            holder.videoView.setVideoURI(Uri.parse(filePath));
+            holder.videoView.requestFocus();
+            holder.videoView.seekTo(200);
+            holder.videoView.pause();
+            holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
+            holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                }
+            });*/
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
@@ -104,8 +130,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         } else {
             holder.selectCheck.setChecked(false);
         }
-        holder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
+        holder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {

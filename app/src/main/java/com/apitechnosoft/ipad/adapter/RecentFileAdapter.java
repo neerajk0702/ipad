@@ -3,6 +3,7 @@ package com.apitechnosoft.ipad.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -55,13 +56,16 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         ImageView recentImg;
         LinearLayout itemLayout;
         ProgressBar loadingDialog;
-
+        LinearLayout videoViewLayout;
+        VideoView videoView;
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
             recentImg = view.findViewById(R.id.recentImg);
             itemLayout = view.findViewById(R.id.itemLayout);
             loadingDialog = view.findViewById(R.id.loadingDialog);
+            videoView = view.findViewById(R.id.videoView);
+            videoViewLayout = view.findViewById(R.id.videoViewLayout);
         }
     }
 
@@ -104,7 +108,22 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 }
             });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
-            holder.recentImg.setImageResource(R.drawable.video);
+           // holder.recentImg.setImageResource(R.drawable.video);
+            String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+            holder.recentImg.setVisibility(View.GONE);
+            holder.videoViewLayout.setVisibility(View.VISIBLE);
+
+            holder.videoView.setVideoURI(Uri.parse(filePath));
+            holder.videoView.requestFocus();
+            holder.videoView.seekTo(200);
+            holder.videoView.pause();
+            holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
+            holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                }
+            });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
