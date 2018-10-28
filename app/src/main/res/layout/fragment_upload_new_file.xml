@@ -1,200 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".fragment.UploadNewFileFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_10dp">
+        android:layout_marginTop="@dimen/_10dp"
+        android:orientation="vertical">
 
-        <android.support.v4.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/_5dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10dp"
-                    android:layout_marginRight="@dimen/_10dp"
-                    android:orientation="horizontal">
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10dp"
-                        android:layout_weight="0.8"
-                        android:text="UPLOAD NEW FILE"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16dp" />
-
-                    <ImageView
-                        android:id="@+id/recentImg"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_50dp"
-                        android:layout_weight="0.2"
-                        android:src="@drawable/plus" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10dp"
-                    android:layout_marginTop="@dimen/_10dp"
-                    android:layout_marginRight="@dimen/_10dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_5dp"
                     android:orientation="vertical">
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:orientation="horizontal">
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_weight="0.8"
+                            android:text="UPLOAD NEW FILE"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16dp" />
+
+                        <ImageView
+                            android:id="@+id/recentImg"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_50dp"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/plus" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.CardView
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="5dp"
-                            app:cardUseCompatPadding="true"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_200dp"
-                            android:background="@color/white"
-                            android:elevation="5dp">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-
-                            <com.apitechnosoft.ipad.component.ASTImageView
-                                android:id="@+id/img"
+                            <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="@dimen/_200dp"
+                                android:background="@color/white"
+                                android:elevation="5dp"
+                                app:cardCornerRadius="2dp"
+                                app:cardElevation="5dp"
+                                app:cardUseCompatPadding="true">
 
-                            <RelativeLayout
-                                android:id="@+id/webLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
 
-                                <WebView
-                                    android:id="@+id/web"
+                                <com.apitechnosoft.ipad.component.ASTImageView
+                                    android:id="@+id/img"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent" />
 
-                                <ProgressBar
-                                    android:id="@+id/loadingDialog"
-                                    android:layout_width="@dimen/_30dp"
-                                    android:layout_height="@dimen/_30dp"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_centerVertical="true"
-                                    android:visibility="gone" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:id="@+id/videoViewLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
                                 <RelativeLayout
+                                    android:id="@+id/webLayout"
                                     android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="0.7">
+                                    android:layout_height="match_parent">
 
-                                    <com.apitechnosoft.ipad.utils.FullScreenVideoView
-                                        android:id="@+id/videoView"
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_gravity="center" />
+                                    <WebView
+                                        android:id="@+id/web"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
 
                                     <ProgressBar
-                                        android:id="@+id/bufferingDialog"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:id="@+id/loadingDialog"
+                                        android:layout_width="@dimen/_30dp"
+                                        android:layout_height="@dimen/_30dp"
                                         android:layout_centerHorizontal="true"
-                                        android:visibility="gone"
-                                        android:layout_centerVertical="true" />
+                                        android:layout_centerVertical="true"
+                                        android:visibility="gone" />
                                 </RelativeLayout>
 
-                                <FrameLayout
-                                    android:id="@+id/videoViewWrapper"
+                                <LinearLayout
+                                    android:id="@+id/videoViewLayout"
                                     android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="0.3">
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.7">
+
+                                        <com.apitechnosoft.ipad.utils.FullScreenVideoView
+                                            android:id="@+id/videoView"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center" />
+
+                                        <ProgressBar
+                                            android:id="@+id/bufferingDialog"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            android:visibility="gone" />
+                                    </RelativeLayout>
+
+                                    <FrameLayout
+                                        android:id="@+id/videoViewWrapper"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3">
 
 
-                                </FrameLayout>
-                            </LinearLayout>
-                        </android.support.v7.widget.CardView>
+                                    </FrameLayout>
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:id="@+id/filename"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16dp"
+                            android:gravity="center"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12dp" />
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16dp"
+                            android:gravity="center"
+                            android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12dp" />
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_14dp"
+                            android:text="Warning:"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_14dp"
+                            android:textStyle="bold" />
+
+                        <com.apitechnosoft.ipad.component.ASTTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5dp"
+                            android:text="Only certain file type will show in preview .jpeg,.gif,.png, etc."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12dp" />
                     </LinearLayout>
 
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:id="@+id/filename"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/btnLogIn"
+                        style="@style/DefaultButtonText"
+                        android:layout_width="@dimen/_210dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_25dp"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:background="@drawable/button_login"
                         android:gravity="center"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
+                        android:text="Upload"
+                        android:textSize="@dimen/_14dp" />
 
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
-                        android:gravity="center"
-                        android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
 
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_14dp"
-                        android:text="Warning:"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/_14dp"
-                        android:textStyle="bold" />
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5dp"
-                        android:text="Only certain file type will show in preview .jpeg,.gif,.png, etc."
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/btnLogIn"
-                    style="@style/DefaultButtonText"
-                    android:layout_width="@dimen/_220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_25dp"
-                    android:background="@drawable/button_login"
-                    android:gravity="center"
-                    android:text="Upload"
-                    android:textSize="@dimen/_14dp" />
-
-
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+            </ScrollView>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -212,6 +221,6 @@
                 android:text="Admob"
                 android:textColor="@android:color/black" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
