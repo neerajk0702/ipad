@@ -54,12 +54,13 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_14dp" />
 
-        <LinearLayout android:id="@+id/joinLayout"
+        <LinearLayout
+            android:id="@+id/joinLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25dp"
-            android:layout_marginRight="@dimen/_25dp"
             android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginRight="@dimen/_25dp"
             android:background="@color/orange">
 
             <com.apitechnosoft.ipad.component.ASTTextView
@@ -111,11 +112,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginRight="@dimen/_10dp"
             android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
             android:orientation="horizontal">
 
-            <Button android:id="@+id/linkedinbt"
+            <Button
+                android:id="@+id/linkedinbt"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginRight="@dimen/_5dp"
@@ -124,13 +126,43 @@
                 android:text="Linkedin"
                 android:textColor="@color/white" />
 
-            <Button android:id="@+id/instabt"
+            <Button
+                android:id="@+id/instabt"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@color/insta"
                 android:text="Instagram"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <com.twitter.sdk.android.core.identity.TwitterLoginButton
+                android:id="@+id/twitterLoginButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:text="Linkedin"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/buttontwiter"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30dp"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:layout_weight="0.5"
+                android:background="@color/insta"
+                android:text="Twiter Login"
                 android:textColor="@color/white" />
 
         </LinearLayout>

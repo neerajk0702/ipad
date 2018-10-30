@@ -62,6 +62,9 @@ dependencies {
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     implementation project(':linkedin-sdk')
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+    implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
 }
 
 

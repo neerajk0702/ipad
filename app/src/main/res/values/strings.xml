@@ -167,5 +167,8 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
 
     <string name="facebook_app_id">1266609856804400</string>
     <string name="fb_login_protocol_scheme">fb1266609856804400</string>
+    <string name="com_twitter_sdk_android_CONSUMER_KEY">fj5bzUimglJbynemlNNQHTESq</string>
+    <string name="com_twitter_sdk_android_CONSUMER_SECRET">LU1KyBvIlyUqb3quVd0l5ExAwfvLJbwPQBL4BUkP50OE641PCE</string>
+
 
 </resources>
