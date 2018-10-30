@@ -139,6 +139,10 @@ public class ContentData {
     public void setLastuploadpic(ArrayList<Lastuploadpic> lastuploadpic) {
         this.lastuploadpic = lastuploadpic;
     }
+    private ArrayList<AllfileLiast> allfileLiast;
 
+    public ArrayList<AllfileLiast> getAllfileLiast() { return this.allfileLiast; }
+
+    public void setAllfileLiast(ArrayList<AllfileLiast> allfileLiast) { this.allfileLiast = allfileLiast; }
 }
 

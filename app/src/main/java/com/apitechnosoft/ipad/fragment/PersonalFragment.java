@@ -91,7 +91,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
     boolean seeallfileFlag = true;
     EditText searchedit;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
+    private TextView emptyView;
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -105,6 +105,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         doclayout = findViewById(R.id.doclayout);
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
+        emptyView = findViewById(R.id.empty_view);
         searchedit = findViewById(R.id.searchedit);
         searchedit.setHint("Search with Folder/File-Name");
         TextView newFolder = findViewById(R.id.newFolder);
@@ -634,6 +635,14 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 mAdapter = new PersonalAdapter(getContext(), newmediaList, type);//type for image video audio doc
             }
             recyclerView.setAdapter(mAdapter);
+        }
+
+        if (newmediaList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
         }
     }
 

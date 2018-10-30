@@ -28,7 +28,7 @@ public class Contants {
     public static String UPLOAD_OURSITEFILE = "FileUplodOutSiteApi/fileuploadoutsite";
     public static String CreateFolder = "CreateNewDirectoryApi/createNewDirectory?";
     public static String GetFileListApi = "GetFileListApi/getfilelist?";
-
+    public static String GetMultiFileListApi = "GetMultiFileListApi/getmultifilefilelist?";
     public static String RecentFileApi = "ResentFileApi/getRecentfile?";
 
     public static String RecivedFileApi = "GetRecivedFileApi/getrecivedfile?";
@@ -71,7 +71,6 @@ public class Contants {
     public static String UploadProfilePic = "UploadProfileApi/saveuprofile";
     public static String ServcePlanApi = "ServcePlanApi/saveplan?";
     public static String VerifyRecaptchaApi = "VerifyRecaptchaApi/verifyrecaptcha";
-
     public static String MoveSaveShareFolderDataLocationApi = "MoveSharedFileFolderApi/movehsaredfolderfile?";
     public static String GetSharedFolderDataApi = "GetShareFolderDataApi/getsharefolder?foldersno=";
 

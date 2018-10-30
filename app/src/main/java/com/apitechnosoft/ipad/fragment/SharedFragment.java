@@ -84,6 +84,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
     String UserId;
     TextView folderArrowIcon, folderTitel;
     LinearLayout folderLayout;
+    private TextView emptyView;
 
     @Override
     protected int fragmentLayout() {
@@ -99,6 +100,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
         selectfoldet.setVisibility(View.VISIBLE);
+        emptyView = findViewById(R.id.empty_view);
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         searchedit = findViewById(R.id.searchedit);
@@ -234,6 +236,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
 
                 }
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -674,6 +677,14 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
             }
             recyclerView.setAdapter(mAdapter);
         }
+        if (newmediaList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
