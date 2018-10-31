@@ -136,7 +136,6 @@ public class UploadNewFileFragment extends MainFragment {
     public void getPickedFiles(ArrayList<MediaFile> files) {
         if (videoView != null) {
             videoView.stopPlayback();
-            videoView.resume();
         }
 
         for (MediaFile deviceFile : files) {
@@ -176,6 +175,10 @@ public class UploadNewFileFragment extends MainFragment {
             setVideoShare();
         } else {
             ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!! Please Press Upload Button.", getContext());//off line msg....
+            videoViewLayout.setVisibility(View.GONE);
+            webView.setVisibility(View.GONE);
+            webLayout.setVisibility(View.GONE);
+            img.setVisibility(View.GONE);
         }
 
     }
