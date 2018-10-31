@@ -58,17 +58,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@color/white"
+                android:background="@android:color/white"
                 android:layout_below="@+id/app_bar"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10dp"
-                    android:layout_marginRight="@dimen/_10dp"
-                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -135,7 +133,8 @@
                     android:id="@+id/filerecycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10dp"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:scrollingCache="false"
                     android:background="@color/white" />
 
                 <View

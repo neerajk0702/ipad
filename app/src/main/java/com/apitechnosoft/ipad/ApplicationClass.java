@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.android.volley.Request;
@@ -28,6 +29,10 @@ import com.apitechnosoft.ipad.framework.LruBitmapCache;
 import com.apitechnosoft.ipad.utils.ASTConstants;
 import com.apitechnosoft.ipad.utils.ASTEnum;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -60,6 +65,16 @@ public class ApplicationClass extends MultiDexApplication {
         super.onCreate();
         setAppInstance();
         this.init();
+
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))//enable logging when app is in debug mode
+                .twitterAuthConfig(new TwitterAuthConfig(getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_KEY), getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_SECRET)))//pass the created app Consumer KEY and Secret also called API Key and Secret
+                .debug(true)//enable debug mode
+                .build();
+
+        //finally initialize twitter with created configs
+        Twitter.initialize(config);
+
     }
 
     protected void setAppInstance() {

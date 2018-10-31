@@ -101,7 +101,7 @@
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
                                         android:visibility="gone" />
-                                </RelativeLayout>
+                                </RelativeLayout>h
 
                                 <LinearLayout
                                     android:id="@+id/videoViewLayout"

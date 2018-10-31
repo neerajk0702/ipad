@@ -33,6 +33,7 @@ import com.apitechnosoft.ipad.database.IpadDBHelper;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.AllfileLiast;
 import com.apitechnosoft.ipad.model.Audioist;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
@@ -317,7 +318,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
             final ASTProgressBar dotDialog = new ASTProgressBar(ShareMultipelFileActivity.this);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(ShareMultipelFileActivity.this);
-            final String url = Contants.BASE_URL + Contants.GetFileListApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
+            final String url = Contants.BASE_URL + Contants.GetMultiFileListApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
             serviceCaller.CallCommanServiceMethod(url, "GetFileListApi", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {
@@ -345,98 +346,30 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
     //show file data in list
     private void showFileData(ContentData data) {
         mediaList = new ArrayList<>();
-        Photolist[] photolists = data.getPhotolist();
-        if (photolists != null && photolists.length > 0) {
+         ArrayList<AllfileLiast> allfileLias = data.getAllfileLiast();
+        if (allfileLias != null && allfileLias.size() > 0) {
             //photoList = new ArrayList<Photolist>(Arrays.asList(photolists));
-            for (Photolist photo : photolists) {
+            for (AllfileLiast allfileLiast : allfileLias) {
                 MediaData mediaData = new MediaData();
-                mediaData.setSno(photo.getSno());
-                mediaData.setFileName(photo.getFileName());
-                mediaData.setFilePath(photo.getFilePath());
-                mediaData.setLimitFilename(photo.getLimitFilename());
-                mediaData.setLimitFilename1(photo.getLimitFilename1());
-                mediaData.setSize(photo.getSize());
-                mediaData.setType(photo.getType());
-                mediaData.setEnteredDate(photo.getEnteredDate());
-                mediaData.setShareSno(photo.getShareSno());
-                mediaData.setItemSno(photo.getItemSno());
-                mediaData.setBytes(photo.getBytes());
-                mediaData.setKiloByte(photo.getKiloByte());
-                mediaData.setMegaByte(photo.getMegaByte());
-                mediaData.setGigaByte(photo.getGigaByte());
-                mediaData.setFolderlocation(photo.getFolderlocation());
+                mediaData.setSno(allfileLiast.getSno());
+                mediaData.setFileName(allfileLiast.getFileName());
+                mediaData.setFilePath(allfileLiast.getFilePath());
+                mediaData.setLimitFilename(allfileLiast.getLimitFilename());
+                mediaData.setLimitFilename1(allfileLiast.getLimitFilename());
+                mediaData.setSize(String.valueOf(allfileLiast.getSize()));
+                mediaData.setType(allfileLiast.getType());
+                mediaData.setEnteredDate(allfileLiast.getEnteredDate());
+                mediaData.setShareSno(allfileLiast.getShareSno());
+                mediaData.setItemSno(allfileLiast.getItemSno());
+                mediaData.setBytes(String.valueOf(allfileLiast.getBytes()));
+                mediaData.setKiloByte(String.valueOf(allfileLiast.getKiloByte()));
+                mediaData.setMegaByte(String.valueOf(allfileLiast.getMegaByte()));
+                mediaData.setGigaByte(String.valueOf(allfileLiast.getGigaByte()));
+                mediaData.setFolderlocation(allfileLiast.getFolderlocation());
                 mediaList.add(mediaData);
             }
         }
-        Videolist[] videos = data.getVideolist();
-        if (videos != null && videos.length > 0) {
-            //videolist = new ArrayList<Videolist>(Arrays.asList(videos));
-            for (Videolist video : videos) {
-                MediaData mediaData = new MediaData();
-                mediaData.setSno(video.getSno());
-                mediaData.setFileName(video.getFileName());
-                mediaData.setFilePath(video.getFilePath());
-                mediaData.setLimitFilename(video.getLimitFilename());
-                mediaData.setLimitFilename1(video.getLimitFilename1());
-                mediaData.setSize(video.getSize());
-                mediaData.setType(video.getType());
-                mediaData.setEnteredDate(video.getEnteredDate());
-                mediaData.setShareSno(video.getShareSno());
-                mediaData.setItemSno(video.getItemSno());
-                mediaData.setBytes(video.getBytes());
-                mediaData.setKiloByte(video.getKiloByte());
-                mediaData.setMegaByte(video.getMegaByte());
-                mediaData.setGigaByte(video.getGigaByte());
-                mediaData.setFolderlocation(video.getFolderlocation());
-                mediaList.add(mediaData);
-            }
-        }
-        Audioist[] audioists = data.getAudioist();
-        if (audioists != null && audioists.length > 0) {
-            // audioList = new ArrayList<Audioist>(Arrays.asList(audioists));
-            for (Audioist audio : audioists) {
-                MediaData mediaData = new MediaData();
-                mediaData.setSno(audio.getSno());
-                mediaData.setFileName(audio.getFileName());
-                mediaData.setFilePath(audio.getFilePath());
-                mediaData.setLimitFilename(audio.getLimitFilename());
-                mediaData.setLimitFilename1(audio.getLimitFilename1());
-                mediaData.setSize(audio.getSize());
-                mediaData.setType(audio.getType());
-                mediaData.setEnteredDate(audio.getEnteredDate());
-                mediaData.setShareSno(audio.getShareSno());
-                mediaData.setItemSno(audio.getItemSno());
-                mediaData.setBytes(audio.getBytes());
-                mediaData.setKiloByte(audio.getKiloByte());
-                mediaData.setMegaByte(audio.getMegaByte());
-                mediaData.setGigaByte(audio.getGigaByte());
-                mediaData.setFolderlocation(audio.getFolderlocation());
-                mediaList.add(mediaData);
-            }
-        }
-        Documentlist[] documentlists = data.getDocumentlist();
-        if (documentlists != null && documentlists.length > 0) {
-            for (Documentlist documentlist : documentlists) {
-                MediaData mediaData = new MediaData();
-                mediaData.setSno(documentlist.getSno());
-                mediaData.setFileName(documentlist.getFileName());
-                mediaData.setFilePath(documentlist.getFilePath());
-                mediaData.setLimitFilename(documentlist.getLimitFilename());
-                mediaData.setLimitFilename1(documentlist.getLimitFilename1());
-                mediaData.setSize(documentlist.getSize());
-                mediaData.setType(documentlist.getType());
-                mediaData.setEnteredDate(documentlist.getEnteredDate());
-                mediaData.setShareSno(documentlist.getShareSno());
-                mediaData.setItemSno(documentlist.getItemSno());
-                mediaData.setBytes(documentlist.getBytes());
-                mediaData.setKiloByte(documentlist.getKiloByte());
-                mediaData.setMegaByte(documentlist.getMegaByte());
-                mediaData.setGigaByte(documentlist.getGigaByte());
-                mediaData.setFolderlocation(documentlist.getFolderlocation());
-                mediaData.setExtension(documentlist.getExtension());
-                mediaList.add(mediaData);
-            }
-        }
+
         mAdapter = new ShareAllFileAdapter(ShareMultipelFileActivity.this, mediaList);
         filerecycler_view.setAdapter(mAdapter);
     }

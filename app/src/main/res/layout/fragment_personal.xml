@@ -250,6 +250,7 @@
                         android:id="@+id/folderrecycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:cacheColorHint="@android:color/transparent"
                         android:background="@color/white" />
 
 
@@ -257,8 +258,17 @@
                         android:id="@+id/perrecycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:cacheColorHint="@android:color/transparent"
                         android:layout_marginBottom="@dimen/_15dp"
                         android:background="@color/white" />
+
+                    <TextView
+                        android:id="@+id/empty_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="No Data Available" />
 
 
                     <com.apitechnosoft.ipad.component.ASTTextView

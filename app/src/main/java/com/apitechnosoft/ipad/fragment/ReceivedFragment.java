@@ -75,6 +75,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
     EditText searchedit;
     RecivedFileAdapter mAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    private TextView emptyView;
 
     @Override
     protected int fragmentLayout() {
@@ -89,6 +90,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
         doclayout = findViewById(R.id.doclayout);
         selectfoldet = findViewById(R.id.selectfoldet);
         sharefile = findViewById(R.id.sharefile);
+        emptyView = findViewById(R.id.empty_view);
         selectfoldet.setVisibility(View.GONE);
         LinearLayout folderlayout = findViewById(R.id.folderlayout);
         folderlayout.setVisibility(View.GONE);
@@ -545,6 +547,9 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
     private void setAdapter(int type) {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
+
+
+
         if (mediaList != null && mediaList.size() > 0) {
             for (MediaData data : mediaList) {
                 if (data.getFullFilePath() != null && !data.getFullFilePath().equals("")) {
@@ -591,6 +596,16 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             }
             recyclerView.setAdapter(mAdapter);
         }
+
+        if (newmediaList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+
+
     }
 
     public void getAllNotification() {
