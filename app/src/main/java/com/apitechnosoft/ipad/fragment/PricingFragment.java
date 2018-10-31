@@ -179,10 +179,10 @@ public class PricingFragment extends MainFragment {
             case R.id.silverbt:
 
                 if (silveryear.isChecked()) {
-                    payAmount = "5.99";
+                    payAmount = "59.90";
                     callPayment();
                 } else if (silvermonth.isChecked()) {
-                    payAmount = "59.90";
+                    payAmount = "5.99";
                     callPayment();
                 } else {
                     ASTUIUtil.showToast("Please select anyone payment option in Silver User!");

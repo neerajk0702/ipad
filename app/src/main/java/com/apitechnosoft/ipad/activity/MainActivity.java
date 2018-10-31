@@ -703,7 +703,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     String filePath = data.getUserprofile().getFilePath();
                                     if (filePath != null) {
                                         String newpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
-                                        Picasso.with(MainActivity.this).load(newpath).resize(65, 65).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
+                                        Picasso.with(MainActivity.this).load(newpath).resize(65, 65).placeholder(R.drawable.ic_launcher).into(sliderProfileImg);
                                     }
                                 }
 

@@ -22,22 +22,14 @@
             <ImageView
                 android:layout_width="@dimen/_200dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/logo" />
+                android:src="@drawable/logo" />
         </LinearLayout>
 
-        <com.apitechnosoft.ipad.component.ASTTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Your Home in the Cloud!"
-            android:textColor="@color/selectfolder"
-            android:textSize="@dimen/_20dp"
-            android:textStyle="italic" />
 
         <com.apitechnosoft.ipad.component.ASTTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginTop="@dimen/_10dp"
             android:gravity="center"
             android:padding="@dimen/_2dp"
             android:text="FREE 5 GB"

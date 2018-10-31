@@ -18,7 +18,7 @@
             android:layout_height="@dimen/_180dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
-            android:src="@mipmap/logo" />
+            android:src="@drawable/logo" />
 
         <ProgressBar
             android:id="@+id/splashProgressBar"

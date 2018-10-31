@@ -17,7 +17,7 @@
             android:layout_width="@dimen/_150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/logo"></ImageView>
+            android:src="@drawable/logo"></ImageView>
 
         <TextView
             android:id="@+id/welcom"
