@@ -88,9 +88,10 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-             holder.recentImg.setImageResource(R.drawable.video);
+          //   holder.recentImg.setImageResource(R.drawable.video);
 
-           /* String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+            String filePath = Contants.Media_File_BASE_URL +
+                    mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
             holder.recentImg.setVisibility(View.GONE);
             holder.videoViewLayout.setVisibility(View.VISIBLE);
 
@@ -104,7 +105,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
                 public void onPrepared(MediaPlayer mp) {
                     holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                 }
-            });*/
+            });
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
