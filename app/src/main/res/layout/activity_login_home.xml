@@ -119,13 +119,13 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/instabt"
+                android:id="@+id/buttontwiter"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
-                android:background="@color/insta"
-                android:text="Instagram"
+                android:background="@color/blue"
+                android:text="Twiter Login"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -135,27 +135,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10dp"
             android:layout_marginTop="@dimen/_10dp"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/_10dp"
             android:orientation="horizontal">
 
+
+
             <com.twitter.sdk.android.core.identity.TwitterLoginButton
                 android:id="@+id/twitterLoginButton"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginRight="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:text="Linkedin"
-                android:textColor="@color/white" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
 
-            <Button
-                android:id="@+id/buttontwiter"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginLeft="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:background="@color/insta"
-                android:text="Twiter Login"
-                android:textColor="@color/white" />
 
         </LinearLayout>
 

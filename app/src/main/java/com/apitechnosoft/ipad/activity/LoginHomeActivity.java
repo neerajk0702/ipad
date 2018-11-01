@@ -79,7 +79,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     LoginButton facebooklogin;
     CallbackManager callbackManager;
     SignInButton btn_gsign_in;
-    Button instabt, linkedinbt;
+    Button  linkedinbt;
     Button buttontwiter;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 7;
@@ -115,9 +115,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         Button signup = (Button) findViewById(R.id.signup);
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
-        instabt = findViewById(R.id.instabt);
         linkedinbt = findViewById(R.id.linkedinbt);
-        instabt.setOnClickListener(this);
         linkedinbt.setOnClickListener(this);
         LinearLayout joinLayout = findViewById(R.id.joinLayout);
         joinLayout.setOnClickListener(this);
@@ -209,9 +207,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 Intent intentjoin = new Intent(LoginHomeActivity.this, RegisterActivity.class);
                 startActivity(intentjoin);
                 break;
-            case R.id.instabt:
-                signIn();
-                break;
+
             case R.id.linkedinbt:
                 linkedInLogin();
                 break;
