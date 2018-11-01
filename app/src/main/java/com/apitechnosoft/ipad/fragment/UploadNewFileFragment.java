@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -157,17 +158,17 @@ public class UploadNewFileFragment extends MainFragment {
             webLayout.setVisibility(View.GONE);
             img.setVisibility(View.VISIBLE);
             setImageShare();
-        }/* else if (mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
+        }else if (mimtype.equalsIgnoreCase("application/msword") ||
                 mimtype.equalsIgnoreCase("application/pdf") ||
                 mimtype.equalsIgnoreCase("text/plain") ||
-                mimtype.equalsIgnoreCase("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
-                mimtype.equalsIgnoreCase("application/vnd.ms-powerpoint")) {
+                mimtype.equalsIgnoreCase("application/vnd.ms-excel") ||
+                mimtype.equalsIgnoreCase("application/mspowerpoint")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             webLayout.setVisibility(View.VISIBLE);
             img.setVisibility(View.GONE);
               setDocShare();
-        } */ else if (mimtype.contains("video") || mimtype.contains("VIDEO") || mimtype.contains("audio") || mimtype.contains("AUDIO")) {
+        } else if (mimtype.contains("video") || mimtype.contains("VIDEO") || mimtype.contains("audio") || mimtype.contains("AUDIO")) {
             videoViewLayout.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
             webLayout.setVisibility(View.GONE);
@@ -283,10 +284,17 @@ public class UploadNewFileFragment extends MainFragment {
             }
         });
         if (selectFile != null) {
-            webView.loadUrl(selectFile.toString());
-            webView.loadDataWithBaseURL("", selectFile.toString(), "text/html", "UTF-8", "");
+           // webView.loadUrl(selectFile.toString());
+       //     webView.loadDataWithBaseURL("", selectFile.toString(), "text/html", "UTF-8", "");
+          //  webView.getSettings().setPluginsEnabled(true);
+            File file = new File(/*Environment.getDataDirectory() +*/ selectFile.getPath());
+            final Uri uri = Uri.fromFile(file);
+            webView.loadUrl(uri.toString());
         }
     }
+
+
+
 
     private void setVideoShare() {
         final MediaController mediaController = new MediaController(getContext());

@@ -262,15 +262,6 @@
                         android:layout_marginBottom="@dimen/_15dp"
                         android:background="@color/white" />
 
-                    <TextView
-                        android:id="@+id/empty_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:text="No Data Available" />
-
-
                     <com.apitechnosoft.ipad.component.ASTTextView
                         android:id="@+id/seeallfile"
                         android:layout_width="match_parent"
@@ -280,6 +271,17 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"
                         android:textSize="@dimen/_14dp" />
+
+                    <TextView
+                        android:id="@+id/empty_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="No Data Available" />
+
+
+
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </android.support.v4.widget.SwipeRefreshLayout>

@@ -259,7 +259,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 break;
             case R.id.videolayout:
                 setAdapter(2);
-                seeallfile.setVisibility(View.GONE);//show only photos
+                seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -272,7 +272,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 break;
             case R.id.audiolayout:
                 setAdapter(3);
-                seeallfile.setVisibility(View.GONE);//show only photos
+                seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -285,7 +285,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 break;
             case R.id.doclayout:
                 setAdapter(4);
-                seeallfile.setVisibility(View.GONE);//show only photos
+                seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -623,7 +623,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             }
             recyclerView.removeAllViews();
             recyclerView.removeAllViewsInLayout();
-            if (seeallfileFlag) {//show only 12 file
+            if (seeallfileFlag) {//show only 8 file
                 ArrayList<MediaData> seemediaList = new ArrayList<>();
                 for (int i = 0; i < 8; i++) {
                     if (i < newmediaList.size()) {
