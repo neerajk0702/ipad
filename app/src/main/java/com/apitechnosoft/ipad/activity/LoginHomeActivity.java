@@ -79,7 +79,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     LoginButton facebooklogin;
     CallbackManager callbackManager;
     SignInButton btn_gsign_in;
-    Button  linkedinbt;
+    Button linkedinbt;
     Button buttontwiter;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 7;
@@ -138,7 +138,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
         // Customizing G+ button
         btn_gsign_in.setSize(SignInButton.SIZE_STANDARD);
-        defaultLoginTwitter();
+
 
     }
 
@@ -212,7 +212,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 linkedInLogin();
                 break;
             case R.id.buttontwiter:
-               logintwiter(view);
+                logintwiter(view);
 
                 break;
         }
@@ -316,6 +316,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             public void onAuthSuccess() {
                 // Authentication was successful.  You can now do
                 // other calls with the SDK.
+                Log.d(TAG, "success:" + "success");
                 getLinkedData();
             }
 
@@ -558,8 +559,9 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
             });
         } else {
             //if user is already authenticated direct call fetch twitter email api
-            Toast.makeText(this, "User already authenticated", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "User already authenticated", Toast.LENGTH_SHORT).show();
             fetchTwitterEmail(getTwitterSession());
+            fetchTwitterImage(view);
         }
     }
 

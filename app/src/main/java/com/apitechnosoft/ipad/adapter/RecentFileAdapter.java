@@ -182,7 +182,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         WebView webView = view.findViewById(R.id.web);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -263,7 +263,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         Button sharebt = view.findViewById(R.id.sharebt);
         ImageView img = view.findViewById(R.id.img);
         final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         loadingDialog.setVisibility(View.VISIBLE);
         Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img, new Callback() {
@@ -332,7 +332,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         TextView deleteicon = view.findViewById(R.id.deleteicon);
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -447,7 +447,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         TextView deleteicon = view.findViewById(R.id.deleteicon);
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));

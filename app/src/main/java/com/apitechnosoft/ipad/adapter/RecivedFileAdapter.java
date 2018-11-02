@@ -235,7 +235,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         WebView webView = view.findViewById(R.id.web);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Recived On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -333,7 +333,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         }
 
         final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Recived On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         loadingDialog.setVisibility(View.VISIBLE);
         final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
@@ -410,7 +410,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             recyclerView.setAdapter(recivedEmailAdapter);
         }
 
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Recived On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -524,7 +524,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         TextView deleteicon = view.findViewById(R.id.deleteicon);
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
-        updateDate.setText("Update On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText("Recived On:" + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));

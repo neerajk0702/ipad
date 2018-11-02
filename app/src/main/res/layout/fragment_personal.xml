@@ -267,6 +267,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
+                        android:visibility="gone"
                         android:text="View All File"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"

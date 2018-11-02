@@ -5,13 +5,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/_5dp"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/_5dp">
 
 
             <TextView
@@ -19,8 +19,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="@dimen/_4dp"
                 android:text="@string/novdetail"
                 android:textSize="@dimen/_12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_5dp"
+                android:visibility="invisible"
+                android:background="@drawable/alert_drawable"
+                android:layout_marginBottom="@dimen/_3dp"
+                android:layout_height="@dimen/_4dp"/>
         </LinearLayout>
+
+
     </ScrollView>
 </LinearLayout>

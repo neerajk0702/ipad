@@ -680,9 +680,11 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
         if (newmediaList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
+            seeallfile.setVisibility(View.GONE);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
+            seeallfile.setVisibility(View.VISIBLE);
         }
 
     }

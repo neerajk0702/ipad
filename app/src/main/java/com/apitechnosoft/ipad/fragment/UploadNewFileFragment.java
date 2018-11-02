@@ -287,7 +287,7 @@ public class UploadNewFileFragment extends MainFragment {
            // webView.loadUrl(selectFile.toString());
        //     webView.loadDataWithBaseURL("", selectFile.toString(), "text/html", "UTF-8", "");
           //  webView.getSettings().setPluginsEnabled(true);
-            File file = new File(/*Environment.getDataDirectory() +*/ selectFile.getPath());
+            File file = new File(selectFile.getPath());
             final Uri uri = Uri.fromFile(file);
             webView.loadUrl(uri.toString());
         }
