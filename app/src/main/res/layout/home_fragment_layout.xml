@@ -87,25 +87,26 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recent_recycler_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/white" />
 
 
+
+                </LinearLayout>
+
                 <com.apitechnosoft.ipad.component.ASTTextView
                     android:id="@+id/seeallfile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center|right"
+                    android:gravity="right"
                     android:text="View All File"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/_14dp" />
 
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
