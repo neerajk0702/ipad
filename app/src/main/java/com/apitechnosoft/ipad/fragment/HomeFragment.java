@@ -58,8 +58,6 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     ViewPager viewPager;
     HomePagerAdapter adapter;
     boolean isTab;
-    boolean seeallfileFlag = true;
-    TextView seeallfile;
 
     @Override
     protected int fragmentLayout() {
@@ -88,9 +86,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         tabLayout.addTab(tabLayout.newTab().setText("Personal"));
         tabLayout.addTab(tabLayout.newTab().setText("Shared"));
         tabLayout.addTab(tabLayout.newTab().setText("Received"));
-        seeallfile = findViewById(R.id.seeallfile);
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        seeallfile.setOnClickListener(this);
         getRecentFile();
 
 
@@ -151,12 +147,6 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.uploadLayout:
                 openUploadScreen();
-                break;
-
-            case R.id.seeallfile:
-                seeallfileFlag = false;
-                seeallfile.setVisibility(View.GONE);
-                setAdapter();
                 break;
         }
     }
@@ -238,35 +228,19 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     }
 
 
-    public void setAdapter(){
+    public void setAdapter() {
         if (mediaList != null && mediaList.size() > 0) {
             //Collections.reverse(mediaList);
             RecentFileAdapter mAdapter;
-            if (seeallfileFlag) {//show only 8 file
-                ArrayList<Resentdata> seemediaList = new ArrayList<>();
-                for (int i = 0; i < 8; i++) {
-                    if (i < mediaList.size()) {
-                        seemediaList.add(mediaList.get(i));
-                    }
+            ArrayList<Resentdata> seemediaList = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                if (i < mediaList.size()) {
+                    seemediaList.add(mediaList.get(i));
                 }
-                mAdapter = new RecentFileAdapter(getContext(), seemediaList);//type for image video audio doc
-            } else {
-                mAdapter = new RecentFileAdapter(getContext(), mediaList);//type for image video audio doc
             }
+            mAdapter = new RecentFileAdapter(getContext(), seemediaList);//type for image video audio doc
             recent_recycler_view.setAdapter(mAdapter);
         }
-
-
-        if (mediaList.isEmpty()) {
-            recent_recycler_view.setVisibility(View.GONE);
-            seeallfile.setVisibility(View.GONE);
-        } else {
-            recent_recycler_view.setVisibility(View.VISIBLE);
-            seeallfile.setVisibility(View.VISIBLE);
-
-        }
-
-
     }
 
 

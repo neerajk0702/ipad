@@ -76,7 +76,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
     RecivedFileAdapter mAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView emptyView;
-
+    int type = 1;
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -245,12 +245,14 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 alertForFolderName();
                 break;
             case R.id.photolayout:
-                setAdapter(1);
+                type = 1;
+                setAdapter();
                 setPhotoButton();
                 break;
             case R.id.videolayout:
-                setAdapter(2);
-                seeallfile.setVisibility(View.VISIBLE);//show only photos
+                type = 2;
+                setAdapter();
+             //   seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -262,8 +264,9 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 doclayout.setTextColor(Color.parseColor("#FF4B05"));
                 break;
             case R.id.audiolayout:
-                setAdapter(3);
-                seeallfile.setVisibility(View.VISIBLE);//show only photos
+                type = 3;
+                setAdapter();
+               // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -275,8 +278,9 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 doclayout.setTextColor(Color.parseColor("#FF4B05"));
                 break;
             case R.id.doclayout:
-                setAdapter(4);
-                seeallfile.setVisibility(View.VISIBLE);//show only photos
+                type = 4;
+                setAdapter();
+               // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -290,7 +294,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.seeallfile:
                 seeallfileFlag = false;
                 seeallfile.setVisibility(View.GONE);
-                setAdapter(1);
+                setAdapter();
                 break;
             case R.id.sharefile:
                 startActivity(new Intent(getContext(), ShareMultipelFileActivity.class));
@@ -422,7 +426,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
 
     //show file data in list
     private void showFileData(ContentData data) {
-        seeallfile.setVisibility(View.VISIBLE);
+       // seeallfile.setVisibility(View.VISIBLE);
         setPhotoButton();
         mediaList = new ArrayList<>();
        /* Folderdata[] folderdata = data.getFolderdata();
@@ -541,14 +545,13 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 mediaList.add(mediaData);
             }
         }
-        setAdapter(1);
+        type = 1;
+        setAdapter();
     }
 
-    private void setAdapter(int type) {
+    private void setAdapter() {
         ArrayList<MediaData> newmediaList = new ArrayList<>();
         //add folder
-
-
 
         if (mediaList != null && mediaList.size() > 0) {
             for (MediaData data : mediaList) {
@@ -576,7 +579,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 }
             } else if (type == 4) {
                 for (MediaData data : mediaList) {
-                    if (data.getType() != null && (data.getType().contains("application") || data.getType().contains("text"))) {
+                    if (data.getFileExtension() != null && (data.getFileExtension().contains("application") || data.getFileExtension().contains("text"))) {
                         newmediaList.add(data);
                     }
                 }
@@ -600,11 +603,11 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
         if (newmediaList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-            seeallfile.setVisibility(View.GONE);
+            //seeallfile.setVisibility(View.GONE);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
-            seeallfile.setVisibility(View.VISIBLE);
+            //seeallfile.setVisibility(View.VISIBLE);
 
         }
 

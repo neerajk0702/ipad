@@ -366,6 +366,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                 mediaData.setMegaByte(String.valueOf(allfileLiast.getMegaByte()));
                 mediaData.setGigaByte(String.valueOf(allfileLiast.getGigaByte()));
                 mediaData.setFolderlocation(allfileLiast.getFolderlocation());
+                mediaData.setExtension(allfileLiast.getExtension());
                 mediaList.add(mediaData);
             }
         }

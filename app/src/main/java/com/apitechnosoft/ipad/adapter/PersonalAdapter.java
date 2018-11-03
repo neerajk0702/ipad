@@ -112,6 +112,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         ProgressBar loadingDialog;
         VideoView videoView;
         LinearLayout videoViewLayout;
+
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
@@ -210,7 +211,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 }
             } else if (type == 4) {
                 if (mediaList.get(position).getExtension() != null) {
-                    if (mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
+                    if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
                         holder.recentImg.setImageResource(R.drawable.doc);
                     } else if (mediaList.get(position).getExtension().contains("pdf")) {
                         holder.recentImg.setImageResource(R.drawable.pdfimg);
@@ -218,7 +219,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         holder.recentImg.setImageResource(R.drawable.htmlimg);
                     } else if (mediaList.get(position).getExtension().contains("zip")) {
                         holder.recentImg.setImageResource(R.drawable.zipimg);
-                    } else if (mediaList.get(position).getExtension().contains("xlsx")) {
+                    } else if (mediaList.get(position).getExtension().contains("xls") || mediaList.get(position).getExtension().contains("xlsx")) {
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
@@ -461,6 +462,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         // videoView.start();
         alert.setCustomTitle(view);
         final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
+        bufferingDialog.setVisibility(View.VISIBLE);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -575,7 +577,10 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         mediaController.setVisibility(View.VISIBLE);
         // videoView.start();
         alert.setCustomTitle(view);
+        final ImageView audiodefault = view.findViewById(R.id.audiodefault);
         final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
+        bufferingDialog.setVisibility(View.GONE);
+        audiodefault.setVisibility(View.VISIBLE);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -597,15 +602,15 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
                         switch (what) {
                             case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
-                                bufferingDialog.setVisibility(View.GONE);
+                            //    bufferingDialog.setVisibility(View.GONE);
                                 return true;
                             }
                             case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
-                                bufferingDialog.setVisibility(View.VISIBLE);
+                                //bufferingDialog.setVisibility(View.VISIBLE);
                                 return true;
                             }
                             case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
-                                bufferingDialog.setVisibility(View.GONE);
+                               // bufferingDialog.setVisibility(View.GONE);
                                 return true;
                             }
                         }

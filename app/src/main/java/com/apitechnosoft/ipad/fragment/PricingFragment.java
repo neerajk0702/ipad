@@ -47,6 +47,7 @@ public class PricingFragment extends MainFragment {
     protected int fragmentLayout() {
         return R.layout.fragment_pricing;
     }
+
     HeaderFragment headerFragment;
     TextView gb5, gb50, gb500;
     Button goldbt, silverbt;
@@ -61,20 +62,21 @@ public class PricingFragment extends MainFragment {
     // environments.
 //testing = AVZUbOX3ry-gyvTBVykh9TnK1v49hM0ycQiquryr8NjuRwnayplCFEm1M4ZnK5Q9JCcWzn5_briWUeRH
     // ipad=    AfPQXoihdmLg8g1nzNSZ5bvg09MSEqo50cbZkeO4_KDLgMkjR2oeyNIUuDMhNWdBYoRvIu7lGf4E7Lmk
-    private static final String CONFIG_CLIENT_ID = "AXQXvP8OmdYA-DGBKdISpH03RzjV1hm_yJ5lRjNRmxKBQisH4fVMHH9G70gBs17T-R89Ny3zGtpDOjLq";
+    private static final String CONFIG_CLIENT_ID = "Ac2GT_ibcDeiq__aqoLzMjnCtwF3gVLorwTaFlvWpcAQ1bguiAZheBydb15DKxynpp9iOkJRoKgwv2to";
+   // private static final String CONFIG_CLIENT_ID = "AXQXvP8OmdYA-DGBKdISpH03RzjV1hm_yJ5lRjNRmxKBQisH4fVMHH9G70gBs17T-R89Ny3zGtpDOjLq";
 
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
     PayPalPayment thingToBuy;
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(CONFIG_ENVIRONMENT)
-            .clientId(CONFIG_CLIENT_ID)
+            .clientId(CONFIG_CLIENT_ID);
             // the following are only used in PayPalFuturePaymentActivity.
-            .merchantName("ipad")
+            /*.merchantName("ipad")
             .merchantPrivacyPolicyUri(
                     Uri.parse("https://ipadtoday.com/Privarcy.jsp"))
             .merchantUserAgreementUri(
-                    Uri.parse("https://ipadtoday.com/TermsOfService.jsp"));
+                    Uri.parse("https://ipadtoday.com/TermsOfService.jsp"));*/
 
     @Override
     protected void loadView() {
@@ -322,6 +324,7 @@ public class PricingFragment extends MainFragment {
         }
 
     }
+
     public void getAllNotification() {
         try {
             String UserId = "";
@@ -351,6 +354,7 @@ public class PricingFragment extends MainFragment {
 
         }
     }
+
     protected void loadcartdata(String count) {
         if (getHostActivity() == null) {
             return;

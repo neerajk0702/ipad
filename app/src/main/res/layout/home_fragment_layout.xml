@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_7dp"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <LinearLayout
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5dp"
             android:layout_marginRight="@dimen/_5dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -96,17 +98,6 @@
 
                 </LinearLayout>
 
-                <com.apitechnosoft.ipad.component.ASTTextView
-                    android:id="@+id/seeallfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="View All File"
-                    android:visibility="visible"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/orange"
-                    android:textSize="@dimen/_14dp" />
-
             </LinearLayout>
 
         </LinearLayout>
@@ -116,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/topLayout"
             android:layout_weight="1"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <View
@@ -143,6 +135,7 @@
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
+                android:background="@color/white"
                 android:layout_below="@+id/tab_layout"
                 android:layout_marginBottom="@dimen/_5dp" />
 

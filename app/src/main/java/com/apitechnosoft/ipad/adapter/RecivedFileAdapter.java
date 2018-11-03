@@ -192,7 +192,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 }
             } else if (type == 4) {
                 if (mediaList.get(position).getExtension() != null) {
-                    if (mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
+                    if (mediaList.get(position).getExtension().contains("doc")||mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
                         holder.recentImg.setImageResource(R.drawable.doc);
                     } else if (mediaList.get(position).getExtension().contains("pdf")) {
                         holder.recentImg.setImageResource(R.drawable.pdfimg);
@@ -200,7 +200,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                         holder.recentImg.setImageResource(R.drawable.htmlimg);
                     } else if (mediaList.get(position).getExtension().contains("zip")) {
                         holder.recentImg.setImageResource(R.drawable.zipimg);
-                    } else if (mediaList.get(position).getExtension().contains("xlsx")) {
+                    } else if (mediaList.get(position).getExtension().contains("xls")||mediaList.get(position).getExtension().contains("xlsx")) {
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
@@ -432,6 +432,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         // videoView.start();
         alert.setCustomTitle(view);
         final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
+        bufferingDialog.setVisibility(View.VISIBLE);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
@@ -553,6 +554,9 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         // videoView.start();
         alert.setCustomTitle(view);
         final ProgressBar bufferingDialog = view.findViewById(R.id.bufferingDialog);
+        final ImageView audiodefault = view.findViewById(R.id.audiodefault);
+        bufferingDialog.setVisibility(View.GONE);
+        audiodefault.setVisibility(View.VISIBLE);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override

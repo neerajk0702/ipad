@@ -74,6 +74,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
     MediaData media;
     String UserId;
     String FirstName, LastName;
+    ImageView audiodefault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         webView = findViewById(R.id.web);
         webLayout = findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
+        audiodefault = findViewById(R.id.audiodefault);
         String MediaData = getIntent().getStringExtra("MediaData");
         int MediaType = getIntent().getIntExtra("MediaType", 0);
         if (MediaData != null) {
@@ -143,7 +145,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                 webView.setVisibility(View.GONE);
                 webLayout.setVisibility(View.GONE);
                 img.setVisibility(View.GONE);
-                setVideoShare(media);
+                setVideoShare(media, MediaType);
             }
         }
         IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareSingleFileActivity.this);
@@ -194,7 +196,7 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void setVideoShare(MediaData media) {
+    private void setVideoShare(MediaData media, int MediaType) {
         String filePath = Contants.Media_File_BASE_URL + media.getFolderlocation() + "/" + media.getFileName();
         final MediaController mediaController = new MediaController(ShareSingleFileActivity.this);
         videoView = findViewById(R.id.videoView);
@@ -208,6 +210,13 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
         ((FrameLayout) findViewById(R.id.videoViewWrapper)).addView(mediaController);
         mediaController.setVisibility(View.VISIBLE);
         final ProgressBar bufferingDialog = findViewById(R.id.bufferingDialog);
+        if (MediaType == 4) {
+            bufferingDialog.setVisibility(View.GONE);
+            audiodefault.setVisibility(View.VISIBLE);
+        } else {
+            bufferingDialog.setVisibility(View.VISIBLE);
+            audiodefault.setVisibility(View.GONE);
+        }
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
