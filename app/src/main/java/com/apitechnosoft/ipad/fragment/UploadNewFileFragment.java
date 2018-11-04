@@ -67,6 +67,7 @@ public class UploadNewFileFragment extends MainFragment {
     RelativeLayout webLayout;
     VideoView videoView;
     LinearLayout videoViewLayout;
+    String mimtype;
 
     @Override
     protected int fragmentLayout() {
@@ -132,7 +133,6 @@ public class UploadNewFileFragment extends MainFragment {
         return ttlSize;
     }
 
-    String mimtype;
 
     public void getPickedFiles(ArrayList<MediaFile> files) {
         if (videoView != null) {
@@ -158,7 +158,7 @@ public class UploadNewFileFragment extends MainFragment {
             webLayout.setVisibility(View.GONE);
             img.setVisibility(View.VISIBLE);
             setImageShare();
-        }else if (mimtype.equalsIgnoreCase("application/msword") ||
+        } else if (mimtype.equalsIgnoreCase("application/msword") ||
                 mimtype.equalsIgnoreCase("application/pdf") ||
                 mimtype.equalsIgnoreCase("text/plain") ||
                 mimtype.equalsIgnoreCase("application/vnd.ms-excel") ||
@@ -167,7 +167,7 @@ public class UploadNewFileFragment extends MainFragment {
             webView.setVisibility(View.VISIBLE);
             webLayout.setVisibility(View.VISIBLE);
             img.setVisibility(View.GONE);
-              setDocShare();
+            setDocShare();
         } else if (mimtype.contains("video") || mimtype.contains("VIDEO") || mimtype.contains("audio") || mimtype.contains("AUDIO")) {
             videoViewLayout.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
@@ -284,16 +284,14 @@ public class UploadNewFileFragment extends MainFragment {
             }
         });
         if (selectFile != null) {
-           // webView.loadUrl(selectFile.toString());
-       //     webView.loadDataWithBaseURL("", selectFile.toString(), "text/html", "UTF-8", "");
-          //  webView.getSettings().setPluginsEnabled(true);
+            // webView.loadUrl(selectFile.toString());
+            //     webView.loadDataWithBaseURL("", selectFile.toString(), "text/html", "UTF-8", "");
+            //  webView.getSettings().setPluginsEnabled(true);
             File file = new File(selectFile.getPath());
             final Uri uri = Uri.fromFile(file);
             webView.loadUrl(uri.toString());
         }
     }
-
-
 
 
     private void setVideoShare() {
@@ -310,7 +308,16 @@ public class UploadNewFileFragment extends MainFragment {
         ((FrameLayout) findViewById(R.id.videoViewWrapper)).addView(mediaController);
         mediaController.setVisibility(View.VISIBLE);
         final ProgressBar bufferingDialog = findViewById(R.id.bufferingDialog);
-        bufferingDialog.setVisibility(View.VISIBLE);
+        final ImageView audiodefault = view.findViewById(R.id.audiodefault);
+        if (mimtype.contains("video") || mimtype.contains("VIDEO")) {
+            bufferingDialog.setVisibility(View.VISIBLE);
+            audiodefault.setVisibility(View.GONE);
+        } else if (mimtype.contains("audio") || mimtype.contains("AUDIO")) {
+            bufferingDialog.setVisibility(View.GONE);
+            audiodefault.setVisibility(View.VISIBLE);
+        }
+
+
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override

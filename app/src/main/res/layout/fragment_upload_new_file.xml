@@ -101,7 +101,8 @@
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
                                         android:visibility="gone" />
-                                </RelativeLayout>h
+                                </RelativeLayout>
+                                h
 
                                 <LinearLayout
                                     android:id="@+id/videoViewLayout"
@@ -118,8 +119,8 @@
                                             android:id="@+id/videoView"
                                             android:layout_width="fill_parent"
                                             android:layout_height="match_parent"
-                                        android:background="#D9D9D9"
-                                            android:layout_gravity="center" />
+                                            android:layout_gravity="center"
+                                            android:background="#D9D9D9" />
 
                                         <ProgressBar
                                             android:id="@+id/bufferingDialog"
@@ -127,6 +128,13 @@
                                             android:layout_height="wrap_content"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
+                                            android:visibility="gone" />
+                                        <ImageView
+                                            android:id="@+id/audiodefault"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/audio_icon"
                                             android:visibility="gone" />
                                     </RelativeLayout>
 

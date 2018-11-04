@@ -124,7 +124,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                     holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                 }
             });
-        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))|| mediaList.get(position).getExtension().contains("m4a")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
         } else if (mediaList.get(position).getExtension().contains("doc")||mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
             holder.recentImg.setImageResource(R.drawable.doc);
@@ -136,6 +136,8 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.pdfimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
             holder.recentImg.setImageResource(R.drawable.zipimg);
+        }else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("rar")) {
+            holder.recentImg.setImageResource(R.drawable.zipimg);
         }
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +146,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))|| mediaList.get(position).getExtension().contains("PNG")|| mediaList.get(position).getExtension().contains("JPG")|| mediaList.get(position).getExtension().contains("JPEG")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowImage(filePath, position);
-                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
+                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))|| mediaList.get(position).getExtension().contains("m4a")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowVideo(filePath, position);
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {

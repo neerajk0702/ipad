@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -26,19 +28,24 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
+import com.apitechnosoft.ipad.calendarview.CalendarCollection;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.fragment.AboutFragment;
@@ -51,13 +58,17 @@ import com.apitechnosoft.ipad.fragment.MyProfileFragment;
 import com.apitechnosoft.ipad.fragment.PressFragment;
 import com.apitechnosoft.ipad.fragment.PricingFragment;
 import com.apitechnosoft.ipad.fragment.ProfileFragment;
+import com.apitechnosoft.ipad.framework.DownloadService;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
+import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.model.EventotdataList;
 import com.apitechnosoft.ipad.runtimepermission.PermissionResultCallback;
 import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
 import com.apitechnosoft.ipad.utils.ASTReqResCode;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -66,6 +77,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.linkedin.platform.LISession;
 import com.linkedin.platform.LISessionManager;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -124,6 +136,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         application().setActivity(this);
+
+        try {
+            SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
+            if (prefs != null) {
+                String eventDate = prefs.getString("eventDate", "");
+                String cdate = ASTUtil.getCurrentDate();
+                    if (!cdate.equals(eventDate)) {
+                        getAllEvents();
+                    }
+            }
+        } catch (Exception e) {
+            // should never happen
+            //   throw new RuntimeException("Could not get language: " + e);
+        }
+
+
     }
 
     @Override
@@ -678,6 +706,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            /* if (profileimage != null) {
                 Picasso.with(ApplicationHelper.application().getContext()).load(profileimage).placeholder(R.mipmap.ic_launcher).into(sliderProfileImg);
             }*/
+
         }
 
         if (ASTUIUtil.isOnline(this)) {
@@ -766,4 +795,77 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         boolean accessTokenValid = session.isValid();
         return accessTokenValid;
     }
+
+
+    //get all events
+    private void getAllEvents() {
+
+        if (ASTUIUtil.isOnline(MainActivity.this)) {
+            final ASTProgressBar dotDialog = new ASTProgressBar(MainActivity.this);
+            // dotDialog.show();
+            ServiceCaller serviceCaller = new ServiceCaller(MainActivity.this);
+            final String url = Contants.BASE_URL + Contants.GetAllEventList + "username=" + UserId;
+            serviceCaller.CallCommanServiceMethod(url, "getAllEvents", new IAsyncWorkCompletedCallback() {
+                @Override
+                public void onDone(String result, boolean isComplete) {
+                    Log.d(Contants.LOG_TAG, "getAllEvents**" + result);
+                    if (isComplete) {
+                        ContentData data = new Gson().fromJson(result, ContentData.class);
+                        if (data != null) {
+                            if (data.getEventotdataList() != null) {
+                                for (EventotdataList eventotdataList : data.getEventotdataList()) {
+                                    if (eventotdataList.getFromdate() != null && !eventotdataList.getFromdate().equals("")) {
+                                        if (ASTUtil.isDateValid(eventotdataList.getFromdate())) {
+                                            String cdate = ASTUtil.getCurrentDate();
+                                            if (cdate.equals(eventotdataList.getFromdate())) {
+                                                getCurrentEvent(eventotdataList.getFromdate(), eventotdataList.getEventname());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+
+    public void getCurrentEvent(String event_date, final String message) {
+        //  Toast.makeText(context, "You have event on this date: " + event_date, Toast.LENGTH_LONG).show();
+        new AlertDialog.Builder(MainActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Date: " + event_date)
+                .setMessage("Event: " + message)
+                .setNegativeButton("Cancel", new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        try {
+                            SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("eventDate", event_date);
+                            editor.commit();
+                        } catch (Exception e) {
+                            // should never happen
+                            //   throw new RuntimeException("Could not get language: " + e);
+                        }
+                    }
+                })
+                .setPositiveButton("OK", new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        try {
+                            SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("eventDate", event_date);
+                            editor.commit();
+                        } catch (Exception e) {
+                            // should never happen
+                            //   throw new RuntimeException("Could not get language: " + e);
+                        }
+                    }
+                }).show();
+    }
+
 }

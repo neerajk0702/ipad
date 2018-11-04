@@ -105,6 +105,7 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
     private String folderlocation;
     ASTProgressBar shareProgressBar;
     String FirstName, LastName;
+    ImageView audiodefault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +153,8 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         webView = findViewById(R.id.web);
         webLayout = findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
+        audiodefault = findViewById(R.id.audiodefault);
+
     }
 
     private void setType(File selectFile, Uri imageUri) {
@@ -354,6 +357,15 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         ((FrameLayout) findViewById(R.id.videoViewWrapper)).addView(mediaController);
         mediaController.setVisibility(View.VISIBLE);
         final ProgressBar bufferingDialog = findViewById(R.id.bufferingDialog);
+
+        if (mimtype.contains("video") || mimtype.contains("VIDEO")) {
+            bufferingDialog.setVisibility(View.VISIBLE);
+            audiodefault.setVisibility(View.GONE);
+        } else if (mimtype.contains("audio") || mimtype.contains("AUDIO")) {
+            bufferingDialog.setVisibility(View.GONE);
+            audiodefault.setVisibility(View.VISIBLE);
+        }
+
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override

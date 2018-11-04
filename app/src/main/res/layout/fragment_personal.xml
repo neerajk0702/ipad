@@ -259,8 +259,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cacheColorHint="@android:color/transparent"
-                        android:layout_marginBottom="@dimen/_15dp"
                         android:background="@color/white" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30dp"
+                        android:background="@color/white"/>
 
                     <com.apitechnosoft.ipad.component.ASTTextView
                         android:id="@+id/seeallfile"
@@ -269,6 +272,7 @@
                         android:gravity="right"
                         android:visibility="visible"
                         android:text="View All File"
+                        android:background="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"
                         android:textSize="@dimen/_14dp" />
@@ -290,7 +294,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30dp"
-            android:background="#00000000" />
+            android:background="@color/white"/>
 
 
     </LinearLayout>
