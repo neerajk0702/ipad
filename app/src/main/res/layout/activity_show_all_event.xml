@@ -68,7 +68,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.6"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.CardView
@@ -147,10 +147,10 @@
                                 android:id="@+id/tableRow1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingBottom="5dp"
                                 android:paddingLeft="2dp"
+                                android:paddingTop="6dp"
                                 android:paddingRight="2dp"
-                                android:paddingTop="6dp">
+                                android:paddingBottom="5dp">
 
                                 <TextView
                                     android:id="@+id/TextView06"
@@ -252,8 +252,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.4"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/_5dp"
+                        android:text="Today Events"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1dp"
+                        android:background="@color/divider" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/eventrecycler_view"

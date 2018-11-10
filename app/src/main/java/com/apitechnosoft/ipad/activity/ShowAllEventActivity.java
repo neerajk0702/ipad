@@ -158,7 +158,7 @@ public class ShowAllEventActivity extends AppCompatActivity {
                 }
                 ((CalendarAdapter) parent.getAdapter()).setSelected(v, position);
 
-                ((CalendarAdapter) parent.getAdapter()).getPositionList(selectedGridDate, ShowAllEventActivity.this);
+                // ((CalendarAdapter) parent.getAdapter()).getPositionList(selectedGridDate, ShowAllEventActivity.this);
             }
 
         });

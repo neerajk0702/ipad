@@ -62,8 +62,8 @@ public class PricingFragment extends MainFragment {
     // environments.
 //testing = AVZUbOX3ry-gyvTBVykh9TnK1v49hM0ycQiquryr8NjuRwnayplCFEm1M4ZnK5Q9JCcWzn5_briWUeRH
     // ipad=    AfPQXoihdmLg8g1nzNSZ5bvg09MSEqo50cbZkeO4_KDLgMkjR2oeyNIUuDMhNWdBYoRvIu7lGf4E7Lmk
-    private static final String CONFIG_CLIENT_ID = "Ac2GT_ibcDeiq__aqoLzMjnCtwF3gVLorwTaFlvWpcAQ1bguiAZheBydb15DKxynpp9iOkJRoKgwv2to";
-   // private static final String CONFIG_CLIENT_ID = "AXQXvP8OmdYA-DGBKdISpH03RzjV1hm_yJ5lRjNRmxKBQisH4fVMHH9G70gBs17T-R89Ny3zGtpDOjLq";
+   //demo private static final String CONFIG_CLIENT_ID = "Ac2GT_ibcDeiq__aqoLzMjnCtwF3gVLorwTaFlvWpcAQ1bguiAZheBydb15DKxynpp9iOkJRoKgwv2to";
+   private static final String CONFIG_CLIENT_ID = "AXQXvP8OmdYA-DGBKdISpH03RzjV1hm_yJ5lRjNRmxKBQisH4fVMHH9G70gBs17T-R89Ny3zGtpDOjLq";
 
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
@@ -202,6 +202,10 @@ public class PricingFragment extends MainFragment {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
 
         startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+
+
+
+
     }
 
     public void onFuturePaymentPressed(View pressed) {

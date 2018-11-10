@@ -223,6 +223,8 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
+                    }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+                        holder.recentImg.setImageResource(R.drawable.araimg);
                     }
 
                 }

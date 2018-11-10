@@ -28,6 +28,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -35,6 +37,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,7 +48,11 @@ import android.widget.Toast;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.adapter.EventDetailAdapter;
 import com.apitechnosoft.ipad.adapter.RecentFileAdapter;
+import com.apitechnosoft.ipad.adapter.SharedFileAdapter;
+import com.apitechnosoft.ipad.adapter.SharedRecivedEmailAdapter;
+import com.apitechnosoft.ipad.adapter.ShowSameDateAllEvent;
 import com.apitechnosoft.ipad.calendarview.CalendarCollection;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -63,6 +71,7 @@ import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.model.Emaildata;
 import com.apitechnosoft.ipad.model.EventotdataList;
 import com.apitechnosoft.ipad.runtimepermission.PermissionResultCallback;
 import com.apitechnosoft.ipad.runtimepermission.PermissionUtils;
@@ -142,9 +151,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (prefs != null) {
                 String eventDate = prefs.getString("eventDate", "");
                 String cdate = ASTUtil.getCurrentDate();
-                    if (!cdate.equals(eventDate)) {
-                        getAllEvents();
-                    }
+                if (!cdate.equals(eventDate)) {
+                    getAllEvents();
+                }
             }
         } catch (Exception e) {
             // should never happen
@@ -813,16 +822,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ContentData data = new Gson().fromJson(result, ContentData.class);
                         if (data != null) {
                             if (data.getEventotdataList() != null) {
+                                ArrayList<EventotdataList> newevent = new ArrayList();
                                 for (EventotdataList eventotdataList : data.getEventotdataList()) {
                                     if (eventotdataList.getFromdate() != null && !eventotdataList.getFromdate().equals("")) {
                                         if (ASTUtil.isDateValid(eventotdataList.getFromdate())) {
                                             String cdate = ASTUtil.getCurrentDate();
                                             if (cdate.equals(eventotdataList.getFromdate())) {
-                                                getCurrentEvent(eventotdataList.getFromdate(), eventotdataList.getEventname());
+                                                newevent.add(eventotdataList);
+                                                // getCurrentEvent(eventotdataList.getFromdate(), eventotdataList.getEventname());
                                             }
                                         }
                                     }
                                 }
+                                getCurrentEvent(newevent);
                             }
                         }
                     }
@@ -832,40 +844,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void getCurrentEvent(String event_date, final String message) {
-        //  Toast.makeText(context, "You have event on this date: " + event_date, Toast.LENGTH_LONG).show();
-        new AlertDialog.Builder(MainActivity.this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Date: " + event_date)
-                .setMessage("Event: " + message)
-                .setNegativeButton("Cancel", new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        try {
-                            SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("eventDate", event_date);
-                            editor.commit();
-                        } catch (Exception e) {
-                            // should never happen
-                            //   throw new RuntimeException("Could not get language: " + e);
-                        }
+    public void getCurrentEvent(ArrayList<EventotdataList> newevent) {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
+        final android.app.AlertDialog alert = builder.create();
+        View view = alert.getLayoutInflater().inflate(R.layout.show_date_event_list, null);
+
+        Button Ok = view.findViewById(R.id.Ok);
+        RecyclerView recyclerView = view.findViewById(R.id.emailrecycler_view);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        if (newevent != null && newevent.size() > 0) {
+            ShowSameDateAllEvent adapter = new ShowSameDateAllEvent(MainActivity.this, newevent);
+            recyclerView.setAdapter(adapter);
+
+            Ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("eventDate", newevent.get(0).getFromdate());
+                        editor.commit();
+                    } catch (Exception e) {
+                        // should never happen
+                        //   throw new RuntimeException("Could not get language: " + e);
                     }
-                })
-                .setPositiveButton("OK", new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        try {
-                            SharedPreferences prefs = getSharedPreferences("EventPreferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("eventDate", event_date);
-                            editor.commit();
-                        } catch (Exception e) {
-                            // should never happen
-                            //   throw new RuntimeException("Could not get language: " + e);
-                        }
-                    }
-                }).show();
+
+                    alert.dismiss();
+                }
+            });
+        }
+        alert.setCustomTitle(view);
+
+
+        alert.show();
     }
 
 }

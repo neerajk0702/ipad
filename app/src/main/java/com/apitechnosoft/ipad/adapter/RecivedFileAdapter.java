@@ -203,7 +203,10 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     } else if (mediaList.get(position).getExtension().contains("xls")||mediaList.get(position).getExtension().contains("xlsx")) {
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
+                    } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
+                    }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+                        holder.recentImg.setImageResource(R.drawable.araimg);
                     }
                 }
             }

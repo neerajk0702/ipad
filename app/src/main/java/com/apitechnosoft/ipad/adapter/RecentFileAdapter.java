@@ -136,8 +136,8 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             holder.recentImg.setImageResource(R.drawable.pdfimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
             holder.recentImg.setImageResource(R.drawable.zipimg);
-        }else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("rar")) {
-            holder.recentImg.setImageResource(R.drawable.zipimg);
+        }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+            holder.recentImg.setImageResource(R.drawable.araimg);
         }
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
