@@ -7,12 +7,19 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.media.ExifInterface;
+import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -21,6 +28,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -42,9 +50,11 @@ import com.apitechnosoft.ipad.exception.FNExceptionUtil;
 import com.apitechnosoft.ipad.filepicker.FNFilePicker;
 import com.apitechnosoft.ipad.listener.PermissionRationaleDialogListener;
 
+
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+import static android.provider.MediaStore.Video.Thumbnails.MINI_KIND;
 import static com.apitechnosoft.ipad.filepicker.FNFilePicker.MEDIA_TYPE_DOCUMENT;
 
 /**
@@ -354,7 +364,7 @@ public class ASTUtil {
 
     public static String getCurrentDate() {
         Date c = Calendar.getInstance().getTime();
-        System.out.println("Current time => " + c);
+        //System.out.println("Current time => " + c);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c);
@@ -366,4 +376,38 @@ public class ASTUtil {
         File DLPDirectory = new File(Environment.getExternalStorageDirectory(), Contants.Share_APP_DIRECTORY);
         return DLPDirectory;
     }
+    public static Bitmap getThumblineImage(String videoPath) {
+        return ThumbnailUtils.createVideoThumbnail(videoPath, MINI_KIND);
+    }
+    /*  public static Bitmap retriveVideoFrameFromURL(String videoPath)
+
+            throws Throwable {
+        Bitmap bitmap = null;
+        FFmpegMediaMetadataRetriever fmmr = new FFmpegMediaMetadataRetriever();
+        try {
+            fmmr.setDataSource(videoPath);
+
+            Bitmap b = fmmr.getFrameAtTime();
+
+            if (b != null) {
+                Bitmap b2 = fmmr.getFrameAtTime(400, FFmpegMediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+                if (b2 != null) {
+                    b = b2;
+                }
+            }
+
+            if (b != null) {
+                Log.i("Thumbnail", "Extracted frame");
+                return b;
+            } else {
+                Log.e("Thumbnail", "Failed to extract frame");
+            }
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        } finally {
+            fmmr.release();
+        }
+        return null;
+    }*/
+
 }

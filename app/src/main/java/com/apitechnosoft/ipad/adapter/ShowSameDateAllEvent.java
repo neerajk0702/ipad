@@ -50,7 +50,7 @@ public class ShowSameDateAllEvent extends RecyclerView.Adapter<ShowSameDateAllEv
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.eventname.setText(eventdataList.get(position).getEventname());
-        holder.eventdate.setText(eventdataList.get(position).getFromdate());
+        //holder.eventdate.setText("Date: "+eventdataList.get(position).getFromdate());
 
     }
 

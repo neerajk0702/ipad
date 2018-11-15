@@ -3,10 +3,14 @@ package com.apitechnosoft.ipad.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -38,12 +42,14 @@ import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Resentdata;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.MyViewHolder> {
 
@@ -110,6 +116,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
            // holder.recentImg.setImageResource(R.drawable.video);
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+
             holder.recentImg.setVisibility(View.GONE);
             holder.videoViewLayout.setVisibility(View.VISIBLE);
 
@@ -616,6 +623,42 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                     ASTUIUtil.showToast("File Downloaded Successfully");
                 }
             }
+        }
+    }
+
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        String filePath;
+
+        public DownloadImage(ImageView bmImage, String filePath) {
+            this.bmImage = (ImageView) bmImage;
+            this.filePath = filePath;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap myBitmap = null;
+            MediaMetadataRetriever mMRetriever = null;
+            try {
+                mMRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mMRetriever.setDataSource(filePath, new HashMap<String, String>());
+                else
+                    mMRetriever.setDataSource(filePath);
+                myBitmap = mMRetriever.getFrameAtTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
+            } finally {
+                if (mMRetriever != null) {
+                    mMRetriever.release();
+                }
+            }
+            return myBitmap;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }

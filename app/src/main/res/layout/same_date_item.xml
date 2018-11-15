@@ -27,8 +27,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/_5dp"
-            android:paddingBottom="@dimen/_3dp"
+            android:visibility="gone"
             android:textColor="@color/secondry_txt_color"
             android:textSize="@dimen/_12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:background="@color/lighterGrey" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

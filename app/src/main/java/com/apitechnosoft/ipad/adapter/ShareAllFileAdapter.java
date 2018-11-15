@@ -2,12 +2,18 @@ package com.apitechnosoft.ipad.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +29,16 @@ import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.provider.MediaStore.Video.Thumbnails.MINI_KIND;
+import static java.security.AccessController.getContext;
 
 public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapter.MyViewHolder> {
 
@@ -78,6 +89,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.setIsRecyclable(false);
         holder.recenttext.setText(mediaList.get(position).getFileName());
         setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
 
@@ -88,30 +100,52 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             Picasso.with(ApplicationHelper.application().getContext()).load(filePath).placeholder(R.drawable.image_icon).into(holder.recentImg);
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-          //   holder.recentImg.setImageResource(R.drawable.video);
-
+            //   holder.recentImg.setImageResource(R.drawable.video);
             String filePath = Contants.Media_File_BASE_URL +
                     mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-            holder.recentImg.setVisibility(View.GONE);
-            holder.videoViewLayout.setVisibility(View.VISIBLE);
+            //  holder.recentImg.setVisibility(View.GONE);
+            try {
+                holder.videoViewLayout.setVisibility(View.GONE);
+                holder.recentImg.setVisibility(View.VISIBLE);
+                // Bitmap bitmap= ASTUtil.retriveVideoFrameFromURL(filePath);
+
+                new DownloadImage(holder.recentImg, filePath).execute(filePath);
+                //  holder.recentImg.setImageBitmap(bitmap);
+
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+            /*holder.videoViewLayout.setVisibility(View.VISIBLE);
 
             holder.videoView.setVideoURI(Uri.parse(filePath));
-            holder.videoView.requestFocus();
-            holder.videoView.seekTo(200);
-            holder.videoView.pause();
+            // holder.videoView.requestFocus();
+            // holder.videoView.seekTo(200);
+            // holder.videoView.pause();
             holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
             holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                    mp.start();
+                    mp.seekTo(200);
+                    mp.pause();
                 }
             });
+            holder.videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // setLooping(true) didn't work, thats why this workaround
+                    holder.videoView.setVideoPath(filePath);
+                    holder.videoView.start();
+                }
+            });*/
+
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
         }
         if (mediaList.get(position).getExtension() != null) {
-            if (mediaList.get(position).getExtension().contains("doc")||mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
+            if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
                 holder.recentImg.setImageResource(R.drawable.doc);
             } else if (mediaList.get(position).getExtension().contains("pdf")) {
                 holder.recentImg.setImageResource(R.drawable.pdfimg);
@@ -119,11 +153,11 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
                 holder.recentImg.setImageResource(R.drawable.htmlimg);
             } else if (mediaList.get(position).getExtension().contains("zip")) {
                 holder.recentImg.setImageResource(R.drawable.zipimg);
-            } else if (mediaList.get(position).getExtension().contains("xls")||mediaList.get(position).getExtension().contains("xlsx")) {
+            } else if (mediaList.get(position).getExtension().contains("xls") || mediaList.get(position).getExtension().contains("xlsx")) {
                 holder.recentImg.setImageResource(R.drawable.excelimg);
             } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                 holder.recentImg.setImageResource(R.drawable.pptimg);
-            }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+            } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
                 holder.recentImg.setImageResource(R.drawable.araimg);
             }
         }
@@ -150,4 +184,52 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         return mediaList.size();
     }
 
+
+    public Bitmap getThumblineImage(String videoPath) {
+        return ThumbnailUtils.createVideoThumbnail(videoPath, MINI_KIND);
+    }
+
+
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        String filePath;
+
+        public DownloadImage(ImageView bmImage, String filePath) {
+            this.bmImage = (ImageView) bmImage;
+            this.filePath = filePath;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap myBitmap = null;
+            Bitmap finalbitmap = null;
+            MediaMetadataRetriever mMRetriever = null;
+            try {
+                int timeInSeconds = 1;
+                mMRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mMRetriever.setDataSource(filePath, new HashMap<String, String>());
+                else
+                    mMRetriever.setDataSource(filePath);
+                myBitmap = mMRetriever.getFrameAtTime(timeInSeconds * 1000000,MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+
+                finalbitmap = ThumbnailUtils.extractThumbnail(myBitmap, 500, 500);
+               // myBitmap = Bitmap.createScaledBitmap(myBitmap, myBitmap.getWidth() / 2, myBitmap.getHeight() / 2, true);
+               // myBitmap.compress(Bitmap.CompressFormat.PNG, 80, streamThumbnail);
+                myBitmap.recycle(); //ensure the image is freed;
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
+            } finally {
+                if (mMRetriever != null) {
+                    mMRetriever.release();
+                }
+            }
+            return finalbitmap;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }

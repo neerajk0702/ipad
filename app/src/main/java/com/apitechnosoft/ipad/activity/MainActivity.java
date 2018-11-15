@@ -834,7 +834,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                     }
                                 }
-                                getCurrentEvent(newevent);
+                                if (newevent != null && newevent.size() > 0) {
+                                    getCurrentEvent(newevent);
+                                }
                             }
                         }
                     }
@@ -850,6 +852,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View view = alert.getLayoutInflater().inflate(R.layout.show_date_event_list, null);
 
         Button Ok = view.findViewById(R.id.Ok);
+        TextView today = view.findViewById(R.id.today);
         RecyclerView recyclerView = view.findViewById(R.id.emailrecycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -857,7 +860,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (newevent != null && newevent.size() > 0) {
             ShowSameDateAllEvent adapter = new ShowSameDateAllEvent(MainActivity.this, newevent);
             recyclerView.setAdapter(adapter);
-
+            today.setText("Today Events ("+newevent.get(0).getFromdate()+")");
             Ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

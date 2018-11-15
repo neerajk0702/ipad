@@ -3,10 +3,14 @@ package com.apitechnosoft.ipad.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -53,6 +57,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.MyViewHolder> implements Filterable {
 
@@ -182,7 +187,6 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                             holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                         }
                     });
-
                 }
             } else if (type == 3) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("audio")) {
@@ -192,7 +196,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 }
             } else if (type == 4) {
                 if (mediaList.get(position).getExtension() != null) {
-                    if (mediaList.get(position).getExtension().contains("doc")||mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
+                    if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
                         holder.recentImg.setImageResource(R.drawable.doc);
                     } else if (mediaList.get(position).getExtension().contains("pdf")) {
                         holder.recentImg.setImageResource(R.drawable.pdfimg);
@@ -200,12 +204,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                         holder.recentImg.setImageResource(R.drawable.htmlimg);
                     } else if (mediaList.get(position).getExtension().contains("zip")) {
                         holder.recentImg.setImageResource(R.drawable.zipimg);
-                    } else if (mediaList.get(position).getExtension().contains("xls")||mediaList.get(position).getExtension().contains("xlsx")) {
+                    } else if (mediaList.get(position).getExtension().contains("xls") || mediaList.get(position).getExtension().contains("xlsx")) {
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
-                    }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+                    } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
                         holder.recentImg.setImageResource(R.drawable.araimg);
                     }
                 }
@@ -754,6 +758,42 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                     ASTUIUtil.showToast("File Downloaded Successfully");
                 }
             }
+        }
+    }
+
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        String filePath;
+
+        public DownloadImage(ImageView bmImage, String filePath) {
+            this.bmImage = (ImageView) bmImage;
+            this.filePath = filePath;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap myBitmap = null;
+            MediaMetadataRetriever mMRetriever = null;
+            try {
+                mMRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mMRetriever.setDataSource(filePath, new HashMap<String, String>());
+                else
+                    mMRetriever.setDataSource(filePath);
+                myBitmap = mMRetriever.getFrameAtTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
+            } finally {
+                if (mMRetriever != null) {
+                    mMRetriever.release();
+                }
+            }
+            return myBitmap;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }

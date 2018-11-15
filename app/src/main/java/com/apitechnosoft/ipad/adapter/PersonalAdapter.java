@@ -11,6 +11,8 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -48,6 +50,7 @@ import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
@@ -186,6 +189,15 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             } else if (type == 2) {
                 String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+                    /*try {
+                        holder.videoViewLayout.setVisibility(View.GONE);
+                        holder.recentImg.setVisibility(View.VISIBLE);
+                       // Bitmap bitmap = ASTUtil.retriveVideoFrameFromURL(filePath);
+                        //holder.recentImg.setImageBitmap(bitmap);
+                        new DownloadImage(holder.recentImg, filePath).execute(filePath);
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }*/
                     holder.recentImg.setVisibility(View.GONE);
                     holder.videoViewLayout.setVisibility(View.VISIBLE);
 
@@ -223,7 +235,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         holder.recentImg.setImageResource(R.drawable.excelimg);
                     } else if (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt")) {
                         holder.recentImg.setImageResource(R.drawable.pptimg);
-                    }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+                    } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
                         holder.recentImg.setImageResource(R.drawable.araimg);
                     }
 
@@ -604,7 +616,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
                         switch (what) {
                             case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
-                            //    bufferingDialog.setVisibility(View.GONE);
+                                //    bufferingDialog.setVisibility(View.GONE);
                                 return true;
                             }
                             case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
@@ -612,7 +624,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                                 return true;
                             }
                             case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
-                               // bufferingDialog.setVisibility(View.GONE);
+                                // bufferingDialog.setVisibility(View.GONE);
                                 return true;
                             }
                         }
@@ -753,5 +765,39 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             }
         }
     }
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        String filePath;
 
+        public DownloadImage(ImageView bmImage, String filePath) {
+            this.bmImage = (ImageView) bmImage;
+            this.filePath = filePath;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap myBitmap = null;
+            MediaMetadataRetriever mMRetriever = null;
+            try {
+                mMRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mMRetriever.setDataSource(filePath, new HashMap<String, String>());
+                else
+                    mMRetriever.setDataSource(filePath);
+                myBitmap = mMRetriever.getFrameAtTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
+            } finally {
+                if (mMRetriever != null) {
+                    mMRetriever.release();
+                }
+            }
+            return myBitmap;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
