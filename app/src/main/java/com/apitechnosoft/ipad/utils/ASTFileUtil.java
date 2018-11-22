@@ -3,7 +3,9 @@ package com.apitechnosoft.ipad.utils;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -12,6 +14,7 @@ import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -512,4 +515,50 @@ public class ASTFileUtil {
 			}
 		}
 	}*/
+
+
+
+	static Bitmap bitmap = null;
+
+	public static void retriveVideoFrameFromVideo(String videoPath, ImageView imageView) throws Throwable {
+
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+
+			}
+
+			@Override
+			protected Boolean doInBackground(Void... voids) {
+				MediaMetadataRetriever mediaMetadataRetriever = null;
+				try {
+					mediaMetadataRetriever = new MediaMetadataRetriever();
+					if (Build.VERSION.SDK_INT >= 14)
+						mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+					else
+						mediaMetadataRetriever.setDataSource(videoPath);
+					//   mediaMetadataRetriever.setDataSource(videoPath);
+					bitmap = mediaMetadataRetriever.getFrameAtTime();
+				} catch (Exception e) {
+					e.printStackTrace();
+					//throw new Throwable("Exception in retriveVideoFrameFromVideo(String videoPath)" + e.getMessage());
+
+				} finally {
+					if (mediaMetadataRetriever != null) {
+						mediaMetadataRetriever.release();
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean flag) {
+				super.onPostExecute(flag);
+				imageView.setImageBitmap(bitmap);
+
+			}
+		}.execute();
+	}
 }

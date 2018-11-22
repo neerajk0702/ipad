@@ -59,14 +59,14 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.gms:google-services:4.0.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     implementation project(':linkedin-sdk')
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
-    implementation 'com.braintreepayments.api:drop-in:3.+'
-    implementation 'com.braintreepayments.api:braintree:1.6.2'
+
+    implementation 'com.braintreepayments.api:braintree:2.18.1'
+    implementation 'com.braintreepayments.api:drop-in:3.7.1'
 
 }
 

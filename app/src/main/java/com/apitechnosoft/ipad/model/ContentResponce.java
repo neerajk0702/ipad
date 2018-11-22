@@ -4,6 +4,15 @@ public class ContentResponce {
     private String tag;
     private boolean status;
     private String error_msg;
+    String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getTag() {
         return tag;

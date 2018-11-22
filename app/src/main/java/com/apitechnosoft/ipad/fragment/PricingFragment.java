@@ -22,24 +22,30 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.LoginActivity;
 import com.apitechnosoft.ipad.activity.MainActivity;
+import com.apitechnosoft.ipad.activity.PaymentActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
+import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
+import com.apitechnosoft.ipad.model.Data;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.google.gson.Gson;
-import com.paypal.android.sdk.payments.PayPalAuthorization;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalFuturePaymentActivity;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+
+import okhttp3.MultipartBody;
+
+import static com.apitechnosoft.ipad.utils.ASTUIUtil.showToast;
 
 public class PricingFragment extends MainFragment {
 
@@ -53,30 +59,13 @@ public class PricingFragment extends MainFragment {
     Button goldbt, silverbt;
     CheckBox silvermonth, silveryear, goldmonth, goldyear;
     String payAmount = "0";
-    String UserId;
-    // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
-    // or live (ENVIRONMENT_PRODUCTION)
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
+    String UserId, fname, lname;
+    final int REQUEST_CODE = 1;
+    //   final String get_token = "http://192.168.1.12/braintreepayment/main.php";
+    final String get_token = "https://www.ipadtoday.com/resources/BrainTreeImplementationApi/braintreeProcessingdata";
+    final String send_payment_details = "https://www.ipadtoday.com/resources/BrainTreePaymentTransactionApi/braintreeTransaction";
+    String token;
 
-    // note that these credentials will differ between live & sandbox
-    // environments.
-//testing = AVZUbOX3ry-gyvTBVykh9TnK1v49hM0ycQiquryr8NjuRwnayplCFEm1M4ZnK5Q9JCcWzn5_briWUeRH
-    // ipad=    AfPQXoihdmLg8g1nzNSZ5bvg09MSEqo50cbZkeO4_KDLgMkjR2oeyNIUuDMhNWdBYoRvIu7lGf4E7Lmk
-   //demo private static final String CONFIG_CLIENT_ID = "Ac2GT_ibcDeiq__aqoLzMjnCtwF3gVLorwTaFlvWpcAQ1bguiAZheBydb15DKxynpp9iOkJRoKgwv2to";
-   private static final String CONFIG_CLIENT_ID = "AXQXvP8OmdYA-DGBKdISpH03RzjV1hm_yJ5lRjNRmxKBQisH4fVMHH9G70gBs17T-R89Ny3zGtpDOjLq";
-
-    private static final int REQUEST_CODE_PAYMENT = 1;
-    private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
-    PayPalPayment thingToBuy;
-    private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(CONFIG_ENVIRONMENT)
-            .clientId(CONFIG_CLIENT_ID);
-            // the following are only used in PayPalFuturePaymentActivity.
-            /*.merchantName("ipad")
-            .merchantPrivacyPolicyUri(
-                    Uri.parse("https://ipadtoday.com/Privarcy.jsp"))
-            .merchantUserAgreementUri(
-                    Uri.parse("https://ipadtoday.com/TermsOfService.jsp"));*/
 
     @Override
     protected void loadView() {
@@ -90,6 +79,7 @@ public class PricingFragment extends MainFragment {
         silveryear = findViewById(R.id.silveryear);
         goldmonth = findViewById(R.id.goldmonth);
         goldyear = findViewById(R.id.goldyear);
+
     }
 
     @Override
@@ -111,10 +101,12 @@ public class PricingFragment extends MainFragment {
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
+            fname = prefs.getString("FirstName", "");
+            lname = prefs.getString("LastName", "");
+
         }
-        Intent intent = new Intent(getContext(), PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        getContext().startService(intent);
+        getTokenPayment(UserId, fname, lname, payAmount);
+
 
         silvermonth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -194,140 +186,32 @@ public class PricingFragment extends MainFragment {
     }
 
     private void callPayment() {
-        thingToBuy = new PayPalPayment(new BigDecimal(payAmount), "USD",
-                "HeadSet", PayPalPayment.PAYMENT_INTENT_SALE);
-        Intent intent = new Intent(getContext(),
-                PaymentActivity.class);
+        onBraintreeSubmit();
 
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
-
-        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
-
-
-
-
-    }
-
-    public void onFuturePaymentPressed(View pressed) {
-        Intent intent = new Intent(getContext(),
-                PayPalFuturePaymentActivity.class);
-
-        startActivityForResult(intent, REQUEST_CODE_FUTURE_PAYMENT);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_PAYMENT) {
+        if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                PaymentConfirmation confirm = data
-                        .getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if (confirm != null) {
-                    try {
-                        System.out.println(confirm.toJSONObject().toString(4));
-                        System.out.println(confirm.getPayment().toJSONObject().toString(4));
-                        paymentConfirm();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+                PaymentMethodNonce nonce = result.getPaymentMethodNonce();
+                String stringNonce = nonce.getNonce();
+                sendPaymentRansaction(UserId, fname, lname, payAmount, stringNonce);
+                if (resultCode == Activity.RESULT_CANCELED) {
+                } else {
+                    Exception error = (Exception) data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
                 }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                System.out.println("The user canceled.");
-            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-                System.out
-                        .println("An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
-            }
-        } else if (requestCode == REQUEST_CODE_FUTURE_PAYMENT) {
-            if (resultCode == Activity.RESULT_OK) {
-                PayPalAuthorization auth = data
-                        .getParcelableExtra(PayPalFuturePaymentActivity.EXTRA_RESULT_AUTHORIZATION);
-                if (auth != null) {
-                    try {
-                        Log.i("FuturePaymentExample", auth.toJSONObject()
-                                .toString(4));
-
-                        String authorization_code = auth.getAuthorizationCode();
-                        Log.i("FuturePaymentExample", authorization_code);
-
-                        sendAuthorizationToServer(auth);
-                        Toast.makeText(getContext(),
-                                "Future Payment code received from PayPal",
-                                Toast.LENGTH_LONG).show();
-
-                    } catch (JSONException e) {
-                        Log.e("FuturePaymentExample",
-                                "an extremely unlikely failure occurred: ", e);
-                    }
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.i("FuturePaymentExample", "The user canceled.");
-            } else if (resultCode == PayPalFuturePaymentActivity.RESULT_EXTRAS_INVALID) {
-                Log.i("FuturePaymentExample",
-                        "Probably the attempt to previously start the PayPalService had an invalid PayPalConfiguration. Please see the docs.");
             }
         }
-    }
-
-    private void sendAuthorizationToServer(PayPalAuthorization authorization) {
-
-    }
-
-    public void onFuturePaymentPurchasePressed(View pressed) {
-        // Get the Application Correlation ID from the SDK
-        String correlationId = PayPalConfiguration
-                .getApplicationCorrelationId(getContext());
-
-        Log.i("FuturePaymentExample", "Application Correlation ID: "
-                + correlationId);
-
-        // TODO: Send correlationId and transaction details to your server for
-        // processing with
-        // PayPal...
-        Toast.makeText(getContext(),
-                "App Correlation ID received from SDK", Toast.LENGTH_LONG)
-                .show();
     }
 
     @Override
     public void onDestroy() {
-        // Stop service when done
-        getContext().stopService(new Intent(getContext(), PayPalService.class));
+
         super.onDestroy();
     }
 
-    private void paymentConfirm() {
-        if (ASTUIUtil.isOnline(getContext())) {
-            final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-            dotDialog.show();
-            ServiceCaller serviceCaller = new ServiceCaller(getContext());
-            final String url = Contants.BASE_URL + Contants.ServcePlanApi + "username=" + UserId + "&" + "price=" + payAmount;
-            serviceCaller.CallCommanServiceMethod(url, "paymentConfirm", new IAsyncWorkCompletedCallback() {
-                @Override
-                public void onDone(String result, boolean isComplete) {
-                    if (isComplete) {
-                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
-                        if (data != null) {
-                            if (data.isStatus()) {
-                                Toast.makeText(getContext(), "Your plan save successfully",
-                                        Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getContext(), "Your plan not save successfully!", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), "Your plan not save successfully!", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        ASTUIUtil.showToast(Contants.Error);
-                    }
-                    if (dotDialog.isShowing()) {
-                        dotDialog.dismiss();
-                    }
-                }
-            });
-        } else {
-            ASTUIUtil.showToast(Contants.OFFLINE_MESSAGE);
-        }
-
-    }
 
     public void getAllNotification() {
         try {
@@ -370,4 +254,169 @@ public class PricingFragment extends MainFragment {
         this.headerFragment.setVisiVilityNotificationIcon(true);
         this.headerFragment.updateNotification(count);
     }
+
+    private void getTokenPayment(String emailid, String fanem, String lname, String ammount) {
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar progressBar = new ASTProgressBar(getContext());
+            progressBar.show();
+            final String serviceURL = get_token;
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("email", emailid);
+                object.put("fname", fanem);
+                object.put("lname", lname);
+                object.put("ammount", ammount);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("jsonData", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
+                        if (data != null) {
+                            Toast.makeText(getContext(), "Successfully got token", Toast.LENGTH_SHORT).show();
+                            token = data.getToken();
+
+
+                        } else {
+                            Toast.makeText(getContext(), "Failed to get token: ", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+        }
+
+    }
+
+
+    private void sendPaymentRansaction(String emailid, String fanem, String lname, String ammount, String clientNonce) {
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar progressBar = new ASTProgressBar(getContext());
+            progressBar.show();
+            final String serviceURL = send_payment_details;
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("email", emailid);
+                object.put("fname", fanem);
+                object.put("lname", lname);
+                object.put("ammount", ammount);
+                object.put("clientNonce", clientNonce);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("jsonData", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null || result == "") {
+                        Data data = new Gson().fromJson(result, Data.class);
+                        if (data != null) {
+                            Toast.makeText(getContext(), "Successfully Payment", Toast.LENGTH_SHORT).show();
+                            sendPaymentDetails(emailid, payAmount);
+                           /* if (data.getStatus().equalsIgnoreCase("Pay Success")) {
+                                Toast.makeText(getContext(), "Successfully Payment", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), data.getStatus(), Toast.LENGTH_LONG).show();
+                                sendPaymentDetails(emailid, payAmount);
+                            } else {
+                                Toast.makeText(getContext(), "Payment not Complete ", Toast.LENGTH_SHORT).show();
+
+                            }*/
+
+                        } else {
+                            Toast.makeText(getContext(), "Failed Payment ", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Failed Payment ", Toast.LENGTH_LONG).show();
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+        }
+
+    }
+
+
+    public void onBraintreeSubmit() {
+        DropInRequest dropInRequest = new DropInRequest()
+                .clientToken(token);
+        startActivityForResult(dropInRequest.getIntent(getContext()), REQUEST_CODE);
+    }
+
+    private void sendPaymentDetails(String name, String price) {
+
+        if (ASTUIUtil.isOnline(getContext())) {
+            final ASTProgressBar progressBar = new ASTProgressBar(getContext());
+            progressBar.show();
+            final String url = Contants.BASE_URL + Contants.SavePlan;
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("userName", name);
+                object.put("price", price);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            HashMap<String, String> payloadList = new HashMap<String, String>();
+            payloadList.put("jsonData", object.toString());
+
+            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, url) {
+                @Override
+                public void receiveData(String result) {
+                    if (result != null) {
+                        Data data = new Gson().fromJson(result, Data.class);
+                        if (data != null) {
+                            Toast.makeText(getContext(), "Successfully Payment Save in database", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(getContext(), "Failed Payment  Save in database", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        showToast(Contants.Error);
+                    }
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                }
+            };
+            fileUploaderHelper.execute();
+        } else {
+            ASTUIUtil.alertForErrorMessage(Contants.OFFLINE_MESSAGE, getContext());//off line msg....
+        }
+
+
+    }
+
+
 }

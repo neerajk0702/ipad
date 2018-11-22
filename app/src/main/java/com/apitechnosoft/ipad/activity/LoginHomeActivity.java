@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
-import com.apitechnosoft.ipad.fragment.HomeFragment;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
@@ -196,7 +195,9 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 signIn();
                 break;
             case R.id.login:
+
                 Intent i = new Intent(LoginHomeActivity.this, LoginActivity.class);
+
                 startActivity(i);
                 break;
             case R.id.signup:
