@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.LoginActivity;
 import com.apitechnosoft.ipad.activity.MainActivity;
-import com.apitechnosoft.ipad.activity.PaymentActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.FileUploaderHelper;
@@ -332,7 +331,7 @@ public class PricingFragment extends MainFragment {
             FileUploaderHelper fileUploaderHelper = new FileUploaderHelper(getContext(), payloadList, multipartBody, serviceURL) {
                 @Override
                 public void receiveData(String result) {
-                    if (result != null || result == "") {
+                    if (result != null && !result.equals("") && !result.equals("{}")) {
                         Data data = new Gson().fromJson(result, Data.class);
                         if (data != null) {
                             Toast.makeText(getContext(), "Successfully Payment", Toast.LENGTH_SHORT).show();
