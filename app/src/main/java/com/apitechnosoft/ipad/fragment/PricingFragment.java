@@ -334,17 +334,11 @@ public class PricingFragment extends MainFragment {
                     if (result != null && !result.equals("") && !result.equals("{}")) {
                         Data data = new Gson().fromJson(result, Data.class);
                         if (data != null) {
-                            Toast.makeText(getContext(), "Successfully Payment", Toast.LENGTH_SHORT).show();
-                            sendPaymentDetails(emailid, payAmount);
-                           /* if (data.getStatus().equalsIgnoreCase("Pay Success")) {
-                                Toast.makeText(getContext(), "Successfully Payment", Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getContext(), data.getStatus(), Toast.LENGTH_LONG).show();
+                            if (data.getStatus().equalsIgnoreCase("Approved")) {
                                 sendPaymentDetails(emailid, payAmount);
                             } else {
-                                Toast.makeText(getContext(), "Payment not Complete ", Toast.LENGTH_SHORT).show();
-
-                            }*/
-
+                                Toast.makeText(getContext(), data.getStatus(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(getContext(), "Failed Payment ", Toast.LENGTH_LONG).show();
                         }
@@ -396,10 +390,13 @@ public class PricingFragment extends MainFragment {
                     if (result != null) {
                         Data data = new Gson().fromJson(result, Data.class);
                         if (data != null) {
-                            Toast.makeText(getContext(), "Successfully Payment Save in database", Toast.LENGTH_SHORT).show();
-
+                            if (data.getStatus().equals("true")) {
+                                Toast.makeText(getContext(), "Payment Successfully done.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Failed Payment!", Toast.LENGTH_LONG).show();
+                            }
                         } else {
-                            Toast.makeText(getContext(), "Failed Payment  Save in database", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Failed Payment!", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
