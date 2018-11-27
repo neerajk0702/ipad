@@ -220,6 +220,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
                 resentdata2.setGigaByte(resentdata1.getGigaByte());
                 resentdata2.setFolderlocation(resentdata1.getFolderlocation());
                 resentdata2.setExtension(resentdata1.getExtension());
+                resentdata2.setThamblingImage(resentdata1.getThamblingImage());
                 mediaList.add(resentdata2);
                 setAdapter();
             }

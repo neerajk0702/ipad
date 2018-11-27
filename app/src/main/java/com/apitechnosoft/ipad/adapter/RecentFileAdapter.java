@@ -33,6 +33,7 @@ import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -64,6 +65,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         ProgressBar loadingDialog;
         LinearLayout videoViewLayout;
         VideoView videoView;
+
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
@@ -114,13 +116,17 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 }
             });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
-           // holder.recentImg.setImageResource(R.drawable.video);
+            holder.recentImg.setVisibility(View.VISIBLE);
+            holder.videoViewLayout.setVisibility(View.GONE);
+            if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+                String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
+                Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
+            } else {
+                holder.recentImg.setImageResource(R.drawable.video);
+            }
+  /*
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-
-            holder.recentImg.setVisibility(View.GONE);
-            holder.videoViewLayout.setVisibility(View.VISIBLE);
-
-            holder.videoView.setVideoURI(Uri.parse(filePath));
+          holder.videoView.setVideoURI(Uri.parse(filePath));
             holder.videoView.requestFocus();
             holder.videoView.seekTo(200);
             holder.videoView.pause();
@@ -130,30 +136,30 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 public void onPrepared(MediaPlayer mp) {
                     holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                 }
-            });
-        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))|| mediaList.get(position).getExtension().contains("m4a")) {
+            });*/
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav")) || mediaList.get(position).getExtension().contains("m4a")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
-        } else if (mediaList.get(position).getExtension().contains("doc")||mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
+        } else if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
             holder.recentImg.setImageResource(R.drawable.doc);
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("pptx") || mediaList.get(position).getExtension().contains("ppt"))) {
             holder.recentImg.setImageResource(R.drawable.pptimg);
-        } else if (mediaList.get(position).getExtension().contains("xls")||mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("xlsx"))) {
+        } else if (mediaList.get(position).getExtension().contains("xls") || mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("xlsx"))) {
             holder.recentImg.setImageResource(R.drawable.excelimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("pdf")) {
             holder.recentImg.setImageResource(R.drawable.pdfimg);
         } else if (mediaList.get(position).getExtension() != null && mediaList.get(position).getExtension().contains("zip")) {
             holder.recentImg.setImageResource(R.drawable.zipimg);
-        }else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
+        } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
             holder.recentImg.setImageResource(R.drawable.araimg);
         }
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png"))|| mediaList.get(position).getExtension().contains("PNG")|| mediaList.get(position).getExtension().contains("JPG")|| mediaList.get(position).getExtension().contains("JPEG")) {
+                if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png")) || mediaList.get(position).getExtension().contains("PNG") || mediaList.get(position).getExtension().contains("JPG") || mediaList.get(position).getExtension().contains("JPEG")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowImage(filePath, position);
-                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))|| mediaList.get(position).getExtension().contains("m4a")) {
+                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv")) || mediaList.get(position).getExtension().contains("m4a")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowVideo(filePath, position);
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {
@@ -578,7 +584,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             final ASTProgressBar dotDialog = new ASTProgressBar(mContext);
             dotDialog.show();
             ServiceCaller serviceCaller = new ServiceCaller(mContext);
-            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno()+ "&" + "p=" + mediaList.get(position).getFilePath();
+            final String url = Contants.BASE_URL + Contants.DeleteFileApi + "username=" + UserId + "&" + "sno=" + mediaList.get(position).getSno() + "&" + "p=" + mediaList.get(position).getFilePath();
             serviceCaller.CallCommanServiceMethod(url, "deletePersonalFile", new IAsyncWorkCompletedCallback() {
                 @Override
                 public void onDone(String result, boolean isComplete) {

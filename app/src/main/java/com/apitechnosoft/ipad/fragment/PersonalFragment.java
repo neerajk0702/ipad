@@ -541,6 +541,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 mediaData.setMegaByte(video.getMegaByte());
                 mediaData.setGigaByte(video.getGigaByte());
                 mediaData.setFolderlocation(video.getFolderlocation());
+                mediaData.setThamblingImage(video.getThamblingImage());
                 mediaList.add(mediaData);
             }
         }
@@ -714,6 +715,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 mediaData.setExtension(photo.getExtension());
                 mediaData.setFullFilePath(photo.getFullFilePath());
                 mediaData.setEventname(photo.getEventname());
+                mediaData.setThamblingImage(photo.getThamblingImage());
                 mediaList.add(mediaData);
             }
 

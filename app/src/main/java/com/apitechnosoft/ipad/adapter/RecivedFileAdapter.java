@@ -170,9 +170,15 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {
-                    // holder.recentImg.setImageResource(R.drawable.video);
-                    //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
-                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+                    holder.recentImg.setVisibility(View.VISIBLE);
+                    holder.videoViewLayout.setVisibility(View.GONE);
+                    if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+                        String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
+                        Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
+                    } else {
+                        holder.recentImg.setImageResource(R.drawable.video);
+                    }
+                    /* String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
                     holder.recentImg.setVisibility(View.GONE);
                     holder.videoViewLayout.setVisibility(View.VISIBLE);
 
@@ -186,7 +192,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                         public void onPrepared(MediaPlayer mp) {
                             holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                         }
-                    });
+                    });*/
                 }
             } else if (type == 3) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("audio")) {

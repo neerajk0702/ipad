@@ -189,19 +189,16 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             } else if (type == 2) {
                 String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
-                    /*try {
-                        holder.videoViewLayout.setVisibility(View.GONE);
-                        holder.recentImg.setVisibility(View.VISIBLE);
-                       // Bitmap bitmap = ASTUtil.retriveVideoFrameFromURL(filePath);
-                        //holder.recentImg.setImageBitmap(bitmap);
-                        new DownloadImage(holder.recentImg, filePath).execute(filePath);
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }*/
-                    holder.recentImg.setVisibility(View.GONE);
-                    holder.videoViewLayout.setVisibility(View.VISIBLE);
+                    holder.recentImg.setVisibility(View.VISIBLE);
+                    holder.videoViewLayout.setVisibility(View.GONE);
+                    if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+                        String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
+                        Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
+                    } else {
+                        holder.recentImg.setImageResource(R.drawable.video);
+                    }
 
-                    holder.videoView.setVideoURI(Uri.parse(filePath));
+                  /*  holder.videoView.setVideoURI(Uri.parse(filePath));
                     holder.videoView.requestFocus();
                     holder.videoView.seekTo(200);
                     holder.videoView.pause();
@@ -211,9 +208,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                         public void onPrepared(MediaPlayer mp) {
                             holder.videoView.setBackgroundColor(Color.TRANSPARENT);
                         }
-                    });
-                    //holder.recentImg.setImageResource(R.drawable.video);
-                    //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
+                    });*/
                 }
             } else if (type == 3) {
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {

@@ -490,6 +490,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                 mediaData.setFolderlocation(video.getFolderlocation());
                 mediaData.setFileExtension(video.getFileExtension());
                 mediaData.setEmailId(video.getEmailId());
+                mediaData.setThamblingImage(video.getThamblingImage());
                 mediaList.add(mediaData);
             }
         }

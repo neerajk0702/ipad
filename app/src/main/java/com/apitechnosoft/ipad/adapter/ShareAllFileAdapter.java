@@ -89,7 +89,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.setIsRecyclable(false);
+        //holder.setIsRecyclable(false);
         holder.recenttext.setText(mediaList.get(position).getFileName());
         setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
 
@@ -101,7 +101,17 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
             //   holder.recentImg.setImageResource(R.drawable.video);
-            String filePath = Contants.Media_File_BASE_URL +
+            holder.recentImg.setVisibility(View.VISIBLE);
+            holder.videoViewLayout.setVisibility(View.GONE);
+            if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+                String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
+                Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
+            } else {
+                holder.recentImg.setImageResource(R.drawable.video);
+            }
+
+
+            /*String filePath = Contants.Media_File_BASE_URL +
                     mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
             //  holder.recentImg.setVisibility(View.GONE);
             try {
@@ -114,32 +124,7 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
 
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
-            }
-            /*holder.videoViewLayout.setVisibility(View.VISIBLE);
-
-            holder.videoView.setVideoURI(Uri.parse(filePath));
-            // holder.videoView.requestFocus();
-            // holder.videoView.seekTo(200);
-            // holder.videoView.pause();
-            holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
-            holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    holder.videoView.setBackgroundColor(Color.TRANSPARENT);
-                    mp.start();
-                    mp.seekTo(200);
-                    mp.pause();
-                }
-            });
-            holder.videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    // setLooping(true) didn't work, thats why this workaround
-                    holder.videoView.setVideoPath(filePath);
-                    holder.videoView.start();
-                }
-            });*/
-
+            }*/
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);

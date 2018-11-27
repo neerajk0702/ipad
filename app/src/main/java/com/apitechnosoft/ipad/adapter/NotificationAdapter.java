@@ -94,9 +94,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             holder.image.setImageResource(R.drawable.video);
         } else if (notificationlists.get(position).getEmailId().contains("audio")) {
             holder.image.setImageResource(R.drawable.audio_icon);
-        } else if (notificationlists.get(position).getEmailId().contains("text")) {
+        } else if (notificationlists.get(position).getEmailId().contains("msword")||notificationlists.get(position).getEmailId().contains("doc") || notificationlists.get(position).getEmailId().contains("docx") || notificationlists.get(position).getEmailId().contains("txt")) {
             holder.image.setImageResource(R.drawable.doc);
+        } else if (notificationlists.get(position).getEmailId().contains("pdf")||notificationlists.get(position).getEmailId().contains("application/pdf")) {
+            holder.image.setImageResource(R.drawable.pdfimg);
+        } else if (notificationlists.get(position).getEmailId().contains("html")) {
+            holder.image.setImageResource(R.drawable.htmlimg);
+        } else if (notificationlists.get(position).getEmailId().contains("zip")) {
+            holder.image.setImageResource(R.drawable.zipimg);
+        } else if (notificationlists.get(position).getEmailId().contains("vnd.ms-excel")||notificationlists.get(position).getEmailId().contains("xls") || notificationlists.get(position).getEmailId().contains("xlsx")) {
+            holder.image.setImageResource(R.drawable.excelimg);
+        } else if (notificationlists.get(position).getEmailId().contains("mspowerpoint")||notificationlists.get(position).getEmailId().contains("pptx") || notificationlists.get(position).getEmailId().contains("ppt")) {
+            holder.image.setImageResource(R.drawable.pptimg);
+        } else if (notificationlists.get(position).getEmailId().contains("rar") || notificationlists.get(position).getEmailId().contains("RAR")) {
+            holder.image.setImageResource(R.drawable.araimg);
         }
+
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

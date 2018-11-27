@@ -568,6 +568,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 mediaData.setGigaByte(video.getGigaByte());
                 mediaData.setFolderlocation(video.getFolderlocation());
                 mediaData.setEmailId(video.getEmailId());
+                mediaData.setThamblingImage(video.getThamblingImage());
                 mediaList.add(mediaData);
             }
         }
@@ -903,6 +904,7 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
                 mediaData.setExtension(photo.getExtension());
                 mediaData.setFullFilePath(photo.getFullFilePath());
                 mediaData.setEventname(photo.getEventname());
+                mediaData.setThamblingImage(photo.getThamblingImage());
                 mediaList.add(mediaData);
             }
 

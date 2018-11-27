@@ -90,5 +90,13 @@ public class AllfileLiast {
     public String getFolderlocation() { return this.folderlocation; }
 
     public void setFolderlocation(String folderlocation) { this.folderlocation = folderlocation; }
+    private String thamblingImage;
 
+    public String getThamblingImage() {
+        return thamblingImage;
+    }
+
+    public void setThamblingImage(String thamblingImage) {
+        this.thamblingImage = thamblingImage;
+    }
 }

@@ -346,7 +346,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
     //show file data in list
     private void showFileData(ContentData data) {
         mediaList = new ArrayList<>();
-         ArrayList<AllfileLiast> allfileLias = data.getAllfileLiast();
+        ArrayList<AllfileLiast> allfileLias = data.getAllfileLiast();
         if (allfileLias != null && allfileLias.size() > 0) {
             //photoList = new ArrayList<Photolist>(Arrays.asList(photolists));
             for (AllfileLiast allfileLiast : allfileLias) {
@@ -367,6 +367,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                 mediaData.setGigaByte(String.valueOf(allfileLiast.getGigaByte()));
                 mediaData.setFolderlocation(allfileLiast.getFolderlocation());
                 mediaData.setExtension(allfileLiast.getExtension());
+                mediaData.setThamblingImage(allfileLiast.getThamblingImage());
                 mediaList.add(mediaData);
             }
         }

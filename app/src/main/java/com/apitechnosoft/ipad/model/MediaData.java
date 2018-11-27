@@ -225,6 +225,16 @@ public class MediaData {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
+    private String thamblingImage;
+
+    public String getThamblingImage() {
+        return thamblingImage;
+    }
+
+    public void setThamblingImage(String thamblingImage) {
+        this.thamblingImage = thamblingImage;
+    }
 }
 
 

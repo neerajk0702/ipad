@@ -187,7 +187,15 @@ public class Folderdata {
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
+    private String thamblingImage;
 
+    public String getThamblingImage() {
+        return thamblingImage;
+    }
+
+    public void setThamblingImage(String thamblingImage) {
+        this.thamblingImage = thamblingImage;
+    }
     @Override
     public String toString() {
         return "ClassPojo [sno = " + sno + ", filePath = " + filePath + ", fullFilePath = " + fullFilePath + ", fileName = " + fileName + "]";
