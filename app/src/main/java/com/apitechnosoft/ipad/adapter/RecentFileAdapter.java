@@ -115,7 +115,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                     }
                 }
             });
-        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv"))) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv")|| mediaList.get(position).getExtension().contains("3gp")|| mediaList.get(position).getExtension().contains("avi")|| mediaList.get(position).getExtension().contains("flv")|| mediaList.get(position).getExtension().contains("m4v")|| mediaList.get(position).getExtension().contains("mkv")|| mediaList.get(position).getExtension().contains("mov")|| mediaList.get(position).getExtension().contains("mpeg")|| mediaList.get(position).getExtension().contains("mpg")|| mediaList.get(position).getExtension().contains("mts")|| mediaList.get(position).getExtension().contains("webm"))) {
             holder.recentImg.setVisibility(View.VISIBLE);
             holder.videoViewLayout.setVisibility(View.GONE);
             if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
