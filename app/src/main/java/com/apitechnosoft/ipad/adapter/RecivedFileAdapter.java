@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -110,8 +111,8 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         ImageView recentImg;
         ProgressBar loadingDialog;
         VideoView videoView;
-        LinearLayout videoViewLayout;
-
+        RelativeLayout videoViewLayout;
+        ProgressBar bufferingDialog;
         public MyViewHolder(View view) {
             super(view);
             recenttext = (TextView) view.findViewById(R.id.recenttext);
@@ -119,6 +120,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
             loadingDialog = view.findViewById(R.id.loadingDialog);
             videoView = view.findViewById(R.id.videoView);
             videoViewLayout = view.findViewById(R.id.videoViewLayout);
+            bufferingDialog = view.findViewById(R.id.bufferingDialog);
         }
     }
 
@@ -152,7 +154,7 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                         holder.loadingDialog.setVisibility(View.VISIBLE);
                     }
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
-                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
+                    Picasso.with(ApplicationHelper.application().getContext()).load(filePath).resize(70, 70).into(holder.recentImg, new Callback() {
                         @Override
                         public void onSuccess() {
                             if (holder.loadingDialog != null) {
@@ -170,29 +172,49 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 }
             } else if (type == 2) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("video")) {
-                    holder.recentImg.setVisibility(View.VISIBLE);
-                    holder.videoViewLayout.setVisibility(View.GONE);
-                    if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+                    holder.recentImg.setVisibility(View.GONE);
+                    holder.videoViewLayout.setVisibility(View.VISIBLE);
+                  //  holder.recentImg.setImageResource(R.drawable.video);
+                  /*  if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
                         String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
                         Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
                     } else {
                         holder.recentImg.setImageResource(R.drawable.video);
-                    }
-                    /* String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
+                    }*/
+                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
                     holder.recentImg.setVisibility(View.GONE);
                     holder.videoViewLayout.setVisibility(View.VISIBLE);
 
                     holder.videoView.setVideoURI(Uri.parse(filePath));
                     holder.videoView.requestFocus();
-                    holder.videoView.seekTo(200);
+                    holder.videoView.seekTo(300);
                     holder.videoView.pause();
                     holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
                     holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
                             holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                            mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                                @Override
+                                public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                                    if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
+                                        holder.bufferingDialog.setVisibility(View.VISIBLE);
+                                    if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START)
+                                        holder.bufferingDialog.setVisibility(View.VISIBLE);
+                                    if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END)
+                                        holder.bufferingDialog.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            });
                         }
-                    });*/
+                    });
+                    holder.videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                        @Override
+                        public boolean onError(MediaPlayer mp, int what, int extra) {
+                            holder.bufferingDialog.setVisibility(View.GONE);
+                            return false;
+                        }
+                    });
                 }
             } else if (type == 3) {
                 if (mediaList.get(position).getFileExtension() != null && mediaList.get(position).getFileExtension().contains("audio")) {

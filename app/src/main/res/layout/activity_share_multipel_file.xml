@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -55,19 +55,26 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/app_bar"
+            android:background="@color/white"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@android:color/white"
-                android:layout_below="@+id/app_bar"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -133,53 +140,60 @@
                     android:id="@+id/filerecycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:background="@color/white" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:background="@color/white"
-                    android:layout_height="@dimen/_30dp" />
+                    android:layout_height="@dimen/_30dp"
+                    android:background="@color/white" />
             </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginRight="@dimen/_10dp"
-                android:orientation="horizontal">
-
-                <com.apitechnosoft.ipad.component.ASTButton
-                    android:id="@+id/sendfile"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_5dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/select_folder"
-                    android:text="Send File"
-                    android:textColor="@color/white" />
-
-                <com.apitechnosoft.ipad.component.ASTButton
-                    android:id="@+id/close"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/share_folder"
-                    android:text="Close"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20dp" />
+                android:layout_height="@dimen/_5dp"
+                android:background="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30dp"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <com.apitechnosoft.ipad.component.ASTButton
+                        android:id="@+id/sendfile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/select_folder"
+                        android:text="Send File"
+                        android:textColor="@color/white" />
+
+                    <com.apitechnosoft.ipad.component.ASTButton
+                        android:id="@+id/close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/share_folder"
+                        android:text="Close"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10dp"
+                    android:background="@color/white" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

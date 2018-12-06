@@ -3,8 +3,11 @@ package com.apitechnosoft.ipad.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -23,9 +27,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.apitechnosoft.ipad.R;
-import com.apitechnosoft.ipad.adapter.PersonalAdapter;
 import com.apitechnosoft.ipad.adapter.ShareAllFileAdapter;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
 import com.apitechnosoft.ipad.constants.Contants;
@@ -34,18 +38,13 @@ import com.apitechnosoft.ipad.framework.FileUploaderHelper;
 import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.AllfileLiast;
-import com.apitechnosoft.ipad.model.Audioist;
 import com.apitechnosoft.ipad.model.ContentData;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.model.Data;
-import com.apitechnosoft.ipad.model.Documentlist;
 import com.apitechnosoft.ipad.model.MediaData;
-import com.apitechnosoft.ipad.model.Photolist;
-import com.apitechnosoft.ipad.model.Videolist;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
-import com.apitechnosoft.ipad.utils.NoSSLv3Factory;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -54,8 +53,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.MultipartBody;
 
@@ -110,8 +107,9 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         TextView iicon = findViewById(R.id.iicon);
         iicon.setTypeface(materialdesignicons_font);
         iicon.setText(Html.fromHtml("&#xf2fd;"));
+
         filerecycler_view = findViewById(R.id.filerecycler_view);
-        filerecycler_view.setHasFixedSize(false);
+       filerecycler_view.setHasFixedSize(true);
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         filerecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
         getAllFile();
@@ -343,6 +341,8 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         }
     }
 
+    private View currentFocusedLayout, oldFocusedLayout;
+
     //show file data in list
     private void showFileData(ContentData data) {
         mediaList = new ArrayList<>();
@@ -374,6 +374,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
 
         mAdapter = new ShareAllFileAdapter(ShareMultipelFileActivity.this, mediaList);
         filerecycler_view.setAdapter(mAdapter);
+
     }
 
     //for hid keyboard when tab outside edittext box

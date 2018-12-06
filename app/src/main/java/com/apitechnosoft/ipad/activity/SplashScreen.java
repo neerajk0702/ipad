@@ -66,7 +66,7 @@ public class SplashScreen extends AppCompatActivity implements ProviderInstaller
                     UserId = prefs.getString("UserId", "");
                 }
                 if (UserId != null && !UserId.equals("")) {
-                    i = new Intent(SplashScreen.this, MainActivity.class);
+                    i = new Intent(SplashScreen.this, MainActivity.class);//MainActivity
                 } else {
                     i = new Intent(SplashScreen.this, LoginHomeActivity.class);
                 }

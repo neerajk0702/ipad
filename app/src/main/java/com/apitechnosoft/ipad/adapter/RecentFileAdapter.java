@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -63,8 +64,9 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         ImageView recentImg;
         LinearLayout itemLayout;
         ProgressBar loadingDialog;
-        LinearLayout videoViewLayout;
+        RelativeLayout videoViewLayout;
         VideoView videoView;
+        ProgressBar bufferingDialog;
 
         public MyViewHolder(View view) {
             super(view);
@@ -74,6 +76,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
             loadingDialog = view.findViewById(R.id.loadingDialog);
             videoView = view.findViewById(R.id.videoView);
             videoViewLayout = view.findViewById(R.id.videoViewLayout);
+            bufferingDialog = view.findViewById(R.id.bufferingDialog);
         }
     }
 
@@ -100,7 +103,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 holder.loadingDialog.setVisibility(View.VISIBLE);
             }
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(holder.recentImg, new Callback() {
+            Picasso.with(ApplicationHelper.application().getContext()).load(filePath).resize(70, 70).into(holder.recentImg, new Callback() {
                 @Override
                 public void onSuccess() {
                     if (holder.loadingDialog != null) {
@@ -116,27 +119,46 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 }
             });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv")|| mediaList.get(position).getExtension().contains("3gp")|| mediaList.get(position).getExtension().contains("avi")|| mediaList.get(position).getExtension().contains("flv")|| mediaList.get(position).getExtension().contains("m4v")|| mediaList.get(position).getExtension().contains("mkv")|| mediaList.get(position).getExtension().contains("mov")|| mediaList.get(position).getExtension().contains("mpeg")|| mediaList.get(position).getExtension().contains("mpg")|| mediaList.get(position).getExtension().contains("mts")|| mediaList.get(position).getExtension().contains("webm"))) {
-            holder.recentImg.setVisibility(View.VISIBLE);
-            holder.videoViewLayout.setVisibility(View.GONE);
-            if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
+            holder.recentImg.setVisibility(View.GONE);
+            holder.videoViewLayout.setVisibility(View.VISIBLE);
+           // holder.recentImg.setImageResource(R.drawable.video);
+           /* if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
                 String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
                 Picasso.with(mContext).load(newpath).placeholder(R.drawable.video).into(holder.recentImg);
             } else {
                 holder.recentImg.setImageResource(R.drawable.video);
-            }
-  /*
+            }*/
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
           holder.videoView.setVideoURI(Uri.parse(filePath));
             holder.videoView.requestFocus();
-            holder.videoView.seekTo(200);
+            holder.videoView.seekTo(300);
             holder.videoView.pause();
             holder.videoView.setBackgroundColor(Color.parseColor("#D9D9D9")); // Your color.
             holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     holder.videoView.setBackgroundColor(Color.TRANSPARENT);
+                    mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                        @Override
+                        public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
+                                holder.bufferingDialog.setVisibility(View.VISIBLE);
+                            if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START)
+                                holder.bufferingDialog.setVisibility(View.VISIBLE);
+                            if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END)
+                                holder.bufferingDialog.setVisibility(View.GONE);
+                            return false;
+                        }
+                    });
                 }
-            });*/
+            });
+            holder.videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    holder.bufferingDialog.setVisibility(View.GONE);
+                    return false;
+                }
+            });
         } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav")) || mediaList.get(position).getExtension().contains("m4a")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
         } else if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("txt") || mediaList.get(position).getExtension().contains("docx"))) {
@@ -159,7 +181,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                 if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("jpg") || mediaList.get(position).getExtension().contains("jpeg") || mediaList.get(position).getExtension().contains("png")) || mediaList.get(position).getExtension().contains("PNG") || mediaList.get(position).getExtension().contains("JPG") || mediaList.get(position).getExtension().contains("JPEG")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowImage(filePath, position);
-                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv")) || mediaList.get(position).getExtension().contains("m4a")) {
+                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp4") || mediaList.get(position).getExtension().contains("wmv")|| mediaList.get(position).getExtension().contains("3gp")|| mediaList.get(position).getExtension().contains("avi")|| mediaList.get(position).getExtension().contains("flv")|| mediaList.get(position).getExtension().contains("m4v")|| mediaList.get(position).getExtension().contains("mkv")|| mediaList.get(position).getExtension().contains("mov")|| mediaList.get(position).getExtension().contains("mpeg")|| mediaList.get(position).getExtension().contains("mpg")|| mediaList.get(position).getExtension().contains("mts")|| mediaList.get(position).getExtension().contains("webm"))) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowVideo(filePath, position);
                 } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))) {

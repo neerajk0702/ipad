@@ -68,6 +68,10 @@ dependencies {
     implementation 'com.braintreepayments.api:braintree:2.18.1'
     implementation 'com.braintreepayments.api:drop-in:3.7.1'
 
+    implementation 'com.devbrackets.android:exomedia:4.3.0'
+
+
+
 }
 
 
