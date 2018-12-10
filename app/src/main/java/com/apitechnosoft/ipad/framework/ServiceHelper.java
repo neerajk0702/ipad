@@ -68,7 +68,7 @@ public class ServiceHelper implements IServiceHelper {
         };
         //jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(5*DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,  0, 0));
         // Adding request to request queue
-        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(30 * 1000, 0, 1.0f));
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(50 * 1000, 0, 1.0f));
         ApplicationHelper.application().addToRequestQueue(jsonObjReq);//, tag_json_obj);
         //AppController.getInstance().cancelPendingRequests(jsonObjReq);
     }

@@ -34,7 +34,7 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
-        ImageView recentImg;
+        ImageView recentImg, fullView;
         CardView cardLayout;
         CheckBox selectCheck;
 
@@ -44,6 +44,7 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
             recentImg = view.findViewById(R.id.recentImg);
             cardLayout = view.findViewById(R.id.cardLayout);
             selectCheck = view.findViewById(R.id.selectCheck);
+            fullView = view.findViewById(R.id.fullView);
         }
     }
 
@@ -66,6 +67,7 @@ public class MoveFileFolderAdapter extends RecyclerView.Adapter<MoveFileFolderAd
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.recenttext.setText(mediaList.get(position).getFileName());
         holder.selectCheck.setVisibility(View.VISIBLE);
+        holder.fullView.setVisibility(View.GONE);
 
         setCheckBoxColor(holder.selectCheck, ASTUIUtil.getColor(R.color.green_color), ASTUIUtil.getColor(R.color.selectfolder));
         if (mediaList.get(position).getFullFilePath() != null && !mediaList.get(position).getFullFilePath().equals("")) {

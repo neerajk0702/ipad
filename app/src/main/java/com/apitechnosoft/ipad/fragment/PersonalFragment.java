@@ -134,6 +134,21 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mAdapter.onScrolled(recyclerView);
+                }
+            }
+
+        });
+
         folderrecycler_view = findViewById(R.id.folderrecycler_view);
         folderrecycler_view.setHasFixedSize(false);
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);

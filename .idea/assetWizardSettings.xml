@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_notification" />
-                            <entry key="sourceFile" value="C:\Users\Neeraj\Downloads\notification.svg" />
+                            <entry key="outputName" value="ic_full_screen" />
+                            <entry key="sourceFile" value="C:\Users\Neeraj\Downloads\full-screen.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
+            android:background="#D9D9D9"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -27,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="#D9D9D9"
                 android:visibility="visible">
 
                 <com.apitechnosoft.ipad.utils.FullScreenVideoView
@@ -43,6 +45,51 @@
                     android:layout_centerVertical="true"
                     android:visibility="gone" />
             </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/video_feed_item_video_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:adjustViewBounds="true"
+                    android:background="#D9D9D9"
+                    android:clickable="true"
+                    android:minHeight="200dp" />
+
+                <com.apitechnosoft.ipad.activity.CustomTextureVideoView
+                    android:id="@+id/video_feed_item_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:minHeight="1dp"
+                    android:visibility="invisible" />
+
+                <ProgressBar
+                    android:id="@+id/lyt_image_loader_progress_bar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+
+
+                <ImageView
+                    android:id="@+id/video_play_img_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:padding="1dp"
+                    android:src="@mipmap/ic_play_circle_outline_black_48dp"
+                    android:tint="@color/colorPrimary" />
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/recentImg"
@@ -66,7 +113,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:buttonTint="@color/red_dark_color"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/fullView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_full_screen"
+                android:visibility="visible" />
+
 
             <TextView
                 android:id="@+id/deleteiconfolder"

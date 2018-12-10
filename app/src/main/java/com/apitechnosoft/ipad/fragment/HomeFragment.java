@@ -125,7 +125,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
 
         setLinearLayoutManager(recent_recycler_view);
         recent_recycler_view.setNestedScrollingEnabled(false);
-        recent_recycler_view.setHasFixedSize(false);
+        recent_recycler_view.setHasFixedSize(true);
 
 
     }
@@ -241,6 +241,20 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             }
             mAdapter = new RecentFileAdapter(getContext(), seemediaList);//type for image video audio doc
             recent_recycler_view.setAdapter(mAdapter);
+            recent_recycler_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        mAdapter.onScrolled(recyclerView);
+                    }
+                }
+
+            });
         }
     }
 

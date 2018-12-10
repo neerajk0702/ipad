@@ -112,6 +112,23 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
        filerecycler_view.setHasFixedSize(true);
         StaggeredGridLayoutManager foldergaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         filerecycler_view.setLayoutManager(foldergaggeredGridLayoutManager);
+
+        filerecycler_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mAdapter.onScrolled(recyclerView);
+                }
+            }
+
+        });
+
+
         getAllFile();
 
         IpadDBHelper ipadDBHelper = new IpadDBHelper(ShareMultipelFileActivity.this);

@@ -124,10 +124,23 @@ public class SharedFragment extends MainFragment implements SwipeRefreshLayout.O
 
         // filterspinner = (Spinner) findViewById(R.id.filterspinner);
         recyclerView = findViewById(R.id.perrecycler_view);
-        recyclerView.setHasFixedSize(false);
+        recyclerView.setHasFixedSize(true);
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
 
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mAdapter.onScrolled(recyclerView);
+                }
+            }
+
+        });
         folderArrowIcon = findViewById(R.id.folderArrowIcon);
         folderTitel = findViewById(R.id.folderTitel);
         folderLayout = findViewById(R.id.folderLayout);

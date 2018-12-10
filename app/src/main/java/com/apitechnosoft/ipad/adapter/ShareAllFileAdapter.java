@@ -1,10 +1,12 @@
 package com.apitechnosoft.ipad.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -33,6 +36,7 @@ import android.widget.TextView;
 
 import com.apitechnosoft.ipad.ApplicationHelper;
 import com.apitechnosoft.ipad.R;
+import com.apitechnosoft.ipad.activity.CustomTextureVideoView;
 import com.apitechnosoft.ipad.activity.ShareSingleFileActivity;
 import com.apitechnosoft.ipad.constants.Contants;
 import com.apitechnosoft.ipad.framework.DownloadService;
@@ -40,11 +44,13 @@ import com.apitechnosoft.ipad.model.MediaData;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
 import com.apitechnosoft.ipad.utils.ASTUtil;
 import com.apitechnosoft.ipad.utils.FontManager;
+import com.apitechnosoft.ipad.utils.UIUtils;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,13 +64,42 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
     int type;
     Typeface materialdesignicons_font;
 
+
+    @Override
+    public void onViewRecycled(MyViewHolder holder) {
+        if (holder == currentVideoViewHolder) {
+            currentVideoViewHolder = null;
+            holder.stopVideo();
+        }
+        holder.videoViewnew.stopPlayback();
+        super.onViewRecycled(holder);
+
+    }
+
+    public void onScrolled(RecyclerView recyclerView) {
+        if (currentVideoViewHolder != null) {
+            currentVideoViewHolder.onScrolled(recyclerView);
+        }
+    }
+
+    MyViewHolder currentVideoViewHolder;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView recenttext;
         ImageView recentImg;
         CheckBox selectCheck;
         RelativeLayout videoViewLayout;
-        VideoView videoView;
+        // VideoView videoView;
         ProgressBar bufferingDialog;
+
+        ImageView videoPlayImageButton, videoImageView, fullView;
+        ProgressBar imageLoaderProgressBar;
+        CustomTextureVideoView videoViewnew;
+        String videoUrl;
+
+        public String getVideoUrl() {
+            return videoUrl;
+        }
 
         public MyViewHolder(View view) {
             super(view);
@@ -73,6 +108,136 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             selectCheck = view.findViewById(R.id.selectCheck);
             videoViewLayout = view.findViewById(R.id.videoViewLayout);
             bufferingDialog = view.findViewById(R.id.bufferingDialog);
+
+            fullView = view.findViewById(R.id.fullView);
+            videoPlayImageButton = view.findViewById(R.id.video_play_img_btn);
+            imageLoaderProgressBar = view.findViewById(R.id.lyt_image_loader_progress_bar);
+            videoViewnew = view.findViewById(R.id.video_feed_item_video);
+            videoImageView = view.findViewById(R.id.video_feed_item_video_image);
+
+
+            videoViewnew.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(final MediaPlayer mp) {
+                    Log.v("Video", "onPrepared" + videoViewnew.getVideoPath());
+                    int width = mp.getVideoWidth();
+                    int height = mp.getVideoHeight();
+                    videoViewnew.setIsPrepared(true);
+                    //  UIUtils.resizeView(videoViewnew, UIUtils.getScreenWidth(ApplicationHelper.application().getActivity()), UIUtils.getScreenWidth(ApplicationHelper.application().getActivity()) * height / width);
+                    if (currentVideoViewHolder == MyViewHolder.this) {
+                        videoImageView.setVisibility(View.GONE);
+                        imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+                        videoViewnew.setVisibility(View.VISIBLE);
+                        videoViewnew.seekTo(0);
+                        videoViewnew.start();
+                    }
+                }
+            });
+            videoViewnew.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    Log.v("Video", "onFocusChange" + hasFocus);
+                    if (!hasFocus && currentVideoViewHolder == MyViewHolder.this) {
+                        //  stopVideo();
+                    }
+
+                }
+            });
+            videoViewnew.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                @Override
+                public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                    Log.v("Video", "onInfo" + what + " " + extra);
+
+                    return false;
+                }
+            });
+            videoViewnew.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    Log.v("Video", "onCompletion");
+
+                    videoImageView.setVisibility(View.VISIBLE);
+                    videoPlayImageButton.setVisibility(View.VISIBLE);
+
+                    if (videoViewnew.getVisibility() == View.VISIBLE)
+                        videoViewnew.setVisibility(View.INVISIBLE);
+
+
+                    imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+                    currentVideoViewHolder = null;
+                }
+            });
+            videoPlayImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (currentVideoViewHolder != null && currentVideoViewHolder != MyViewHolder.this) {
+                        currentVideoViewHolder.videoViewnew.pause();
+                        currentVideoViewHolder.videoImageView.setVisibility(View.INVISIBLE);
+                        currentVideoViewHolder.videoPlayImageButton.setVisibility(View.VISIBLE);
+                        currentVideoViewHolder.imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+                        if (currentVideoViewHolder.videoViewnew.getVisibility() == View.VISIBLE)
+                            currentVideoViewHolder.videoViewnew.setVisibility(View.INVISIBLE);
+
+
+                        currentVideoViewHolder = null;
+                    }
+                    currentVideoViewHolder = MyViewHolder.this;
+
+                    videoPlayImageButton.setVisibility(View.INVISIBLE);
+                    imageLoaderProgressBar.setVisibility(View.VISIBLE);
+                    videoViewnew.setVisibility(View.VISIBLE);
+                    videoImageView.setVisibility(View.INVISIBLE);
+                    if (videoViewnew.isPrepared()) {
+                        imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+                    } else {
+                        imageLoaderProgressBar.setVisibility(View.VISIBLE);
+                    }
+                    if (!getVideoUrl().equals(videoViewnew.getVideoPath())) {
+                        videoViewnew.setIsPrepared(false);
+                        //videoView.setVideoPath(getVideoUrl());
+                        videoViewnew.setVideoURI(Uri.parse(getVideoUrl()));
+                        videoViewnew.requestFocus();
+                        //  videoViewnew.seekTo(0);
+                        // videoViewnew.start();
+                    } else {
+                        if (videoViewnew.isPrepared()) {
+                            imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+                        } else {
+                            imageLoaderProgressBar.setVisibility(View.VISIBLE);
+                        }
+                        videoViewnew.requestFocus();
+                        videoViewnew.seekTo(0);
+                        videoViewnew.start();
+                    }
+                }
+            });
+        }
+
+        public void stopVideo() {
+            Log.v("Video", "stopVideo");
+
+            //imageView is within the visible window
+            videoViewnew.pause();
+            if (videoViewnew.getVisibility() == View.VISIBLE) {
+                videoViewnew.setVisibility(View.INVISIBLE);
+            }
+            videoImageView.setVisibility(View.VISIBLE);
+            videoPlayImageButton.setVisibility(View.VISIBLE);
+            imageLoaderProgressBar.setVisibility(View.INVISIBLE);
+            currentVideoViewHolder = null;
+        }
+
+        public void onScrolled(RecyclerView recyclerView) {
+            if (isViewNotVisible(videoPlayImageButton, recyclerView) || isViewNotVisible(imageLoaderProgressBar, recyclerView)) {
+                //imageView is within the visible window
+                stopVideo();
+            }
+        }
+
+        public boolean isViewNotVisible(View view, RecyclerView recyclerView) {
+            Rect scrollBounds = new Rect();
+            recyclerView.getHitRect(scrollBounds);
+            return view.getVisibility() == View.VISIBLE && !view.getLocalVisibleRect(scrollBounds);
         }
     }
 
@@ -110,8 +275,15 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             Picasso.with(mContext).load(filePath).resize(70, 70).placeholder(R.drawable.image_icon).into(holder.recentImg);
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+            String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
+            holder.videoUrl = filePath;
+            holder.imageLoaderProgressBar.setVisibility(View.INVISIBLE);//INVISIBLE
+            holder.videoImageView.setVisibility(View.VISIBLE);//VISIBLE
+            holder.fullView.setVisibility(View.VISIBLE);
+
+
             holder.recentImg.setImageResource(R.drawable.video);
-            holder.recentImg.setVisibility(View.VISIBLE);
+            holder.recentImg.setVisibility(View.GONE);
             holder.videoViewLayout.setVisibility(View.GONE);
             // holder.recentImg.setImageResource(R.drawable.video);
          /*   if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
@@ -175,9 +347,15 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }*/
+        } else {
+            holder.videoImageView.setVisibility(View.GONE);
+            holder.videoPlayImageButton.setVisibility(View.GONE);
+            holder.fullView.setVisibility(View.GONE);
         }
         if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
             holder.recentImg.setImageResource(R.drawable.audio_icon);
+            holder.videoImageView.setVisibility(View.GONE);
+            holder.videoPlayImageButton.setVisibility(View.GONE);
         }
         if (mediaList.get(position).getExtension() != null) {
             if (mediaList.get(position).getExtension().contains("doc") || mediaList.get(position).getExtension().contains("docx") || mediaList.get(position).getExtension().contains("txt")) {
@@ -217,9 +395,19 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         holder.recentImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
-                    //  alertForShowVideo(filePath);
+                    // alertForShowVideo(filePath, position);
+                }
+            }
+        });
+        holder.fullView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+                    holder.stopVideo();
+                    holder.videoViewnew.stopPlayback();
+                    String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowVideo(filePath, position);
                 }
             }
@@ -284,25 +472,106 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         final android.app.AlertDialog alert = builder.create();
         // alert.getWindow().getAttributes().windowAnimations = R.style.alertAnimation;
+        alert.getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         final View view = alert.getLayoutInflater().inflate(R.layout.video_view, null);
         Button close = view.findViewById(R.id.close);
         TextView title = view.findViewById(R.id.title);
         VideoView videoView = view.findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse(filePath));
+        videoView.setVisibility(View.GONE);
+
+        ProgressBar loader_progress_bar = view.findViewById(R.id.loader_progress_bar);
+        CustomTextureVideoView video_feed_item_video = view.findViewById(R.id.video_feed_item_video);
+        video_feed_item_video.setVideoURI(Uri.parse(filePath));
+
+       /* videoView.setVideoURI(Uri.parse(filePath));
         videoView.requestFocus();
+        videoView.start();*/
         //  videoView.seekTo(300);
         //   videoView.pause();
-        videoView.requestFocus();
-        videoView.start();
-        alert.setCustomTitle(view);
 
+        if (video_feed_item_video.isPrepared()) {
+            loader_progress_bar.setVisibility(View.INVISIBLE);
+        } else {
+            loader_progress_bar.setVisibility(View.VISIBLE);
+        }
+        // video_feed_item_video.setIsPrepared(true);
+        video_feed_item_video.requestFocus();
+        video_feed_item_video.seekTo(0);
+        video_feed_item_video.start();
+
+        alert.setCustomTitle(view);
+        video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(final MediaPlayer mp) {
+                Log.v("Video", "onPrepared" + video_feed_item_video.getVideoPath());
+                int width = mp.getVideoWidth();
+                int height = mp.getVideoHeight();
+                loader_progress_bar.setVisibility(View.INVISIBLE);
+                video_feed_item_video.setIsPrepared(true);
+              /*  video_feed_item_video.requestFocus();
+                video_feed_item_video.seekTo(0);
+                video_feed_item_video.start();*/
+            }
+        });
+
+      /*  video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                video_feed_item_video.setIsPrepared(true);
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                        if (what == 703)
+                            loader_progress_bar.setVisibility(View.INVISIBLE);
+                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
+                            loader_progress_bar.setVisibility(View.VISIBLE);
+                        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START)
+                            loader_progress_bar.setVisibility(View.VISIBLE);
+                        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END)
+                            loader_progress_bar.setVisibility(View.INVISIBLE);
+                        return false;
+                    }
+                });
+            }
+        });*/
+        video_feed_item_video.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                loader_progress_bar.setVisibility(View.INVISIBLE);
+                return false;
+            }
+        });
+
+        video_feed_item_video.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.v("Video", "onFocusChange" + hasFocus);
+
+            }
+        });
+        video_feed_item_video.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+            @Override
+            public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                Log.v("Video", "onInfo" + what + " " + extra);
+
+                return false;
+            }
+        });
+        video_feed_item_video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.v("Video", "onCompletion");
+                loader_progress_bar.setVisibility(View.INVISIBLE);
+            }
+        });
         title.setText(mediaList.get(position).getFileName());
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (videoView.isPlaying()) {
-                    videoView.stopPlayback();
-                    videoView.release();
+                if (video_feed_item_video.isPlaying()) {
+                    video_feed_item_video.stopPlayback();
+                    //  videoView.release();
                 }
                 alert.dismiss();
             }
