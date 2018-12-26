@@ -483,13 +483,6 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         ProgressBar loader_progress_bar = view.findViewById(R.id.loader_progress_bar);
         CustomTextureVideoView video_feed_item_video = view.findViewById(R.id.video_feed_item_video);
         video_feed_item_video.setVideoURI(Uri.parse(filePath));
-
-       /* videoView.setVideoURI(Uri.parse(filePath));
-        videoView.requestFocus();
-        videoView.start();*/
-        //  videoView.seekTo(300);
-        //   videoView.pause();
-
         if (video_feed_item_video.isPrepared()) {
             loader_progress_bar.setVisibility(View.INVISIBLE);
         } else {
@@ -501,6 +494,14 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
         video_feed_item_video.start();
 
         alert.setCustomTitle(view);
+
+        final MediaController controller = new MediaController(mContext);
+        video_feed_item_video.setMediaController(controller);
+        controller.setMediaPlayer(video_feed_item_video);
+        controller.setAnchorView(video_feed_item_video);
+        ((ViewGroup) controller.getParent()).removeView(controller);
+        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(controller);
+
         video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(final MediaPlayer mp) {
@@ -509,32 +510,28 @@ public class ShareAllFileAdapter extends RecyclerView.Adapter<ShareAllFileAdapte
                 int height = mp.getVideoHeight();
                 loader_progress_bar.setVisibility(View.INVISIBLE);
                 video_feed_item_video.setIsPrepared(true);
-              /*  video_feed_item_video.requestFocus();
-                video_feed_item_video.seekTo(0);
-                video_feed_item_video.start();*/
-            }
-        });
-
-      /*  video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                video_feed_item_video.setIsPrepared(true);
                 mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
                     @Override
-                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                        if (what == 703)
-                            loader_progress_bar.setVisibility(View.INVISIBLE);
-                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
-                            loader_progress_bar.setVisibility(View.VISIBLE);
-                        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START)
-                            loader_progress_bar.setVisibility(View.VISIBLE);
-                        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END)
-                            loader_progress_bar.setVisibility(View.INVISIBLE);
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                loader_progress_bar.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                        }
                         return false;
                     }
                 });
             }
-        });*/
+        });
         video_feed_item_video.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {

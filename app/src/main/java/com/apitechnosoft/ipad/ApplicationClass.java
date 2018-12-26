@@ -59,7 +59,12 @@ public class ApplicationClass extends MultiDexApplication {
     private Typeface _fontExtraLightItalic;
 
     public static final String TAG = Application.class.getSimpleName();
-
+    //You add the code below without extending **MultiDexApplication**
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     @Override
     public void onCreate() {
         super.onCreate();

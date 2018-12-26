@@ -4,7 +4,7 @@ android {
     defaultConfig {
         applicationId "com.apitechnosoft.ipad"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -24,6 +24,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
     }
 }
 
@@ -65,12 +67,8 @@ dependencies {
     implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
     implementation 'com.braintreepayments.api:braintree:2.18.1'
     implementation 'com.braintreepayments.api:drop-in:3.7.1'
-
     implementation 'com.devbrackets.android:exomedia:4.3.0'
     implementation 'com.sprylab.android.texturevideoview:texturevideoview:1.0.2'
-
-
-
 }
 
 

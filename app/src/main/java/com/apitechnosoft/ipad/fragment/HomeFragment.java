@@ -234,7 +234,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
             //Collections.reverse(mediaList);
             RecentFileAdapter mAdapter;
             ArrayList<Resentdata> seemediaList = new ArrayList<>();
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (i < mediaList.size()) {
                     seemediaList.add(mediaList.get(i));
                 }

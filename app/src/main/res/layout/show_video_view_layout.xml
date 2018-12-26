@@ -87,7 +87,8 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7">
 
                     <com.devbrackets.android.exomedia.ui.widget.VideoView
                         android:id="@+id/videoView"
@@ -105,7 +106,6 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:adjustViewBounds="true"
-                        android:background="@color/colorPrimary"
                         android:clickable="true"
                         android:minHeight="200dp"
                         android:visibility="gone" />
@@ -136,10 +136,17 @@
                         android:clickable="true"
                         android:padding="1dp"
                         android:src="@mipmap/ic_play_circle_outline_black_48dp"
-                        android:tint="@color/colorPrimary"
+                        android:tint="@color/white"
                         android:visibility="gone" />
                 </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/videoViewWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3">
 
+
+                </FrameLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 

@@ -161,6 +161,7 @@
                 <data android:scheme="com.apitechnosoft.ipad.braintree" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

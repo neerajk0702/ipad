@@ -104,7 +104,7 @@ public class OrganizerActivity extends AppCompatActivity {
         allevents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OrganizerActivity.this, ShowAllEventActivity.class));
+                startActivity(new Intent(OrganizerActivity.this, ShowAllEventActivity.class));//ShowAllEventActivity
             }
         });
     }

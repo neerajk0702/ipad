@@ -662,7 +662,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         video_feed_item_video.start();
 
         alert.setCustomTitle(view);
-
+        final MediaController controller = new MediaController(mContext);
+        video_feed_item_video.setMediaController(controller);
+        controller.setMediaPlayer(video_feed_item_video);
+        controller.setAnchorView(video_feed_item_video);
+        ((ViewGroup) controller.getParent()).removeView(controller);
+        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(controller);
         video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(final MediaPlayer mp) {
@@ -671,9 +676,26 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 int height = mp.getVideoHeight();
                 loader_progress_bar.setVisibility(View.INVISIBLE);
                 video_feed_item_video.setIsPrepared(true);
-              /*  video_feed_item_video.requestFocus();
-                video_feed_item_video.seekTo(0);
-                video_feed_item_video.start();*/
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                loader_progress_bar.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
         });
         video_feed_item_video.setOnErrorListener(new MediaPlayer.OnErrorListener() {
@@ -770,6 +792,9 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         final String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderName() + "/" + mediaList.get(position).getFileName();
 
         ProgressBar loader_progress_bar = view.findViewById(R.id.loader_progress_bar);
+        ImageView video_feed_item_video_image = view.findViewById(R.id.video_feed_item_video_image);
+        video_feed_item_video_image.setImageResource(R.drawable.audio_icon);
+        video_feed_item_video_image.setVisibility(View.VISIBLE);
         CustomTextureVideoView video_feed_item_video = view.findViewById(R.id.video_feed_item_video);
         video_feed_item_video.setVideoURI(Uri.parse(filePath));
         if (video_feed_item_video.isPrepared()) {
@@ -783,7 +808,12 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
         video_feed_item_video.start();
 
         alert.setCustomTitle(view);
-
+        final MediaController controller = new MediaController(mContext);
+        video_feed_item_video.setMediaController(controller);
+        controller.setMediaPlayer(video_feed_item_video);
+        controller.setAnchorView(video_feed_item_video);
+        ((ViewGroup) controller.getParent()).removeView(controller);
+        ((FrameLayout) view.findViewById(R.id.videoViewWrapper)).addView(controller);
         video_feed_item_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(final MediaPlayer mp) {
@@ -792,9 +822,26 @@ public class RecivedFileAdapter extends RecyclerView.Adapter<RecivedFileAdapter.
                 int height = mp.getVideoHeight();
                 loader_progress_bar.setVisibility(View.INVISIBLE);
                 video_feed_item_video.setIsPrepared(true);
-              /*  video_feed_item_video.requestFocus();
-                video_feed_item_video.seekTo(0);
-                video_feed_item_video.start();*/
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+                        switch (what) {
+                            case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_START: {
+                                loader_progress_bar.setVisibility(View.VISIBLE);
+                                return true;
+                            }
+                            case MediaPlayer.MEDIA_INFO_BUFFERING_END: {
+                                loader_progress_bar.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
         });
         video_feed_item_video.setOnErrorListener(new MediaPlayer.OnErrorListener() {
