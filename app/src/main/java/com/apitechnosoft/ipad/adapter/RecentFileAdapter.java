@@ -347,6 +347,9 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
             setVisibilityView(holder, false);
             holder.recentImg.setImageResource(R.drawable.araimg);
+        }else if (mediaList.get(position).getExtension().contains("html") || mediaList.get(position).getExtension().contains("html")) {
+            setVisibilityView(holder, false);
+            holder.recentImg.setImageResource(R.drawable.htmlimg);
         }
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {

@@ -162,7 +162,7 @@ public class UploadNewFileFragment extends MainFragment {
                 mimtype.equalsIgnoreCase("application/pdf") ||
                 mimtype.equalsIgnoreCase("text/plain") ||
                 mimtype.equalsIgnoreCase("application/vnd.ms-excel") ||
-                mimtype.equalsIgnoreCase("application/mspowerpoint")) {
+                mimtype.equalsIgnoreCase("application/mspowerpoint") || mimtype.equalsIgnoreCase("text/html")) {
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             webLayout.setVisibility(View.VISIBLE);

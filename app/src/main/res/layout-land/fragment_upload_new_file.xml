@@ -161,25 +161,6 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12dp" />
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_14dp"
-                        android:text="Warning:"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/_14dp"
-                        android:textStyle="bold" />
-
-                    <com.apitechnosoft.ipad.component.ASTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5dp"
-                        android:text="Only certain file type will show in preview .jpeg,.gif,.png, etc."
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12dp" />
                 </LinearLayout>
 
                 <Button
