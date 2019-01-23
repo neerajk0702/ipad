@@ -60,7 +60,7 @@ public class ShowAllEventActivity extends AppCompatActivity {
     private Toolbar toolbar;
     String UserId;
     RecyclerView eventrecycler_view;
-
+    private TextView todaydate;
     public GregorianCalendar cal_month, cal_month_copy;
     private CalendarAdapter cal_adapter;
     private TextView tv_month;
@@ -108,7 +108,7 @@ public class ShowAllEventActivity extends AppCompatActivity {
         cal_month_copy = (GregorianCalendar) cal_month.clone();
         cal_adapter = new CalendarAdapter(this, cal_month, CalendarCollection.date_collection_arr);
 
-
+        todaydate = findViewById(R.id.todaydate);
         tv_month = findViewById(R.id.tv_month);
         tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
 
@@ -286,8 +286,11 @@ public class ShowAllEventActivity extends AppCompatActivity {
                     if (dotDialog.isShowing()) {
                         dotDialog.dismiss();
                     }
-                    EventDetailAdapter adapter = new EventDetailAdapter(ShowAllEventActivity.this, eventdataList);
-                    eventrecycler_view.setAdapter(adapter);
+                    if (eventdataList != null && eventdataList.size() > 0) {
+                        EventDetailAdapter adapter = new EventDetailAdapter(ShowAllEventActivity.this, eventdataList);
+                        eventrecycler_view.setAdapter(adapter);
+                        todaydate.setText("Today Events (" + eventdataList.get(0).getFromdate() + " )");
+                    }
                 }
             });
         } else {

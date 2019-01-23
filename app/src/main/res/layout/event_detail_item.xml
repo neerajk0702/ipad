@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:elevation="5dp"
+    android:elevation="3dp"
     app:cardCornerRadius="2dp"
-    app:cardElevation="5dp"
+    app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -14,21 +14,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/eventname"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14dp" />
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5dp">
 
-        <TextView
-            android:id="@+id/eventtype"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_5dp"
-            android:paddingTop="@dimen/_5dp"
-            android:textColor="@color/secondry_txt_color"
-            android:textSize="@dimen/_12dp" />
+            <TextView
+                android:id="@+id/eventtype"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="Birthday:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12dp" />
+
+            <TextView
+                android:id="@+id/eventname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="dcdsc"
+                android:textColor="@color/secondry_txt_color"
+                android:textSize="@dimen/_12dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/fromdate"
@@ -42,12 +51,12 @@
             android:id="@+id/todate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_5dp"
             android:paddingTop="@dimen/_5dp"
+            android:paddingBottom="@dimen/_5dp"
             android:text=""
-            android:visibility="gone"
             android:textColor="@color/secondry_txt_color"
-            android:textSize="@dimen/_12dp" />
+            android:textSize="@dimen/_12dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/eventdes"
@@ -55,5 +64,10 @@
             android:layout_height="wrap_content"
             android:textColor="@color/secondry_txt_color"
             android:textSize="@dimen/_12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/secondry_txt_color" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

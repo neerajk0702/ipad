@@ -54,7 +54,7 @@ public abstract class FNFilePicker {
     public static final String EXTRA_CROP_MODE = "cropMode";
     public static final String EXTRA_PICKER_MENU = "picker_menu";
     public static final int MAX_LIMIT = 10;
-    public static final long SIZE_LIMIT = 100 * 1024 * 1024; // 100mb
+    public static final long SIZE_LIMIT = 100000 * 1024 * 1024;
     public static final int MODE_SINGLE = 1;
    public static final int MODE_MULTIPLE = 2;
     public static String SCHEME_VIDEO = "video";
