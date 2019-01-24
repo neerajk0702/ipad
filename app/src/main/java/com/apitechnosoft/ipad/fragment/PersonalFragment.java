@@ -278,7 +278,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.videolayout:
                 type = 2;
                 setAdapter();
-              //  seeallfile.setVisibility(View.VISIBLE);//show only photos
+                //  seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -292,7 +292,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.audiolayout:
                 type = 3;
                 setAdapter();
-               // seeallfile.setVisibility(View.VISIBLE);//show only photos
+                // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -306,7 +306,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.doclayout:
                 type = 4;
                 setAdapter();
-               // seeallfile.setVisibility(View.VISIBLE);//show only photos
+                // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -663,7 +663,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         if (newmediaList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-          //  seeallfile.setVisibility(View.GONE);
+            //  seeallfile.setVisibility(View.GONE);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
@@ -744,7 +744,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             folderTitel.setText("No Data Found!");
         }
         //  filterSelectFolder(FolderID);
-        type=1;
+        type = 1;
         setAdapter();//show folder value
     }
 

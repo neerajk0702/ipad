@@ -253,7 +253,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recent_row, parent, false);
+                .inflate(R.layout.recent_row2, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -325,7 +325,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                     return false;
                 }
             });*/
-        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav")) || mediaList.get(position).getExtension().contains("m4a")|| mediaList.get(position).getExtension().contains("aiff")|| mediaList.get(position).getExtension().contains("m4b")|| mediaList.get(position).getExtension().contains("m4p")|| mediaList.get(position).getExtension().contains("wma")|| mediaList.get(position).getExtension().contains("webm")) {
+        } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav")) || mediaList.get(position).getExtension().contains("m4a") || mediaList.get(position).getExtension().contains("aiff") || mediaList.get(position).getExtension().contains("m4b") || mediaList.get(position).getExtension().contains("m4p") || mediaList.get(position).getExtension().contains("wma") || mediaList.get(position).getExtension().contains("webm")) {
             String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
             holder.videoUrl = filePath;
             setVisibilityView(holder, true);
@@ -347,7 +347,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
         } else if (mediaList.get(position).getExtension().contains("rar") || mediaList.get(position).getExtension().contains("RAR")) {
             setVisibilityView(holder, false);
             holder.recentImg.setImageResource(R.drawable.araimg);
-        }else if (mediaList.get(position).getExtension().contains("html") || mediaList.get(position).getExtension().contains("html")) {
+        } else if (mediaList.get(position).getExtension().contains("html") || mediaList.get(position).getExtension().contains("html")) {
             setVisibilityView(holder, false);
             holder.recentImg.setImageResource(R.drawable.htmlimg);
         }
@@ -375,7 +375,7 @@ public class RecentFileAdapter extends RecyclerView.Adapter<RecentFileAdapter.My
                     holder.videoViewnew.stopPlayback();
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowVideo(filePath, position);
-                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav"))|| mediaList.get(position).getExtension().contains("m4a")|| mediaList.get(position).getExtension().contains("aiff")|| mediaList.get(position).getExtension().contains("m4b")|| mediaList.get(position).getExtension().contains("m4p")|| mediaList.get(position).getExtension().contains("wma")|| mediaList.get(position).getExtension().contains("webm")) {
+                } else if (mediaList.get(position).getExtension() != null && (mediaList.get(position).getExtension().contains("mp3") || mediaList.get(position).getExtension().contains("wav")) || mediaList.get(position).getExtension().contains("m4a") || mediaList.get(position).getExtension().contains("aiff") || mediaList.get(position).getExtension().contains("m4b") || mediaList.get(position).getExtension().contains("m4p") || mediaList.get(position).getExtension().contains("wma") || mediaList.get(position).getExtension().contains("webm")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     alertForShowAudio(filePath, position);
                 }

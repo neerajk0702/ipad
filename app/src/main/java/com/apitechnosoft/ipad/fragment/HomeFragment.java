@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,7 +50,7 @@ import static com.apitechnosoft.ipad.ApplicationHelper.application;
 /**
  * Created by Narayan .
  */
-public class HomeFragment extends MainFragment implements View.OnClickListener {
+public class HomeFragment extends MainFragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     Typeface materialdesignicons_font;
     RecyclerView recent_recycler_view;
     LinearLayout uploadLayout;
@@ -58,6 +59,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     ViewPager viewPager;
     HomePagerAdapter adapter;
     boolean isTab;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected int fragmentLayout() {
@@ -87,9 +89,30 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         tabLayout.addTab(tabLayout.newTab().setText("Shared"));
         tabLayout.addTab(tabLayout.newTab().setText("Received"));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        getRecentFile();
 
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
 
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeRefreshLayout.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+
+                // Fetching data from server
+                getRecentFile();
+            }
+        });
     }
 
     @Override
@@ -169,8 +192,6 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         if (prefs != null) {
             String UserId = prefs.getString("UserId", "");
             if (ASTUIUtil.isOnline(getContext())) {
-                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
-                // dotDialog.show();
                 ServiceCaller serviceCaller = new ServiceCaller(getContext());
                 final String url = Contants.BASE_URL + Contants.RecentFileApi + "username=" + UserId + "&" + "order=" + "desc" + "&" + "search_keyword=" + "&" + "searchdate=";
                 serviceCaller.CallCommanServiceMethod(url, "RecentFile Api", new IAsyncWorkCompletedCallback() {
@@ -183,11 +204,10 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
                             } else {
                                 Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
                             }
+                            mSwipeRefreshLayout.setRefreshing(false);
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
-                        }
-                        if (dotDialog.isShowing()) {
-                            dotDialog.dismiss();
+                            mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 });
@@ -258,5 +278,10 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        getRecentFile();
+    }
 
 }

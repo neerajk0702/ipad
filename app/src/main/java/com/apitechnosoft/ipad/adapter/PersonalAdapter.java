@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -176,7 +177,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     videoViewnew.setIsPrepared(true);
                     //  UIUtils.resizeView(videoViewnew, UIUtils.getScreenWidth(ApplicationHelper.application().getActivity()), UIUtils.getScreenWidth(ApplicationHelper.application().getActivity()) * height / width);
                     if (currentVideoViewHolder == MyViewHolder.this) {
-                        videoImageView.setVisibility(View.GONE);
+                        if (type == 3) {//for audio image show
+                            videoImageView.setVisibility(View.VISIBLE);
+                        } else {
+                            videoImageView.setVisibility(View.GONE);
+                        }
                         imageLoaderProgressBar.setVisibility(View.INVISIBLE);
                         videoViewnew.setVisibility(View.VISIBLE);
                         videoViewnew.seekTo(0);
@@ -223,7 +228,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 public void onClick(View v) {
                     if (currentVideoViewHolder != null && currentVideoViewHolder != MyViewHolder.this) {
                         currentVideoViewHolder.videoViewnew.pause();
-                        currentVideoViewHolder.videoImageView.setVisibility(View.INVISIBLE);
+                        if (type == 3) {//for audio image show
+                            currentVideoViewHolder.videoImageView.setVisibility(View.VISIBLE);
+                        } else {
+                            currentVideoViewHolder.videoImageView.setVisibility(View.INVISIBLE);
+                        }
                         currentVideoViewHolder.videoPlayImageButton.setVisibility(View.VISIBLE);
                         currentVideoViewHolder.imageLoaderProgressBar.setVisibility(View.INVISIBLE);
                         if (currentVideoViewHolder.videoViewnew.getVisibility() == View.VISIBLE)
@@ -237,7 +246,11 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                     videoPlayImageButton.setVisibility(View.INVISIBLE);
                     imageLoaderProgressBar.setVisibility(View.VISIBLE);
                     videoViewnew.setVisibility(View.VISIBLE);
-                    videoImageView.setVisibility(View.INVISIBLE);
+                    if (type == 3) {//for audio image show
+                        videoImageView.setVisibility(View.VISIBLE);
+                    } else {
+                        videoImageView.setVisibility(View.INVISIBLE);
+                    }
                     if (videoViewnew.isPrepared()) {
                         imageLoaderProgressBar.setVisibility(View.INVISIBLE);
                     } else {
@@ -359,6 +372,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
                     holder.videoUrl = filePath;
                     setVisibilityView(holder, true);
+
                     //  holder.recentImg.setImageResource(R.drawable.video);
                   /*  if (mediaList.get(position).getThamblingImage() != null && !mediaList.get(position).getThamblingImage().equals("")) {
                         String newpath = mediaList.get(position).getThamblingImage().replace("C:\\xampp\\tomcat\\webapps\\ROOT\\", Contants.Media_File_BASE_URL);
@@ -404,6 +418,9 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("audio")) {
                     String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                     holder.videoUrl = filePath;
+                    holder.videoImageView.setImageResource(R.drawable.audio_icon);
+                    holder.videoImageView.setVisibility(View.VISIBLE);
+                    holder.videoPlayImageButton.setColorFilter(ContextCompat.getColor(mContext, R.color.black), android.graphics.PorterDuff.Mode.MULTIPLY);
                     // holder.recentImg.setImageResource(R.drawable.audio_icon);
                     //  Picasso.with(ApplicationHelper.application().getContext()).load(mediaList.get(position).getFullFilePath()).into(holder.recentImg);
 
@@ -684,7 +701,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         } else {
             loader_progress_bar.setVisibility(View.VISIBLE);
         }
-       // video_feed_item_video.setIsPrepared(true);
+        // video_feed_item_video.setIsPrepared(true);
         video_feed_item_video.requestFocus();
         video_feed_item_video.seekTo(0);
         video_feed_item_video.start();

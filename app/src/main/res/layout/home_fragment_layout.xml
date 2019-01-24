@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_130dp"
             android:layout_marginLeft="@dimen/_5dp"
             android:layout_marginRight="@dimen/_5dp"
             android:background="@color/white"
@@ -35,8 +35,8 @@
                     android:background="@drawable/border_layout_orange"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingBottom="@dimen/_5dp"
-                    android:paddingTop="@dimen/_5dp">
+                    android:paddingTop="@dimen/_5dp"
+                    android:paddingBottom="@dimen/_5dp">
 
                     <com.apitechnosoft.ipad.component.ASTTextView
                         android:id="@+id/uploadIcon"
@@ -65,8 +65,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
-                android:layout_marginBottom="@dimen/_5dp"
                 android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:background="@color/orange" />
 
             <LinearLayout
@@ -87,14 +87,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recent_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white" />
+                    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/swipe_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recent_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white" />
 
+                    </android.support.v4.widget.SwipeRefreshLayout>
 
                 </LinearLayout>
 
@@ -135,9 +139,9 @@
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:background="@color/white"
                 android:layout_below="@+id/tab_layout"
-                android:layout_marginBottom="@dimen/_5dp" />
+                android:layout_marginBottom="@dimen/_5dp"
+                android:background="@color/white" />
 
 
         </LinearLayout>
