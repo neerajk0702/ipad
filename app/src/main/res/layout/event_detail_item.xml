@@ -22,30 +22,46 @@
 
             <TextView
                 android:id="@+id/eventtype"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:text="Birthday:"
+                android:text="Event Name: "
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12dp" />
+                android:textSize="@dimen/_12dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/eventname"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="dcdsc"
+                android:layout_weight="1"
+                android:text=""
                 android:textColor="@color/secondry_txt_color"
                 android:textSize="@dimen/_12dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/fromdate"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/secondry_txt_color"
-            android:textSize="@dimen/_12dp" />
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Time: "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fromdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/secondry_txt_color"
+                android:textSize="@dimen/_12dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/todate"
@@ -58,12 +74,28 @@
             android:textSize="@dimen/_12dp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/eventdes"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/secondry_txt_color"
-            android:textSize="@dimen/_12dp" />
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Details: "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/eventdes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/secondry_txt_color"
+                android:textSize="@dimen/_12dp" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

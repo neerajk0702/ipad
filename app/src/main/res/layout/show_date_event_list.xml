@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView android:id="@+id/today"
+    <TextView
+        android:id="@+id/today"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -45,7 +46,7 @@
             <Button
                 android:id="@+id/Ok"
                 style="@style/DefaultButtonText"
-                android:layout_width="@dimen/_80dp"
+                android:layout_width="@dimen/_100dp"
                 android:layout_height="@dimen/_30dp"
                 android:background="@drawable/share_folder"
                 android:gravity="center"
