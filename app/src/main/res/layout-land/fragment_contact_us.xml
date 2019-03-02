@@ -35,7 +35,7 @@
                 android:layout_marginTop="@dimen/_20dp"
                 android:background="#00000000"
                 android:gravity="left|center"
-                android:hint="First Name *"
+                android:hint="@string/firstName"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -53,7 +53,7 @@
                 android:layout_marginTop="@dimen/_15dp"
                 android:background="#00000000"
                 android:gravity="left|center"
-                android:hint="Last Name"
+                android:hint="@string/lastName"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -72,7 +72,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Email-ID *"
+                android:hint="@string/enteremail"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColorHint="#919191"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/_15dp"
                 android:background="#00000000"
                 android:gravity="left|center"
-                android:hint="Subject *"
+                android:hint="@string/Subject"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -109,7 +109,7 @@
                 android:layout_marginTop="@dimen/_15dp"
                 android:background="#00000000"
                 android:gravity="top"
-                android:hint="Message *"
+                android:hint="@string/Message"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -127,7 +127,7 @@
                 android:layout_marginTop="@dimen/_30dp"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textSize="@dimen/_14dp" />
         </LinearLayout>
     </ScrollView>

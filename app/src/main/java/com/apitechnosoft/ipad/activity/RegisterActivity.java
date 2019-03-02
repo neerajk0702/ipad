@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout otpLayout;
     String PINString;
     boolean buttonFlag = false;
-    private TextView welcom, Privacy,ipad;
+    private TextView welcom, Privacy, ipad;
     private CheckBox accept;
 
     @Override
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         welcom.setOnClickListener(this);
         accept = findViewById(R.id.accept);
         ipad = findViewById(R.id.ipad);
-        ipad.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
+        ipad.setText(Html.fromHtml(getString(R.string.welcomeipadtm)));
 
         TextView iicon = findViewById(R.id.iicon);
         iicon.setTypeface(materialdesignicons_font);
@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     //get data from UI
     public void datatoView() {
-        btnLogIn.setText("Send Verification Code");
+        btnLogIn.setText(getString(R.string.sendvarificationcode));
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,10 +94,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             if (PINString.equals(userOtp)) {
                                 callSignup();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "Verification Code did not matched!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, getString(R.string.varificationnotmatch), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Please Enter Verification Code!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, getString(R.string.entervaricicationcode), Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {
@@ -130,15 +130,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.setUserId(RegisterActivity.this,mailstr,passwordstr,null,null);
-                                Toast.makeText(RegisterActivity.this, "Signup Successfully.", Toast.LENGTH_LONG).show();
+                                ASTUIUtil.setUserId(RegisterActivity.this, mailstr, passwordstr, null, null);
+                                Toast.makeText(RegisterActivity.this, getString(R.string.Signupsuccess), Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
                             } else {
-                                Toast.makeText(RegisterActivity.this, "Signup not Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, getString(R.string.Signupnotsuccess), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Signup not Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, getString(R.string.Signupnotsuccess), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -162,22 +162,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mailstr = edt_mail.getText().toString();
         passwordstr = edt_password.getText().toString();
         if (firstnamestr.length() == 0) {
-            showToast("Please enter first name");
+            showToast(getString(R.string.enterfirstName));
             return false;
         } else if (lastnamestr.length() == 0) {
-            showToast("Please enter last name");
+            showToast(getString(R.string.lastName));
             return false;
         } else if (mailstr.length() == 0) {
-            showToast("Please enter Email Id");
+            showToast(getString(R.string.enteremail));
             return false;
         } else if (!mailstr.matches(emailRegex)) {
-            showToast("Please enter valid Email ID");
+            showToast(getString(R.string.validEmail));
             return false;
         } else if (passwordstr.length() == 0) {
-            showToast("Please enter password");
+            showToast(getString(R.string.enterpass));
             return false;
         } else if (!accept.isChecked()) {
-            showToast("Please select Term's of Service.");
+            showToast(getString(R.string.selecttermsevices));
             return false;
         }
         return true;
@@ -192,12 +192,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
 
             case R.id.Privacy:
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("headerTxt", "Terms of Service");
                 ApplicationHelper.application().getActivity().updateFragment(new PrivacyActivity(), bundle);
                 break;
             case R.id.welcom:
-                Bundle bundle1=new Bundle();
+                Bundle bundle1 = new Bundle();
                 bundle1.putString("headerTxt", "Terms of Service");
                 ApplicationHelper.application().getActivity().updateFragment(new TermsConditionActivity(), bundle1);
                 break;
@@ -212,7 +212,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(RegisterActivity.this, "Please wait", "Sending Verification Code", true, false);
+            progressDialog = ProgressDialog.show(RegisterActivity.this, getString(R.string.pleasewait), getString(R.string.sendvarificationcode), true, false);
         }
 
         @Override
@@ -221,13 +221,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             try {
                 if (aVoid) {
                     buttonFlag = true;
-                    btnLogIn.setText("Submit");
+                    btnLogIn.setText(getString(R.string.Submit));
                     otpLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(RegisterActivity.this, "Verification Code was sent to your Mail successfully.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, getString(R.string.varificationcodeemail), Toast.LENGTH_LONG).show();
                 } else {
-                    btnLogIn.setText("Send Verification Code");
+                    btnLogIn.setText(getString(R.string.sendvarificationcode));
                     otpLayout.setVisibility(View.GONE);
-                    Toast.makeText(RegisterActivity.this, "Verification Code was not sent to your Mail successfully.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, getString(R.string.varificationcodenotemail), Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
                 Log.e("MailApp", "Could not send email", e);

@@ -533,7 +533,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
         WebView webView = view.findViewById(R.id.web);
-        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText(mContext.getString(R.string.UploadedOn) + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -614,7 +614,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         Button sharebt = view.findViewById(R.id.sharebt);
         ImageView img = view.findViewById(R.id.img);
         final ProgressBar loadingDialog = view.findViewById(R.id.loadingDialog);
-        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText(mContext.getString(R.string.UploadedOn) + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         loadingDialog.setVisibility(View.VISIBLE);
         Picasso.with(ApplicationHelper.application().getContext()).load(filePath).into(img, new Callback() {
@@ -686,7 +686,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         TextView deleteicon = view.findViewById(R.id.deleteicon);
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
-        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText(mContext.getString(R.string.UploadedOn)+ mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));
@@ -827,7 +827,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
         TextView deleteicon = view.findViewById(R.id.deleteicon);
         TextView title = view.findViewById(R.id.title);
         Button sharebt = view.findViewById(R.id.sharebt);
-        updateDate.setText("Uploaded On:" + mediaList.get(position).getEnteredDate().toString());
+        updateDate.setText(mContext.getString(R.string.UploadedOn) + mediaList.get(position).getEnteredDate().toString());
         title.setText(mediaList.get(position).getFileName());
         downloadicon.setTypeface(materialdesignicons_font);
         downloadicon.setText(Html.fromHtml("&#xf162;"));

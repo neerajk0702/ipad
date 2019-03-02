@@ -24,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Welcome to ipadtoday.com (the iPAD Site)."
+                    android:text="@string/wipad"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="I. TRADEMARKS"
+                    android:text="@string/itemcondi1"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="II. DISCLAIMERS AND LIMITATION OF LIABILITY"
+                    android:text="@string/itemcondi2"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p4"
+                    android:text="@string/p3"
                     android:layout_marginTop="@dimen/_10dp"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
@@ -79,14 +79,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="III. CONTENT"
+                    android:text="@string/itemcondi3"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="A. PROPRIETARY RIGHTS"
+                    android:text="@string/itemcondi4"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -99,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="B. DISTRIBUTION/UPLOADING OF THIRD-PARTY CONTENT"
+                    android:text="@string/itemcondi5"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="C. THIRD-PARTY CONTENT"
+                    android:text="@string/itemcondi6"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="D. EXPORT"
+                    android:text="@string/itemcondi7"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -138,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="IV. ONLINE CONDUCT"
+                    android:text="@string/itemcondi8"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -166,13 +166,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="V. PRIVACY POLICY"
+                    android:text="@string/itemcondi9"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="In accordance with the terms of the IPAD Site's Privacy Policy, RXD respects the privacy of its Users."
+                    android:text="@string/termplocy"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="VI. TERMINATION OF USAGE"
+                    android:text="@string/itemcondi10"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -193,7 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="VII. USAGE BY CHILDREN UNDER 13"
+                    android:text="@string/itemcondi11"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -206,7 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="VIII. APPLICABLE LAW"
+                    android:text="@string/itemcondi12"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -219,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="IX. SEVERABILITY"
+                    android:text="@string/itemcondi13"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView
@@ -232,7 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="X. ACKNOWLEDGMENT"
+                    android:text="@string/itemcondi14"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
                 <TextView

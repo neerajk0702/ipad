@@ -171,7 +171,7 @@ public class BirthdayFragment extends MainFragment {
                                 Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Event not saved Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.eventnotsave), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -200,16 +200,16 @@ public class BirthdayFragment extends MainFragment {
             reminderStr = "off";
         }
         if (nameStr.length() == 0) {
-            showToast("Please enter event name");
+            showToast(getString(R.string.enterevent));
             return false;
         } else if (desStr.length() == 0) {
-            showToast("Please enter description");
+            showToast(getString(R.string.enterdesc));
             return false;
         } else if (dateStr.length() == 0) {
-            showToast("Please Selete date");
+            showToast(getString(R.string.selectdatee));
             return false;
         } else if (timeStr.length() == 0) {
-            showToast("Please Selete time");
+            showToast(getString(R.string.selecttime));
             return false;
         }
         return true;

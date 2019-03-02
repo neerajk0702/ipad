@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         password_icon.setTypeface(materialdesignicons_font);
         password_icon.setText(Html.fromHtml("&#xf33e;"));
         welcom = findViewById(R.id.welcom);
-        welcom.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
+        welcom.setText(Html.fromHtml(getString(R.string.welcomeipadtm)));
         forgotPasssword = findViewById(R.id.forgotPasssword);
     }
 
@@ -189,14 +189,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (data != null) {
                             if (data.isStatus()) {
                                 ASTUIUtil.setUserId(LoginActivity.this, emailStr, passwordStr, null, null);
-                                Toast.makeText(LoginActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, getString(R.string.LoginSuccessfully), Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
                             } else {
-                                Toast.makeText(LoginActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, getString(R.string.LoginnotSuccessfully), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(LoginActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, getString(R.string.LoginnotSuccessfully), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -219,13 +219,13 @@ public class LoginActivity extends AppCompatActivity {
         emailStr = edt_phone.getText().toString();
 
         if (emailStr.length() == 0) {
-            showToast("Please enter Email Id");
+            showToast(getString(R.string.enteremail));
             return false;
         } else if (!emailStr.matches(emailRegex)) {
-            showToast("Please enter valid Email ID");
+            showToast(getString(R.string.validEmail));
             return false;
         } else if (passwordStr.length() == 0) {
-            showToast("Please enter password");
+            showToast(getString(R.string.enterpass));
             return false;
         }
         return true;
@@ -412,10 +412,10 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intentLoggedIn = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intentLoggedIn);
                                         } else {
-                                            Toast.makeText(LoginActivity.this, "Something went wrong..!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(LoginActivity.this, getString(R.string.somethingwrong), Toast.LENGTH_LONG).show();
                                         }
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Something went wrong..!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this,  getString(R.string.somethingwrong), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
                                     showToast(Contants.Error);
@@ -483,7 +483,7 @@ public class LoginActivity extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                Toast.makeText(LoginActivity.this, "Password reset link send into your registered Mailid.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, getString(R.string.linkpasssend), Toast.LENGTH_LONG).show();
 
                                 finish();
                             } else {

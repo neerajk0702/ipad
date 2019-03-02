@@ -109,7 +109,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         sharefile = findViewById(R.id.sharefile);
         emptyView = findViewById(R.id.empty_view);
         searchedit = findViewById(R.id.searchedit);
-        searchedit.setHint("Search with Folder/File-Name");
+        searchedit.setHint(getString(R.string.searchwithfile));
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         // TextView filter = findViewById(R.id.filter);
@@ -327,7 +327,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                 if (folderList != null && folderList.size() > 0) {
                     getMoveFilevalue();
                 } else {
-                    ASTUIUtil.showToast("Folder not found!");
+                    ASTUIUtil.showToast(getString(R.string.nodata));
                 }
                 break;
             case R.id.seeallfile:
@@ -360,7 +360,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                     filevalueforfolder = filevalueforfolder.substring(0, filevalueforfolder.length() - SEPARATOR.length());
                     moveFile(filevalueforfolder);
                 } else {
-                    ASTUIUtil.showToast("Please Select file!");
+                    ASTUIUtil.showToast(getString(R.string.plsselctFile));
                 }
             }
         }
@@ -391,7 +391,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
             public void onClick(View view) {
 
                 if (edt_foldername.getText().toString().length() == 0) {
-                    ASTUIUtil.showToast("Please enter Folder Name!");
+                    ASTUIUtil.showToast(getString(R.string.foldername));
                 } else {
                     alertDialog.dismiss();
                     createFolder(edt_foldername.getText().toString());
@@ -425,13 +425,13 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                             ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                             if (data != null) {
                                 if (data.isStatus()) {
-                                    Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.foldercretesuccess), Toast.LENGTH_LONG).show();
                                     getAllFile();
                                 } else {
-                                    Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.foldernotcreate), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.foldernotcreate), Toast.LENGTH_LONG).show();
                             }
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
@@ -473,7 +473,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                                 showFolder(data);
                                 showFileData(data);
                             } else {
-                                Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.nodata), Toast.LENGTH_LONG).show();
                             }
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
@@ -689,7 +689,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                             mediaList = new ArrayList<>();
                             parseFolderFile(data, foldersno);
                         } else {
-                            Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.nodata), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);
@@ -741,7 +741,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
         if (folderName != null && !folderName.equals("")) {
             folderTitel.setText(folderName);
         } else {
-            folderTitel.setText("No Data Found!");
+            folderTitel.setText(getString(R.string.nodata));
         }
         //  filterSelectFolder(FolderID);
         type = 1;
@@ -814,7 +814,7 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                     int itemsno = folderdata.getSno();
                     MoveFileIntoFolder(filevalueforfolder, itemsno);
                 } else {
-                    ASTUIUtil.showToast("Please Select Folder!");
+                    ASTUIUtil.showToast(getString(R.string.selectfolder));
                 }
                 alert.dismiss();
             }
@@ -842,13 +842,13 @@ public class PersonalFragment extends MainFragment implements SwipeRefreshLayout
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                ASTUIUtil.showToast("File Moved Successfully");
+                                ASTUIUtil.showToast(getString(R.string.MoveFile));
                                 getAllFile();
                             } else {
-                                Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.filemovesuccesnot), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "File not Moved Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.filemovesuccesnot), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);

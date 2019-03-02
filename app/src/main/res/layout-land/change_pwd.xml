@@ -59,7 +59,7 @@
                     android:background="#00000000"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:hint="Enter Old Password"
+                    android:hint="@string/enteroldpass"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColorHint="#919191"
@@ -101,7 +101,7 @@
                     android:background="#00000000"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:hint="Enter New  Password"
+                    android:hint="@string/enternewpass"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColorHint="#919191"
@@ -142,7 +142,7 @@
                     android:background="#00000000"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:hint="Enter Confirm Password"
+                    android:hint="@string/enternewconfirmpass"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColorHint="#919191"
@@ -159,7 +159,7 @@
                 android:layout_marginTop="@dimen/_25dp"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Change Password" />
+                android:text="@string/changepass" />
         </LinearLayout>
     </ScrollView>
 

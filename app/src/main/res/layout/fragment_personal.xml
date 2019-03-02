@@ -39,7 +39,7 @@
                 android:background="@drawable/border_layout_orange"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
-                android:text="Photos"
+                android:text="@string/Photos"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_12dp" />
@@ -54,7 +54,7 @@
                 android:background="@drawable/border_layout_orange"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
-                android:text="Video"
+                android:text="@string/Video"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_12dp" />
@@ -69,7 +69,7 @@
                 android:background="@drawable/border_layout_orange"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
-                android:text="Music"
+                android:text="@string/Music"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_12dp" />
@@ -83,7 +83,7 @@
                 android:background="@drawable/border_layout_orange"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
-                android:text="Docs"
+                android:text="@string/Docs"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_12dp" />
@@ -139,7 +139,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:background="@drawable/bg_boder_round"
-                        android:hint="Search with Folder/File-Name"
+                        android:hint="@string/searchfilefolder"
                         android:padding="@dimen/_2dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"
@@ -271,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:visibility="visible"
-                        android:text="View All File"
+                        android:text="@string/viewallfile"
                         android:background="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"
@@ -326,7 +326,7 @@
                 android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/select_folder"
-                android:text="Move to Folder"
+                android:text="@string/movetofolder"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12dp" />
 
@@ -337,7 +337,7 @@
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/share_folder"
-                android:text="Share Multiple File's"
+                android:text="@string/sharemulti"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12dp" />
 

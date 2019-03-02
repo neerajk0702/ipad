@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="It all started when..."
+                android:text="@string/itallStart"
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
 
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="In 2007, the idea for ipad™ was born from a founder's need for connecting and synchronizing individuals, and groups, within a vastly growing field of information. An accessible platform to bring ideas to life through organized communication was designed to foster engagement and cooperation toward outcomes not only within immediate circles but world community as well."
+                android:text="@string/aboutus1"
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="The mission of ipad™ is to be the world's most efficient, user friendly cloud storage service to support the organization and growth for you, your family, your friends and your business."
+                android:text="@string/aboutus2"
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="Connect with ipad Today™"
+                android:text="@string/Connect"
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
 

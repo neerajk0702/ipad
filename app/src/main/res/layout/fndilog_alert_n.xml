@@ -43,7 +43,7 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Really Exit"
+            android:text="@string/reallyexit"
             android:textColor="@color/black"
             android:textSize="@dimen/_18dp"
             android:textStyle="normal" />

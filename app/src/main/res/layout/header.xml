@@ -54,7 +54,7 @@
             android:layout_weight="0.4"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Organizer"
+            android:text="@string/Organizer"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_14dp"
             android:textStyle="bold" />

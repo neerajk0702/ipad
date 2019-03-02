@@ -85,9 +85,9 @@ public class HomeFragment extends MainFragment implements View.OnClickListener, 
         recent_recycler_view = findViewById(R.id.recent_recycler_view);
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Personal"));
-        tabLayout.addTab(tabLayout.newTab().setText("Shared"));
-        tabLayout.addTab(tabLayout.newTab().setText("Received"));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.Personal)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.Shared)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.Received)));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // SwipeRefreshLayout
@@ -176,7 +176,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener, 
 
     protected void openUploadScreen() {
         Bundle bundle = new Bundle();
-        bundle.putString("headerTxt", "Home");
+        bundle.putString("headerTxt", getString(R.string.home));
         bundle.putInt("MENU_ID", 0);
         getHostActivity().updateFragment(new UploadNewFileFragment(), bundle);
     }
@@ -202,7 +202,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener, 
                             if (data != null) {
                                 showFileData(data);
                             } else {
-                                Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.nodata), Toast.LENGTH_LONG).show();
                             }
                             mSwipeRefreshLayout.setRefreshing(false);
                         } else {

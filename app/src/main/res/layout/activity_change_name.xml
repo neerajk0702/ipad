@@ -47,7 +47,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:text="Update Profile"
+                        android:text="@string/UpdateProfile"
                         android:textColor="#fff"
                         android:textSize="@dimen/_16dp" />
 
@@ -92,7 +92,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_5dp"
-                        android:text="Change User Information"
+                        android:text="@string/changeinfo"
                         android:textAlignment="center"
                         android:textStyle="bold" />
 
@@ -109,7 +109,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.35"
-                            android:text="First Name"
+                            android:text="@string/firstName"
                             android:textSize="@dimen/_12dp"
                             android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.65"
                             android:background="@drawable/bg_boder_round"
-                            android:hint="First Name"
+                            android:hint="@string/firstName"
                             android:padding="@dimen/_10dp"
                             android:textSize="@dimen/_12dp" />
                     </LinearLayout>
@@ -142,7 +142,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.35"
-                            android:text="Last Name"
+                            android:text="@string/LastName"
                             android:textSize="@dimen/_12dp"
                             android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                             android:layout_margin="@dimen/_5dp"
                             android:layout_weight="0.65"
                             android:background="@drawable/bg_boder_round"
-                            android:hint="Last Name"
+                            android:hint="@string/LastName"
                             android:padding="@dimen/_10dp"
                             android:textSize="@dimen/_12dp" />
                     </LinearLayout>

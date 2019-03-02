@@ -387,13 +387,13 @@ public class ShareSingleFileActivity extends AppCompatActivity implements View.O
                                         ipadDBHelper.upsertShareEmailData(emaildata);
                                     }
                                 }
-                                showToast("File shared Successfully");
+                                showToast(getString(R.string.fileSharedsuccess));
                                 finish();
                             } else {
-                                Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ShareSingleFileActivity.this, getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ShareSingleFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShareSingleFileActivity.this, getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);

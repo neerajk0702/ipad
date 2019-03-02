@@ -1,17 +1,23 @@
 package com.apitechnosoft.ipad.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.apitechnosoft.ipad.R;
@@ -68,6 +74,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Locale;
 
 import retrofit2.Call;
 
@@ -89,6 +96,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
     private static final String AUTH_TYPE = "rerequest";
     private TwitterAuthClient client;
     TwitterLoginButton twitterLoginButton;
+    Spinner languageSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +146,12 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         // Customizing G+ button
         btn_gsign_in.setSize(SignInButton.SIZE_STANDARD);
 
+        languageSpinner = findViewById(R.id.languageSpinner);
+
 
     }
+
+    boolean isOPnSplash;
 
     //get data from UI
     public void datatoView() {
@@ -183,8 +195,55 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 System.out.println("onError");
             }
         });
+        SharedPreferences prefs = getSharedPreferences("LanguagePreferences", Context.MODE_PRIVATE);
+        int lanPos = prefs.getInt("Position", 0);
 
 
+        final String itemCondition_array[] = {"English", "Chinesh", "French", "German", "Italian", "Japines", "Korean", "Spansh"};
+        final String languagecodearray[] = {"en", "zh", "fr", "de", "it", "ja", "ko", "es"};
+        ArrayAdapter<String> languageAdapater = new ArrayAdapter<String>(this, R.layout.spinner_row, itemCondition_array);
+        languageSpinner.setAdapter(languageAdapater);
+
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setLanguageIntoSharedPreferences(position, languagecodearray[position], itemCondition_array[position]);
+                if (lanPos != position) {
+                    isOPnSplash = true;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        languageSpinner.setSelection(lanPos);
+    }
+
+    //set language into locale
+    public void setLangRecreate(String LanguageCode) {
+        Configuration config = new Configuration();
+        Locale locale = new Locale(LanguageCode);
+        Locale.setDefault(locale);
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        if (isOPnSplash) {
+            Intent intent = new Intent(this, SplashScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
+
+    //set languagae
+    public void setLanguageIntoSharedPreferences(int languagepos, String LanguageCode, String languagename) {
+        SharedPreferences prefs = getSharedPreferences("LanguagePreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("languagename", languagename);
+        editor.putString("LanguageCode", LanguageCode);
+        editor.putInt("Position", languagepos);
+        editor.commit();
+        setLangRecreate(LanguageCode);
     }
 
 
@@ -420,7 +479,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         if (data != null) {
                             if (data.isStatus()) {
                                 ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null, fname, null);
-                                Toast.makeText(LoginHomeActivity.this, "Registeration Successfully.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginHomeActivity.this, getString(R.string.RegisterationSuccessfully), Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
 
@@ -463,16 +522,16 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                         if (data != null) {
                             if (data.isStatus()) {
                                 ASTUIUtil.setUserId(LoginHomeActivity.this, emailStr, null, fname, null);
-                                Toast.makeText(LoginHomeActivity.this, "Login Successfully.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginHomeActivity.this, getString(R.string.LoginSuccessfully), Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(LoginHomeActivity.this, MainActivity.class);
                                 startActivity(intentLoggedIn);
 
 
                             } else {
-                                Toast.makeText(LoginHomeActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginHomeActivity.this, getString(R.string.LoginnotSuccessfully), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(LoginHomeActivity.this, "Login not Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginHomeActivity.this, getString(R.string.LoginnotSuccessfully), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);
@@ -524,13 +583,13 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void failure(TwitterException exception) {
                     // Do something on failure
-                    Toast.makeText(LoginHomeActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginHomeActivity.this, getString(R.string.faildauth), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
 
             //if user is already authenticated direct call fetch twitter email api
-            Toast.makeText(this, "User already authenticated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.useralredyauth), Toast.LENGTH_SHORT).show();
             fetchTwitterEmail(getTwitterSession());
         }
     }
@@ -555,7 +614,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void failure(TwitterException e) {
                     // Do something on failure
-                    Toast.makeText(LoginHomeActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginHomeActivity.this, getString(R.string.faildauth), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -586,7 +645,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void failure(TwitterException exception) {
-                Toast.makeText(LoginHomeActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginHomeActivity.this, getString(R.string.faildauth), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -634,12 +693,12 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
 
                 @Override
                 public void failure(TwitterException exception) {
-                    Toast.makeText(LoginHomeActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginHomeActivity.this, getString(R.string.faildauth), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             //if user is not authenticated first ask user to do authentication
-            Toast.makeText(this, "First to Twitter auth to Verify Credentials.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.firsttwiter), Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -155,15 +155,15 @@ public class ProfileFragment extends MainFragment {
                                 editor.commit();
                                 loginUserName.setText(data.getUser().getfName() + "\t" + data.getUser().getlName());
                                 emailusername.setText(emailStr);
-                                dataSize.setText(data.getUsedsize() + "\tMB used out of" + data.getRemanningsiz() + "\tGB");
+                                dataSize.setText(data.getUsedsize() + "\t" + getString(R.string.mbuseed) + data.getRemanningsiz() + "\tGB");
                                 if (data.getUser().getType().equals("0")) {
-                                    usertype.setText("Bronze User");
+                                    usertype.setText(getString(R.string.BRONZEUSER));
                                     usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.browne));
                                 } else if (data.getUser().getType().equals("1")) {
-                                    usertype.setText("Silver User");
+                                    usertype.setText(getString(R.string.SILVERUSER));
                                     usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.silver3));
                                 } else if (data.getUser().getType().equals("2")) {
-                                    usertype.setText("Gold  User");
+                                    usertype.setText(getString(R.string.GOLDUSER));
                                     usertype.setBackgroundColor(ASTUIUtil.getColor(R.color.gold));
                                 }
 
@@ -249,13 +249,13 @@ public class ProfileFragment extends MainFragment {
                         ContentData data = new Gson().fromJson(result, ContentData.class);
                         if (data != null) {
                             if (data.isStatus() == true) {
-                                ASTUIUtil.showToast("File Upload Successfully");
+                                ASTUIUtil.showToast(getString(R.string.fileuploadsuccesss));
                                 reloadBackScreen();
                             } else {
-                                ASTUIUtil.showToast("File Not Uploaded!");
+                                ASTUIUtil.showToast(getString(R.string.filenotulod));
                             }
                         } else {
-                            ASTUIUtil.showToast("File Not Uploaded!");
+                            ASTUIUtil.showToast(getString(R.string.filenotulod));
                         }
                         if (progressBar.isShowing()) {
                             progressBar.dismiss();

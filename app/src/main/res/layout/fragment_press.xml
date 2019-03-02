@@ -23,7 +23,7 @@
                 android:layout_marginBottom="@dimen/_10dp"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
-                android:text="ARCHIVE"
+                android:text="@string/ARCHIVE"
                 android:textAlignment="center"
                 android:textSize="@dimen/_14dp" />
 

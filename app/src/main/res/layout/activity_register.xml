@@ -41,7 +41,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter First Name"
+                android:hint="@string/enterfirstName"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -60,7 +60,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Last Name "
+                android:hint="@string/lastName"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="14dp" />
@@ -80,7 +80,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Email-ID"
+                android:hint="@string/enteremail"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColorHint="#919191"
@@ -100,7 +100,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Password"
+                android:hint="@string/enterpass"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColorHint="#919191"
@@ -128,7 +128,7 @@
                     android:background="#00000000"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:hint="Enter Verification Code"
+                    android:hint="@string/entervarificationcode"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColorHint="#919191"
@@ -187,7 +187,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Term's of Service"
+                        android:text="@string/termofsrvices"
                         android:textColor="@color/colorAccent"
                         android:textSize="14sp" />
 
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Privacy"
+                        android:text="@string/privacy"
                         android:textColor="@color/colorAccent"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -219,7 +219,7 @@
                         android:id="@+id/accept"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="By establishing your IPAD account, you agree to our terms of service and consent to the processing and storage of your information on RXD's servers in the U.S. and elsewhere."
+                        android:text="@string/byestablish"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -235,7 +235,7 @@
                 android:layout_marginTop="@dimen/_20dp"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textSize="@dimen/_14dp" />
         </LinearLayout>
 

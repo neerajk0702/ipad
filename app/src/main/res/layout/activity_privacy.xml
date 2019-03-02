@@ -25,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="PRIVACY POLICY"
+                    android:text="@string/PRIVACYPOLICY"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="1. Types of Information Collected"
+                    android:text="@string/type1"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="2. Collection Methods and Use of Information"
+                    android:text="@string/type2"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -119,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="3. Release of Information"
+                    android:text="@string/type3"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -158,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="4. Updating and Correcting Information"
+                    android:text="@string/type4"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -197,7 +197,7 @@ Doylestown, Pennsylvania 18901"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="5. User Choices on Collection and Use of Information"
+                    android:text="@string/type5"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -220,7 +220,7 @@ Doylestown, Pennsylvania 18901"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="6. Security of Information"
+                    android:text="@string/type6"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -251,7 +251,7 @@ Doylestown, Pennsylvania 18901"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="7. Cookies"
+                    android:text="@string/type7"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -273,7 +273,7 @@ Doylestown, Pennsylvania 18901"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="8. Privacy Policies of Third Party Sites"
+                    android:text="type8"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -288,7 +288,7 @@ Doylestown, Pennsylvania 18901"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:text="9. Miscellaneous Privacy Issues"
+                    android:text="@string/type9"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -333,9 +333,10 @@ Attn: Privacy Compliance Officer"
                     android:text="@string/pp27"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30dp"/>
+                    android:layout_height="@dimen/_30dp" />
             </LinearLayout>
         </ScrollView>
 

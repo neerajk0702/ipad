@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/orange"
-                android:text="REGISTER"
+                android:text="@string/REGISTER"
                 android:textColor="@color/white" />
 
             <com.apitechnosoft.ipad.component.ASTButton
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
                 android:background="@color/folderbutton"
-                android:text="LOGIN"
+                android:text="@string/LOGIN"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/_2dp"
-                android:text="Storage + Digital Organizer"
+                android:text="@string/storagedigital"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14dp" />
 
@@ -87,7 +87,7 @@
                     android:layout_marginRight="@dimen/_5dp"
                     android:layout_weight="0.5"
                     android:background="@color/linkedin"
-                    android:text="Linkedin"
+                    android:text="@string/Linkedin"
                     android:textColor="@color/white" />
 
                 <Button android:id="@+id/instabt"
@@ -96,7 +96,7 @@
                     android:layout_marginLeft="@dimen/_5dp"
                     android:layout_weight="0.5"
                     android:background="@color/insta"
-                    android:text="Instagram"
+                    android:text="@string/Instagram"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -107,7 +107,7 @@
                 android:layout_marginTop="@dimen/_10dp"
                 android:gravity="center"
                 android:padding="@dimen/_2dp"
-                android:text="SYNC with ipadtoday.com"
+                android:text="@string/sync"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_14dp"
                 android:textStyle="bold" />
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/_2dp"
-                android:text="FREE 5 GB"
+                android:text="@string/FREE5GB"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/_22dp"
                 android:textStyle="bold" />
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/_10dp"
-                    android:text="JOIN FOR FREE NOW"
+                    android:text="@string/joinforfree"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14dp" />
             </LinearLayout>

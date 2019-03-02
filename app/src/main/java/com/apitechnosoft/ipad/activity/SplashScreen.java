@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.google.android.gms.security.ProviderInstaller;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 
 /**
@@ -43,7 +45,7 @@ public class SplashScreen extends AppCompatActivity implements ProviderInstaller
         setContentView(R.layout.splash_screen);
         ApplicationHelper.application().initIcons();
         ProviderInstaller.installIfNeededAsync(this, this);
-
+        setLangRecreate();
         pref = getApplicationContext().getSharedPreferences("SharedPref", MODE_PRIVATE);
         String userId = pref.getString("userId", "");
         new Handler().postDelayed(new Runnable() {
@@ -76,6 +78,16 @@ public class SplashScreen extends AppCompatActivity implements ProviderInstaller
         }, 1000);
 
         getHSAKey();
+    }
+
+    //set language into locale
+    public void setLangRecreate() {
+        SharedPreferences prefs = getSharedPreferences("LanguagePreferences", Context.MODE_PRIVATE);
+        Configuration config = new Configuration();
+        Locale locale = new Locale(prefs.getString("LanguageCode", "en"));
+        Locale.setDefault(locale);
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
     public void getHSAKey() {

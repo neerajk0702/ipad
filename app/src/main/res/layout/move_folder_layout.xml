@@ -58,7 +58,7 @@
                 android:layout_marginRight="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/select_folder"
-                android:text="Move File"
+                android:text="@string/MoveFile"
                 android:textColor="@color/white" />
 
             <com.apitechnosoft.ipad.component.ASTButton
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/share_folder"
-                android:text="Close"
+                android:text="@string/close"
                 android:textColor="@color/white" />
         </LinearLayout>
 

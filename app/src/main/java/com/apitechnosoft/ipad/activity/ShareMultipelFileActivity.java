@@ -212,7 +212,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
 
 
                         } else {
-                            ASTUIUtil.showToast("Please Select file!");
+                            ASTUIUtil.showToast(getString(R.string.plsselctFile));
                         }
 
                     }
@@ -229,10 +229,10 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
         commentStr = edt_comment.getText().toString();
 
         if (emailStr.length() == 0) {
-            showToast("Please enter Email Id");
+            showToast(getString(R.string.enteremail));
             return false;
         } else if (commentStr.length() == 0) {
-            showToast("Please enter Comment");
+            showToast(getString(R.string.entercomment));
             return false;
         }
         return true;
@@ -305,13 +305,13 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                                     }
                                 }
 
-                                showToast("File shared Successfully");
+                                showToast(getString(R.string.fileSharedsuccess));
                                 finish();
                             } else {
-                                Toast.makeText(ShareMultipelFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ShareMultipelFileActivity.this, getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ShareMultipelFileActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShareMultipelFileActivity.this, getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -343,7 +343,7 @@ public class ShareMultipelFileActivity extends AppCompatActivity implements View
                             Log.d(Contants.LOG_TAG, "Get All File**" + result);
                             showFileData(data);
                         } else {
-                            Toast.makeText(ShareMultipelFileActivity.this, "No Data found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShareMultipelFileActivity.this, getString(R.string.nodata), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);

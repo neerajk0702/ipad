@@ -7,187 +7,237 @@
     android:background="@color/white"
     tools:context=".activity.LoginHomeActivity">
 
-    <LinearLayout
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_10dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/_200dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/logo" />
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_200dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logo" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10dp"
+                    android:minHeight="@dimen/_30dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_2dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/selectlanguage"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_14dp" />
 
 
-        <com.apitechnosoft.ipad.component.ASTTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:gravity="center"
-            android:padding="@dimen/_2dp"
-            android:text="FREE 5 GB"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/_22dp"
-            android:textStyle="bold" />
+                    <Spinner
+                        android:id="@+id/languageSpinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:minHeight="@dimen/_32dp" />
 
-        <com.apitechnosoft.ipad.component.ASTTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_2dp"
-            android:text="Storage + Digital Organizer"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:background="@color/backgroundColor" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/joinLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_25dp"
-            android:layout_marginTop="@dimen/_15dp"
-            android:layout_marginRight="@dimen/_25dp"
-            android:background="@color/orange">
 
-            <com.apitechnosoft.ipad.component.ASTTextView
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_2dp"
+                    android:text="@string/FREE5GB"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/_22dp"
+                    android:textStyle="bold" />
+
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/_2dp"
+                    android:text="@string/storagedigital"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14dp" />
+
+                <LinearLayout
+                    android:id="@+id/joinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_25dp"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_25dp"
+                    android:background="@color/orange">
+
+                    <com.apitechnosoft.ipad.component.ASTTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/_10dp"
+                        android:text="@string/joinforfree"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
+
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/_10dp"
+                    android:text="@string/orloginwith"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:orientation="horizontal">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/facebooklogin"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginRight="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/fb"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/btn_gsign_in"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginRight="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/fb"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/linkedinbt"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginRight="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/linkedin"
+                        android:text="@string/Linkedin"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/buttontwiter"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginLeft="@dimen/_5dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/blue"
+                        android:text="@string/twiterlogin"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+
+                    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+                        android:id="@+id/twitterLoginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical" />
+
+
+                </LinearLayout>
+
+                <com.apitechnosoft.ipad.component.ASTTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_2dp"
+                    android:text="@string/sync"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/_14dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/_10dp"
-                android:text="JOIN FOR FREE NOW"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_16dp" />
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal">
 
-        <com.apitechnosoft.ipad.component.ASTTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_10dp"
-            android:text="or Login with"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14dp" />
+                <com.apitechnosoft.ipad.component.ASTButton
+                    android:id="@+id/signup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/orange"
+                    android:text="@string/REGISTER"
+                    android:textColor="@color/white" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginRight="@dimen/_10dp"
-            android:orientation="horizontal">
+                <com.apitechnosoft.ipad.component.ASTButton
+                    android:id="@+id/login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/folderbutton"
+                    android:text="@string/LOGIN"
+                    android:textColor="@color/white" />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebooklogin"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginRight="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:background="@color/fb"
-                android:textColor="@color/white" />
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_gsign_in"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginRight="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:background="@color/fb"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginRight="@dimen/_10dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/linkedinbt"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginRight="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:background="@color/linkedin"
-                android:text="Linkedin"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/buttontwiter"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30dp"
-                android:layout_marginLeft="@dimen/_5dp"
-                android:layout_weight="0.5"
-                android:background="@color/blue"
-                android:text="Twiter Login"
-                android:textColor="@color/white" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:visibility="gone"
-            android:layout_marginRight="@dimen/_10dp"
-            android:orientation="horizontal">
-
-
-
-            <com.twitter.sdk.android.core.identity.TwitterLoginButton
-                android:id="@+id/twitterLoginButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-
-        </LinearLayout>
-
-        <com.apitechnosoft.ipad.component.ASTTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:gravity="center"
-            android:padding="@dimen/_2dp"
-            android:text="SYNC with ipadtoday.com"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/_14dp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/_10dp"
-        android:orientation="horizontal">
-
-        <com.apitechnosoft.ipad.component.ASTButton
-            android:id="@+id/signup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/orange"
-            android:text="REGISTER"
-            android:textColor="@color/white" />
-
-        <com.apitechnosoft.ipad.component.ASTButton
-            android:id="@+id/login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/folderbutton"
-            android:text="LOGIN"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

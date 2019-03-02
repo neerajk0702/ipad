@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
                 android:gravity="center"
-                android:text="Cloud Pricing Tables"
+                android:text="@string/cloudpriceing"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
                 android:gravity="center"
-                android:text="Stores All File Types (Photo's, Video's, Music, Documents and More..)"
+                android:text="@string/stroleallfiledesc"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -54,7 +54,7 @@
                         android:gravity="center"
                         android:paddingBottom="@dimen/_10dp"
                         android:paddingTop="@dimen/_10dp"
-                        android:text="BRONZE USER"
+                        android:text="@string/BRONZEUSER"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -70,7 +70,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="5GB"
+                            android:text="@string/fivegb"
                             android:padding="@dimen/_5dp"
                             android:textColor="@color/white"
                             android:textSize="25sp" />
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="Free Space"
+                            android:text="@string/FreeSpace"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
 
@@ -92,7 +92,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:background="@drawable/free_button"
                             android:gravity="center"
-                            android:text="FREE FOR ALL USERS"
+                            android:text="@string/FREEFORALL"
                             android:textSize="@dimen/_12dp" />
 
 
@@ -123,7 +123,7 @@
                         android:gravity="center"
                         android:paddingBottom="@dimen/_10dp"
                         android:paddingTop="@dimen/_10dp"
-                        android:text="SILVER USER"
+                        android:text="@string/SILVERUSER"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -139,7 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="50GB"
+                            android:text="@string/fiftyvegb"
                             android:padding="@dimen/_5dp"
                             android:textColor="@color/white"
                             android:textSize="25sp" />
@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="$5.99/Month"
+                            android:text="@string/month"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -158,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="$59.90/Year (2 Months Free)"
+                            android:text="@string/month2free"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -174,14 +174,14 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
                                 android:layout_marginRight="@dimen/_5dp"
-                                android:text="Monthly" />
+                                android:text="@string/Monthly" />
 
                             <CheckBox android:id="@+id/silveryear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_10dp"
                                 android:textColor="@color/white"
-                                android:text="Yearly" />
+                                android:text="@string/Yearly" />
                         </LinearLayout>
 
                         <Button android:id="@+id/silverbt"
@@ -192,7 +192,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:background="@drawable/buy_button"
                             android:gravity="center"
-                            android:text="BUY NOW"
+                            android:text="@string/BUYNOW"
                             android:textSize="@dimen/_12dp" />
 
                         <View
@@ -222,7 +222,7 @@
                         android:gravity="center"
                         android:paddingBottom="@dimen/_10dp"
                         android:paddingTop="@dimen/_10dp"
-                        android:text="GOLD USER"
+                        android:text="@string/GOLDUSER"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -239,7 +239,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
                             android:padding="@dimen/_5dp"
-                            android:text="500GB"
+                            android:text="@string/gb500"
                             android:textColor="@color/white"
                             android:textSize="25sp" />
 
@@ -257,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20dp"
                             android:gravity="center"
-                            android:text="$99.90/Year (2 Months Free)"
+                            android:text="@string/Yearlymonth"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -273,14 +273,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/_5dp"
                                 android:textColor="@color/white"
-                                android:text="Monthly" />
+                                android:text="@string/Monthly" />
 
                             <CheckBox android:id="@+id/goldyear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_10dp"
                                 android:textColor="@color/white"
-                                android:text="Yearly" />
+                                android:text="@string/Yearly" />
                         </LinearLayout>
 
                         <Button android:id="@+id/goldbt"
@@ -292,7 +292,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:background="@drawable/gold_button"
                             android:gravity="center"
-                            android:text="BUY NOW"
+                            android:text="@string/BUYNOW"
                             android:textSize="@dimen/_12dp" />
 
                         <View

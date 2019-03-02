@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ipad™</string>
+    <string name="button_label_cancel">Cancelar</string>
+    <string name="buffring">Buffering ...</string>
+    <string name="close">Cerrar</string>
+    <string name="text_done">Hecho</string>
+    <string name="save">salvar</string>
+    <string name="error_no_images">No se encontraron archivos</string>
+    <string name="picker_images">Foto</string>
+    <string name="picker_videos">Vídeo</string>
+    <string name="picker_documents">Documento</string>
+    <string name="picker_audio">Audio</string>
+    <string name="text_camera">Cámara</string>
+    <string name="select_image">Toque para seleccionar</string>
+    <string name="p1">Para garantizar un entorno seguro y no ofensivo para todos nuestros usuarios, hemos establecido nuestros Términos de uso y servicio. Explica lo que puede esperar de nosotros y lo que esperamos de usted. Al acceder a cualquier área del Sitio de IPAD, los usuarios (Usuarios) aceptan estar legalmente obligados y cumplir con los términos establecidos a continuación. el sitio de IPAD es propiedad y está operado por RXD Media, LLC (RXD). Se considerará que cualquier referencia aquí a IPAD se refiere al Sitio de IPAD y / o RXD, según corresponda en las circunstancias.</string>
+    <string name="p2">Este sitio está creado y controlado por RXD en el estado de Pennsylvania. Como tal, las leyes del Estado de Pennsylvania regirán las renuncias, términos y condiciones, sin dar efecto a ningún principio de conflicto de leyes. RXD se reserva el derecho de realizar cambios en su sitio y en estas renuncias, términos y condiciones en cualquier momento. Por este medio, el usuario consiente irrevocablemente e incondicionalmente a someterse a la jurisdicción exclusiva de los tribunales del Estado de Pennsylvania y de los Estados Unidos de América ubicados en el Estado de Pennsylvania para cualquier litigio que surja o esté relacionado con el uso o la compra realizada a través del El sitio de IPAD (y acuerda no iniciar ningún litigio relacionado con el mismo, excepto en dichos tribunales), renuncia a cualquier objeción al establecimiento de cualquier litigio en los tribunales del Estado de Pensilvania y se compromete a no defender ni reclamar ante ningún tribunal de El Commonwealth de Pensilvania que se ha presentado en un foro inconveniente ha sido objeto de tales litigios.</string>
+    <string name="p3">El usuario acepta expresamente que el uso del Sitio IPAD es responsabilidad del Usuario. Ni RXD ni sus afiliados ni ninguno de sus funcionarios, directores o empleados, agentes, proveedores de contenido, comerciantes, patrocinadores, otorgantes de licencias (colectivamente, Proveedores) o similares, garantizan que el sitio del iPad no tendrá interrupciones ni errores , ni ofrecen ninguna garantía en cuanto a los resultados que se pueden obtener del uso del Sitio de IPAD, o en cuanto a la precisión, confiabilidad o vigencia de cualquier contenido de información, servicio o mercancía provista a través del Sitio de IPAD.</string>
+    <string name="When">Cuando</string>
+    <string name="viewallfile">Ingrese el nombre del evento</string>
+    <string name="Video">Vídeo</string>
+    <string name="uplodnewfile">Subir nuevo archivo</string>
+    <string name="upload">Subir</string>
+    <string name="UpdateProfile">Actualización del perfil</string>
+    <string name="type9">9. Varios problemas de privacidad</string>
+    <string name="GOLDUSER">USUARIO DE ORO</string>
+    <string name="BUYNOW">COMPRA AHORA</string>
+    <string name="SILVERUSER">Usuario de plata</string>
+    <string name="FREEFORALL">GRATIS PARA TODOS LOS USUARIOS</string>
+    <string name="FreeSpace">Espacio libre</string>
+    <string name="BRONZEUSER">USUARIO DE BRONCE</string>
+    <string name="stroleallfiledesc">Almacena todos los tipos de archivos (fotos, videos, música, documentos y más)</string>
+    <string name="cloudpriceing">Tablas de precios en la nube</string>
+    <string name="sharemulti">Compartir archivos múltiples</string>
+    <string name="movetofolder">Mover a la carpeta</string>
+    <string name="searchfilefolder">Búsqueda con carpeta / nombre de archivo</string>
+    <string name="From">Desde</string>
+    <string name="eventname">Ingrese el nombre del evento</string>
+    <string name="Docs">Docs</string>
+    <string name="Music">Música</string>
+    <string name="Photos">Las fotos</string>
+    <string name="fileplaced">Su archivo se colocará automáticamente en la categoría correspondiente. Foto, vídeo, música o documentos.</string>
+    <string name="RecentFile">archivo reciente</string>
+    <string name="MoveFile">Mover archivo</string>
+    <string name="Comment">Comentario</string>
+    <string name="coomingsson">Próximamente...</string>
+    <string name="Reset">Reiniciar</string>
+    <string name="Account">Cuenta:</string>
+    <string name="Reminder">Recordatorio</string>
+    <string name="selecttime">Seleccione tiempo</string>
+    <string name="selectdate">Seleccione fecha</string>
+    <string name="enterdesc">Introducir Descripción ...</string>
+    <string name="entername">Ingrese su nombre</string>
+    <string name="foldername">Ingrese el nombre de la carpeta</string>
+    <string name="reallyexit">Realmente salir</string>
+    <string name="eventdetail">Detalles del evento:</string>
+    <string name="eventtime">Hora del evento:</string>
+    <string name="OK">DE ACUERDO</string>
+    <string name="exituwant">Realmente desea salir ?</string>
+    <string name="changepass">Cambia la contraseña</string>
+    <string name="enternewconfirmpass">Ingresar Confirmar Contraseña</string>
+    <string name="enternewpass">Introduzca nueva contraseña</string>
+    <string name="enteroldpass">Ingresar contraseña antigua</string>
+    <string name="itemcondi13">X. RECONOCIMIENTO</string>
+    <string name="itemcondi12">IX. SEPARABILIDAD</string>
+    <string name="itemcondi11">VIII. LEY APLICABLE</string>
+    <string name="itemcondi10">VI. TERMINACIÓN DEL USO</string>
+    <string name="termplocy">De acuerdo con los términos de la Política de privacidad del sitio de IPAD, RXD respeta la privacidad de sus usuarios.</string>
+    <string name="itemcondi9">V. POLÍTICA DE PRIVACIDAD</string>
+    <string name="itemcondi8">V. CONDUCTA EN LINEA</string>
+    <string name="itemcondi7">D. exportación</string>
+    <string name="itemcondi6">C. CONTENIDO DE TERCEROS</string>
+    <string name="itemcondi5">B. DISTRIBUCIÓN / CARGA DE CONTENIDO DE TERCEROS</string>
+    <string name="itemcondi4">A. DERECHOS DE PROPIEDAD</string>
+    <string name="itemcondi3">III. CONTENIDO</string>
+    <string name="itemcondi2">II. RENUNCIAS Y LIMITACIÓN DE RESPONSABILIDAD</string>
+    <string name="itemcondi1">I. MARCAS COMERCIALES</string>
+    <string name="TodayEvents">Eventos de hoy</string>
+    <string name="Events">Eventos</string>
+    <string name="sendFIle">Enviar archivo</string>
+    <string name="SEND">ENVIAR</string>
+    <string name="commentbox">Caja de comentarios...</string>
+    <string name="entersenderemailid">Introduzca la ID del correo electrónico del remitente:</string>
+    <string name="shareFile">Recurso compartido de archivos</string>
+    <string name="byestablish">Al establecer su cuenta de iPad, usted acepta nuestros términos de servicio y acepta el procesamiento y almacenamiento de su información en los servidores de RXD en los EE. UU. Y en otros lugares.</string>
+    <string name="privacy">Intimidad</string>
+    <string name="termofsrvices">Términos de servicio</string>
+    <string name="entervarificationcode">Introduzca el código de verificación</string>
+    <string name="enteremail">Ingresar ID de correo electrónico</string>
+    <string name="lastName">Introduzca el apellido</string>
+    <string name="enterfirstName">Ingrese el primer nombre</string>
+    <string name="type6">6. Seguridad de la información</string>
+    <string name="type5">5. Opciones del usuario sobre la recopilación y el uso de la información</string>
+    <string name="type4">4. Actualización y corrección de la información</string>
+    <string name="type3">3. Divulgación de información</string>
+    <string name="type2">2. Métodos de recolección y uso de la información.</string>
+    <string name="type1">2. Métodos de recolección y uso de la información.</string>
+    <string name="PRIVACYPOLICY">POLÍTICA DE PRIVACIDAD</string>
+    <string name="AllEvents">Todos los eventos</string>
+    <string name="Organizer">Organizadora</string>
+    <string name="clearAll">Limpiar todo</string>
+    <string name="Notification">Notificación</string>
+    <string name="Instagram">Instagram</string>
+    <string name="LOGIN">INICIAR SESIÓN</string>
+    <string name="p5">Bajo ninguna circunstancia, RXD o cualquier otra parte involucrada en la creación, producción o distribución del Sitio de IPAD será responsable por cualquier daño directo, indirecto, incidental, especial o consecuente que resulte del uso o la imposibilidad de usar el Sitio de IPAD, incluyendo, pero no limitado a la confianza por parte del Usuario en cualquier información obtenida del Sitio de IPAD o que resulte de errores, omisiones, interrupciones, eliminación de archivos o correos electrónicos, errores, defectos, virus, retrasos en la operación o transmisión, o cualquier falla en el rendimiento, sea ​​o no como resultado de actos de Dios, fallas en las comunicaciones, robo, destrucción o acceso no autorizado a los registros, programas o servicios de los Sitios del iPad. Por la presente, el usuario reconoce que este párrafo se aplicará a todo el contenido, las mercancías y los servicios disponibles a través del Sitio del iPad. Debido a que algunos estados no permiten la exclusión o limitación de responsabilidad por daños indirectos o incidentales, en tales estados, la responsabilidad se limita al máximo permitido por la ley.</string>
+    <string name="p6">El usuario reconoce que el sitio IPAD contiene información, datos, software, fotografías, gráficos, videos, tipografías, gráficos, música, sonidos y otros materiales (colectivamente, Contenido) que están protegidos por derechos de autor, marcas comerciales, secretos comerciales u otros derechos de propiedad, y que estos derechos son válidos y protegidos en todas las formas, medios y tecnologías existentes ahora o en lo sucesivo, desarrollados. Todo el Contenido está protegido como un trabajo colectivo bajo las leyes de derechos de autor de los EE. UU., Y RXD posee los derechos de autor en la selección, coordinación, disposición y mejora de dicho Contenido. El usuario no puede modificar, eliminar, eliminar, aumentar, agregar, publicar, transmitir, participar en la transferencia o venta de, crear trabajos derivados de, o de ninguna manera explotar cualquiera de los Contenidos, en su totalidad o en parte. Si no se muestran restricciones específicas, los Usuarios pueden hacer copias de partes seleccionadas del Contenido, siempre que las copias se realicen únicamente para uso personal de los Usuarios y que el Usuario mantenga los avisos contenidos en el Contenido, como todos los avisos de derechos de autor, leyendas de marcas registradas o Otros avisos de derechos de propiedad. Excepto por lo dispuesto en la oración anterior o según lo permita el privilegio de uso justo bajo las leyes de derechos de autor de EE. UU. (Consulte, por ejemplo, 17 USCA Sección 107), el Usuario no puede cargar, publicar, reproducir ni distribuir de ninguna manera el Contenido protegido por derechos de autor. u otro derecho de propiedad, sin obtener el permiso del propietario de los derechos de autor u otro derecho de propiedad. Además de lo anterior, el uso de cualquier Contenido de software se regirá por el acuerdo de licencia de software que acompaña a dicho software.</string>
+    <string name="p7">Excepto por lo establecido en la Sección III (A) anterior, el Usuario puede cargar o distribuir de otra manera en el Sitio del iPad solo el Contenido que no esté sujeto a derechos de autor u otra protección de derechos de propiedad (colectivamente, Contenido Público) o Contenido en el que el autor Ha otorgado autorización expresa para su distribución en la World Wide Web. Cualquier Contenido con derechos de autor u otro Contenido propietario distribuido con el consentimiento de un propietario de derechos de autor debe contener una fase tal como Derechos de autor, propiedad de [nombre del propietario]; utilizado con permiso. La presentación o distribución no autorizada de Contenido con derechos de autor u otro Contenido propietario es ilegal y podría someter al Usuario a un proceso penal, así como a la responsabilidad personal por daños en una demanda civil. El usuario será responsable de cualquier daño que resulte de cualquier infracción de derechos de autor o derechos de propiedad, o de cualquier otro daño que surja de dicha presentación. Ni RXD, ni sus afiliados, ni ninguno de sus funcionarios, directores, empleados, agentes, proveedores o similares, serán responsables por cualquier daño que resulte de cualquier infracción de derechos de autor o derechos de propiedad, o de cualquier otro daño que surja de dicho Usuario. sumisión. De conformidad con la Ley de derechos de autor de Digital Millennium, los usuarios y otras personas pueden denunciar una infracción a RXD en la siguiente dirección de correo electrónico: inquiry@rxdmedia.com. Cualquier sala de chat, usuario automáticamente otorga, o garantiza, que el propietario de dicho Contenido ha otorgado expresamente a RXD el derecho y la licencia libres de regalías, perpetuos, irrevocables, no exclusivos para usar, reproducir, publicar, traducir, otorgar licencias, copiar y distribuir el Contenido. en su totalidad o en parte en todo el mundo y / o para incorporarlo en otros trabajos en cualquier forma, medio o tecnología ahora conocida o desarrollada a continuación por el término completo de cualquier derecho de autor que pueda existir en dicho Contenido. El Usuario también permite que cualquier otro Usuario acceda, almacene o reproduzca el Contenido para el uso personal de ese Usuario. Sujeto a esta concesión, el propietario del Contenido colocado en el Sitio de IPAD retiene todos los derechos que puedan existir en dicho Contenido.</string>
+    <string name="p8">RXD es un distribuidor y no un editor de Contenido suministrado por terceros y Usuarios. RXD no tiene más control editorial sobre dicho Contenido que una biblioteca pública o un puesto de periódicos. Cualquier opinión, consejo, declaración, servicio, oferta u otra información que forme parte del Contenido expresado o puesto a disposición por terceros, incluidos los Proveedores o cualquier otro Usuario del Sitio de IPAD, son los de los respectivos autores o distribuidores y no de RXD. o sus filiales o cualquiera de sus funcionarios, directores, empleados o agentes. Ni RXD ni sus afiliados, ni ninguno de sus funcionarios, directores, empleados o agentes, ni ningún tercero, incluido ningún Proveedor, o cualquier otro Usuario del Sitio de IPAD, garantiza la exactitud, integridad o utilidad de cualquier Contenido, ni su comercialización. o aptitud para cualquier propósito particular. En muchos casos, el Contenido disponible a través del Sitio de IPAD representa las opiniones y juicios del Proveedor respectivo, o Usuario no contratado por RXD. RXD no respalda ni es responsable de la exactitud o confiabilidad de ninguna opinión, consejo o declaración hecha en el Sitio de IPAD por alguien que no sea un empleado autorizado de RXD. Bajo ninguna circunstancia, RXD, o sus afiliados, o cualquiera de sus funcionarios, directores, empleados o agentes serán responsables por cualquier pérdida, daño o daño causado por la confianza de los Usuarios en la información obtenida a través del Sitio del iPad. Es responsabilidad del usuario evaluar la información, opinión, consejo u otro contenido disponible a través del sitio del iPad.</string>
+    <string name="p9">Las leyes de control de exportaciones de los Estados Unidos regulan la exportación y reexportación de tecnología originada en los Estados Unidos. Esto incluye la transmisión electrónica de información y software a países extranjeros y a ciertos ciudadanos extranjeros. El usuario acepta cumplir con estas leyes y sus regulaciones, que incluyen pero no se limitan a la Ley de Administración de Exportaciones y la Ley de Control de Exportaciones de Armas y no transfieren, por transmisión electrónica o de otro tipo, cualquier Contenido derivado del Sitio del iPad a un ciudadano extranjero. o un destino extranjero en violación de tales leyes.</string>
+    <string name="p10">El usuario acepta utilizar el sitio de IPAD únicamente con fines legales. Se prohíbe al usuario publicar o transmitir a través del Sitio de IPAD cualquier material ilegal de cualquier tipo, ilegal, dañino, amenazante, abusivo, hostigador, difamatorio, vulgar, obsceno, sexualmente explícito, profano, de odio, racial, étnico o de cualquier otro tipo, incluyendo limitado a cualquier material que fomente conductas que constituyan una ofensa criminal, den lugar a responsabilidad civil, o que de otro modo violen cualquier ley local, estatal, nacional o internacional aplicable.</string>
+    <string name="p11">Si se notifica a RXD de contenido presuntamente infractor, difamatorio, dañino, ilegal u ofensivo proporcionado por el Usuario (por ejemplo, a través de una revisión en línea o sala de chat), RXD puede investigar la denuncia y determinar, a su exclusivo criterio, si elimina o solicita la eliminación de dicho Contenido del Sitio del iPad. RXD puede divulgar cualquier Contenido o comunicación electrónica de cualquier tipo: (i) para satisfacer cualquier ley, reglamento o solicitud gubernamental; (ii) si dicha divulgación es necesaria o apropiada para operar el Sitio de IPAD; o (iii) para proteger los derechos o propiedad de RXD, sus Usuarios o Proveedores.</string>
+    <string name="p12">RXD se reserva el derecho de prohibir la conducta, la comunicación o el Contenido que considere, a su entera discreción, dañinos para los Usuarios individuales, el Sitio del iPad, las comunidades que conforman el Sitio del iPad o cualquier derecho de RXD o cualquier tercero, Violar cualquier ley aplicable. No obstante lo anterior, ni RXD ni sus Proveedores pueden garantizar la eliminación inmediata del Contenido cuestionable después de la publicación en línea. En consecuencia, ni RXD, ni sus afiliados, ni ninguno de sus funcionarios, directores, empleados o agentes, ni los Proveedores asumirán la responsabilidad por cualquier acción o inacción con respecto a la conducta, la comunicación o el Contenido en el sitio del iPad.</string>
+    <string name="p13">"RXD puede suspender el acceso de los Usuarios, o suspender el acceso de los Usuarios a todo o parte del Sitio de IPAD, sin previo aviso, por cualquier conducta que el Sitio de IPAD, a su entera discreción, considere que viola cualquier ley aplicable o es perjudicial para los intereses otro usuario, un proveedor externo, un proveedor de servicios o RXD. "</string>
+    <string name="p14">RXD no puede prohibir que los menores visiten este sitio. RXD debe confiar en los padres, tutores y los responsables de supervisar a los niños menores de 13 años para decidir qué materiales son apropiados para que los niños los vean y / o compren.  RXD requiere que todas las compras sean realizadas: (i) por individuos de 13 años de edad o más, o (ii) por menores de 13 años, a través de un programa afiliado autorizado por RXD que permite a los padres y otros tutores pagar por las compras de menores. , y otorgar un permiso verificable para que dichos menores compren artículos en nuestro sitio y para que nosotros recopilemos cierta información de acuerdo con los términos de nuestra política de privacidad.  CADA VEZ QUE USTED COMPRA UN PRODUCTO O SERVICIO EN IPADTODAY.COM, ESTÁ REPRESENTANDO A RXD QUE USTED ES (I) INDIVIDUAL 13 AÑOS DE EDAD O MAYORES, O (II) UN MENOR MENOR DE 13 AÑOS DE QUE ESTÁ COMPRANDO A TRAVÉS DE UN AFILIADO AUTORIZADO PROGRAMA QUE PERMITE A LOS PADRES Y OTROS TUTORES PAGAR LAS COMPRAS DE MENORES Y OTORGAR PERMISO VERIFICABLE PARA DICHOS MENORES PARA COMPRAR ARTÍCULOS EN NUESTRO SITIO Y PARA LA RECOGIDA POR EE.UU. DE CIERTA INFORMACIÓN CON RESPECTO A LOS TÉRMINOS DE NUESTRA POLÍTICA DE PRIVACIDAD.</string>
+    <string name="p15">Este sitio está creado y controlado por RXD en el estado de Pennsylvania. Como tal, las leyes del Estado de Pennsylvania regirán las renuncias, términos y condiciones, sin dar efecto a ningún principio de conflicto de leyes. RXD se reserva el derecho de realizar cambios en su sitio y en estas renuncias, términos y condiciones en cualquier momento. Por este medio, el usuario consiente irrevocablemente e incondicionalmente a someterse a la jurisdicción exclusiva de los tribunales del Estado de Pennsylvania y de los Estados Unidos de América ubicados en el Estado de Pennsylvania para cualquier litigio que surja o esté relacionado con el uso o la compra realizada a través del El sitio de IPAD (y acuerda no iniciar ningún litigio relacionado con el mismo, excepto en dichos tribunales), renuncia a cualquier objeción al establecimiento de cualquier litigio en los tribunales del Estado de Pensilvania y se compromete a no defender ni reclamar ante ningún tribunal de El Commonwealth de Pensilvania que se ha presentado en un foro inconveniente ha sido objeto de tales litigios.</string>
+    <string name="p16">Las disposiciones de estos Términos de uso y servicio están destinadas a ser divisibles. Si por alguna razón alguna disposición de estos Términos de uso y servicio se considerara inválida o inaplicable en su totalidad o en parte en cualquier jurisdicción, dicha disposición será, en cuanto a dicha jurisdicción, inefectiva en la medida de dicha invalidez o inaplicabilidad en ningún de manera que afecte la validez o exigibilidad de la misma en cualquier otra jurisdicción o las disposiciones restantes en cualquier jurisdicción.</string>
+    <string name="p17">Los Términos de uso y servicio, incluidos todos los documentos a los que se hace referencia en este documento, representan el entendimiento completo entre usted y RXD con respecto a su relación con RXD y reemplaza cualquier declaración o representación anterior. USTED ACEPTA ESTAR OBLIGADO POR LOS TÉRMINOS DE USO Y SERVICIO al utilizar el sitio web ipadtoday.com. Los términos de uso y servicio mencionados anteriormente están sujetos a cambios.</string>
+    <string name="pp1">Esta Política de privacidad divulga las prácticas de privacidad para el sitio ipadtoday.com (el Sitio de IPAD) y varios servicios relacionados (en conjunto, el sitio). RXD Media, LLC (RXD), el proveedor del sitio (conocido como nosotros o nosotros), se compromete a proteger su privacidad en línea. Lea la información a continuación para conocer lo siguiente sobre su uso de este sitio.</string>
+    <string name="pp2">Usted reconoce que esta Política de privacidad es parte de los Términos de uso y servicio del sitio de IPAD, y al acceder o utilizar nuestro sitio, acepta estar sujeto a todos sus términos y condiciones. Si no está de acuerdo con estos términos, no acceda ni utilice este sitio.</string>
+    <string name="pp3">Nos reservamos el derecho de cambiar esta Política de Privacidad en cualquier momento. Dichos cambios, modificaciones, adiciones o eliminaciones entrarán en vigencia inmediatamente después de la notificación de los mismos, que se pueden proporcionar por medios que incluyen, entre otros, la emisión de un correo electrónico a la dirección de correo electrónico indicada por los usuarios registrados y la publicación de la Política revisada en esta página. Usted reconoce y acepta que es su responsabilidad mantener una dirección de correo electrónico válida como usuario registrado, revisar este sitio y esta Política periódicamente y estar al tanto de cualquier modificación. Su uso continuado del sitio después de dichas modificaciones constituirá su: (a) reconocimiento de la Política modificada; y (b) acuerdo para cumplir y estar sujeto a la Política modificada.</string>
+    <string name="pp4">Para poder brindarle mejor nuestros numerosos servicios, recopilamos dos tipos de información sobre nuestros usuarios: Información de identificación personal e Información de identificación no personal. Nuestro objetivo principal al recopilar información sobre usted es brindarle una experiencia fluida, eficiente y personalizada mientras utiliza nuestro sitio.</string>
+    <string name="pp5">Información de identificación personal: se refiere a la información que nos permite conocer los detalles específicos de quién es usted. Cuando participa en ciertas actividades en este sitio, como registrarse para una membresía, ordenar un producto o servicio, enviar contenido y / o publicar contenido en foros de discusión u otras áreas públicas, participar en un concurso o sorteo, completar una encuesta o enviándonos sus comentarios, podemos pedirle que proporcione cierta información sobre usted llenando y enviando un formulario en línea. Es completamente opcional para usted participar en estas actividades. Sin embargo, si elige participar en estas actividades, es posible que le solicitemos que nos proporcione información personal, como su nombre y apellido, dirección postal (incluido el código postal), dirección de correo electrónico, empleador, cargo y departamento, teléfono y fax. Números, y otra información de identificación personal. Al pedir productos o servicios en el sitio, se le puede solicitar que proporcione un número de tarjeta de crédito. Dependiendo de la actividad, parte de la información que le pedimos que proporcione se identifica como obligatoria y otra como voluntaria. Si no proporciona los datos obligatorios con respecto a una actividad en particular, no podrá participar en esa actividad.</string>
+    <string name="pp6">nformación no personal identificable: se refiere a información que no identifica por sí sola a una persona específica. Recopilamos cierta información sobre usted en función de su visita a nuestro sitio de varias maneras. Esta información se compila y analiza tanto de forma personal como agregada. Esta información puede incluir el localizador uniforme de recursos (URL) de los sitios web de los que acaba de llegar, a qué URL va a ir, qué navegador está utilizando y su dirección de Protocolo de Internet (IP). Una URL es la dirección global de documentos y otros recursos en la World Wide Web. Una dirección IP es un identificador para una computadora o dispositivo en una red de Protocolo de control de transmisión / Protocolo de Internet (TCP / IP), como la World Wide Web. Las redes como la Web utilizan el protocolo TCP / IP para enrutar la información según la dirección IP del destino. En otras palabras, una dirección IP es un número que se asigna automáticamente a su computadora cada vez que navega por la web, lo que permite a los servidores web localizar e identificar su computadora. Las computadoras requieren direcciones IP para que los usuarios puedan comunicarse en Internet.</string>
+    <string name="pp7">No recopilamos ninguna Información de identificación personal sobre usted a menos que nos la proporcione voluntariamente. Usted nos proporciona cierta información de identificación personal cuando: (a) se registra en nuestros servicios y registra su dirección de correo electrónico con nosotros; (b) participar en sorteos o concursos patrocinados por nosotros o uno de nuestros socios; (c) registrarse para ofertas especiales de terceros seleccionados; (d) enviar mensajes de correo electrónico, enviar formularios o transmitir otra información por teléfono o carta; o (e) envíe su tarjeta de crédito u otra información de pago al realizar un pedido y comprar productos y servicios en nuestro sitio. También podemos recopilar información sobre usted en otros puntos de nuestro sitio que indiquen que dicha información se está recopilando.</string>
+    <string name="pp8">Además, también podemos recopilar, o nuestro servidor de anuncios de terceros y / o servidor de contenido puede recopilar, cierta información de identificación no personal. Esta información se almacena en última instancia en forma de categorías de tiendas y, en algunos casos, de URL específicas. Utilizamos su dirección IP para diagnosticar problemas con nuestros servidores y software, para administrar nuestro sitio y para recopilar información demográfica. Nuestros servidores de anuncios de terceros también nos proporcionarán informes resumidos, pero no individuales, que nos dirán cuántos anuncios se presentaron y se hizo clic en nuestro sitio.</string>
+    <string name="pp9">Principalmente utilizaremos su información de identificación personal para proporcionarle nuestros servicios, según lo exijan nuestros acuerdos con usted. También utilizaremos la información de identificación personal para mejorar el funcionamiento de nuestro sitio, completar pedidos, mejorar nuestros esfuerzos de marketing y promoción, analizar estadísticamente el uso del sitio, mejorar nuestra oferta de productos y servicios, y personalizar el contenido, diseño y servicios de nuestros sitios. Podemos usar información de identificación personal para enviarle información y para contactarlo con respecto a avisos administrativos. También podemos usar información de identificación personal para resolver disputas, solucionar problemas y hacer cumplir nuestros acuerdos con usted, incluidos los Términos de uso del sitio, los Términos y condiciones de venta y esta Política privada.</string>
+    <string name="pp10">No vendemos, intercambiamos ni alquilamos su información de identificación personal a terceros. Proporcionamos algunos de nuestros servicios a través de acuerdos contractuales con afiliados, proveedores de servicios, socios y otros terceros. Nosotros y nuestros socios de servicio utilizamos su información de identificación personal para operar nuestros sitios y para prestar sus servicios. Por ejemplo, debemos divulgar la información de su tarjeta de crédito al banco emisor de la tarjeta para confirmar el pago de los productos y servicios adquiridos en este sitio; divulgue la información de su dirección al servicio de entrega para entregar los productos que solicitó; y proporcionar información de pedidos a terceros que nos ayuden a brindar servicio al cliente.</string>
+    <string name="pp11">Animaremos a nuestros socios de servicio a adoptar y publicar políticas de privacidad. Sin embargo, el uso de su información de identificación personal por parte de nuestros socios de servicio se rige por las políticas de privacidad de dichos socios y no está sujeto a nuestro control.</string>
+    <string name="pp12">Ocasionalmente, las autoridades policiales o judiciales pueden exigirnos que proporcionemos información de identificación personal a las autoridades gubernamentales correspondientes. Divulgaremos información de identificación personal al recibir una orden judicial, una citación o para cooperar con una investigación policial. Cooperamos completamente con las agencias de aplicación de la ley para identificar a quienes usan nuestros servicios para actividades ilegales. Nos reservamos el derecho de informar a los organismos encargados de hacer cumplir la ley cualquier actividad que consideremos de buena fe ilegal.</string>
+    <string name="pp13">También podemos proporcionar Información No Personalmente Identificable sobre las ventas de nuestros clientes, patrones de tráfico e información relacionada del sitio a anunciantes de terceros, pero estas estadísticas no incluyen ninguna Información de Identificación Personal.</string>
+    <string name="pp14">Creemos que debe tener la capacidad de acceder y editar la información de identificación personal que nos ha proporcionado. Puede cambiar cualquier parte de su información de identificación personal en su cuenta en línea en cualquier momento mediante el enlace a su cuenta de acuerdo con las instrucciones publicadas en este sitio. También puede acceder y corregir su información personal y sus preferencias de privacidad escribiéndonos a:</string>
+    <string name="pp15">Le recomendamos que actualice de inmediato su información de identificación personal si ésta cambia. Puede solicitar que se elimine o elimine la información de su cuenta; sin embargo, debido a que hacemos un seguimiento de las transacciones anteriores, no puede eliminar la información asociada con las transacciones anteriores en este sitio. Además, puede ser imposible eliminar completamente su información sin alguna información residual debido a las copias de seguridad.</string>
+    <string name="pp16">Es posible que, de vez en cuando, le enviemos un correo electrónico sobre nuestros productos y servicios. Además, si en el momento del registro indicó que está interesado en recibir ofertas o información de nosotros y de nuestros socios, es posible que ocasionalmente le enviemos un correo directo sobre productos y servicios que consideremos que pueden ser de su interés. Solo RXD (o los agentes que trabajan en nombre de RXD y según los acuerdos de confidencialidad) le enviarán estos correos directos y solo si indicó que no se opone a estas ofertas. Si no desea recibir dichos correos, simplemente avísenos cuando nos brinde su información personal. O, en cualquier momento, puede editar fácilmente la información de su cuenta para dejar de recibir tales ofertas y correos.</string>
+    <string name="pp17">También tiene opciones con respecto a las cookies, como se describe a continuación. Al modificar las preferencias de su navegador, tiene la opción de aceptar todas las cookies, recibir una notificación cuando se establece una cookie o rechazar todas las cookies. Si elige rechazar todas las cookies, es posible que algunas partes de nuestro sitio no funcionen correctamente en su caso.</string>
+    <string name="pp18">En nuestro sitio, puede estar seguro de que su información de identificación personal es segura y coherente con los estándares actuales de la industria. La importancia de la seguridad para toda la información de identificación personal asociada con nuestro usuario es de suma importancia para nosotros. Su información de identificación personal está protegida de varias maneras. El acceso de usted a su información de identificación personal está disponible a través de una contraseña y una identificación de cliente única seleccionada por usted. Esta contraseña está encriptada. Le recomendamos que no divulgue su contraseña a nadie. Además, su información de identificación personal reside en un servidor seguro al que solo el personal y los contratistas seleccionados de RXD tienen acceso a través de una contraseña. Encriptamos su información de identificación personal y, por lo tanto, evitamos que terceros no autorizados vean dicha información cuando nos la transmiten.</string>
+    <string name="pp19">La información personal que usted proporciona que no es información de identificación personal también reside en un servidor seguro y solo se puede acceder a ella mediante una contraseña. Dado que no se puede acceder a esta información desde fuera de RXD, no se le pedirá que seleccione una contraseña para ver o modificar dicha información. Con el fin de brindarle un servicio más eficiente, las transacciones con tarjeta de crédito y el cumplimiento de pedidos se realizan mediante banca de terceros, agentes de procesamiento e instituciones de distribución. Reciben la información necesaria para verificar y autorizar su tarjeta de crédito u otra información de pago y para procesar y enviar su pedido.</string>
+    <string name="pp20">Desafortunadamente, no se puede garantizar que la transmisión de datos a través de Internet o cualquier red inalámbrica sea 100% segura. Como resultado, mientras nos esforzamos por proteger su información de identificación personal, usted reconoce que: (a) existen limitaciones de seguridad y privacidad en Internet que están fuera de nuestro control; (b) no se puede garantizar la seguridad, integridad y privacidad de cualquier y toda la información y los datos intercambiados entre usted y nosotros a través de este sitio; y (c) cualquier información y datos de este tipo pueden ser vistos o manipulados en tránsito por un tercero.</string>
+    <string name="pp21">Cuando utiliza nuestro sitio, podemos almacenar cookies en su computadora para facilitar y personalizar su uso de nuestro sitio. Una cookie es un pequeño archivo de texto de datos, que un sitio web almacena en el disco duro de su computadora (si su explorador web lo permite) que luego puede ser recuperado para identificarlo. Nuestras cookies almacenan números de identificación de usuarios asignados al azar, el país donde se encuentra y su nombre para darle la bienvenida a nuestro sitio. Las cookies facilitan el uso del sitio, hacen que el sitio funcione sin problemas y nos ayudan a mantener un sitio seguro. Siempre es libre de rechazar nuestras cookies si su navegador lo permite, pero es posible que algunas partes de nuestro sitio no funcionen correctamente en ese caso.</string>
+    <string name="pp22">Es posible que utilicemos una empresa externa de publicación de anuncios para mostrar anuncios publicitarios en nuestro sitio. Como parte de su servicio, colocarán una cookie separada en su computadora. No proporcionaremos a ningún servidor de anuncios de terceros información alguna sobre su información de identificación personal o información sobre sus compras. Nosotros y nuestro servidor de anuncios de terceros recopilaremos y utilizaremos la Información de identificación no personal sobre usted, como su dirección IP, el tipo de navegador, el servidor en el que inició sesión su computadora, el código de área y el código postal asociado a su servidor y anuncio particular Otros anunciantes también pueden colocar anuncios publicitarios en nuestro sitio de la misma manera que anteriormente, pero no les revelaremos ninguna Información de identificación personal.</string>
+    <string name="pp23">Excepto como se explica en esta Política de privacidad, este documento solo trata el uso y la divulgación de la información que recopilamos de usted. Otros sitios accesibles a través de nuestro sitio tienen sus propias políticas de privacidad y prácticas de recopilación, uso y divulgación de datos. Por favor consulte la política de privacidad de cada sitio. No somos responsables de las políticas o prácticas de terceros. Además, otras compañías que publican en nuestro sitio pueden recopilar información sobre usted cuando ve o hace clic en su publicidad a través del uso de cookies. No podemos controlar esta recopilación de información. Debe comunicarse directamente con estos anunciantes si tiene alguna pregunta sobre el uso que hacen de la información que recopilan.</string>
+    <string name="pp24">Nuestra política es que no recopilamos, usamos ni divulgamos a sabiendas información de identificación personal sobre visitantes menores de 13 años sin permiso. Al acceder y utilizar el Sitio de IPAD, usted verifica que tiene al menos 13 años de edad o tiene permiso de un padre o tutor para acceder y usar el Sitio, y que se le otorga permiso a RXD para recopilar, usar o divulgar información de identificación personal Información consistente con los términos de esta Política de Privacidad.</string>
+    <string name="pp25">También debe tener en cuenta que cuando la información de identificación personal se divulga voluntariamente (es decir, su nombre, dirección de correo electrónico, etc.) en los foros de discusión u otras áreas públicas de este sitio, dicha información, junto con cualquier información divulgada en su comunicación, recopilados y utilizados por terceros y pueden dar lugar a mensajes no solicitados de terceros. Tales actividades están fuera de nuestro control y esta Política no se aplica a dicha información. Cualquier envío a salas de chat u otras áreas públicas en este sitio se aceptan con el entendimiento de que son accesibles a todos los terceros. Si no desea que terceros puedan ver sus comentarios, se recomienda no realizar ningún envío. En última instancia, usted es el único responsable de mantener en secreto su contraseña y / o la información de su cuenta. Por favor, sea cuidadoso y responsable cuando esté en línea.</string>
+    <string name="pp26">Si tiene alguna pregunta sobre esta Política de privacidad, las prácticas de este sitio o sus relaciones con este sitio, contáctenos enviando una carta a:</string>
+    <string name="pp27">También puede contactarnos por correo electrónico a inquiry@rxdmedia.com</string>
+    <string name="pp28">El perro no puede comer su tarea cuando está en la nube. Los maestros pueden mantener a los estudiantes, y a sus familias, actualizados sobre los acontecimientos, las expectativas y el progreso.</string>
+    <string name="pp29">La conexión es la clave. El aula se está expandiendo fuera de sus cuatro paredes y está recorriendo la supercarretera de información. Las comunidades de aula pueden compartir información y recursos entre sí, así como en comunidades escolares más grandes a nivel local y de gran alcance. No te pierdas el autobús.</string>
+    <string name="pp30">Los compañeros de clase pueden conectarse entre sí, desde el hogar, para colaborar en tareas, proyectos e incluso mejorar las habilidades de estudio.</string>
+    <string name="pp31">Haga que la hora de la tarea sea menos estresante con herramientas para apoyar a su estudiante en casa en una variedad de áreas temáticas.</string>
+    <string name="pp32">Si tiene una pregunta general o desea solicitar información adicional sobre el almacenamiento en la nube personal de ipads y las soluciones educativas, complete el formulario a continuación. Gracias y esperamos conectar con usted!</string>
+    <string name="otpverify">Por favor revise su carpeta de Spam! Si usa Gmail u otro servicio de correo web gratuito, entonces el código de verificación probablemente estará en su carpeta Spam / Junk.</string>
+    <string name="changeinfo">Cambiar información del usuario</string>
+    <string name="firstName">Nombre de pila</string>
+    <string name="LastName">Apellido</string>
+    <string name="commentonfile">Comentar en el archivo</string>
+    <string name="commentboxmin">Cuadro de comentarios Máximo 36 palabras.</string>
+    <string name="Submit">Enviar</string>
+    <string name="TravelRoutine">Rutina de viaje</string>
+    <string name="Calendar">Calendario</string>
+    <string name="Enterregemail">Ingrese el correo electrónico registrado</string>
+    <string name="enterpass">Introducir la contraseña</string>
+    <string name="forgetpass">Se te olvidó tu contraseña</string>
+    <string name="SignIn">Registrarse</string>
+    <string name="FREE5GB">GRATIS 5 GB</string>
+    <string name="storagedigital">Almacenamiento + Organizador Digital</string>
+    <string name="joinforfree">ÚNETE GRATIS AHORA</string>
+    <string name="orloginwith">o iniciar sesión con</string>
+    <string name="Linkedin">Linkedin</string>
+    <string name="twiterlogin">Ingreso a Twitter</string>
+    <string name="sync">SYNC con ipadtoday.com</string>
+    <string name="REGISTER">REGISTRO</string>
+    <string name="itemcondi14">X. RECONOCIMIENTO</string>
+    <string name="selectlanguage">Elige tu idioma</string>
+    <string name="welcomeipadtm">Bienvenido a iPad <sup> TM </sup></string>
+    <string name="sendvarificationcode">Envíe el código de verificación</string>
+    <string name="varificationnotmatch">Código de verificación no coincide!</string>
+    <string name="entervaricicationcode">Por favor, introduzca el código de verificación!</string>
+    <string name="Signupsuccess">Registrarse con éxito.</string>
+    <string name="Signupnotsuccess">Registrarse no con éxito.</string>
+    <string name="validEmail">Por favor, introduzca una ID de correo electrónico válida</string>
+    <string name="selecttermsevices">Por favor seleccione Términos de servicio.</string>
+    <string name="pleasewait">por favor espera</string>
+    <string name="varificationcodeemail">Código de verificación fue enviado a su correo con éxito.</string>
+    <string name="varificationcodenotemail">El código de verificación no fue enviado a su correo con éxito.</string>
+    <string name="LoginSuccessfully">Iniciar sesión con éxito</string>
+    <string name="LoginnotSuccessfully">Iniciar sesión no correctamente</string>
+    <string name="somethingwrong">Algo salió mal..!</string>
+    <string name="linkpasssend">Enlace de restablecimiento de contraseña enviado a su ID de correo electrónico registrado.</string>
+    <string name="eventnotsave">Evento no guardado con éxito!</string>
+    <string name="eventsave">Evento guardado con éxito</string>
+    <string name="enterevent">Por favor ingrese el nombre del evento</string>
+    <string name="selectdatee">Por favor selete fecha</string>
+    <string name="SendingMail">Enviando correo</string>
+    <string name="thankucontactus">Gracias por contactarnos.</string>
+    <string name="entersubj">Por favor ingrese el asunto</string>
+    <string name="entermsg">Por favor ingrese el mensaje</string>
+    <string name="nodata">¡Datos no encontrados!</string>
+    <string name="PressAgain">Presione de nuevo</string>
+    <string name="searchwithfile">Búsqueda con carpeta / nombre de archivo</string>
+    <string name="plsselctFile">Por favor seleccione el archivo!</string>
+    <string name="foldercretesuccess">Carpeta Crear con éxito.</string>
+    <string name="foldernotcreate">Carpeta no creada!</string>
+    <string name="selectfolder">Por favor, seleccione la carpeta!</string>
+    <string name="filemovesucces">Archivo movido exitosamente</string>
+    <string name="filemovesuccesnot">El archivo no se movió con éxito!</string>
+    <string name="selectpaymnetgold">Por favor, seleccione cualquier opción de pago en Usuario Oro!</string>
+    <string name="paymentsliver">Por favor, seleccione cualquier opción de pago en Usuario Silver!</string>
+    <string name="gottoken">Éxito obtenido token</string>
+    <string name="gottokennit">Error al obtener el token:</string>
+    <string name="faildPayment">Pago fallido</string>
+    <string name="donePayment">Pago realizado con éxito.</string>
+    <string name="filenotulod">Archivo no subido!</string>
+    <string name="fileuploadsuccesss">Carga de archivos con éxito</string>
+    <string name="foldernotfound">Carpeta no encontrada</string>
+    <string name="enterfoldername">Por favor, introduzca el nombre de la carpeta!</string>
+    <string name="filetypenotsuport">Este tipo de archivo no es compatible con la vista previa todavía !! Por favor, presione el botón Subir.</string>
+    <string name="videoloading">Video Cargando ...</string>
+    <string name="passwordchange">Cambio de contraseña con éxito.</string>
+    <string name="oldpss">Su contraseña anterior no coincide, ingrese contraseña antigua válida</string>
+    <string name="entercomment">Por favor ingrese comentario</string>
+    <string name="CommentsendSuccessfully">Comentario enviado con éxito</string>
+    <string name="CommentsnotendSuccessfully">El comentario no se envía con éxito!</string>
+    <string name="sharedemail">Correo electrónico compartido No se han encontrado datos!</string>
+    <string name="RegisterationSuccessfully">Registro exitoso</string>
+    <string name="faildauth">No se pudo autenticar. Inténtalo de nuevo.</string>
+    <string name="useralredyauth">Usuario ya autenticado</string>
+    <string name="firsttwiter">Primero en la autenticación de Twitter para verificar credenciales.</string>
+    <string name="needper">Necesita múltiples permisos</string>
+    <string name="gpsdisable">Tu GPS parece estar deshabilitado, ¿quieres habilitarlo?</string>
+    <string name="Yes">Sí</string>
+    <string name="No">No</string>
+    <string name="notinotfound">Notificación no encontrada!</string>
+    <string name="Event">Evento</string>
+    <string name="Birthday">Cumpleaños</string>
+    <string name="fileSharedsuccess">Archivo compartido con éxito</string>
+    <string name="filennotSharedsuccess">Archivo no compartido con éxito!</string>
+    <string name="eventlistdata">Datos de la lista de eventos encontrados!</string>
+    <string name="novdetail"><b> RXD Media, LLC 09 de noviembre de 2017 </b> <b> ipad ™, manteniéndolo
+        conectado con su familia, amigos y empresa para la vida </b> <b> DOYLESTOWN, PA (PRWEB) 9 
+        de noviembre de 2017 </b> <b> ipad ™ celebra su décimo aniversario con una nueva versión </b> <b> ipad ™ ha continuado evolucionando a un popular servicio de almacenamiento en la nube con una interfaz fácil de usar para fomentar la comunicación y el compromiso. </b> <b> El almacenamiento en la nube es un modo popular de almacenamiento de datos y comunicación con el mundo. A lo largo de los años, las soluciones de almacenamiento en la nube han facilitado la comunicación al fomentar el compromiso y la cooperación en todo el mundo en tiempo real. ipad ™, un servicio que se lanzó en 2007, es una creación del fundador de RXD Medias, Brian Clements, quien simplemente quería conectar y sincronizar tanto a individuos como a grupos dentro de este campo en rápido crecimiento de la tecnología de la comunicación y la información. Brian Clements dijo: Quería desarrollar un servicio de almacenamiento en la nube y una solución que pudiera reunir a una gran comunidad de personas, individuos y empresas. Trabajé en mi idea y tenía una fe inmensa en el concepto. Como resultado, el servicio ipad ™ ha continuado su crecimiento como una solución de almacenamiento en la nube de buena fe. </b> <b> ipad ™ fue desarrollado con la misión de convertirse en el servicio de almacenamiento en la nube más eficiente, atractivo y fácil de usar en todo el mundo. También creemos que podemos respaldar el crecimiento de empresas y organizaciones ofreciéndoles almacenamiento en la nube para almacenar sus datos críticos, dijo Keith Clements, CEO y presidente de RXD Media. Además de las soluciones empresariales, ipad ™ también se dirige a la gran sección de familias que viven en el extranjero o que se encuentran lejos de sus seres queridos en otros lugares distantes. El servicio ipad ™ ofrece una comunidad donde las familias y los amigos pueden unirse, unirse y compartir su trabajo, música, videos, fotos e incluso guardar todo esto en el espacio de almacenamiento en la nube. </b> <b> La solución de almacenamiento en la nube ipad ™ ofrece espacio de almacenamiento virtual en la nube y permite a los usuarios restaurar datos cuando lo deseen. Damos una solución dedicada a nuestros usuarios a través de nuestro servicio de almacenamiento en la nube, dijo Keith Clements. También agregó: Nuestro producto es útil para crear una copia de seguridad cuando sea necesario. Además, permite a los usuarios sincronizar y restaurar sus datos en cualquier momento desde cualquier dispositivo. </b> <b> En este mundo en rápido movimiento y debido a los cambios fenomenales en la tecnología, el almacenamiento de datos es una de las principales causas de preocupación para las personas. En general, el servicio ipad ™ ofrece a los usuarios la posibilidad de realizar copias de seguridad de todo lo que es importante con facilidad. Independientemente del tipo y tamaño del archivo, puede almacenarlo en línea en su nube, sincronizarlo cuando sea necesario y restaurarlo para su uso inmediato. Incluso mientras viaja, el servicio ipad ™ no le permite olvidar sus tareas importantes. Le brindamos una solución de almacenamiento móvil de bolsillo para llevar todos sus datos sin importar a dónde vaya, dijo Keith Clements. </b> Para obtener más información sobre ipad ™ o para entrevistar a Keith Clements, Presidente y CEO, puede visitar la compañía en línea en http://www.ipadtoday.com o comunicarse con ellos por teléfono al 267.895.1776.</string>
+    <string name="nov"><b> 09 de noviembre de 2017  </b> <b> ipad ™, que lo mantiene conectado con su familia, amigos y negocios para la vida </b></string>
+    <string name="oct"><b> 18 de octubre de 2017  </b> <b> ipad ™ celebra su décimo aniversario con un nuevo lanzamiento </b></string>
+
+    <string name="octdetail"><b> RXD Media, LLC 18 de octubre de 2017
+
+</b>
+   <b> ipad ™ celebra su décimo aniversario con un nuevo lanzamiento
+    
+
+</b> <b> DOYLESTOWN, PA (PRWEB) 18 de octubre de 2017
+
+</b> <b> Cloud Storage para el hogar, Family Business anuncia nuevos servicios y sitio web.
+
+</b> <b>
+
+DOYLESTOWN, Pa. - 18 de octubre de 2017 --- RXD Media, LLC anuncia la última versión de ipad ™ y un sitio web de ipad ™ completamente nuevo y actualizado para celebrar su décimo aniversario.
+    
+
+ipad ™, una solución de almacenamiento en la nube con todas las funciones, ofrece un almacenamiento adecuado para uso personal o empresarial.
+    
+
+El almacenamiento en la nube de ipadsTM es adecuado para todos los dispositivos, desde computadoras, teléfonos y tabletas. ipad ™ está diseñado para realizar copias de seguridad, sincronizar y restaurar de manera sencilla y sencilla todos los datos esenciales de varios dispositivos para que nunca haya un momento en que una empresa o persona carezca de la información más importante.
+    
+
+Con varias versiones del servicio disponibles tanto para usuarios individuales como para clientes comerciales, ipad ™ puede ayudar a organizar cada aspecto de su negocio y su vida personal.
+    
+
+Hay 3 versiones del servicio disponibles para los nuevos usuarios, incluida una versión gratuita.
+    
+
+El nuevo sitio web presenta un diseño limpio y ordenado que permite a los usuarios una funcionalidad completa y contenido mejorado. La misión de ipad ™ es ofrecer servicios en la nube de primera clase a sus clientes, al tiempo que es el servicio de almacenamiento en la nube más eficiente y fácil de usar del mundo. Además, la misión de ipad ™ es apoyar el crecimiento de individuos y empresas por igual.
+    
+
+Estoy muy agradecido a nuestro creativo y talentoso equipo de ejecutivos, desarrolladores y diseñadores por poner todo esto en conjunto, dijo el Presidente y CEO de RXD Media, Keith Clements. Todos tenemos el objetivo común de hacer que nuestra marca ipad ™ y la nube, también en los Estados Unidos y en todo el mundo.
+
+
+Para obtener más información sobre ipad ™ o para entrevistar a Keith Clements, Presidente y CEO,
+            puede visitar la compañía en línea en www.ipadtoday.com o comunicarse con ellos por teléfono
+            al 267.895.1776. </b></string>
+
+
+    <string name="decdetail"><b> RXD Media, LLC 13 de diciembre de 2016
+
+</b>
+    <b>
+
+RXD Media, LLC, continúa la expansión de sus servicios ipad ™ con un impulso hacia el creciente sector educativo. RXD busca estar a la vanguardia de este creciente mercado.
+    
+
+</b> <b> DOYLESTOWN, PA (PRWEB) 13 de diciembre de 2016
+    
+
+</b> <b> El 14 de septiembre de 2016, la Junta de Juicios y Marcas de Marcas de los Estados Unidos rechazó una moción de juicio sumario presentada por IP Application Development, LLC, una subsidiaria de Apple, Inc. que posee la licencia de ipad ™ marca registrada de Apple, con respecto a los derechos de RXD en su marca de servicio ipad ™. Como se señaló en las decisiones de la Junta, la Solicitud de IP presentó dos solicitudes para registrar la marca ipad ™ para varios servicios, y buscó que la Junta declarara que RXD no tiene derechos de propiedad en su marca IPAD para los servicios descritos en la aplicación de marca registrada de RXD. De acuerdo con la decisión de la Junta, como mínimo, RXD ha presentado un problema genuino con respecto a su reclamación de derechos de propiedad en la marca de servicio ipad ™. Para ver y seguir los procedimientos de la USPTO de la oposición número 91207333, vaya a: http://ttabvue.uspto.gov/ttabvue/v?pno=91207333pty=OPP
+    
+
+</b> <b> Me alegró ver que el TTAB reconoció nuestra historia, que esperamos contar más detalladamente a medida que la oposición avanza. Siempre hemos creído que hay una diferencia entre nuestros servicios de almacenamiento basados ​​en la nube, en los cuales somos los primeros y, según sabemos, solo uno que usa la marca ipad ™ y su tableta / dispositivo, dijo el Socio Gerente de RXD, Keith Clements. Después de ser retenidos durante años, finalmente tenemos la capacidad de dirigir nuestro negocio y crecer.
+    
+
+</b> <b> RXD Media fue fundada en 2006 por Brian Clements, y en 2007 lanzó su aplicación web móvil pionera que permite a las personas sincronizar su información de forma remota con cualquier dispositivo. RXD adoptó la marca ipad ™ para sus servicios revolucionarios en el verano de 2007, tres años antes del anuncio de Apple de la tableta, y en el otoño de 2007, comenzó a ofrecer un sistema de suscripción en línea que permite a los suscriptores almacenar información personal. Digitalmente para la recuperación en varios dispositivos móviles. RXD ofreció y continúa ofreciendo sus servicios de marca ipad ™ a través de un portal web accesible en http://www.ipad.mobi (el portal web de ipad ™).
+    
+
+</b> <b> RXD pronto lanzará sus últimos desarrollos. Una vista previa de esos desarrollos se puede ver en http://www.ipadtoday.com
+    
+
+</b> Para la versión original en PRWeb visite: http://www.prweb.com/releases</string>
+
+    <string name="oct2detail"><b> RXD Media, LLC 09 de octubre de 2016
+
+ </b> <b> El 14 de septiembre de 2016, la Junta de juicios y apelaciones de marcas registradas de Estados Unidos rechazó una moción de juicio sumario presentada por IP Application Development, LLC, una subsidiaria de Apple, Inc. que posee la licencia de la marca registrada IPAD. a Apple, con respecto a los derechos de RXD en su marca de servicio ipad ™.
+    
+
+ </b> <b> DOYLESTOWN, PA (PRWEB) 09 de octubre de 2016
+
+</b>
+    <b> El 14 de septiembre de 2016, la Junta de juicios y apelaciones de marcas registradas de Estados Unidos rechazó una moción de juicio sumario presentada por IP Application Development, LLC, una subsidiaria de Apple, Inc. que otorga la licencia de la marca registrada ipad ™ a Apple. con respecto a los derechos de RXD en su marca de servicio ipad ™. Como se señaló en las decisiones de la Junta, la Solicitud de IP presentó dos solicitudes para registrar la marca IPAD para diversos servicios y solicitó que la Junta declarara que RXD no tiene derechos de propiedad sobre su marca ipad ™ para los servicios descritos en la aplicación de marca registrada de RXD. De acuerdo con la decisión de la Junta, como mínimo, RXD ha presentado un problema genuino con respecto a su reclamación de derechos de propiedad en la marca de servicio ipad ™. Para ver y seguir los procedimientos de la USPTO de la oposición número 91207333, vaya a: http://ttabvue.uspto.gov/ttabvue/v?pno=91207333pty=OPP
+    
+
+</b> <b> Me alegró ver que el TTAB reconoció nuestra historia, que esperamos contar más detalladamente a medida que la oposición avanza. Siempre hemos creído que hay una diferencia entre nuestros servicios de almacenamiento basados ​​en la nube, en los cuales somos los primeros y, según sabemos, solo uno que usa la marca ipad ™ y su tableta / dispositivo, dijo el Socio Gerente de RXD, Keith Clements. Después de ser retenidos durante años, finalmente tenemos la capacidad de dirigir nuestro negocio y crecer.
+    
+
+</b> <b> RXD Media fue fundada en 2006 por Brian Clements, y en 2007 lanzó su aplicación web móvil pionera que permite a las personas sincronizar su información de forma remota con cualquier dispositivo. RXD adoptó la marca ipad ™ para sus servicios revolucionarios en el verano de 2007, tres años antes del anuncio de Apple de la tableta, y en el otoño de 2007, comenzó a ofrecer un sistema de suscripción en línea que permite a los suscriptores almacenar información personal. Digitalmente para la recuperación en varios dispositivos móviles. RXD ofreció y continúa ofreciendo sus servicios de marca IPAD a través de un portal web accesible en http://www.ipad.mobi (el portal web ipad ™).
+    
+
+</b> RXD pronto lanzará sus últimos desarrollos. Una vista previa de esos desarrollos se puede ver en http://www.ipadtoday.com.</string>
+    <string name="home">CASA</string>
+    <string name="MyProfile">Mi perfil</string>
+    <string name="About">Acerca de</string>
+    <string name="Pricing">Precios</string>
+    <string name="Press">prensa</string>
+    <string name="ContactUs">Contáctenos</string>
+    <string name="TermsofService">Términos de servicio</string>
+    <string name="Logout">Cerrar sesión</string>
+    <string name="Personal">Personal</string>
+    <string name="Shared">Compartido</string>
+    <string name="Received">Recibido</string>
+    <string name="earchwithemaildd">Buscar con ID de correo electrónico</string>
+    <string name="searchsenderemail">Buscar con ID de correo electrónico del remitente</string>
+    <string name="UploadedOn">Subido en</string>
+    <string name="RecivedOn">Recibido en:</string>
+    <string name="Education">Educación</string>
+    <string name="fivegb">5 <sup> GB </sup></string>
+    <string name="fiftyvegb">50 <sup> GB </sup></string>
+    <string name="gb500">500 <sup> GB </sup></string>
+    <string name="month">$ 5.99 / mes</string>
+    <string name="Monthly">Mensual</string>
+    <string name="month2free">$ 59.90 / año (2 meses gratis)</string>
+    <string name="Yearly">Anual</string>
+    <string name="Yearlymonth">$ 99.90 / año (2 meses gratis)</string>
+    <string name="Subject">Tema</string>
+    <string name="Message">Mensaje</string>
+    <string name="wipad">Bienvenido a ipadtoday.com (el sitio iPAD).</string>
+    <string name="PressDetail">Detalle de prensa</string>
+    <string name="itallStart">Todo empezó cuando...</string>
+    <string name="aboutus2">La misión de ipad ™ es ser el mundo más eficiente,          Servicio de almacenamiento en la nube fácil de usar para apoyar la organización y el crecimiento para usted.          Tu familia, tus amigos y tu negocio.</string>
+    <string name="Connect">Conéctate con el iPad Hoy ™</string>
+    <string name="mbuseed">MB usado fuera de</string>
+    <string name="aboutus1">En 2007, la idea de ipad ™ nació de la necesidad de un fundador      para conectar y sincronizar individuos, y grupos, dentro de un      campo de información enormemente creciente. Una plataforma accesible para aportar ideas a      La vida a través de la comunicación organizada fue diseñada para fomentar el compromiso y la cooperación.          hacia los resultados no solo dentro de los círculos inmediatos sino también en la comunidad mundial.</string>
+
+
+</resources>

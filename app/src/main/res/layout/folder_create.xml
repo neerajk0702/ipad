@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/_15dp"
             android:background="#00000000"
             android:gravity="left|center"
-            android:hint="Enter Folder Name"
+            android:hint="@string/foldername"
             android:singleLine="true"
             android:textColorHint="#919191"
             android:textSize="14dp" />
@@ -64,7 +64,7 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textSize="12sp" />
 
             <Button
@@ -78,7 +78,7 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/button_login"
                 android:gravity="center"
-                android:text="Cancel"
+                android:text="@string/button_label_cancel"
                 android:textSize="12sp" />
         </LinearLayout>
 
