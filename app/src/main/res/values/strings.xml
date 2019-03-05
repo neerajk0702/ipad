@@ -225,6 +225,7 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
     <string name="From">From</string>
     <string name="searchfilefolder">Search with Folder/File-Name</string>
     <string name="viewallfile">Enter Event Name</string>
+    <string name="ViewAllFile">View All File</string>
     <string name="movetofolder">Move to Folder</string>
     <string name="sharemulti">Share Multiple Files"</string>
     <string name="ARCHIVE" translatable="false">ARCHIVE</string>

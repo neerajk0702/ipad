@@ -199,7 +199,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         int lanPos = prefs.getInt("Position", 0);
 
 
-        final String itemCondition_array[] = {"English", "Chinesh", "French", "German", "Italian", "Japines", "Korean", "Spansh"};
+        final String itemCondition_array[] = {"English", "Chinesh", "French", "German", "Italian", "Japines", "Korean", "Spanish"};
         final String languagecodearray[] = {"en", "zh", "fr", "de", "it", "ja", "ko", "es"};
         ArrayAdapter<String> languageAdapater = new ArrayAdapter<String>(this, R.layout.spinner_row, itemCondition_array);
         languageSpinner.setAdapter(languageAdapater);
@@ -207,10 +207,11 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setLanguageIntoSharedPreferences(position, languagecodearray[position], itemCondition_array[position]);
                 if (lanPos != position) {
                     isOPnSplash = true;
                 }
+                setLanguageIntoSharedPreferences(position, languagecodearray[position], itemCondition_array[position]);
+
             }
 
             @Override

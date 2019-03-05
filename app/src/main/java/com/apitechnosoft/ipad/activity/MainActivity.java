@@ -363,9 +363,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("headerTxt", getString(R.string.MyProfile));
             this.updateFragment(new ProfileFragment(), bundle);
         }
-        else if (id == R.id.selectlang) {
-
-        }
 
 
         DrawerLayout drawer = this.findViewById(R.id.drawer_layout);

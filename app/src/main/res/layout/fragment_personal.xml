@@ -271,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:visibility="visible"
-                        android:text="@string/viewallfile"
+                        android:text="@string/ViewAllFile"
                         android:background="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/orange"
