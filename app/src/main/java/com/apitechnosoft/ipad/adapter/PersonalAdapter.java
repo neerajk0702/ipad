@@ -370,6 +370,9 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.MyView
             } else if (type == 2) {
                 String filePath = Contants.Media_File_BASE_URL + mediaList.get(position).getFolderlocation() + "/" + mediaList.get(position).getFileName();
                 if (mediaList.get(position).getType() != null && mediaList.get(position).getType().contains("video")) {
+                    String thumpath = filePath.replace("C:/xampp/tomcat/webapps/ROOT/", Contants.Media_File_BASE_URL);
+                    Log.d(Contants.LOG_TAG, "thumpath****" + thumpath);
+                  //  Picasso.with(mContext).load(thumpath).resize(65, 65).placeholder(R.drawable.video).into(holder.videoImageView);
                     holder.videoUrl = filePath;
                     setVisibilityView(holder, true);
 

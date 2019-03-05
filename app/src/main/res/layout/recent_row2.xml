@@ -55,12 +55,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
                     android:background="#D9D9D9"
-                    android:clickable="true"
-                    android:minHeight="200dp" />
+                    android:clickable="true" />
 
                 <com.apitechnosoft.ipad.activity.CustomTextureVideoView
                     android:id="@+id/video_feed_item_video"
