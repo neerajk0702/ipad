@@ -24,7 +24,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Event Name"
+                android:hint="@string/eventname"
                 android:singleLine="true"
                 android:textColorHint="#919191"
                 android:textSize="@dimen/_14dp" />
@@ -43,7 +43,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Description..."
+                android:hint="@string/enterdesc"
                 android:textColorHint="#919191"
                 android:textSize="@dimen/_14dp" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15dp"
                 android:layout_marginBottom="@dimen/_10dp"
-                android:text="When"
+                android:text="@string/When"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14dp" />
 
@@ -76,7 +76,7 @@
                     android:layout_weight="0.5"
                     android:background="@drawable/troke_outlay"
                     android:gravity="center"
-                    android:hint="Select Date"
+                    android:hint="@string/selectdate"
                     android:minHeight="50dp"
                     android:paddingLeft="5dp" />
 
@@ -89,7 +89,7 @@
                     android:layout_weight="0.5"
                     android:background="@drawable/troke_outlay"
                     android:gravity="center"
-                    android:hint="Select Time"
+                    android:hint="@string/selecttime"
                     android:minHeight="50dp"
                     android:paddingLeft="5dp" />
             </LinearLayout>
@@ -146,7 +146,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reminder" />
+                    android:text="@string/Reminder" />
 
                 <Switch
                     android:id="@+id/reminder"
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5dp"
                     android:layout_weight="0.2"
-                    android:text="Account:"
+                    android:text="@string/Account"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -198,7 +198,7 @@
                     android:layout_marginRight="@dimen/_5dp"
                     android:layout_weight="0.5"
                     android:background="@drawable/select_folder"
-                    android:text="Submit"
+                    android:text="@string/Submit"
                     android:textColor="@color/white" />
 
                 <com.apitechnosoft.ipad.component.ASTButton
@@ -208,7 +208,7 @@
                     android:layout_marginLeft="@dimen/_5dp"
                     android:layout_weight="0.5"
                     android:background="@drawable/share_folder"
-                    android:text="Reset"
+                    android:text="@string/Reset"
                     android:textColor="@color/white" />
 
             </LinearLayout>

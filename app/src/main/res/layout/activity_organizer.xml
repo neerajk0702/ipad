@@ -48,7 +48,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
                         android:gravity="center"
-                        android:text="Organizer"
+                        android:text="@string/Organizer"
                         android:textColor="#fff"
                         android:textSize="@dimen/_16dp" />
 
@@ -61,7 +61,7 @@
                         android:layout_marginRight="@dimen/_5dp"
                         android:layout_weight="0.3"
                         android:background="@drawable/share_folder"
-                        android:text="All Events"
+                        android:text="@string/AllEvents"
                         android:textColor="@color/white" />
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>

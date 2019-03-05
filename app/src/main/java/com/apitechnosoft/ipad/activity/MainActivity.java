@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void loadPage() {
         MenuItem menuItem = navigationView.getMenu().getItem(0);
         Bundle pageBundle = new Bundle();
-        pageBundle.putString("headerTxt", "Home");
+        pageBundle.putString("headerTxt", this.getString(R.string.home));
         pageBundle.putInt("MENU_ID", 0);
         application().lastMenuItem = menuItem;
         this.updateFragment(new HomeFragment(), pageBundle);
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 ProfileFragment profileFragment = new ProfileFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("headerTxt", "My Profile");
+                bundle.putString("headerTxt", getString(R.string.MyProfile));
                 updateFragment(new ProfileFragment(), bundle);
             }
         });
@@ -319,31 +319,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle bundle = new Bundle();
         bundle.putInt("MENU_ID", item.getItemId());
         if (id == R.id.nav_home) {
-            bundle.putString("headerTxt", "Home");
+            bundle.putString("headerTxt", getString(R.string.home));
             bundle.putInt("MENU_ID", 0);
             this.updateFragment(new HomeFragment(), bundle);
         } else if (id == R.id.nav_About) {
-            bundle.putString("headerTxt", "About Us");
+            bundle.putString("headerTxt", getString(R.string.About));
             this.updateFragment(new AboutFragment(), bundle);
         } else if (id == R.id.nav_Pricing) {
-            bundle.putString("headerTxt", "Pricing");
+            bundle.putString("headerTxt", getString(R.string.Pricing));
             this.updateFragment(new PricingFragment(), bundle);
         } else if (id == R.id.nav_Education) {
-            bundle.putString("headerTxt", "Education");
+            bundle.putString("headerTxt", getString(R.string.Education));
             this.updateFragment(new EducationFragment(), bundle);
         } else if (id == R.id.nav_Press) {
-            bundle.putString("headerTxt", "Press");
+            bundle.putString("headerTxt", getString(R.string.Press));
             this.updateFragment(new PressFragment(), bundle);
 
         } else if (id == R.id.nav_Contact) {
-            bundle.putString("headerTxt", "Contact Us");
+            bundle.putString("headerTxt", getString(R.string.ContactUs));
             this.updateFragment(new ContactUsFragment(), bundle);
         } else if (id == R.id.nav_Terms) {
-            bundle.putString("headerTxt", "Terms of Service");
+            bundle.putString("headerTxt", getString(R.string.TermsofService));
             this.updateFragment(new TermsConditionActivity(), bundle);
 
         } else if (id == R.id.nav_Privacy) {
-            bundle.putString("headerTxt", "Privacy");
+            bundle.putString("headerTxt", getString(R.string.privacy));
             this.updateFragment(new PrivacyActivity(), bundle);
 
         } else if (id == R.id.nav_Logout) {
@@ -360,9 +360,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
             finish();
         } else if (id == R.id.nav_profile) {
-            bundle.putString("headerTxt", "My Profile");
+            bundle.putString("headerTxt", getString(R.string.MyProfile));
             this.updateFragment(new ProfileFragment(), bundle);
         }
+        else if (id == R.id.selectlang) {
+
+        }
+
+
         DrawerLayout drawer = this.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return false;
@@ -623,7 +628,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Previously Permission Request was cancelled with 'Dont Ask Again',
         // Redirect to Settings after showing Information about why you need the permission
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Need Multiple Permissions");
+        builder.setTitle(getString(R.string.needper));
         builder.setCancelable(false);
         builder.setMessage("Location, Phone and Storage Services Permissions are required for this App.");
         builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
@@ -636,7 +641,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivityForResult(intent, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_label_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -649,15 +654,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         final AlertDialog alert = builder.create();
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        builder.setMessage(getString(R.string.gpsdisable))
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         alert.dismiss();
                         startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQUEST_CODE_GPS_PERMISSIONS);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         alert.dismiss();
                         checkGpsEnable();
@@ -860,7 +865,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (newevent != null && newevent.size() > 0) {
             ShowSameDateAllEvent adapter = new ShowSameDateAllEvent(MainActivity.this, newevent);
             recyclerView.setAdapter(adapter);
-            today.setText("Today Events ("+newevent.get(0).getFromdate()+")");
+            today.setText("Today Events (" + newevent.get(0).getFromdate() + ")");
             Ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

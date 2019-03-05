@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">ipad™</string>
+    <string name="button_label_cancel">取消</string>
+    <string name="buffring">缓冲...</string>
+    <string name="close">关</string>
+    <string name="text_done">完成</string>
+    <string name="save">保存</string>
+    <string name="error_no_images">找不到文件</string>
+    <string name="picker_images">照片</string>
+    <string name="picker_videos">视频</string>
+    <string name="picker_documents">文献</string>
+    <string name="picker_audio">音频</string>
+    <string name="text_camera">相机</string>
+    <string name="select_image">点按即可选择</string>
+    <string name="p1">为确保为所有用户提供安全，无害的环境，我们制定了使用条款和服务条款。 它阐明了您对我们的期望以及我们对您的期望。 通过访问IPAD网站的任何区域，用户（用户）同意受法律约束并遵守下述条款。 IPAD网站由RXD Media，LLC（RXD）拥有和运营。 本文中对IPAD的任何引用应视为在适用情况下适用于IPAD网站和/或RXD。</string>
+    <string name="p2">该网站由宾夕法尼亚州联邦的RXD创建和控制。因此，宾夕法尼亚州的法律将管辖免责声明，条款和条件，而不会影响任何法律冲突原则。 RXD保留随时更改其网站和免责声明，条款和条件的权利。用户特此不可撤销地和无条件地同意接受位于宾夕法尼亚州的宾夕法尼亚州和美利坚合众国法院的专属管辖权，以解决因使用或购买而产生或与之相关的任何诉讼。 IPAD网站（并同意不会启动与此类法院有关的任何诉讼），放弃对在宾夕法尼亚州法院提起任何此类诉讼的地点的任何异议，并同意不在任何法院提出辩护或要求宾夕法尼亚州联邦政府提出的此类诉讼已被带入一个不方便的论坛。</string>
+    <string name="p3">用户明确同意使用IPAD网站的风险由用户承担。 RXD及其关联公司或其任何高级职员，董事或员工，代理商，第三方内容提供商，商家，赞助商，许可方（统称为提供商）等均不保证IPAD网站不会中断或无错误 ，他们也不对使用IPAD网站可能获得的结果，或通过IPAD网站提供的任何信息内容，服务或商品的准确性，可靠性或货币作出任何保证。</string>
+    <string name="When">什么时候</string>
+    <string name="viewallfile">输入活动名称</string>
+    <string name="Video">视频</string>
+    <string name="uplodnewfile">上传新文件</string>
+    <string name="upload">上传</string>
+    <string name="UpdateProfile">更新配置文件</string>
+    <string name="type9">9.其他隐私问题</string>
+    <string name="GOLDUSER">黄金用户</string>
+    <string name="BUYNOW">立即购买</string>
+    <string name="SILVERUSER">银牌用户</string>
+    <string name="FREEFORALL">所有用户都免费</string>
+    <string name="FreeSpace">可用空间</string>
+    <string name="BRONZEUSER">青铜用户</string>
+    <string name="stroleallfiledesc">存储所有文件类型（照片，视频，音乐，文档等）</string>
+    <string name="cloudpriceing">云定价表</string>
+    <string name="sharemulti">共享多个文件</string>
+    <string name="movetofolder">移到文件夹</string>
+    <string name="searchfilefolder">使用文件夹/文件名搜索</string>
+    <string name="From">从</string>
+    <string name="eventname">输入活动名称</string>
+    <string name="Docs">文件</string>
+    <string name="Music">音乐</string>
+    <string name="Photos">相片</string>
+    <string name="fileplaced">您的文件将自动放入适当的类别。 照片，视频，音乐或文档。</string>
+    <string name="RecentFile">最近的档案</string>
+    <string name="MoveFile">移动文件</string>
+    <string name="Comment">评论</string>
+    <string name="coomingsson">Coming Soon...</string>
+    <string name="Reset">重启</string>
+    <string name="Account">帐户：</string>
+    <string name="Reminder">提醒</string>
+    <string name="selecttime">选择时间</string>
+    <string name="selectdate">选择日期</string>
+    <string name="enterdesc">输入说明...</string>
+    <string name="entername">输入名字</string>
+    <string name="foldername">输入文件夹名称</string>
+    <string name="reallyexit">真的退出</string>
+    <string name="eventdetail">活动详情：</string>
+    <string name="eventtime">活动时间：</string>
+    <string name="OK">好</string>
+    <string name="exituwant">你真的想退出吗？</string>
+    <string name="changepass">更改密码</string>
+    <string name="enternewconfirmpass">输入确认密码</string>
+    <string name="enternewpass">输入新密码</string>
+    <string name="enteroldpass">输入旧密码</string>
+    <string name="itemcondi13">X.致谢</string>
+    <string name="itemcondi12">IX。可分割</string>
+    <string name="itemcondi11">八。 适用法律</string>
+    <string name="itemcondi10">VI。 终止使用</string>
+    <string name="termplocy">根据IPAD网站隐私政策的条款，RXD尊重其用户的隐私。</string>
+    <string name="itemcondi9">五，隐私政策</string>
+    <string name="itemcondi8">IV。 在线行为</string>
+    <string name="itemcondi7">D.出口</string>
+    <string name="itemcondi6">C.第三方内容</string>
+    <string name="itemcondi5">B.分发/上传第三方内容</string>
+    <string name="itemcondi4">A.所有权</string>
+    <string name="itemcondi3">III。 内容</string>
+    <string name="itemcondi2">II。 免责声明和责任限制</string>
+    <string name="itemcondi1">一，商标</string>
+    <string name="TodayEvents">今日活动</string>
+    <string name="Events">活动</string>
+    <string name="sendFIle">发送文件</string>
+    <string name="SEND">发送</string>
+    <string name="commentbox">评论框...</string>
+    <string name="entersenderemailid">输入发件人电子邮件ID：</string>
+    <string name="shareFile">分享文件</string>
+    <string name="byestablish">通过建立您的IPAD帐户，即表示您同意我们的服务条款，并同意在美国和其他地方的RXD服务器上处理和存储您的信息。</string>
+    <string name="privacy">隐私</string>
+    <string name="termofsrvices">服务条款</string>
+    <string name="entervarificationcode">输入验证码</string>
+    <string name="enteremail">输入电子邮件ID</string>
+    <string name="lastName">输入姓氏</string>
+    <string name="enterfirstName">输入名字</string>
+    <string name="type6">6.信息安全</string>
+    <string name="type5">5.用户选择收集和使用信息</string>
+    <string name="type4">4.更新和更正信息</string>
+    <string name="type3">3.发布信息</string>
+    <string name="type2">2.收集方法和信息的使用</string>
+    <string name="type1">2.收集方法和信息的使用</string>
+    <string name="PRIVACYPOLICY">隐私政策</string>
+    <string name="AllEvents">所有活动</string>
+    <string name="Organizer">组织者</string>
+    <string name="clearAll">全部清除</string>
+    <string name="Notification">通知</string>
+    <string name="Instagram">Instagram的</string>
+    <string name="LOGIN">登录</string>
+    <string name="p5">在任何情况下，RXD或参与创建，制作或分发IPAD网站的任何其他方均不对因使用或无法使用IPAD网站而导致的任何直接，间接，偶然，特殊或后果性损害承担责任，包括不限于用户依赖从IPAD网站获得的任何信息，或由于错误，遗漏，中断，删除文件或电子邮件，错误，缺陷，病毒，操作或传输延迟或任何性能失败而导致的信息，是否由于上帝的行为，通信失败，盗窃，破坏或未经授权访问IPAD网站记录，程序或服务而造成的。用户特此确认本段适用于通过IPAD网站提供的所有内容，商品和服务。由于某些州不允许排除或限制间接或附带损害的责任，因此在这种情况下，责任仅限于法律允许的最大范围内。</string>
+    <string name="p6">用户承认IPAD网站包含受版权，商标，商业秘密或其他所有权保护的信息，数据，软件，照片，图形，视频，字体，图形，音乐，声音和其他材料（统称为内容），并且这些权利在现在或以后开发的所有形式，媒体和技术中都是有效的并受到保护。根据美国版权法，所有内容均受到集体保护，RXD拥有此类内容的选择，协调，安排和增强的版权。用户不得全部或部分修改，删除，删除，增加，添加，发布，传输，参与转让或出售，创建衍生作品，或以任何方式利用任何内容。如果没有显示任何特定限制，用户可以复制内容的选定部分，前提是副本仅供用户个人使用，并且用户保留内容中包含的任何通知，例如所有版权声明，商标图例或其他所有权声明。除非在前一句中规定或根据美国版权法的合理使用权限（参见，例如，17 USCA第107节），否则用户不得以任何方式上传，发布，复制或分发受版权保护的内容，或未经版权所有者或其他所有权许可的其他所有权。除上述内容外，任何软件内容的使用均受该软件随附的软件许可协议的约束。</string>
+    <string name="p7">除上述第III（A）节规定的情况外，用户可以仅在IPAD网站上传或以其他方式分发不受任何版权或其他所有权保护的内容（统称为公共内容）或作者的内容。已明确授权在万维网上发布。经版权所有者同意分发的任何受版权保护或其他专有内容应包含[版权所有]的阶段，由[所有者名称]拥有;经许可使用。未经授权提交或分发受版权保护的内容或其他专有内容是非法的，可能会使用户受到刑事诉讼，并对民事诉讼中的损害承担个人责任。用户将对因侵犯版权或所有权而导致的任何损害或此类提交所产生的任何其他损害承担责任。 RXD及其关联公司或其任何高级职员，董事，员工，代理商，提供商等均不对任何侵犯版权或所有权或由此类用户造成的任何其他损害所造成的任何损害承担责任。提交。根据“数字千年版权法案”，用户和其他人可以通过以下电子邮件地址向RXD报告侵权行为：inquiry@rxdmedia.com通过向任何用户提交区域提交内容，包括但不限于任何产品评论或参与任何聊天室，用户自动授予或保证，此类内容的所有者已明确授予RXD免版税，永久，不可撤销，非独占的权利以及使用，复制，出版，翻译，再许可，复制和分发内容的许可全部或部分在全球范围内和/或将其以任何形式，媒体或技术合并到其他作品中，这些形式，媒体或技术现在已知或此后为此类内容中可能存在的任何版权的整个期限而开发。用户还允许任何其他用户访问，存储或复制该用户个人使用的内容。根据此授权，放置在IPAD网站上的内容所有者保留此类内容中可能存在的任何和所有权利。</string>
+    <string name="p8">RXD是分销商，不是第三方和用户提供的内容的发布者。与公共图书馆或报摊相比，RXD对此类内容没有更多的编辑控制权。任何由第三方（包括提供商或IPAD网站的任何其他用户）表达或提供的内容的一部分的意见，建议，声明，服务，优惠或其他信息均为相应作者或分销商的内容，而非RXD的内容。或其附属公司或其任何高级职员，董事，员工或代理人。 RXD及其关联公司，其任何高级职员，董事，员工或代理人，以及任何第三方（包括任何提供商或IPAD网站的任何其他用户）均不保证任何内容的准确性，完整性或实用性，也不保证其适销性或适合任何特定目的。在许多情况下，通过IPAD网站提供的内容代表相应提供商或未与RXD签订合同的用户的意见和判断。 RXD既不认可也不对由授权的RXD员工以外的任何人在IPAD网站上发表的任何意见，建议或声明的准确性或可靠性负责。在任何情况下，RXD或其关联公司或其任何高级职员，董事，员工或代理人均不对因用户依赖通过IPAD网站获取的信息而造成的任何损失，损害或伤害负责。用户有责任评估通过IPAD网站提供的信息，意见，建议或其他内容。</string>
+    <string name="p9">美国的出口管制法律规定了源自美国的技术的出口和再出口。 这包括向外国和某些外国国民电子传输信息和软件。 用户同意遵守这些法律及其规定 - 包括但不限于“出口管理法”和“武器出口管制法”，不得通过电子传输或其他方式将来自IPAD网站的任何内容转让给外国国民 或违反此类法律的外国目的地。</string>
+    <string name="p10">用户同意仅出于合法目的使用IPAD网站。 禁止用户在IPAD网站上发布或传播任何非法，有害，威胁，辱骂，骚扰，诽谤，庸俗，淫秽，露骨色情，亵渎，仇恨，种族，民族或其他令人反感的任何材料，包括但不包括但不 限于任何鼓励构成刑事犯罪的行为，引起民事责任或以其他方式违反任何适用的地方，州，国家或国际法律的材料。</string>
+    <string name="p11">如果RXD被告知用户提供的涉嫌侵权，诽谤，破坏，非法或令人反感的内容（例如，通过在线评论或聊天室），RXD可以调查指控并自行决定是否删除或要求删除 来自IPAD网站的此类内容。 RXD可以披露任何形式的任何内容或电子通信：（i）满足任何法律，法规或政府要求; （ii）如果此类披露对于操作IPAD网站是必要或适当的; 或（iii）保护RXD，其用户或提供商的权利或财产。</string>
+    <string name="p12">RXD保留禁止其自行决定认为对个人用户，IPAD网站，组成IPAD网站的社区或RXD或任何第三方的任何权利有害的行为，通信或内容的权利，或 违反任何适用的法律。 尽管有上述规定，但在线发布后，RXD及其提供商均无法确保及时删除可疑内容。 因此，RXD及其关联公司或其任何高级职员，董事，员工或代理人以及提供商均不对IPAD网站上的行为，沟通或内容采取任何行动或不作为承担责任。</string>
+    <string name="p13">对于IPAD网站自行决定认为违反任何适用法律或有损于利益的任何行为，RXD可以终止用户访问，或暂停用户访问IPAD网站的全部或部分内容，恕不另行通知。 另一个用户，第三方提供商，服务提供商或RXD。</string>
+    <string name="p14">RXD不能禁止未成年人访问本网站。 RXD必须依靠父母，监护人和负责监督13岁以下儿童的人来决定哪些材料适合这些儿童观看和/或购买。  RXD要求所有购买：（i）13岁或以上的个人，或（ii）未满13岁的未成年人，通过RXD授权的附属计划，允许父母和其他监护人支付购买未成年人的费用，并允许此类未成年人在我们的网站上购买物品，并根据我们的隐私政策条款收集我们的某些信息。  您每次在IPADTODAY.COM购买产品或服务时，您都表示您认为您是（I）单独的13岁或者年龄，或者（II）13岁以下的未成年人通过授权联盟授权的RXD购买允许父母和其他监护人同时支付购买未成年人的计划，并允许这些未成年人购买我们网站上的物品以及根据我们的隐私政策条款收集我们的某些信息。</string>
+    <string name="p15">该网站由宾夕法尼亚州联邦的RXD创建和控制。因此，宾夕法尼亚州的法律将管辖免责声明，条款和条件，而不会影响任何法律冲突原则。 RXD保留随时更改其网站和免责声明，条款和条件的权利。用户特此不可撤销地和无条件地同意接受位于宾夕法尼亚州的宾夕法尼亚州和美利坚合众国法院的专属管辖权，以解决因使用或购买而产生或与之相关的任何诉讼。 IPAD网站（并同意不会启动与此类法院有关的任何诉讼），放弃对在宾夕法尼亚州法院提起任何此类诉讼的地点的任何异议，并同意不在任何法院提出辩护或要求宾夕法尼亚州联邦政府提出的此类诉讼已被带入一个不方便的论坛。</string>
+    <string name="p16">本使用条款和服务条款的目的是可以分割的。 如果出于任何原因，这些使用和服务条款的任何条款在任何司法管辖区内全部或部分无效或不可执行，则此类条款对于此类无效或不可执行的范围内无效。 影响任何其他司法管辖区的有效性或可执行性的方式或任何司法管辖区的其余条款。</string>
+    <string name="p17">使用条款和服务条款（包括此处引用的所有文件）代表您与RXD之间关于您与RXD的关系的完整理解，并取代之前的任何陈述或陈述。 您同意使用ipadtoday.com网站受使用和服务条款的约束。 上述使用条款和服务可能会有所变化。</string>
+    <string name="pp1">本隐私政策披露了ipadtoday.com网站（IPAD网站）和各种相关服务（统称为网站）的隐私惯例。 RXD Media，LLC（RXD）是该网站的提供商（简称我们或我们），致力于在线保护您的隐私。 请阅读以下信息，了解有关您使用本网站的以下信息。</string>
+    <string name="pp2">您承认本隐私政策是IPAD网站使用和服务条款的一部分，通过访问或使用我们的网站，您同意受其所有条款和条件的约束。 如果您不同意这些条款，请不要访问或使用本网站。</string>
+    <string name="pp3">我们保留随时更改本隐私政策的权利。 此类更改，修改，添加或删除应在收到通知后立即生效，可通过包括但不限于向注册用户列出的电子邮件地址发送电子邮件以及在此页面上发布修订后的政策的方式提供。 您承认并同意，您有责任以注册用户身份维护有效的电子邮件地址，定期查看本网站和本政策，并了解任何修改。 您在此类修改后继续使用本网站将构成您：（a）对修改后的政策的确认; （b）同意遵守修改后的政策并受其约束。</string>
+    <string name="pp4">为了更好地为您提供众多服务，我们收集了两类有关用户的信息：个人身份信息和非个人身份信息。 我们收集您的信息的主要目的是在使用我们的网站时为您提供流畅，高效和定制的体验。</string>
+    <string name="pp5">个人身份信息：这是指让我们了解您的具体情况的信息。当您在本网站上从事某些活动时，例如注册会员资格，订购产品或服务，提交内容和/或在论坛或其他公共区域发布内容，参加竞赛或抽奖活动，填写调查表，或者向我们发送反馈，我们可能会要求您填写并提交在线表格，以提供有关您自己的某些信息。您可以完全选择参与这些活动。但是，如果您选择参与这些活动，我们可能会要求您向我们提供个人信息，例如您的姓名，邮寄地址（包括邮政编码），电子邮件地址，雇主，职称和部门，电话和传真。号码和其他个人识别信息。在网站上订购产品或服务时，可能会要求您提供信用卡号。根据活动的不同，我们要求您提供的一些信息被确定为强制性的，有些则是自愿性的。如果您未提供与特定活动相关的强制性数据，您将无法参与该活动。</string>
+    <string name="pp6">非人工可识别信息：这是指本身不能识别特定个人的信息。我们会根据您在我们网站上的访问地点以多种方式收集有关您的某些信息。此信息在个人和汇总的基础上进行汇编和分析。此信息可能包括您刚刚来自的网站统一资源定位器（URL），您下次访问的URL，您使用的浏览器以及您的Internet协议（IP）地址。 URL是万维网上的文档和其他资源的全局地址。 IP地址是传输控制协议/网际协议（TCP / IP）网络（例如万维网）上的计算机或设备的标识符。像Web这样的网络使用TCP / IP协议根据目的地的IP地址路由信息。换句话说，IP地址是在您上网时自动分配给您的计算机的号码，允许Web服务器找到并识别您的计算机。计算机需要IP地址才能使用户在Internet上进行通信。</string>
+    <string name="pp7">除非您自愿提供给我们，否则我们不会收集有关您的任何个人身份信息。 您在以下情况下向我们提供某些个人身份信息：（a）注册我们的服务并向我们注册您的电子邮件地址; （b）参加由我们或我们的合作伙伴赞助的抽奖或竞赛; （c）注册选定第三方的特别优惠; （d）通过电话或信函发送电子邮件，提交表格或传递其他信息; 或（e）在我们网站上订购和购买产品和服务时提交您的信用卡或其他付款信息。 我们还可能在我们网站上的其他位置收集您的信息，说明正在收集此类信息。</string>
+    <string name="pp8">此外，我们还可能收集或我们的第三方广告服务器和/或内容服务器可能收集某些非人工可识别信息。 此信息最终以商店类别的形式存储，在某些情况下，还存储在特定的URL中。 我们使用您的IP地址来诊断我们的服务器，软件问题，管理我们的网站以及收集人口统计信息。 我们的第三方广告服务器还会向我们提供摘要，但不会提供个别报告，这些报告会告诉我们在外部网站上展示和点击的广告数量。</string>
+    <string name="pp9">根据我们与您达成的协议的要求，我们将主要使用您的个人身份信息为您提供服务。 我们还将使用个人身份信息来增强我们网站的运营，填写订单，改进我们的营销和推广工作，统计分析网站使用，改进我们的产品和服务产品，以及定制我们的网站内容，布局和服务。 我们可能会使用个人身份信息向您提供信息，并就行政通知与您联系。 我们还可能使用个人身份信息来解决纠纷，解决问题并与您签订协议，包括我们的网站使用条款，销售条款和条件以及本私人政策。</string>
+    <string name="pp10">我们不会将您的个人身份信息出售，交易或出租给他人。 我们通过与关联公司，服务提供商，合作伙伴和其他第三方的合同安排提供我们的一些服务。 我们和我们的服务合作伙伴使用您的个人身份信息来运营我们的网站并提供他们的服务。 例如，我们必须将您的信用卡信息发布给发卡银行，以确认对在本网站上购买的产品和服务的付款; 将您的地址信息发布到送货服务，以提供您订购的产品; 并向第三方提供订单信息，以帮助我们提供客户服务。</string>
+    <string name="pp11">我们将鼓励我们的服务合作伙伴采用和发布隐私政策。 但是，我们的服务合作伙伴对您的个人身份信息的使用受这些服务合作伙伴的隐私政策的约束，并且不受我们的控制。</string>
+    <string name="pp12">有时，执法或司法机关可能要求我们向相应的政府机构提供个人身份信息。 我们将在收到法院命令，传票或与执法调查合作时披露个人身份信息。 我们与执法机构充分合作，确定那些使用我们服务进行非法活动的人。 我们保留向执法机构报告任何我们真诚相信为非法的活动的权利。</string>
+    <string name="pp13">我们还可能向第三方广告商提供有关我们的客户销售，流量模式和相关网站信息的非人工可识别信息，但这些统计信息不包括任何个人身份信息。</string>
+    <string name="pp14">我们相信您应该能够访问和编辑您提供给我们的个人身份信息。 您可以根据本网站其他地方发布的说明，随时链接到您的帐户，在线更改您帐户中的任何个人身份信息。 您也可以通过以下方式访问并更正您的个人信息和隐私偏好：</string>
+    <string name="pp15">我们建议您在个人身份信息发生变化时及时更新。 您可能会要求删除或删除有关您帐户的信息; 但是，由于我们会跟踪过去的交易，因此您无法删除与此网站上过去交易相关的信息。 此外，由于备份，可能无法在没有剩余信息的情况下完全删除您的信息。</string>
+    <string name="pp16">我们可能会不时向您发送有关我们产品和服务的电子邮件。 此外，如果您在注册时表示您有兴趣收到我们和我们的合作伙伴的优惠或信息，我们可能会偶尔向您发送有关我们认为您可能感兴趣的产品和服务的直接邮件。 只有RXD（或代表RXD并根据保密协议工作的代理商）才会向您发送这些直接邮件，并且仅当您表明您不反对这些优惠时。 如果您不想收到此类邮件，请在向我们提供您的个人信息时告诉我们。 或者，您可以随时轻松编辑您的帐户信息，以便不再收到此类优惠和邮件。</string>
+    <string name="pp17">您还可以选择cookie，如下所述。 通过修改浏览器首选项，您可以选择接受所有cookie，在设置cookie时收到通知，或拒绝所有cookie。 如果您选择拒绝所有Cookie，我们网站的某些部分可能无法正常运行。</string>
+    <string name="pp18">在我们的网站上，您可以放心，您的个人身份信息是安全的，符合当前的行业标准。 与我们的用户相关的所有个人身份信息的安全性的重要性是我们最关心的问题。 您的个人身份信息受到多种保护。 您可以通过您选择的密码和唯一客户ID访问您的个人身份信息。 此密码已加密。 我们建议您不要向任何人透露密码。 此外，您的个人身份信息驻留在安全的服务器上，该服务器仅选择RXD人员和承包商可以通过密码访问。 我们对您的个人身份信息进行加密，从而防止未经授权的一方在传输给我们时查看此类信息。</string>
+    <string name="pp19">您提供的非个人身份信息的个人信息也位于安全的服务器上，只能通过密码访问。 由于无法从外部RXD访问此信息，因此不会要求您选择密码以查看或修改此类信息。 为了最有效地为您服务，信用卡交易和订单履行由已建立的第三方银行，处理代理和分销机构处理。 他们会收到验证和授权您的信用卡或其他付款信息以及处理和发送订单所需的信息。</string>
+    <string name="pp20">遗憾的是，互联网或任何无线网络上的数据传输都不能保证100％安全。 因此，在我们努力保护您的个人身份信息时，您承认：（a）互联网的安全和隐私限制是我们无法控制的; （b）您和我们之间通过本网站交换的任何和所有信息和数据的安全性，完整性和隐私性均不能得到保证; （c）任何此类信息和数据可能在第三方过境时被查看或篡改。</string>
+    <string name="pp21">当您使用我们的网站时，我们可能会在您的计算机上存储cookie，以便于和定制您对我们网站的使用。 Cookie是一个小型数据文本文件，网站存储在您的计算机硬盘驱动器上（如果您的Web浏览器允许），以后可以检索该文件以识别您的身份。 我们的cookie存储随机分配的用户标识号，您所在的国家/地区以及您的名字，欢迎您回到我们的网站。 Cookie使您更轻松地使用网站，使网站运行更顺畅，并帮助我们维护安全的网站。 如果您的浏览器允许，您可以随时拒绝我们的cookie，但在这种情况下，我们网站的某些部分可能无法正常工作。</string>
+    <string name="pp22">我们可能会使用外部广告服务公司在我们的网站上展示横幅广告。 作为其服务的一部分，他们将在您的计算机上放置一个单独的cookie。 我们不会向任何第三方广告服务器提供您的任何个人身份信息或有关您购买的信息。 我们和我们的第三方广告服务器将收集和使用您的非人工可识别信息，例如您的IP地址，浏览器类型，您的计算机登录的服务器，与您的服务器关联的区号和邮政编码以及您是否回复了 特别广告。 其他广告客户也可以采用与上述相同的方式在我们的网站上放置横幅广告，但我们不会向他们透露任何个人身份信息。</string>
+    <string name="pp23">除非本隐私政策中另有说明，否则本文档仅涉及我们向您收集的信息的使用和披露。 通过我们网站访问的其他网站有自己的隐私政策和数据收集，使用和披露做法。 请参阅每个站点的隐私政策。 我们不对第三方的政策或做法负责。 此外，在我们网站上刊登广告的其他公司可能会在您通过使用Cookie查看或点击其广告时收集有关您的信息。 我们无法控制这一系列信息。 如果您对使用他们收集的信息有任何疑问，请直接与这些广告客户联系。</string>
+    <string name="pp24">我们的政策是，未经许可，我们不会故意收集，使用或披露13岁以下访客的个人身份信息。 通过访问和使用IPAD网站，您确认您已年满13周岁或获得父母或监护人的许可才能访问和使用本网站，并且该许可授予RXD以收集，使用或披露个人身份信息 符合本隐私政策条款的信息。</string>
+    <string name="pp25">您还应该知道，当在本网站的论坛或其他公共区域自愿披露个人身份信息（即您的姓名，电子邮件地址等）时，该信息以及您通信中披露的任何信息可以是 由第三方收集和使用，可能会导致来自第三方的未经请求的消息。 此类活动不受我们控制，本政策不适用于此类信息。 任何提交到本网站聊天室或其他公共区域的内容均被接受，并了解所有第三方均可访问。 如果您不希望第三方查看您的意见，建议您不要提交任何意见。 最终，您自行负责维护您的密码和/或帐户信息的保密性。 无论何时在线，请务必小心并负责。</string>
+    <string name="pp26">如果您对本隐私政策，本网站的做法或您与本网站的交易有任何疑问，请发送信函与我们联系：</string>
+    <string name="pp27">您也可以发送电子邮件至inquiry@rxdmedia.com与我们联系</string>
+    <string name="pp28">当它在云中时，狗不能吃你的功课。 教师可以让学生及其家人及时了解事件，期望和进展。</string>
+    <string name="pp29">连接是关键。 教室正在四面墙外扩展，正在信息高速公路上行走。 课堂社区可以在他们自己以及本地和远程的大型学校社区之间共享信息和资源。 不要错过公共汽车。</string>
+    <string name="pp30">同学们可以在家里相互联系，合作完成家庭作业，项目，甚至提高学习技巧。</string>
+    <string name="pp31">通过各种学科领域为学生提供支持的工具，减轻家庭作业时间。</string>
+    <string name="pp32">如果您有一般性问题，或想要了解有关ipads个人云存储和教育解决方案的其他信息，请填写下面的表格。 谢谢，我们期待与您联系！</string>
+    <string name="otpverify">请检查您的垃圾邮件文件夹！ 如果您使用Gmail或其他免费网络邮件服务，则验证码很可能位于您的垃圾邮件/垃圾邮件文件夹中。</string>
+    <string name="changeinfo">更改用户信息</string>
+    <string name="firstName">名字</string>
+    <string name="LastName">姓</string>
+    <string name="commentonfile">评论文件</string>
+    <string name="commentboxmin">评论框最多36个字..</string>
+    <string name="Submit">提交</string>
+    <string name="TravelRoutine">旅行套路</string>
+    <string name="Calendar">日历</string>
+    <string name="Enterregemail">输入注册电邮</string>
+    <string name="enterpass">输入密码</string>
+    <string name="forgetpass">忘记密码</string>
+    <string name="SignIn">登入</string>
+    <string name="FREE5GB">免费5 GB</string>
+    <string name="storagedigital">存储+数字管理器</string>
+    <string name="joinforfree">现在加入免费</string>
+    <string name="orloginwith">或登录</string>
+    <string name="Linkedin">LinkedIn</string>
+    <string name="twiterlogin">Twitter登录</string>
+    <string name="sync">与ipadtoday.com同步</string>
+    <string name="REGISTER">寄存器</string>
+    <string name="itemcondi14">X.致谢</string>
+    <string name="selectlanguage">选择你的语言</string>
+    <string name="welcomeipadtm">欢迎使用iPad <sup> TM </sup></string>
+    <string name="sendvarificationcode">发送验证码</string>
+    <string name="varificationnotmatch">验证码不匹配！</string>
+    <string name="entervaricicationcode">请输入验证码！</string>
+    <string name="Signupsuccess">注册成功。</string>
+    <string name="Signupnotsuccess">注册不成功。</string>
+    <string name="validEmail">请输入有效的电子邮件ID</string>
+    <string name="selecttermsevices">请选择服务条款。</string>
+    <string name="pleasewait">请耐心等待</string>
+    <string name="varificationcodeemail">验证码已成功发送到您的邮件。</string>
+    <string name="varificationcodenotemail">验证码未成功发送到您的邮件。</string>
+    <string name="LoginSuccessfully">登录成功</string>
+    <string name="LoginnotSuccessfully">登录不成功</string>
+    <string name="somethingwrong">有些不对劲..！</string>
+    <string name="linkpasssend">密码重置链接已发送到您注册的电子邮件ID。</string>
+    <string name="eventnotsave">活动未成功保存！</string>
+    <string name="eventsave">事件成功保存</string>
+    <string name="enterevent">请输入活动名称</string>
+    <string name="selectdatee">请选择日期</string>
+    <string name="SendingMail">发送邮件</string>
+    <string name="thankucontactus">感谢您与我们联系。</string>
+    <string name="entersubj">请输入主题</string>
+    <string name="entermsg">请输入留言</string>
+    <string name="nodata">没有找到数据！</string>
+    <string name="PressAgain">再按一次</string>
+    <string name="searchwithfile">使用文件夹/文件名搜索</string>
+    <string name="plsselctFile">请选择文件！</string>
+    <string name="foldercretesuccess">文件夹创建成功。</string>
+    <string name="foldernotcreate">文件夹未创建！</string>
+    <string name="selectfolder">请选择文件夹！</string>
+    <string name="filemovesucces">文件已成功移动</string>
+    <string name="filemovesuccesnot">文件未成功移动！</string>
+    <string name="selectpaymnetgold">请选择Gold User中的任何付款选项！</string>
+    <string name="paymentsliver">请选择Silver User中的任何付款选项！</string>
+    <string name="gottoken">成功得到了令牌</string>
+    <string name="gottokennit">无法获得令牌：</string>
+    <string name="faildPayment">付款失败</string>
+    <string name="donePayment">付款成功完成。</string>
+    <string name="filenotulod">文件未上传！</string>
+    <string name="fileuploadsuccesss">文件上传成功</string>
+    <string name="foldernotfound">找不到文件夹</string>
+    <string name="enterfoldername">请输入文件夹名称！</string>
+    <string name="filetypenotsuport">此文件类型不支持预览！ 请按上传按钮。</string>
+    <string name="videoloading">视频加载......</string>
+    <string name="passwordchange">密码更改成功。</string>
+    <string name="oldpss">您的旧密码不匹配请输入有效的旧密码</string>
+    <string name="entercomment">请输入评论</string>
+    <string name="CommentsendSuccessfully">评论发送成功</string>
+    <string name="CommentsnotendSuccessfully">评论不成功发送！</string>
+    <string name="sharedemail">共享电子邮件未找到数据！</string>
+    <string name="RegisterationSuccessfully">注册成功</string>
+    <string name="faildauth">无法进行身份验证。 请再试一次。</string>
+    <string name="useralredyauth">用户已经过身份验证</string>
+    <string name="firsttwiter">首先是Twitter验证验证凭据。</string>
+    <string name="needper">需要多个权限</string>
+    <string name="gpsdisable">您的GPS似乎已禁用，是否要启用它？</string>
+    <string name="Yes">是</string>
+    <string name="No">没有</string>
+    <string name="notinotfound">通知未找到！</string>
+    <string name="Event">事件</string>
+    <string name="Birthday">生日</string>
+    <string name="fileSharedsuccess">文件已成功共享</string>
+    <string name="filennotSharedsuccess">文件未成功共享！</string>
+    <string name="eventlistdata">找到事件列表数据！</string>
+    <string name="novdetail">      <b> RXD Media，LLC 2017年11月9日</b> <b> ipad™，让您与家人，朋友和生活事业保持联系</b> <b> DOYLESTOWN，PA（PRWEB）2017年11月9日</b> <b> ipad™以新版本庆祝其成立十周年</b> <b> ipad™继续发展成为一个流行的云存储服务，具有用户友好界面，以促进沟通和参与。 </b> <b>云存储是一种与全世界存储数据和通信的流行模式。多年来，云存储解决方案通过实时促进全球参与和合作，促进了沟通。 ipad™是一项于2007年推出的服务，是RXD Medias创始人Brian Clements的心血结晶，他只是想在这个快速发展的通信和信息技术领域中连接和同步个人和团体。 Brian Clements说，我想开发一个云存储服务和解决方案，可以将一大群人，个人和企业聚集在一起。我研究了我的想法并对这个概念抱有极大的信心。因此，ipad™服务作为真正的云存储解决方案继续发展。 </b> <b>开发ipad™的使命是成为全球最高效，最具吸引力且用户友好的云存储服务。 RXD Media首席执行官兼总裁Keith Clements表示，我们还相信，我们可以通过为存储关键数据提供云存储来支持企业和组织的发展。除了商业解决方案之外，ipad™还针对居住在国外的大部分家庭或远离其他地方的亲人。 ipad™服务提供了一个社区，家人和朋友可以将他们的工作，音乐，视频，图片联合起来，粘合和共享，甚至将所有这些保存到云存储空间。 </b> <b> ipad™云存储解决方案在云中提供虚拟存储空间，允许用户随时恢复数据。 Keith Clements表示，我们通过云存储服务为用户提供专用解决方案。他还补充说，我们的产品可以在需要时创建备份。此外，它允许用户随时从任何设备同步和恢复其数据。 </b> <b>在这个快速发展的世界中，由于技术的巨大变化，数据存储是人们关注的主要原因。通常，ipad™服务使用户能够轻松备份重要的所有内容。无论文件的类型和大小如何，您都可以将其在线存储在云中，并在需要时进行同步，并将其还原以便立即使用。即使在旅途中，ipad™服务也不会让您忘记您的重要任务。 Keith Clements表示，无论您走到哪里，我们都会为您提供袖珍移动存储解决方案，以便随身携带您的所有数据。 </b>有关ipad™的更多信息或采访总裁兼首席执行官Keith Clements，您可以在http://www.ipadtoday.com在线访问该公司，或通过电话267.895.1776与他们联系。</string>
+    <string name="nov"><b> 2017年11月9日  </b><b> ipad™，让您与家人，朋友和生活事业保持联系</b></string>
+    <string name="oct"><b> 2017年10月18日  </b> <b> ipad™以新版本庆祝成立十周年</b></string>
+
+    <string name="octdetail"><b> RXD Media，LLC 2017年10月18日
+
+</b>
+   <b> ipad™以新版本庆祝成立十周年
+    
+
+</b> <b>宾夕法尼亚州DOYLESTOWN（PRWEB）2017年10月18日
+
+</b> <b>家庭，家庭企业的云存储宣布新的服务和网站。
+
+</b> <b>
+
+宾夕法尼亚州道利斯特 -  2017年10月18日--- RXD Media，LLC宣布推出最新版ipad™和全新的ipad™网站，以庆祝其成立10周年。
+    
+
+ipad™是一款功能齐全的云存储解决方案，可提供适合个人或商业用途的存储。
+    
+
+ipadsTM云存储适用于所有设备，从计算机到手机，再到平板电脑。 ipad™旨在轻松简单地备份，同步和恢复来自各种设备的所有重要数据，以便公司或个人永远不会没有最重要的信息。
+    
+
+通过为个人用户和商业客户提供各种版本的服务，ipad™可以帮助您组织业务和个人生活的各个方面。
+    
+
+新用户可以使用3种版本的服务，包括免费版本。
+    
+
+新网站采用干净整洁的设计，允许用户使用全功能和增强内容.ipad™的使命是为客户提供一流的云服务，同时提供世界上最高效，用户友好的云存储服务。此外，ipad™的使命是支持个人和公司的发展。
+    
+
+RXD Media总裁兼首席执行官Keith Clements表示，我非常感谢我们的创意和才华横溢的高管，开发人员和设计师团队将所有这些放在一起。我们的共同目标是在美国和全球范围内使我们的ipad™品牌和云成为同义词
+
+
+有关ipad™的更多信息或采访总裁兼首席执行官Keith Clements，您可以在www.ipadtoday.com在线访问该公司，或通过电话267.895.1776与他们联系。</b></string>
+
+    <string name="decdetail"><b> RXD Media，LLC 2016年12月13日
+
+</b>
+    <b>
+
+RXD Media，LLC正在继续扩展其ipad™服务，推动蓬勃发展的教育行业。 RXD力求走在这个不断增长的市场的最前沿。
+    
+
+</b> <b> DOYLESTOWN，PA（PRWEB）2016年12月13日
+    
+
+</b> <b> 2016年9月14日，美国商标审判和上诉委员会否决了Apple Application公司的全资子公司IP Application Development，LLC提出的简易判决动议，该公司授权ipad™ Apple的商标，关于其ipad™服务标志中的RXD权利。正如委员会的决定所述，IP应用程序提交了两份申请，要求注册标记ipad™用于各种服务，并试图让委员会声明RXD在其IPAD标志中没有对RXDs商标申请中描述的服务的所有权。根据委员会的决定，至少RXD提出了一个关于其在ipad™服务标志中拥有所有权的真正问题。要查看和关注反对意见号码91207333的USPTO程序，请访问：http：//ttabvue.uspto.gov/ttabvue/v？pno = 91207333pty = OPP
+    
+
+</b> <b>我很高兴看到TTAB承认了我们的故事，我们期待在反对派向前推进时更详细地讲述。 RXD管理合伙人Keith Clements表示，我们一直认为，基于云的存储服务，我们是第一个，也是我们只有一个使用ipad™品牌和平板电脑/设备的存储服务。在被搁置多年后，我们终于有能力经营我们的业务并发展壮大。
+    
+
+</b> <b> RXD Media由Brian Clements于2006年创立，并于2007年推出了其开创性的移动Web应用程序，允许人们通过任何设备远程同步他们的信息。 RXD于2007年夏天采用品牌ipad™作为其革命性服务，这是苹果宣布推出平板电脑设备前三年，并于2007年秋季开始提供在线订阅系统，允许订户存储个人信息数字地用于在各种移动计算机设备上检索。 RXD通过http://www.ipad.mobi（ipad™Web Portal）上可访问的门户网站提供并继续提供其ipad™品牌服务。
+    
+
+</b> <b> RXD即将推出其最新发展。可以在http://www.ipadtoday.com上看到这些发展的预览
+    
+
+</b>有关PRWeb的原始版本，请访问：http：//www.prweb.com/releases</string>
+
+    <string name="oct2detail"><b> RXD Media，LLC 2016年10月9日
+
+ </b> <b> 2016年9月14日，美国商标审判和上诉委员会否决了Apple Application Inc.的全资子公司IP Application Development，LLC提出的简易判决动议，该公司授权IPAD商标关于其ipad™服务商标中的RXD权利。
+    
+
+ </b> <b> DOYLESTOWN，PA（PRWEB）2016年10月9日
+
+</b>
+    <b> 2016年9月14日，美国商标审判和上诉委员会否决了Apple Application Inc.的全资子公司IP Application Development，LLC提交的简易判决动议，该公司向Apple提供ipad™商标许可，关于其ipad™服务标志中的RXD权利。正如委员会的决定所述，IP应用程序提交了两份申请，要求为各种服务注册商标IPAD，并寻求董事会声明RXD在其ipad™商标中没有对RXDs商标申请中描述的服务拥有所有权。根据委员会的决定，至少RXD提出了一个关于其在ipad™服务标志中拥有所有权的真正问题。要查看和关注反对意见号码91207333的USPTO程序，请访问：http：//ttabvue.uspto.gov/ttabvue/v？pno = 91207333pty = OPP
+    
+
+</b> <b>我很高兴看到TTAB承认了我们的故事，我们期待在反对派向前推进时更详细地讲述。 RXD管理合伙人Keith Clements表示，我们一直认为，基于云的存储服务，我们是第一个，也是我们只有一个使用ipad™品牌和平板电脑/设备的存储服务。在被搁置多年后，我们终于有能力经营我们的业务并发展壮大。
+    
+
+</b> <b> RXD Media由Brian Clements于2006年创立，并于2007年推出了其开创性的移动Web应用程序，允许人们通过任何设备远程同步他们的信息。 RXD于2007年夏天采用品牌ipad™作为其革命性服务，这是苹果宣布推出平板电脑设备前三年，并于2007年秋季开始提供在线订阅系统，允许订户存储个人信息数字地用于在各种移动计算机设备上检索。 RXD通过http://www.ipad.mobi（ipad™Web Portal）上可访问的门户网站提供并继续提供其IPAD品牌服务。
+    
+
+</b> RXD即将推出其最新发展。可以在http://www.ipadtoday.com上看到这些发展的预览。</string>
+    <string name="home">家</string>
+    <string name="MyProfile">我的简历</string>
+    <string name="About">关于</string>
+    <string name="Pricing">价钱</string>
+    <string name="Press">按</string>
+    <string name="ContactUs">联系我们</string>
+    <string name="TermsofService">服务条款</string>
+    <string name="Logout">登出</string>
+    <string name="Personal">个人</string>
+    <string name="Shared">共享</string>
+    <string name="Received">收到</string>
+    <string name="earchwithemaildd">使用电子邮件ID搜索</string>
+    <string name="searchsenderemail">使用发件人电子邮件ID进行搜索</string>
+    <string name="UploadedOn">上传时间：</string>
+    <string name="RecivedOn">收到：</string>
+    <string name="Education">教育</string>
+    <string name="fivegb">5 <sup> GB </sup></string>
+    <string name="fiftyvegb">50 <sup> GB </sup></string>
+    <string name="gb500">500 <sup> GB </sup></string>
+    <string name="month">$5.99/月</string>
+    <string name="Monthly">每月一次</string>
+    <string name="month2free">$ 59.90 /年（2个月免费）</string>
+    <string name="Yearly">每年</string>
+    <string name="Yearlymonth">$ 99.90 /年（2个月免费）</string>
+    <string name="Subject">学科</string>
+    <string name="Message">信息</string>
+    <string name="wipad">欢迎来到ipadtoday.com（iPAD网站）。</string>
+    <string name="PressDetail">按详细信息</string>
+    <string name="itallStart">这一切都始于......</string>
+    <string name="aboutus2">ipad™的使命是成为世界上最高效的，          用户友好的云存储服务，以支持您的组织和发展，          你的家人，朋友和你的事。</string>
+    <string name="Connect">连接ipad Today™</string>
+    <string name="mbuseed">MB用完了</string>
+    <string name="aboutus1">2007年，ipad™的理念诞生于创始人的需求      用于连接和同步个人和群组      日益增长的信息领域。 一个可以提供创意的无障碍平台      通过有组织的沟通来促进生活，旨在促进参与和合作          不仅在直接的圈子内，而且在世界社区中也取得了成果。</string>
+
+</resources>

@@ -1,29 +1,12 @@
-<resources>
-    <string name="app_name">ipad™</string>
-    <string name="label_main_activity_cant_move_further">We can\t move further without this permission!!!</string>
-    <string name="button_label_settings">Settings</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">ipad™</string>
     <string name="button_label_cancel">Cancel</string>
-    <string name="button_label_retry">Retry</string>
-    <string name="button_label_exit">Exit</string>
-    <string name="and">&amp;</string>
     <string name="buffring">Buffering...</string>
-    <string name="label_main_activity_internet_cancelled">Internet permission cancelled</string>
-    <string name="label_main_activity_read_contact_cancelled">Read contacts permission cancelled</string>
-    <string name="label_main_activity_camera_cancelled">Camera permission cancelled</string>
-    <string name="label_main_activity_fine_location_cancelled">Access fine location permission cancelled</string>
-    <string name="we_need_to_access_camera">We need to access camera</string>
-    <string name="we_need_to_access_gps">We need to access gps</string>
-    <string name="we_need_to_read_contacts">We need to read contacts</string>
-    <string name="we_need_to_access_internet">We need to access internet</string>
-    <string name="permission_granted">Permission Granted</string>
-    <string name="retry">Retry</string>
-    <string name="cancel">Cancel</string>
-    <string name="errorMsg">Error Message</string>
-    <string name="noNetwork">No Network</string>
-    <string name="cheakConn">Please check your network connection</string>
-    <string name="openSett">Open Settings</string>
+    <string name="noNetwork" translatable="false">No Network</string>
+    <string name="cheakConn" translatable="false">Please check your network connection</string>
+    <string name="openSett" translatable="false">Open Settings</string>
     <string name="close">Close</string>
-    <string name="error_no_camera">error_no_camera</string>
+    <string name="error_no_camera" translatable="false">error_no_camera</string>
     <string name="text_done">Done</string>
     <string name="save">save</string>
     <string name="error_no_images">No files found</string>
@@ -31,24 +14,20 @@
     <string name="picker_videos">Video</string>
     <string name="picker_documents">Document</string>
     <string name="picker_audio">Audio</string>
-    <string name="image_picker_error">Please select valid file</string>
     <string name="text_camera">Camera</string>
     <string name="select_image">Tap to select</string>
-    <string name="file_picker_title">Attachments</string>
-    <string name="error_image_select_limit">You can select only %1$s files</string>
-    <string name="text_selected">%d item(s) selected</string>
-    <string name="error_image_select_size_limit">Total file size cannot be greater than %1$s.</string>
-    <string name="error_create_image_file">Failed to create image file</string>
-    <string name="entermake">Please Enter Make</string>
+    <string name="error_image_select_limit" translatable="false">You can select only %1$s files</string>
+    <string name="text_selected" translatable="false">%d item(s) selected</string>
+    <string name="error_image_select_size_limit" translatable="false">Total file size cannot be greater than %1$s.</string>
+    <string name="error_create_image_file" translatable="false">Failed to create image file</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
 
     <string name="p1">To ensure a safe, nonoffensive environment for all of our users, we have established our Terms of Use and Service. It spells out what you can expect from us and what we expect from you. By accessing any areas of the IPAD Site, users (Users) agree to be legally bound and to abide by the terms set forth below. the IPAD Site is owned and operated by RXD Media, LLC ("RXD"). Any references herein to IPAD shall be deemed to refer to the IPAD Site and/or RXD, as applicable under the circumstances.</string>
     <string name="p2">IPAD, IPAD TODAY and ipadtoday.com are service marks of RXD or its affiliates. All rights reserved. These and other IPAD graphics, logos and service marks and trademarks of RXD and its affiliates may not be used without prior written consent of RXD or its affiliates, as the case may be. All other trademarks, product names, and company names and logos appearing on the IPAD Site are the property of their respective owners.</string>
     <string name="p3">User expressly agrees that use of the IPAD Site is at Users sole risk. Neither RXD nor its affiliates nor any of their officers, directors, or employees, agents, third-party content providers, merchants, sponsors, licensors (collectively, Providers), or the like, warrant that the IPAD Site will be uninterrupted or error free, nor do they make any warranty as to the results that may be obtained from the use of the IPAD Site, or as to the accuracy, reliability, or currency of any information content, service, or merchandise provided through the IPAD Site.</string>
-    <string name="p4">THIS SITE IS PROVIDED BY RXD ON AN "AS IS" AND "AS AVAILABLE" BASIS. RXD MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE SITE, THE INFORMATION, CONTENT, MATERIALS OR PRODUCTS, INCLUDED ON THIS SITE. TO THE FULL EXTENT PERMISSIBLE BY APPLICABLE LAW, RXD DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. RXD WILL NOT BE LIABLE FOR ANY DAMAGES OF ANY KIND ARISING FROM THE USE OF THIS SITE, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, PUNITIVE AND CONSEQUENTIAL DAMAGES. NO ORAL ADVICE OR WRITTEN INFORMATION GIVEN BY RXD NOR ITS AFFILIATES, NOR ANY OF THEIR OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, PROVIDERS, OR THE LIKE, SHALL CREATE A WARRANTY; NOR SHALL USER RELY ON ANY SUCH INFORMATION OR ADVICE.</string>
     <string name="p5">Under no circumstance shall RXD or any other party involved in creating, producing, or distributing the IPAD Site be liable for any direct, indirect, incidental, special or consequential damages that result from the use of or inability to use the IPAD Site, including but not limited to reliance by User on any information obtained from the IPAD Site or that result from mistakes, omissions, interruptions, deletion of files or E-mail, errors, defects, viruses, delays in operation or transmission, or any failure of performance, whether or not resulting from acts of God, communications failure, theft, destruction, or unauthorized access to the IPAD Sites records, programs or services. User hereby acknowledges that this paragraph shall apply to all content, merchandise, and services available through the IPAD Site. Because some states do not allow the exclusion or limitation of liability for consequential or incidental damages, in such states liability is limited to the fullest extent permitted by law.</string>
     <string name="p6">User acknowledges that the IPAD Site contains information, data, software, photographs, graphs, videos, typefaces, graphics, music, sounds and other material (collectively, Content) that are protected by copyrights, trademarks, trade secrets, or other proprietary rights, and that these rights are valid and protected in all forms, media and technologies existing now or hereinafter developed. All Content is protected as a collective work under the U.S. copyright laws, and RXD owns a copyright in the selection, coordination, arrangement, and enhancement of such Content. User may not modify, remove, delete, augment, add to, publish, transmit, participate in the transfer or sale of, create derivative works from, or in any way exploit any of the Content, in whole or in part. If no specific restrictions are displayed, Users may make copies of select portions of the Content, provided that the copies are made only for Users personal use and that User maintains any notices contained in the Content, such as all copyright notices, trademark legends, or other proprietary rights notices. Except as provided in the preceding sentence or as permitted by the fair use privilege under the U.S. copyright laws (see, e.g., 17 U.S.C.A. Section 107), User may not upload, post, reproduce, or distribute in any way Content protected by copyright, or other proprietary right, without obtaining permission of the owner of the copyright or other proprietary right. In addition to the foregoing, use of any software Content shall be governed by the software license agreement accompanying such software.</string>
     <string name="p7">Except as set forth in Section III(A) above, User may upload to or otherwise distribute on the IPAD Site only Content that is not subject to any copyright or other proprietary rights protection (collectively, Public Content), or Content in which the author has given express authorization for distribution on the World Wide Web. Any copyrighted or other proprietary Content distributed with the consent of a copyright owner should contain a phase such as "Copyright, owned by [name of owner]; used by permission." The unauthorized submission or distribution of copyrighted or other proprietary Content is illegal and could subject the User to criminal prosecution as well as personal liability for damages in a civil suit. User will be liable for any damage resulting from any infringement of copyrights or proprietary rights, or from any other harm arising from such submission. Neither RXD, nor its affiliates, nor any of their officers, directors, employees, agents, Providers, or the like, will be liable for any damage resulting from any infringement of copyrights or proprietary rights, or from any other harm arising from such User submission. In compliance with the Digital Millennium Copyright Act, Users and other persons can report an infringement to RXD at the following E-mail address: inquiry@rxdmedia.com By submitting Content to any User submit areas, including without limitation any product reviews or participation in any chat rooms, user automatically grants, or warrants, that the owner of such Content has expressly granted RXD the royalty-free, perpetual, irrevocable, nonexclusive right and license to use, reproduce, publish, translate, sublicense, copy and distribute the Content in whole or in part worldwide and/or to incorporate it in other works in any form, media or technology now known or hereafter developed for the full term of any copyright that may exist in such Content. User also permits any other User to access, store, or reproduce the Content for that Users personal use. Subject to this grant, the owner of Content placed on the IPAD Site retains any and all rights which may exist in such Content.</string>
@@ -76,17 +55,14 @@ EACH TIME YOU PURCHASE A PRODUCT OR SERVICE AT IPADTODAY.COM, YOU ARE REPRESENTI
     <string name="pp5">Personally Identifiable Information: This refers to information that lets us know the specifics of who you are. When you engage in certain activities on this site, such as registering for a membership, ordering a product or service, submitting content and/or posting content in discussion forums or other public areas, entering a contest or sweepstakes, filling out a survey, or sending us feedback, we may ask you to provide certain information about yourself by filling out and submitting an online form. It is completely optional for you to engage in these activities. If you elect to engage in these activities, however, we may ask that you provide us personal information, such as your first and last name, mailing address (including zip code), email address, employer, job title and department, telephone and facsimile numbers, and other personal identifying information. When ordering products or services on the site, you may be asked to provide a credit card number. Depending upon the activity, some of the information we ask you to provide is identified as mandatory and some as voluntary. If you do not provide the mandatory data with respect to a particular activity, you will not be able to engage in that activity.</string>
     <string name="pp6">Nonpersonally Identifiable Information: This refers to information that does not by itself identify a specific individual. We gather certain information about you based upon where you visit on our site in several ways. This information is compiled and analyzed on both a personal and an aggregated basis. This information may include the Web sites Uniform Resource Locator ("URL") that you just came from, which URL you next go to, what browser you are using, and your Internet Protocol ("IP") address. A URL is the global address of documents and other resources on the World Wide Web. An IP address is an identifier for a computer or device on a Transmission Control Protocol/Internet Protocol ("TCP/IP") network, such as the World Wide Web. Networks like the Web use the TCP/IP protocol to route information based on the IP address of the destination. In other words, an IP address is a number that is automatically assigned to your computer whenever you are surfing the web, allowing web servers to locate and identify your computer. Computers require IP addresses in order for users to communicate on the Internet.</string>
     <string name="pp7">We do not collect any Personally Identifiable Information about you unless you voluntarily provide it to us. You provide certain Personally Identifiable Information to us when you: (a) register for our services and register your email address with us; (b) enter sweepstakes or contests sponsored by us or one of our partners; (c) sign up for special offers from selected third parties; (d) send email messages, submit forms or transmit other information by telephone or letter; or (e) submit your credit card or other payment information when ordering and purchasing products and services on our site. We may also collect information from you at other points on our site that state that such information is being collected.</string>
-    <string name="pp8">In addition, we may also collect, or our third party ad server and/or content server may collect, certain Nonpersonally Identifiable Information. This information is ultimately stored in the form of store categories, and, in some cases, specific URLs. We use your IP address to diagnose problems with our servers, software, to administer our site and to gather demographic information. Our third party ad servers will also provide us with summary, but not individual, reports that will tell us how many ads were presented and clicked upon at out site.
-</string>
+    <string name="pp8">"In addition, we may also collect, or our third party ad server and/or content server may collect, certain Nonpersonally Identifiable Information. This information is ultimately stored in the form of store categories, and, in some cases, specific URLs. We use your IP address to diagnose problems with our servers, software, to administer our site and to gather demographic information. Our third party ad servers will also provide us with summary, but not individual, reports that will tell us how many ads were presented and clicked upon at out site. "</string>
     <string name="pp9">We will primarily use your Personally Identifiable Information to provide our services to you, as required by our agreements with you. We will also use Personally Identifiable Information to enhance the operation of our site, fill orders, improve our marketing and promotional efforts, statistically analyze site use, improve our product and service offerings, and customize our sites content, layout, and services. We may use Personally Identifiable Information to deliver information to you and to contact you regarding administrative notices. We may also use Personally Identifiable Information to resolve disputes, troubleshoot problems and enforce our agreements with you, including our Site Terms of Use, Sales Terms and Conditions, and this Private Policy.</string>
     <string name="pp10">We do not sell, trade, or rent your Personally Identifiable Information to others. We do provide some of our services through contractual arrangements with affiliates, services providers, partners and other third parties. We and our service partners use your Personally Identifiable Information to operate our sites and to deliver their services. For example, we must release your credit card information to the card-issuing bank to confirm payment for products and services purchased on this site; release your address information to the delivery service to deliver products that you ordered; and provide order information to third parties that help us provide customer service.</string>
-    <string name="pp11">We will encourage our service partners to adopt and post privacy policies. However, the use of your Personally Identifiable Information by our service partners is governed by the privacy policies of those service partners, and is not subject to our control.</string>
     <string name="pp12">Occasionally we may be required by law enforcement or judicial authorities to provide Personally Identifiable Information to the appropriate governmental authorities. We will disclose Personally Identifiable Information upon receipt of a court order, subpoena, or to cooperate with a law enforcement investigation. We fully cooperate with law enforcement agencies in identifying those who use our services for illegal activities. We reserve the right to report to law enforcement agencies any activities that we in good faith believe to be unlawful.</string>
     <string name="pp13">We may also provide Nonpersonally Identifiable Information about our customers sales, traffic patterns, and related site information to third party advertisers, but these statistics do not include any Personally Identifiable Information.</string>
     <string name="pp14">We believe you should have the ability to access and edit the Personally Identifiable Information that you have provided to us. You may change any of your Personally Identifiable Information in your account online at any time by linking to your account in accordance with instructions posted elsewhere on this site. You may also access and correct your personal information and privacy preferences by writing us at:</string>
     <string name="pp15">We encourage you to promptly update your Personally Identifiable Information if it changes. You may ask to have the information on your account deleted or removed; however, because we keep track of past transactions, you cannot delete information associated with past transactions on this site. In addition, it may be impossible to completely delete your information without some residual information because of backups.</string>
-    <string name="pp16">We may, from time to time, send you email regarding our products and services. In addition, if you indicated upon registration that you are interested in receiving offers or information from us and our partners, we may occasionally send you direct mail about products and services that we feel may be of interest to you. Only RXD (or agents working on behalf of RXD and under confidentiality agreements) will send you these direct mailings and only if you indicated that you do not object to these offers. If you do not want to receive such mailings, simply tell us when you give us your personal information. Or, at any time you can easily edit your account information to no longer receive such offers and mailings.
-</string>
+    <string name="pp16">"We may, from time to time, send you email regarding our products and services. In addition, if you indicated upon registration that you are interested in receiving offers or information from us and our partners, we may occasionally send you direct mail about products and services that we feel may be of interest to you. Only RXD (or agents working on behalf of RXD and under confidentiality agreements) will send you these direct mailings and only if you indicated that you do not object to these offers. If you do not want to receive such mailings, simply tell us when you give us your personal information. Or, at any time you can easily edit your account information to no longer receive such offers and mailings. "</string>
     <string name="pp17">You also have choices with respect to cookies, as described below. By modifying your browser preferences, you have the choice to accept all cookies, to be notified when a cookie is set, or to reject all cookies. If you choose to reject all cookies some parts of our site may not work properly in your case.</string>
     <string name="pp18">At our site you can be assured that your Personally Identifiable Information is secure, consistent with current industry standards. The importance of security for all Personally Identifiable Information associated with our user is of utmost concern to us. Your Personally Identifiable Information is protected in several ways. Access by you to your Personally Identifiable Information is available through a password and unique customer ID selected by you. This password is encrypted. We recommend that you do not divulge your password to anyone. In addition, your Personally Identifiable Information resides on a secure server that only selected RXD personnel and contractors have access to via password. We encrypt your Personally Identifiable Information and thereby prevent unauthorized parties from viewing such information when it is transmitted to us.</string>
     <string name="pp19">Personal information that you provide that is not Personally Identifiable Information also resides on a secure server and is only accessible via password. Since this information is not accessible from outside RXD you will not be asked to select a password in order to view or modify such information. In order to most efficiently serve you, credit card transactions and order fulfillment are handled by established third party banking, processing agents and distribution institutions. They receive the information needed to verify and authorize your credit card or other payment information and to process and ship your order.</string>
@@ -109,31 +85,15 @@ EACH TIME YOU PURCHASE A PRODUCT OR SERVICE AT IPADTODAY.COM, YOU ARE REPRESENTI
 
 
     //Days short keyword
-    <string name="monday">M</string>
-    <string name="tuesday">T</string>
-    <string name="wednesday">W</string>
-    <string name="thursday">T</string>
-    <string name="friday">F</string>
-    <string name="saturday">S</string>
-    <string name="sunday">S</string>
 
-    <string name="novdetail"><b> RXD Media, LLC November 09 2017\n\n</b><b>
-ipad™, Keeping You Connected with your Family, Friends, and Business for Life\n\n</b><b>DOYLESTOWN, PA (PRWEB) November 09 2017\n\n</b><b>
-ipad™ Celebrates its 10th Anniversary with New Release\n\n</b><b>
-ipad™ has Continued to Evolve into a Popular Cloud Storage Service with a User-Friendly Interface to Foster Communication and Engagement.
-\n\n</b><b>Cloud storage is a popular mode of storing data and communication with the world. Over the years,cloud storage solutions have facilitated communication by fostering engagement as well as cooperation across the globe in real time. ipad™, a service that was launched in 2007, is the brainchild of RXD Medias founder, Brian Clements, who simply wanted to connect and synchronize individuals as well as groups within this rapidly growing field of communication and information technology. Brian Clements said, I wanted to develop a cloud storage service and solution that could bring a large community of people, individuals, and businesses together. I worked on my idea and had immense faith in the concept. As a result, the ipad™ service has continued its growth as a bonafide cloud storage solution.
-        \n\n</b><b>ipad™ was developed with a mission to become the most efficient, engaging, and user-friendly cloud storage service worldwide. We also believe that we can support the growth of businesses and organizations by giving them cloud storage for storing their critical data, said, Keith Clements, the CEO and President of RXD Media. Apart from the business solutions, ipad™ also targets the large section of families living abroad or away from their loved ones at other distant locations. The ipad™ service offers one community where families and friends can unite, bond, and share their work, music, videos, pictures and even save all of these on to the cloud storage space.
-        \n\n</b><b>The ipad™ cloud storage solution offers virtual storage space in the cloud and allows users to restore data whenever they want to. We give a dedicated solution to our users through our cloud storage service,said Keith Clements. He also added, Our product is useful in creating a backup as and when needed. Also, it allows users to sync as well as restore their data at any time from any device.
-\n\n</b><b>In this fast-moving world and owing to phenomenal changes in technology, data storage is a major cause of concern for people. In general, the ipad™ service offers users the ability to back up everything that is important with ease. Regardless of the type and size of the file, you can store it online in your cloud, synchronize it whenever needed, and restore it for immediate use. Even on the go, the ipad™ service does not let you forget your important tasks. We give you a pocket mobile storage solution to carry all your data no matter where you go, said Keith Clements.
-        \n\n</b>For more information about ipad™ or to interview Keith Clements, President and CEO, you may visit the company online at http://www.ipadtoday.com or contact them via phone at 267.895.1776.
-    </string>
+    <string name="novdetail">"<b> RXD Media, LLC November 09 2017  </b><b> ipad™, Keeping You Connected with your Family, Friends, and Business for Life  </b><b>DOYLESTOWN, PA (PRWEB) November 09 2017  </b><b> ipad™ Celebrates its 10th Anniversary with New Release  </b><b> ipad™ has Continued to Evolve into a Popular Cloud Storage Service with a User-Friendly Interface to Foster Communication and Engagement.   </b><b>Cloud storage is a popular mode of storing data and communication with the world. Over the years,cloud storage solutions have facilitated communication by fostering engagement as well as cooperation across the globe in real time. ipad™, a service that was launched in 2007, is the brainchild of RXD Medias founder, Brian Clements, who simply wanted to connect and synchronize individuals as well as groups within this rapidly growing field of communication and information technology. Brian Clements said, I wanted to develop a cloud storage service and solution that could bring a large community of people, individuals, and businesses together. I worked on my idea and had immense faith in the concept. As a result, the ipad™ service has continued its growth as a bonafide cloud storage solution.           </b><b>ipad™ was developed with a mission to become the most efficient, engaging, and user-friendly cloud storage service worldwide. We also believe that we can support the growth of businesses and organizations by giving them cloud storage for storing their critical data, said, Keith Clements, the CEO and President of RXD Media. Apart from the business solutions, ipad™ also targets the large section of families living abroad or away from their loved ones at other distant locations. The ipad™ service offers one community where families and friends can unite, bond, and share their work, music, videos, pictures and even save all of these on to the cloud storage space.           </b><b>The ipad™ cloud storage solution offers virtual storage space in the cloud and allows users to restore data whenever they want to. We give a dedicated solution to our users through our cloud storage service,said Keith Clements. He also added, Our product is useful in creating a backup as and when needed. Also, it allows users to sync as well as restore their data at any time from any device.   </b><b>In this fast-moving world and owing to phenomenal changes in technology, data storage is a major cause of concern for people. In general, the ipad™ service offers users the ability to back up everything that is important with ease. Regardless of the type and size of the file, you can store it online in your cloud, synchronize it whenever needed, and restore it for immediate use. Even on the go, the ipad™ service does not let you forget your important tasks. We give you a pocket mobile storage solution to carry all your data no matter where you go, said Keith Clements.           </b>For more information about ipad™ or to interview Keith Clements, President and CEO, you may visit the company online at http://www.ipadtoday.com or contact them via phone at 267.895.1776.     "</string>
     <string name="nov"><b>November 09 2017\n\n</b><b>
 ipad™, Keeping You Connected with your Family, Friends, and Business for Life</b></string>
     <string name="oct">
         <b>October 18 2017\n\n</b><b>ipad™ Celebrates its 10th Anniversary with New Release</b></string>
-    <string name="dec"><b>December 13 2016\n\n</b>
+    <string name="dec" translatable="false"><b>December 13 2016\n\n</b>
 RXD Media, LLC, is continuing the expansion of its ipad™ services with a push into the burgeoning education sector. RXD seeks to be at the forefront of this growing market.</string>
-    <string name="oct2"><b>October 09 2016</b><b>
+    <string name="oct2" translatable="false"><b>October 09 2016</b><b>
 \n\nOn September 14, 2016, the United States Trademark Trial and Appeal Board denied a motion for summary judgment filed by IP Application Development, LLC, a wholly-owned subsidiary of Apple, Inc. that licenses the IPAD trademark to Apple, regarding RXDs rights in its ipad™Service Mark.</b></string>
 
     <string name="octdetail">
@@ -165,10 +125,229 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
     \n\n</b><b>RXD Media was founded in 2006 by Brian Clements, and in 2007 launched its pioneering Mobile Web Application that allows people to sync their information remotely with any device. RXD adopted the brand ipad™ for its revolutionary services in the summer of 2007, three years prior to the announcement of the tablet computer device by Apple, and in the fall of 2007, began offering an online subscription system that allows subscribers to store personal information digitally for retrieval on various mobile computer devices. RXD offered and continues to offer its IPAD brand services through a web portal accessible at http://www.ipad.mobi (the ipad™ Web Portal).
     \n\n</b>RXD will soon be rolling out its latest developments. A preview of those developments can be seen at http://www.ipadtoday.com.</string>
 
-    <string name="facebook_app_id">1266609856804400</string>
-    <string name="fb_login_protocol_scheme">fb1266609856804400</string>
-    <string name="com_twitter_sdk_android_CONSUMER_KEY">fj5bzUimglJbynemlNNQHTESq</string>
-    <string name="com_twitter_sdk_android_CONSUMER_SECRET">LU1KyBvIlyUqb3quVd0l5ExAwfvLJbwPQBL4BUkP50OE641PCE</string>
+    <string name="facebook_app_id" translatable="false">1266609856804400</string>
+    <string name="com_twitter_sdk_android_CONSUMER_KEY" translatable="false">fj5bzUimglJbynemlNNQHTESq</string>
+    <string name="com_twitter_sdk_android_CONSUMER_SECRET" translatable="false">LU1KyBvIlyUqb3quVd0l5ExAwfvLJbwPQBL4BUkP50OE641PCE</string>
+    <string name="fromhome" translatable="false">Android From Home</string>
+    <string name="UpdateProfile">Update Profile</string>
+    <string name="changeinfo">Change User Information</string>
+    <string name="firstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="commentonfile">Comment On File</string>
+    <string name="commentboxmin">Comment Box Maximum 36 word..</string>
+    <string name="Submit">Submit</string>
+    <string name="TravelRoutine">Travel Routine</string>
+    <string name="Calendar">Calendar</string>
+    <string name="Enterregemail">Enter Registered Email</string>
+    <string name="enterpass">Enter Password</string>
+    <string name="forgetpass">Forgot password ?</string>
+    <string name="SignIn">Sign In</string>
+    <string name="FREE5GB">FREE 5 GB</string>
+    <string name="storagedigital">Storage + Digital Organizer</string>
+    <string name="joinforfree">JOIN FOR FREE NOW</string>
+    <string name="orloginwith">or Login with</string>
+    <string name="Linkedin">Linkedin</string>
+    <string name="twiterlogin">Twiter Login</string>
+    <string name="sync">SYNC with ipadtoday.com</string>
+    <string name="REGISTER">REGISTER</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="Instagram">Instagram</string>
+    <string name="Notification">Notification</string>
+    <string name="clearAll">Clear All</string>
+    <string name="Organizer">Organizer</string>
+    <string name="AllEvents">All Events</string>
+    <string name="PRIVACYPOLICY">PRIVACY POLICY</string>
+    <string name="type1">1. Types of Information Collected</string>
+    <string name="type2">2. Collection Methods and Use of Information</string>
+    <string name="type3">3. Release of Information</string>
+    <string name="type4">4. Updating and Correcting Information</string>
+    <string name="type5">5. User Choices on Collection and Use of Information</string>
+    <string name="type6">6. Security of Information</string>
+    <string name="type7" translatable="false">7. Cookies</string>
+    <string name="enterfirstName">Enter First Name</string>
+    <string name="lastName">Enter Last Name </string>
+    <string name="enteremail">Enter Email-ID</string>
+    <string name="entervarificationcode">Enter Verification Code</string>
+    <string name="termofsrvices">Terms of Service</string>
+    <string name="byestablish">By establishing your IPAD account, you agree to our terms of service and consent to the processing and storage of your information on RXDs servers in the U.S. and elsewhere.</string>
+    <string name="shareFile">Share File</string>
+    <string name="entersenderemailid">Enter Sender Email ID:</string>
+    <string name="commentbox">Comment Box...</string>
+    <string name="SEND">SEND</string>
+    <string name="sendFIle">Send File</string>
+    <string name="Events">Events</string>
+    <string name="TodayEvents">Today Events</string>
+    <string name="itemcondi1">I. TRADEMARKS</string>
+    <string name="itemcondi2">II. DISCLAIMERS AND LIMITATION OF LIABILITY</string>
+    <string name="itemcondi3">III. CONTENT</string>
+    <string name="itemcondi4">A. PROPRIETARY RIGHTS</string>
+    <string name="itemcondi5">  B. DISTRIBUTION/UPLOADING OF THIRD-PARTY CONTENT</string>
+    <string name="itemcondi6">C. THIRD-PARTY CONTENT</string>
+    <string name="itemcondi7">D. EXPORT</string>
+    <string name="itemcondi8">IV. ONLINE CONDUCT</string>
+    <string name="itemcondi9">V. PRIVACY POLICY</string>
+    <string name="termplocy">In accordance with the terms of the IPAD Sites Privacy Policy, RXD respects the privacy of its Users.</string>
+    <string name="itemcondi10">VI. TERMINATION OF USAGE</string>
+    <string name="itemcondi11">VII. USAGE BY CHILDREN UNDER 13</string>
+    <string name="itemcondi12">VIII. APPLICABLE LAW</string>
+    <string name="itemcondi13">IX. SEVERABILITY</string>
+    <string name="itemcondi14">X. ACKNOWLEDGMENT</string>
+    <string name="enteroldpass">Enter Old Password</string>
+    <string name="enternewpass">Enter New  Password</string>
+    <string name="enternewconfirmpass">Enter Confirm Password</string>
+    <string name="changepass">Change Password"</string>
+    <string name="exituwant">Do you realy want to exit ?</string>
+    <string name="OK">OK</string>
+    <string name="eventtime">Event Time: </string>
+    <string name="eventdetail">Event Details: </string>
+    <string name="reallyexit">Really Exit</string>
+    <string name="foldername">Enter Folder Name</string>
+    <string name="entername">Enter Name</string>
+    <string name="enterdesc">Enter Description...</string>
+    <string name="When">When</string>
+    <string name="selectdate">Select Date</string>
+    <string name="selecttime">Select Time</string>
+    <string name="Reminder">Reminder</string>
+    <string name="Account">Account:</string>
+    <string name="Reset">Reset</string>
+    <string name="coomingsson">Coming Soon...</string>
+    <string name="Comment">Comment</string>
+    <string name="MoveFile">Move File</string>
+    <string name="RecentFile">Recent File</string>
+    <string name="uplodnewfile">Upload New File</string>
+    <string name="upload">Upload</string>
+    <string name="fileplaced">Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs.</string>
+    <string name="Photos">Photos</string>
+    <string name="Video">Video</string>
+    <string name="Music">Music</string>
+    <string name="Docs">Docs</string>
+    <string name="eventname">Enter Event Name</string>
+    <string name="From">From</string>
+    <string name="searchfilefolder">Search with Folder/File-Name</string>
+    <string name="viewallfile">Enter Event Name</string>
+    <string name="movetofolder">Move to Folder</string>
+    <string name="sharemulti">Share Multiple Files"</string>
+    <string name="ARCHIVE" translatable="false">ARCHIVE</string>
+    <string name="cloudpriceing">Cloud Pricing Tables</string>
+    <string name="stroleallfiledesc">Stores All File Types (Photos, Videos, Music, Documents and More..)</string>
+    <string name="BRONZEUSER">BRONZE USER</string>
+    <string name="FreeSpace">Free Space</string>
+    <string name="FREEFORALL">FREE FOR ALL USERS</string>
+    <string name="SILVERUSER">SILVER USER</string>
+    <string name="BUYNOW">BUY NOW</string>
+    <string name="GOLDUSER">GOLD USER</string>
+    <string name="type9">9. Miscellaneous Privacy Issues</string>
+    <string name="pp11">We will encourage our service partners to adopt and post privacy policies. However, the use of your Personally Identifiable Information by our service partners is governed by the privacy policies of those service partners, and is not subject to our control.</string>
+    <string name="selectlanguage">Select your Language</string>
+    <string name="welcomeipadtm">Welcome to iPad<sup>TM</sup></string>
+    <string name="sendvarificationcode">Send Verification Code</string>
+    <string name="varificationnotmatch">Verification Code did not matched!</string>
+    <string name="entervaricicationcode">Please Enter Verification Code!</string>
+    <string name="Signupsuccess">Signup Successfully.</string>
+    <string name="Signupnotsuccess">Signup Not Successfully.</string>
+    <string name="validEmail">Please enter valid Email ID</string>
+    <string name="selecttermsevices">Please select Terms of Service.</string>
+    <string name="pleasewait">Please wait</string>
+    <string name="varificationcodeemail">Verification Code was sent to your Mail successfully.</string>
+    <string name="varificationcodenotemail">Verification Code was not sent to your Mail successfully.</string>
+
+    <string name="LoginSuccessfully">Login Successfully</string>
+    <string name="LoginnotSuccessfully">Login not Successfully</string>
+    <string name="somethingwrong">Something went wrong..!</string>
+    <string name="linkpasssend">Password reset link send into your registered Mailid.</string>
+    <string name="eventnotsave">Event not saved Successfully!</string>
+
+    <string name="eventsave">Event saved Successfully</string>
+    <string name="enterevent">Please enter event name</string>
+
+    <string name="selectdatee">Please Selete date</string>
+    <string name="SendingMail">Sending Mail</string>
+    <string name="thankucontactus">Thanku for Contact us.</string>
+    <string name="entersubj">Please enter Subject</string>
+    <string name="entermsg">Please enter Message</string>
+    <string name="nodata">No Data found!</string>
+    <string name="PressAgain">Press Again</string>
+    <string name="searchwithfile">Search with Folder/File-Name</string>
+    <string name="plsselctFile">Please Select file!</string>
+    <string name="foldercretesuccess">Folder Create Successfully.</string>
+    <string name="foldernotcreate">Folder not created!</string>
+    <string name="selectfolder">Please Select Folder!</string>
+    <string name="filemovesucces">File Moved Successfully</string>
+    <string name="filemovesuccesnot">File not Moved Successfully!</string>
+    <string name="selectpaymnetgold">Please select anyone payment option in Gold User!</string>
+    <string name="paymentsliver">Please select anyone payment option in Silver User!</string>
+    <string name="gottoken">Successfully got token</string>
+    <string name="gottokennit">Failed to get token: </string>
+    <string name="faildPayment">Failed Payment</string>
+    <string name="donePayment">Payment Successfully done.</string>
+    <string name="filenotulod">File Not Uploaded!</string>
+    <string name="fileuploadsuccesss">File Upload Successfully</string>
+    <string name="foldernotfound">Folder not found</string>
+    <string name="enterfoldername">Please enter Folder Name!</string>
+    <string name="filetypenotsuport">This file type is not supported For Preview yet!! Please Press Upload Button.</string>
+    <string name="videoloading">Video Loading...</string>
+    <string name="passwordchange">Password Change Successfully.</string>
+    <string name="oldpss">Your Old Password Not match please enter valid old password</string>
+    <string name="entercomment">Please enter Comment</string>
+    <string name="CommentsendSuccessfully">Comment send Successfully</string>
+    <string name="CommentsnotendSuccessfully">Comment not send Successfully!</string>
+    <string name="sharedemail">Shared Email No Data found!</string>
+    <string name="RegisterationSuccessfully">Registeration Successfully</string>
+    <string name="faildauth">Failed to authenticate. Please try again.</string>
+    <string name="useralredyauth">User already authenticated</string>
+    <string name="firsttwiter">First to Twitter auth to Verify Credentials.</string>
+    <string name="needper">Need Multiple Permissions</string>
+    <string name="gpsdisable">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="notinotfound">Notification not found!</string>
+    <string name="Event">Event</string>
+    <string name="Birthday">Birthday</string>
+    <string name="fileSharedsuccess">File shared Successfully</string>
+    <string name="filennotSharedsuccess">File not shared Successfully!</string>
+    <string name="eventlistdata">Event List Data found!</string>
+    <string name="home">HOME</string>
+    <string name="MyProfile">My Profile</string>
+    <string name="About">About</string>
+    <string name="Pricing">Pricing</string>
+    <string name="Press">Press</string>
+    <string name="ContactUs">Contact Us</string>
+    <string name="TermsofService">Terms of Service</string>
+    <string name="privacy">Privacy</string>
+    <string name="Logout">Logout</string>
+    <string name="Personal">Personal</string>
+    <string name="Shared">Shared</string>
+    <string name="Received">Received</string>
+    <string name="earchwithemaildd">Search with email id</string>
+    <string name="searchsenderemail">Search with Sender Email id"</string>
+    <string name="UploadedOn">Uploaded On:</string>
+    <string name="RecivedOn">Recived On:</string>
+    <string name="Education">Education</string>
+    <string name="fivegb">5<sup>GB</sup></string>
+    <string name="fiftyvegb"> 50<sup>GB</sup></string>
+    <string name="gb500">500<sup>GB</sup>"</string>
+    <string name="month">$5.99/Month</string>
+    <string name="month2free">$59.90/Year (2 Months Free)</string>
+    <string name="Monthly">Monthly</string>
+    <string name="Yearly">Yearly</string>
+    <string name="Yearlymonth">$99.90/Year (2 Months Free)</string>
+    <string name="Subject">Subject </string>
+    <string name="Message">Message</string>
+    <string name="wipad">Welcome to ipadtoday.com (the iPAD Site).</string>
+    <string name="PressDetail">Press Detail</string>
+    <string name="itallStart">It all started when...</string>
+
+    <string name="aboutus1">In 2007, the idea for ipad™ was born from a founder s need
+    for connecting and synchronizing individuals, and groups, within a
+    vastly growing field of information. An accessible platform to bring ideas to
+    life through organized communication was designed to foster engagement and cooperation
+        toward outcomes not only within immediate circles but world community as well.</string>
+
+    <string name="aboutus2">The mission of ipad™ is to be the worlds most efficient,
+        user friendly cloud storage service to support the organization and growth for you,
+        your family, your friends and your business.</string>
+<string name="Connect">Connect with ipad Today™</string>
+    <string name="mbuseed">MB used out of</string>
 
 
 </resources>

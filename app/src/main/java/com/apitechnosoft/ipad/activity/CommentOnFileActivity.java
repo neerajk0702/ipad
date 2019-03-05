@@ -108,7 +108,7 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
         img = findViewById(R.id.img);
         imgLayout = findViewById(R.id.imgLayout);
         webView = findViewById(R.id.web);
-        webLayout=findViewById(R.id.webLayout);
+        webLayout = findViewById(R.id.webLayout);
         videoViewLayout = findViewById(R.id.videoViewLayout);
         recyclerView = findViewById(R.id.emailrecycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CommentOnFileActivity.this);
@@ -260,7 +260,7 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
         String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
         commentStr = edt_comment.getText().toString();
         if (commentStr.length() == 0) {
-            showToast("Please enter Comment");
+            showToast(getString(R.string.entercomment));
             return false;
         }
         return true;
@@ -284,14 +284,14 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                showToast("Comment send Successfully");
+                                showToast(getString(R.string.CommentsendSuccessfully));
                                 edt_comment.setText("");
                                 getAllSharedFileComments();
                             } else {
-                                Toast.makeText(CommentOnFileActivity.this, "Comment not send Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CommentOnFileActivity.this, getString(R.string.CommentsnotendSuccessfully), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(CommentOnFileActivity.this, "Comment not send Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CommentOnFileActivity.this, getString(R.string.CommentsnotendSuccessfully), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -342,10 +342,10 @@ public class CommentOnFileActivity extends AppCompatActivity implements View.OnC
                                         recyclerView.setAdapter(recivedEmailAdapter);
                                     }
                                 } else {
-                                    Toast.makeText(CommentOnFileActivity.this, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(CommentOnFileActivity.this, getString(R.string.sharedemail), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(CommentOnFileActivity.this, "Shared Email No Data found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CommentOnFileActivity.this, getString(R.string.sharedemail), Toast.LENGTH_LONG).show();
                             }
                         } else {
                             ASTUIUtil.showToast(Contants.Error);

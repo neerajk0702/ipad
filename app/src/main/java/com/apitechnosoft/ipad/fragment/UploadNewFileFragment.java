@@ -120,7 +120,7 @@ public class UploadNewFileFragment extends MainFragment {
 
     public boolean isVlaidate() {
         if (selectFile == null || !selectFile.exists()) {
-            ASTUIUtil.shownewErrorIndicator(getContext(), "Please Select File");
+            ASTUIUtil.shownewErrorIndicator(getContext(), getString(R.string.plsselctFile));
             return false;
         }
         return true;
@@ -175,7 +175,7 @@ public class UploadNewFileFragment extends MainFragment {
             img.setVisibility(View.GONE);
             setVideoShare();
         } else {
-            ASTUIUtil.alertForErrorMessage("This file type is not supported For Preview yet!! Please Press Upload Button.", getContext());//off line msg....
+            ASTUIUtil.alertForErrorMessage(getString(R.string.filetypenotsuport), getContext());//off line msg....
             videoViewLayout.setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
             webLayout.setVisibility(View.GONE);
@@ -227,13 +227,13 @@ public class UploadNewFileFragment extends MainFragment {
                         ContentData data = new Gson().fromJson(result, ContentData.class);
                         if (data != null) {
                             if (data.isStatus() == true) {
-                                ASTUIUtil.showToast("File Upload Successfully");
+                                ASTUIUtil.showToast(getString(R.string.fileuploadsuccesss));
                                 reloadBackScreen();
                             } else {
-                                ASTUIUtil.showToast("File Not Uploaded!");
+                                ASTUIUtil.showToast(getString(R.string.filenotulod));
                             }
                         } else {
-                            ASTUIUtil.showToast("File Not Uploaded!");
+                            ASTUIUtil.showToast(getString(R.string.filenotulod));
                         }
                         if (progressBar.isShowing()) {
                             progressBar.dismiss();

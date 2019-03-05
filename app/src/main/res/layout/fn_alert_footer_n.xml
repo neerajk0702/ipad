@@ -37,7 +37,7 @@
                 android:background="@android:color/transparent"
                 android:minHeight="@dimen/_40dp"
                 android:minWidth="@dimen/_120dp"
-                android:text="@string/cancel"
+                android:text="@string/button_label_cancel"
                 android:textColor="@color/blackMedium"
                 android:textSize="@dimen/_14dp" />
         </LinearLayout>
@@ -59,7 +59,7 @@
                 android:background="@android:color/transparent"
                 android:minHeight="@dimen/_40dp"
                 android:minWidth="@dimen/_120dp"
-                android:text="Ok"
+                android:text="@string/OK"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_14dp" />
         </LinearLayout>
@@ -82,7 +82,7 @@
             android:background="@android:color/transparent"
             android:minHeight="@dimen/_40dp"
             android:minWidth="@dimen/_100dp"
-            android:text="Cancel"
+            android:text="@string/button_label_cancel"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_14dp" />
     </LinearLayout>

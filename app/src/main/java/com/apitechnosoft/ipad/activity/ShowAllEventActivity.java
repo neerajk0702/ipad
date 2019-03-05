@@ -223,10 +223,10 @@ public class ShowAllEventActivity extends AppCompatActivity {
                                 }
                                 refreshCalendar();
                             } else {
-                                Toast.makeText(ShowAllEventActivity.this, "Event List Data found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ShowAllEventActivity.this, getString(R.string.eventlistdata), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ShowAllEventActivity.this, "Event List Data found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShowAllEventActivity.this, getString(R.string.eventlistdata), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);
@@ -275,10 +275,10 @@ public class ShowAllEventActivity extends AppCompatActivity {
                                 }
 
                             } else {
-                                Toast.makeText(ShowAllEventActivity.this, "Event detail found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ShowAllEventActivity.this, getString(R.string.eventdetail), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ShowAllEventActivity.this, "Event detail found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShowAllEventActivity.this, getString(R.string.eventdetail), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);
@@ -289,7 +289,7 @@ public class ShowAllEventActivity extends AppCompatActivity {
                     if (eventdataList != null && eventdataList.size() > 0) {
                         EventDetailAdapter adapter = new EventDetailAdapter(ShowAllEventActivity.this, eventdataList);
                         eventrecycler_view.setAdapter(adapter);
-                        todaydate.setText("Today Events (" + eventdataList.get(0).getFromdate() + " )");
+                        todaydate.setText(getString(R.string.TodayEvents) + "(" + eventdataList.get(0).getFromdate() + " )");
                     }
                 }
             });

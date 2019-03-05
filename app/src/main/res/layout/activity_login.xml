@@ -56,7 +56,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Registered Email"
+                android:hint="@string/Enterregemail"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColorHint="#919191"
@@ -98,7 +98,7 @@
                 android:background="#00000000"
                 android:clickable="true"
                 android:gravity="left|center"
-                android:hint="Enter Password"
+                android:hint="@string/enterpass"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColorHint="#919191"
@@ -121,7 +121,7 @@
             android:layout_marginRight="@dimen/_12dp"
             android:layout_marginTop="@dimen/_15dp"
             android:gravity="right"
-            android:text="Forgot password ?"
+            android:text="@string/forgetpass"
             android:textColor="#000"
             android:textSize="16sp" />
 
@@ -134,7 +134,7 @@
             android:layout_marginTop="@dimen/_25dp"
             android:background="@drawable/button_login"
             android:gravity="center"
-            android:text="Sign In" />
+            android:text="@string/SignIn" />
     </LinearLayout>
 
 

@@ -429,10 +429,10 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
         commentStr = edt_comment.getText().toString();
 
         if (emailStr.length() == 0) {
-            showToast("Please enter Email Id");
+            showToast(getString(R.string.enteremail));
             return false;
         } else if (commentStr.length() == 0) {
-            showToast("Please enter Comment");
+            showToast(getString(R.string.entercomment));
             return false;
         }
         return true;
@@ -483,13 +483,13 @@ public class UploadFromOutsideActivity extends AppCompatActivity implements View
                                         ipadDBHelper.upsertShareEmailData(emaildata);
                                     }
                                 }
-                                showToast("File shared Successfully");
+                                showToast(getString(R.string.fileSharedsuccess));
                                 finish();
                             } else {
-                                Toast.makeText(UploadFromOutsideActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UploadFromOutsideActivity.this, getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(UploadFromOutsideActivity.this, "File not shared Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(UploadFromOutsideActivity.this,  getString(R.string.filennotSharedsuccess), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);

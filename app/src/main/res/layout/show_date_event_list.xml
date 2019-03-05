@@ -50,7 +50,7 @@
                 android:layout_height="@dimen/_30dp"
                 android:background="@drawable/share_folder"
                 android:gravity="center"
-                android:text="Ok"
+                android:text="@string/OK"
                 android:textSize="@dimen/_12dp" />
 
             <View

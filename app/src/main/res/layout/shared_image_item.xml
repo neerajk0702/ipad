@@ -143,7 +143,7 @@
                     android:layout_marginBottom="@dimen/_10dp"
                     android:background="@drawable/share_folder"
                     android:gravity="center"
-                    android:text="Comment"
+                    android:text="@string/Comment"
                     android:textSize="@dimen/_12dp" />
 
             </LinearLayout>

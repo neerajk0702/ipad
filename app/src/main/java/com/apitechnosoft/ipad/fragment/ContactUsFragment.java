@@ -91,7 +91,7 @@ public class ContactUsFragment extends MainFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(getContext(), "Please wait", "Sending Mail", true, false);
+            progressDialog = ProgressDialog.show(getContext(), getString(R.string.pleasewait), getString(R.string.SendingMail), true, false);
         }
 
         @Override
@@ -105,9 +105,9 @@ public class ContactUsFragment extends MainFragment {
                     edt_subject.setText("");
                     edt_message.setText("");
 
-                    Toast.makeText(getContext(), "Thanku for Contact us.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.thankucontactus), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), "Something wrong.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.somethingwrong), Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
                 Log.e("MailApp", "Could not send email", e);
@@ -151,26 +151,27 @@ public class ContactUsFragment extends MainFragment {
         message1 = edt_message.getText().toString();
         from = emailid;
         if (fname.length() == 0) {
-            showToast("Please enter first name");
+            showToast(getString(R.string.enterfirstName));
             return false;
         } else if (lname.length() == 0) {
-            showToast("Please enter last name");
+            showToast(getString(R.string.lastName));
             return false;
         } else if (from.length() == 0) {
-            showToast("Please enter Email Id");
+            showToast(getString(R.string.enteremail));
             return false;
         } else if (!from.matches(emailRegex)) {
-            showToast("Please enter valid Email ID");
+            showToast(getString(R.string.validEmail));
             return false;
         } else if (subject1.length() == 0) {
-            showToast("Please enter Subject");
+            showToast(getString(R.string.entersubj));
             return false;
         } else if (message1.length() == 0) {
-            showToast("Please enter Message");
+            showToast(getString(R.string.entermsg));
             return false;
         }
         return true;
     }
+
     public void getAllNotification() {
         try {
             String UserId = "";
@@ -200,6 +201,7 @@ public class ContactUsFragment extends MainFragment {
 
         }
     }
+
     protected void loadcartdata(String count) {
         if (getHostActivity() == null) {
             return;

@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Share Files"
+                        android:text="@string/shareFile"
                         android:textColor="#fff"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
@@ -105,7 +105,7 @@
                         android:background="#00000000"
                         android:clickable="true"
                         android:gravity="left|center"
-                        android:hint="Enter Sender Email ID:"
+                        android:hint="@string/entersenderemailid"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
                         android:textColorHint="#919191"
@@ -125,7 +125,7 @@
                         android:background="#00000000"
                         android:clickable="true"
                         android:gravity="left|center"
-                        android:hint="Comment Box..."
+                        android:hint="@string/commentbox"
                         android:textColorHint="#919191"
                         android:textSize="14dp" />
 
@@ -174,7 +174,7 @@
                         android:layout_marginRight="@dimen/_5dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/select_folder"
-                        android:text="Send File"
+                        android:text="@string/sendFIle"
                         android:textColor="@color/white" />
 
                     <com.apitechnosoft.ipad.component.ASTButton
@@ -184,7 +184,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/share_folder"
-                        android:text="Close"
+                        android:text="@string/close"
                         android:textColor="@color/white" />
 
                 </LinearLayout>

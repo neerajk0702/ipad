@@ -72,9 +72,9 @@ public class ChangeNameActivity extends AppCompatActivity {
                 fnamee = fname.getText().toString();
                 lnamee = lname.getText().toString();
                 if (ASTObjectUtil.isEmptyStr(fnamee)) {
-                    ASTUIUtil.showToast("Please Enter First Name");
+                    ASTUIUtil.showToast(getString(R.string.firstName));
                 } else if (ASTObjectUtil.isEmptyStr(lnamee)) {
-                    ASTUIUtil.showToast("Please Enter Last Name");
+                    ASTUIUtil.showToast(getString(R.string.lastName));
                 } else {
                     ChnageName();
                 }

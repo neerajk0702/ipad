@@ -21,7 +21,7 @@
         android:layout_weight="0.5"
         android:gravity="center"
         android:background="@drawable/button_login"
-        android:text="@string/cancel"
+        android:text="@string/button_label_cancel"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_17dp"
         android:textStyle="bold"

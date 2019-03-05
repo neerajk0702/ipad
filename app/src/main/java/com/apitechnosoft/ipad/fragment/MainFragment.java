@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.activity.MainActivity;
 import com.apitechnosoft.ipad.utils.ASTObjectUtil;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
@@ -126,7 +127,7 @@ public abstract class MainFragment extends Fragment implements View.OnClickListe
         if (2000 + previousTime > (previousTime = System.currentTimeMillis())) {
             this.getActivity().moveTaskToBack(true);
         } else {
-            Snackbar.make(view, "Press Again", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(view, getString(R.string.PressAgain), Snackbar.LENGTH_SHORT).show();
         }
     }
 

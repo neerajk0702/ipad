@@ -77,6 +77,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
     SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView emptyView;
     int type = 1;
+
     @Override
     protected int fragmentLayout() {
         return R.layout.fragment_personal;
@@ -99,7 +100,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
         TextView newFolder = findViewById(R.id.newFolder);
         TextView upFolder = findViewById(R.id.upFolder);
         searchedit = findViewById(R.id.searchedit);
-        searchedit.setHint("Search with Sender Email id");
+        searchedit.setHint(getString(R.string.searchsenderemail));
         // TextView filter = findViewById(R.id.filter);
         //TextView filterIcon = findViewById(R.id.filterIcon);
         materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(getContext(), "fonts/materialdesignicons-webfont.otf");
@@ -266,7 +267,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.videolayout:
                 type = 2;
                 setAdapter();
-             //   seeallfile.setVisibility(View.VISIBLE);//show only photos
+                //   seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_full_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -280,7 +281,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.audiolayout:
                 type = 3;
                 setAdapter();
-               // seeallfile.setVisibility(View.VISIBLE);//show only photos
+                // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_full_orange);
@@ -294,7 +295,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             case R.id.doclayout:
                 type = 4;
                 setAdapter();
-               // seeallfile.setVisibility(View.VISIBLE);//show only photos
+                // seeallfile.setVisibility(View.VISIBLE);//show only photos
                 photolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 videolayout.setBackgroundResource(R.drawable.border_layout_orange);
                 audiolayout.setBackgroundResource(R.drawable.border_layout_orange);
@@ -341,7 +342,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
             public void onClick(View view) {
 
                 if (edt_foldername.getText().toString().length() == 0) {
-                    ASTUIUtil.showToast("Please enter Folder Name!");
+                    ASTUIUtil.showToast(getString(R.string.foldername));
                 } else {
                     alertDialog.dismiss();
                     createFolder(edt_foldername.getText().toString());
@@ -375,13 +376,13 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                             ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                             if (data != null) {
                                 if (data.isStatus()) {
-                                    Toast.makeText(getContext(), "Folder Create Successfully.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.foldercretesuccess), Toast.LENGTH_LONG).show();
                                     getAllFile();
                                 } else {
-                                    Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.foldernotcreate), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(getContext(), "Folder not created!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.foldernotcreate), Toast.LENGTH_LONG).show();
                             }
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
@@ -419,7 +420,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
                                 showFileData(data);
                                 getAllNotification();
                             } else {
-                                Toast.makeText(getContext(), "No Data found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.nodata), Toast.LENGTH_LONG).show();
                             }
                         } else {
                             ASTUIUtil.showToast(Contants.Error);
@@ -440,7 +441,7 @@ public class ReceivedFragment extends MainFragment implements SwipeRefreshLayout
 
     //show file data in list
     private void showFileData(ContentData data) {
-       // seeallfile.setVisibility(View.VISIBLE);
+        // seeallfile.setVisibility(View.VISIBLE);
         setPhotoButton();
         mediaList = new ArrayList<>();
        /* Folderdata[] folderdata = data.getFolderdata();

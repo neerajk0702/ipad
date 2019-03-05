@@ -76,7 +76,7 @@ public class PressFragment extends MainFragment {
 
     private void opneDetail(int key) {
         Bundle bundle = new Bundle();
-        bundle.putString("headerTxt", "Press Detail");
+        bundle.putString("headerTxt", getString(R.string.PressDetail));
         bundle.putInt("Key",key);
         ApplicationHelper.application().getActivity().updateFragment(new PressDetailFragment(), bundle);
     }

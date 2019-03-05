@@ -89,7 +89,7 @@ public class ChnagePassword extends AppCompatActivity {
         password_iconold.setTypeface(materialdesignicons_font);
         password_iconold.setText(Html.fromHtml("&#xf33e;"));
         welcom = findViewById(R.id.welcom);
-        welcom.setText(Html.fromHtml("Welcome to iPad<sup>TM</sup>"));
+        welcom.setText(Html.fromHtml(getString(R.string.welcomeipadtm)));
         forgotPasssword = findViewById(R.id.forgotPasssword);
     }
 
@@ -119,14 +119,14 @@ public class ChnagePassword extends AppCompatActivity {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                Toast.makeText(ChnagePassword.this, "Password Change Successfully.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ChnagePassword.this, getString(R.string.passwordchange), Toast.LENGTH_LONG).show();
                                 Intent intentLoggedIn = new Intent(ChnagePassword.this, LoginActivity.class);
                                 startActivity(intentLoggedIn);
                             } else {
-                                Toast.makeText(ChnagePassword.this, "Password not Change!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ChnagePassword.this, getString(R.string.passwordchange), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ChnagePassword.this, "Password not  Change Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChnagePassword.this, getString(R.string.passwordchange), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -153,13 +153,13 @@ public class ChnagePassword extends AppCompatActivity {
         newconfpassword1 = new_confirmpassword.getText().toString();
         enteoldpasswordStr = oldpwdedit.getText().toString();
         if (!oldpasswordStr.equalsIgnoreCase(enteoldpasswordStr)) {
-            showToast("Your Old Password Not match please enter valid old password");
+            showToast(getString(R.string.oldpss));
             return false;
         } else if (newpassword.length() == 0) {
-            showToast("Please enter password");
+            showToast(getString(R.string.enterpass));
             return false;
         } else if (newconfpassword1.length() == 0) {
-            showToast("Please enter password");
+            showToast(getString(R.string.enterpass));
             return false;
         }
 

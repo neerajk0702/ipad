@@ -56,7 +56,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5dp"
                             android:gravity="center"
-                            android:text="Upload New File"
+                            android:text="@string/uplodnewfile"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/_12dp" />

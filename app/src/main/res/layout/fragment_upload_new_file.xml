@@ -42,7 +42,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10dp"
                             android:layout_weight="0.8"
-                            android:text="UPLOAD NEW FILE"
+                            android:text="@string/uplodnewfile"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_16dp" />
@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16dp"
                             android:gravity="center"
-                            android:text="Your file will be placed automatically in appropiate category. Photo,Video,Music or Docs."
+                            android:text="@string/fileplaced"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12dp" />
@@ -182,7 +182,7 @@
                         android:layout_marginBottom="@dimen/_10dp"
                         android:background="@drawable/button_login"
                         android:gravity="center"
-                        android:text="Upload"
+                        android:text="@string/upload"
                         android:textSize="@dimen/_14dp" />
 
 

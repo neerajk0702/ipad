@@ -94,9 +94,9 @@ public class PricingFragment extends MainFragment {
     @Override
     protected void dataToView() {
         getAllNotification();
-        gb5.setText(Html.fromHtml("5<sup>GB</sup>"));
-        gb50.setText(Html.fromHtml("50<sup>GB</sup>"));
-        gb500.setText(Html.fromHtml("500<sup>GB</sup>"));
+        gb5.setText(Html.fromHtml(getString(R.string.fivegb)));
+        gb50.setText(Html.fromHtml(getString(R.string.fiftyvegb)));
+        gb500.setText(Html.fromHtml(getString(R.string.gb500)));
         SharedPreferences prefs = getActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         if (prefs != null) {
             UserId = prefs.getString("UserId", "");
@@ -166,7 +166,7 @@ public class PricingFragment extends MainFragment {
                     payAmount = "99.90";
                     callPayment();
                 } else {
-                    ASTUIUtil.showToast("Please select anyone payment option in Gold User!");
+                    ASTUIUtil.showToast(getString(R.string.selectpaymnetgold));
                 }
                 break;
             case R.id.silverbt:
@@ -178,7 +178,7 @@ public class PricingFragment extends MainFragment {
                     payAmount = "5.99";
                     callPayment();
                 } else {
-                    ASTUIUtil.showToast("Please select anyone payment option in Silver User!");
+                    ASTUIUtil.showToast(getString(R.string.paymentsliver));
                 }
                 break;
         }
@@ -282,12 +282,12 @@ public class PricingFragment extends MainFragment {
                     if (result != null) {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
-                            Toast.makeText(getContext(), "Successfully got token", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.gottoken), Toast.LENGTH_SHORT).show();
                             token = data.getToken();
 
 
                         } else {
-                            Toast.makeText(getContext(), "Failed to get token: ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.gottokennit), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -340,10 +340,10 @@ public class PricingFragment extends MainFragment {
                                 Toast.makeText(getContext(), data.getStatus(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Failed Payment ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.faildPayment), Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Failed Payment ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.faildPayment), Toast.LENGTH_LONG).show();
                     }
                     if (progressBar.isShowing()) {
                         progressBar.dismiss();
@@ -391,12 +391,12 @@ public class PricingFragment extends MainFragment {
                         Data data = new Gson().fromJson(result, Data.class);
                         if (data != null) {
                             if (data.getStatus().equals("true")) {
-                                Toast.makeText(getContext(), "Payment Successfully done.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), getString(R.string.donePayment), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getContext(), "Failed Payment!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.faildPayment), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Failed Payment!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.faildPayment), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);

@@ -66,8 +66,8 @@ public class OrganizerActivity extends AppCompatActivity {
         allevents = findViewById(R.id.allevents);
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Event"));
-        tabLayout.addTab(tabLayout.newTab().setText("Birthday"));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.Event)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.Birthday)));
 
         adapter = new OrganizerPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);

@@ -47,7 +47,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:text="Notification"
+                        android:text="@string/Notification"
                         android:textColor="#fff"
                         android:textSize="@dimen/_16dp" />
 
@@ -71,7 +71,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/_5dp"
                 android:background="@drawable/share_folder"
-                android:text="Clear All"
+                android:text="@string/clearAll"
                 android:textColor="@color/white" />
 
             <LinearLayout

@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Event Time: "
+                android:text="@string/eventtime"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12dp"
                 android:textStyle="bold" />
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Event Details: "
+                android:text="@string/eventdetail"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12dp"
                 android:textStyle="bold" />

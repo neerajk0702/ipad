@@ -50,7 +50,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Comment On File"
+                            android:text="@string/commentonfile"
                             android:textColor="#fff"
                             android:textSize="@dimen/_16dp" />
                     </LinearLayout>
@@ -180,7 +180,7 @@
                     android:background="#00000000"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:hint="Comment Box Maximum 36 word.."
+                    android:hint="@string/commentboxmin"
                     android:singleLine="true"
                     android:textColorHint="#919191"
                     android:textSize="14dp" />
@@ -200,7 +200,7 @@
                     android:layout_marginTop="@dimen/_25dp"
                     android:background="@drawable/button_login"
                     android:gravity="center"
-                    android:text="Submit" />
+                    android:text="@string/Submit" />
             </LinearLayout>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

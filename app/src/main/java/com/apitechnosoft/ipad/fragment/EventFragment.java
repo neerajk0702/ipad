@@ -199,14 +199,14 @@ public class EventFragment extends MainFragment {
                         ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                         if (data != null) {
                             if (data.isStatus()) {
-                                Toast.makeText(getContext(), "Event saved Successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.eventsave), Toast.LENGTH_LONG).show();
                                 name.setText("");
                                 description.setText("");
                             } else {
                                 Toast.makeText(getContext(), data.getError_msg(), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Event not saved Successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.eventnotsave), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         showToast(Contants.Error);
@@ -237,16 +237,16 @@ public class EventFragment extends MainFragment {
             reminderStr = "off";
         }
         if (nameStr.length() == 0) {
-            showToast("Please enter event name");
+            showToast(getString(R.string.eventname));
             return false;
         } else if (desStr.length() == 0) {
-            showToast("Please enter description");
+            showToast(getString(R.string.enterdesc));
             return false;
         } else if (fromcaladerDateStr.length() == 0) {
-            showToast("Please select from date");
+            showToast(getString(R.string.selectdatee));
             return false;
         } else if (fromtimeStr.length() == 0) {
-            showToast("Please select from time");
+            showToast(getString(R.string.selecttime));
             return false;
         } /*else if (tocaladerDateStr.length() == 0) {
             showToast("Please select to date");

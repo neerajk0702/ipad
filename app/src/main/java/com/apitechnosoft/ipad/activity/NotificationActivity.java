@@ -112,7 +112,7 @@ public class NotificationActivity extends AppCompatActivity {
                             }
 
                         } else {
-                            Toast.makeText(NotificationActivity.this, "Notification not found!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(NotificationActivity.this, getString(R.string.notinotfound), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         ASTUIUtil.showToast(Contants.Error);

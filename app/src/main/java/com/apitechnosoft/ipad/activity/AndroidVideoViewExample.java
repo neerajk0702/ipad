@@ -57,7 +57,7 @@ public class AndroidVideoViewExample extends Activity {
         deleteicon.setTypeface(materialdesignicons_font);
         deleteicon.setText(Html.fromHtml("&#xf1c0;"));
         progressDialog = new ProgressDialog(AndroidVideoViewExample.this);
-        progressDialog.setMessage("Video Loading...");
+        progressDialog.setMessage(getString(R.string.videoloading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
