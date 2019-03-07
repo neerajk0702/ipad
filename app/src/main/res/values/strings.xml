@@ -91,9 +91,9 @@ EACH TIME YOU PURCHASE A PRODUCT OR SERVICE AT IPADTODAY.COM, YOU ARE REPRESENTI
 ipad™, Keeping You Connected with your Family, Friends, and Business for Life</b></string>
     <string name="oct">
         <b>October 18 2017\n\n</b><b>ipad™ Celebrates its 10th Anniversary with New Release</b></string>
-    <string name="dec" translatable="false"><b>December 13 2016\n\n</b>
+    <string name="dec" ><b>December 13 2016\n\n</b>
 RXD Media, LLC, is continuing the expansion of its ipad™ services with a push into the burgeoning education sector. RXD seeks to be at the forefront of this growing market.</string>
-    <string name="oct2" translatable="false"><b>October 09 2016</b><b>
+    <string name="oct2"><b>October 09 2016</b><b>
 \n\nOn September 14, 2016, the United States Trademark Trial and Appeal Board denied a motion for summary judgment filed by IP Application Development, LLC, a wholly-owned subsidiary of Apple, Inc. that licenses the IPAD trademark to Apple, regarding RXDs rights in its ipad™Service Mark.</b></string>
 
     <string name="octdetail">
@@ -225,7 +225,7 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
     <string name="From">From</string>
     <string name="searchfilefolder">Search with Folder/File-Name</string>
     <string name="viewallfile">Enter Event Name</string>
-    <string name="ViewAllFile">View All File</string>
+    <string name="ViewAllFile">View All Files</string>
     <string name="movetofolder">Move to Folder</string>
     <string name="sharemulti">Share Multiple Files"</string>
     <string name="ARCHIVE" translatable="false">ARCHIVE</string>
@@ -240,7 +240,7 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
     <string name="type9">9. Miscellaneous Privacy Issues</string>
     <string name="pp11">We will encourage our service partners to adopt and post privacy policies. However, the use of your Personally Identifiable Information by our service partners is governed by the privacy policies of those service partners, and is not subject to our control.</string>
     <string name="selectlanguage">Select your Language</string>
-    <string name="welcomeipadtm">Welcome to iPad<sup>TM</sup></string>
+    <string name="welcomeipadtm">Welcome to ipad™</string>
     <string name="sendvarificationcode">Send Verification Code</string>
     <string name="varificationnotmatch">Verification Code did not matched!</string>
     <string name="entervaricicationcode">Please Enter Verification Code!</string>
@@ -347,7 +347,7 @@ RXD Media, LLC, is continuing the expansion of its ipad™ services with a push 
     <string name="aboutus2">The mission of ipad™ is to be the worlds most efficient,
         user friendly cloud storage service to support the organization and growth for you,
         your family, your friends and your business.</string>
-<string name="Connect">Connect with ipad Today™</string>
+    <string name="Connect">Connect with ipad Today™</string>
     <string name="mbuseed">MB used out of</string>
 
 

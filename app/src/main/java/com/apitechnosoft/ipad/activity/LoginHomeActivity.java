@@ -199,7 +199,7 @@ public class LoginHomeActivity extends AppCompatActivity implements View.OnClick
         int lanPos = prefs.getInt("Position", 0);
 
 
-        final String itemCondition_array[] = {"English", "Chinesh", "French", "German", "Italian", "Japines", "Korean", "Spanish"};
+        final String itemCondition_array[] = {"English", "Chinese", "French", "German", "Italian", "Japanese", "Korean", "Spanish"};
         final String languagecodearray[] = {"en", "zh", "fr", "de", "it", "ja", "ko", "es"};
         ArrayAdapter<String> languageAdapater = new ArrayAdapter<String>(this, R.layout.spinner_row, itemCondition_array);
         languageSpinner.setAdapter(languageAdapater);

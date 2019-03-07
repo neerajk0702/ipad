@@ -130,7 +130,9 @@
                     <com.facebook.login.widget.LoginButton
                         android:id="@+id/facebooklogin"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_30dp"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
                         android:layout_marginRight="@dimen/_5dp"
                         android:layout_weight="0.5"
                         android:background="@color/fb"
@@ -139,10 +141,10 @@
                     <com.google.android.gms.common.SignInButton
                         android:id="@+id/btn_gsign_in"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_30dp"
+                        android:layout_height="@dimen/_35dp"
                         android:layout_marginRight="@dimen/_5dp"
                         android:layout_weight="0.5"
-                        android:background="@color/fb"
+                        android:background="@color/white"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
