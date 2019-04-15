@@ -6,9 +6,53 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.TermsConditionActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.NoActionBar.AppBarOverlay"
+            android:visibility="visible">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/orange"
+                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_14dp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/termofsrvices"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -35,6 +79,7 @@
                     android:text="@string/p1"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -42,12 +87,14 @@
                     android:text="@string/itemcondi1"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p2"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,26 +102,30 @@
                     android:text="@string/itemcondi2"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p3"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p3"
                     android:layout_marginTop="@dimen/_10dp"
+                    android:text="@string/p3"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
                     android:text="@string/p5"
-                    android:layout_marginTop="@dimen/_10dp"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,6 +133,7 @@
                     android:text="@string/itemcondi3"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,12 +141,14 @@
                     android:text="@string/itemcondi4"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p6"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,12 +156,14 @@
                     android:text="@string/itemcondi5"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p7"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,12 +171,14 @@
                     android:text="@string/itemcondi6"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p8"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -128,12 +186,14 @@
                     android:text="@string/itemcondi7"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p9"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,24 +201,27 @@
                     android:text="@string/itemcondi8"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p10"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p11"
                     android:layout_marginTop="@dimen/_10dp"
+                    android:text="@string/p11"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p12"
                     android:layout_marginTop="@dimen/_10dp"
+                    android:text="@string/p12"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
@@ -169,6 +232,7 @@
                     android:text="@string/itemcondi9"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,12 +247,14 @@
                     android:text="@string/itemcondi10"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p13"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -196,12 +262,14 @@
                     android:text="@string/itemcondi11"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p14"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -209,12 +277,14 @@
                     android:text="@string/itemcondi12"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p15"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -222,12 +292,14 @@
                     android:text="@string/itemcondi13"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p16"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -235,15 +307,17 @@
                     android:text="@string/itemcondi14"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/p17"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30dp"/>
+                    android:layout_height="@dimen/_30dp" />
             </LinearLayout>
         </ScrollView>
 

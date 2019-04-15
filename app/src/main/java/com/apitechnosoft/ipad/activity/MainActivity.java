@@ -339,13 +339,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("headerTxt", getString(R.string.ContactUs));
             this.updateFragment(new ContactUsFragment(), bundle);
         } else if (id == R.id.nav_Terms) {
-            bundle.putString("headerTxt", getString(R.string.TermsofService));
-            this.updateFragment(new TermsConditionActivity(), bundle);
-
+            Intent terintent = new Intent(MainActivity.this, TermsConditionActivity.class);
+            startActivity(terintent);
         } else if (id == R.id.nav_Privacy) {
-            bundle.putString("headerTxt", getString(R.string.privacy));
-            this.updateFragment(new PrivacyActivity(), bundle);
-
+            Intent intentLoggedIn = new Intent(MainActivity.this, PrivacyActivity.class);
+            startActivity(intentLoggedIn);
         } else if (id == R.id.nav_Logout) {
             if (isLogin()) {//linkedin logout
                 LISessionManager.getInstance(getApplicationContext()).clearSession();

@@ -55,11 +55,11 @@
         android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".activity.SplashScreen"
-            android:alwaysRetainTaskState="true"
-            android:screenOrientation="portrait"
-            android:hardwareAccelerated="true"
             android:allowBackup="true"
+            android:alwaysRetainTaskState="true"
+            android:hardwareAccelerated="true"
             android:largeHeap="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -101,19 +101,25 @@
             android:name=".activity.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.DocOpenActivity" />
-        <activity android:name=".activity.VideoPlayerActivity"
-            android:hardwareAccelerated="true"/>
-        <activity android:name=".activity.ShareSingleFileActivity"
-            android:hardwareAccelerated="true"/>
-        <activity android:name=".activity.ShareMultipelFileActivity"
+        <activity
+            android:name=".activity.VideoPlayerActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".activity.ShareSingleFileActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".activity.ShareMultipelFileActivity"
             android:hardwareAccelerated="true" />
         <activity android:name=".activity.OrganizerActivity" />
-        <activity android:name=".activity.CommentOnFileActivity"
-            android:hardwareAccelerated="true"/>
+        <activity
+            android:name=".activity.CommentOnFileActivity"
+            android:hardwareAccelerated="true" />
         <activity android:name=".activity.ShowAllEventActivity" />
         <activity android:name=".calendarview.CalenderActivity" />
         <activity android:name=".calendarview.ListViewActivity" />
         <activity android:name=".activity.ChnagePassword" />
+        <activity android:name=".activity.PrivacyActivity" />
+        <activity android:name=".activity.TermsConditionActivity" />
 
         <service android:name=".framework.DownloadService" />
 

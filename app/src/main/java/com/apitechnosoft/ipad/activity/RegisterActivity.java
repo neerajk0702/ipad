@@ -192,14 +192,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
 
             case R.id.Privacy:
-                Bundle bundle = new Bundle();
-                bundle.putString("headerTxt", "Terms of Service");
-                ApplicationHelper.application().getActivity().updateFragment(new PrivacyActivity(), bundle);
+                Intent intentLoggedIn = new Intent(RegisterActivity.this, PrivacyActivity.class);
+                startActivity(intentLoggedIn);
                 break;
             case R.id.welcom:
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("headerTxt", "Terms of Service");
-                ApplicationHelper.application().getActivity().updateFragment(new TermsConditionActivity(), bundle1);
+                Intent terintent = new Intent(RegisterActivity.this, TermsConditionActivity.class);
+                startActivity(terintent);
                 break;
 
         }

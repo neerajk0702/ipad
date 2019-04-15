@@ -2,8 +2,14 @@ package com.apitechnosoft.ipad.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.View;
+import android.widget.TextView;
 
 import com.apitechnosoft.ipad.R;
 import com.apitechnosoft.ipad.component.ASTProgressBar;
@@ -14,43 +20,53 @@ import com.apitechnosoft.ipad.framework.IAsyncWorkCompletedCallback;
 import com.apitechnosoft.ipad.framework.ServiceCaller;
 import com.apitechnosoft.ipad.model.ContentResponce;
 import com.apitechnosoft.ipad.utils.ASTUIUtil;
+import com.apitechnosoft.ipad.utils.ASTUtil;
+import com.apitechnosoft.ipad.utils.FontManager;
 import com.google.gson.Gson;
 
-public class PrivacyActivity extends MainFragment {
-    @Override
-    protected int fragmentLayout() {
-        return R.layout.activity_privacy;
-    }
-    HeaderFragment headerFragment;
-    @Override
-    protected void loadView() {
-
-    }
+public class PrivacyActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
-    protected void setClickListeners() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_privacy);
+        if (ASTUtil.isTablet(PrivacyActivity.this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        dataToView();
     }
 
-    @Override
-    protected void setAccessibility() {
-    }
-
-    @Override
     protected void dataToView() {
+        Typeface materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(this, "fonts/materialdesignicons-webfont.otf");
+        TextView back = toolbar.findViewById(R.id.back);
+        back.setTypeface(materialdesignicons_font);
+        back.setText(Html.fromHtml("&#xf30d;"));
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getAllNotification();
     }
+
     public void getAllNotification() {
         try {
             String UserId = "";
-            SharedPreferences prefs = getContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
             if (prefs != null) {
                 UserId = prefs.getString("UserId", "");
             }
-            if (ASTUIUtil.isOnline(getContext())) {
-                final ASTProgressBar dotDialog = new ASTProgressBar(getContext());
+            if (ASTUIUtil.isOnline(PrivacyActivity.this)) {
+                final ASTProgressBar dotDialog = new ASTProgressBar(PrivacyActivity.this);
                 // dotDialog.show();
 
-                ServiceCaller serviceCaller = new ServiceCaller(getContext());
+                ServiceCaller serviceCaller = new ServiceCaller(PrivacyActivity.this);
                 final String url = Contants.BASE_URL + Contants.Getallnotification + "username=" + UserId;
                 serviceCaller.CallCommanServiceMethod(url, "getAllNotification", new IAsyncWorkCompletedCallback() {
                     @Override
@@ -58,7 +74,7 @@ public class PrivacyActivity extends MainFragment {
                         if (isComplete) {
                             ContentResponce data = new Gson().fromJson(result, ContentResponce.class);
                             if (data != null) {
-                                loadcartdata(data.getNotificationcount() + "");
+                                //loadcartdata(data.getNotificationcount() + "");
                             }
                         }
                     }
@@ -68,16 +84,6 @@ public class PrivacyActivity extends MainFragment {
 
         }
     }
-    protected void loadcartdata(String count) {
-        if (getHostActivity() == null) {
-            return;
-        }
-        this.headerFragment = this.getHostActivity().headerFragment();
-        if (headerFragment == null) {
-            return;
-        }
-        this.headerFragment.setVisiVilityNotificationIcon(true);
-        this.headerFragment.updateNotification(count);
-    }
+
 }
 

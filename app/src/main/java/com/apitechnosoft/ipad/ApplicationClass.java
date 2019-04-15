@@ -1,5 +1,6 @@
 package com.apitechnosoft.ipad;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -34,7 +35,15 @@ import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * @author AST Inc.
@@ -59,12 +68,14 @@ public class ApplicationClass extends MultiDexApplication {
     private Typeface _fontExtraLightItalic;
 
     public static final String TAG = Application.class.getSimpleName();
+
     //You add the code below without extending **MultiDexApplication**
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -79,7 +90,7 @@ public class ApplicationClass extends MultiDexApplication {
 
         //finally initialize twitter with created configs
         Twitter.initialize(config);
-
+        handleSSLHandshake();
     }
 
     protected void setAppInstance() {
@@ -311,6 +322,39 @@ public class ApplicationClass extends MultiDexApplication {
                 this._fontRegular = Typeface.createFromAsset(this.getAssets(), ASTConstants.FONT_Regular);
                 break;
 
+        }
+    }
+
+    /**
+     * Enables https connections
+     */
+    @SuppressLint("TrulyRandom")
+    public static void handleSSLHandshake() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String arg0, SSLSession arg1) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
         }
     }
 }
