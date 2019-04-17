@@ -8,8 +8,8 @@ public class Contants {
     public static final String APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Downloads/";
     public static final String Share_APP_DIRECTORY = DEFAULT_APPLICATION_NAME + "Share/";
 
-    public static String Media_File_BASE_URL = "https://www.ipadtoday.com/";
-    public static String BASE_URL = "https://www.ipadtoday.com/resources/";
+    public static String Media_File_BASE_URL = "https://ipadtoday.com/";
+    public static String BASE_URL = "https://ipadtoday.com/resources/";
 
     public static String SEND_BUG_REPORT = "addbugreport";
     public static String LOG_TAG = "ASTAtm";

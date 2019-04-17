@@ -2,6 +2,7 @@ package com.apitechnosoft.ipad.framework;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -9,10 +10,28 @@ import android.widget.ProgressBar;
 
 import com.apitechnosoft.ipad.constants.Contants;
 
+import org.apache.http.conn.ssl.AbstractVerifier;
+
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
+
+import okhttp3.CertificatePinner;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -82,8 +101,8 @@ public abstract class FileUploaderHelper extends AsyncTask<String, Integer, Stri
             b.connectTimeout(180, TimeUnit.SECONDS);
             b.writeTimeout(180, TimeUnit.SECONDS);
             b.readTimeout(180, TimeUnit.SECONDS);
+            //b.certificatePinner(certificatePinner);
             OkHttpClient client = b.build();
-
             Response response = client.newCall(request).execute();
             return response.body().string();
 
@@ -97,4 +116,20 @@ public abstract class FileUploaderHelper extends AsyncTask<String, Integer, Stri
     public abstract void receiveData(String result);
 
 
+    /*private const val DOMAIN = "*.stylingandroid.com"
+    private const val PIN = "sha256/htJkaSJB+j8Ckv7ovGieQJYqyV/M4K7YRt4je18A7T4="
+    private const val BACKUP = "sha256/x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM="
+
+    private fun createOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            addInterceptor(HttpLoggingInterceptor(Logger { println(it) }).setLevel(Level.BASIC))
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                certificatePinner(CertificatePinner.Builder()
+                        .add(DOMAIN, PIN)
+                        .add(DOMAIN, BACKUP)
+                        .build()
+                )
+            }
+        }.build()
+    }*/
 }
